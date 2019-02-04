@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SEPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_READALL_GrupoEtnico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_READALL_Sexo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SEPSModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SEPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SEPSEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SP_READALL_GrupoEtnico" ReturnType="Collection(SEPSModel.SP_READALL_GrupoEtnico_Result)" />
+          <FunctionImport Name="SP_READALL_Sexo" ReturnType="Collection(SEPSModel.SP_READALL_Sexo_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SP_READALL_GrupoEtnico_Result">
+          <Property Type="Byte" Name="PK_GrupoEtnico" Nullable="false" />
+          <Property Type="String" Name="CO_TEDS" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="DE_GrupoEtnico" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CO_TEDS_MH" Nullable="true" MaxLength="2" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="Ordered" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_READALL_Sexo_Result">
+          <Property Type="Byte" Name="PK_Sexo" Nullable="false" />
+          <Property Type="String" Name="CO_TEDS" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CO_TEDS_MH" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="DE_Sexo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Ordered" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SEPSModelStoreContainer" CdmEntityContainer="SEPSEntities" >
+          <FunctionImportMapping FunctionImportName="SP_READALL_GrupoEtnico" FunctionName="SEPSModel.Store.SP_READALL_GrupoEtnico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEPSModel.SP_READALL_GrupoEtnico_Result">
+                <ScalarProperty Name="PK_GrupoEtnico" ColumnName="PK_GrupoEtnico" />
+                <ScalarProperty Name="CO_TEDS" ColumnName="CO_TEDS" />
+                <ScalarProperty Name="DE_GrupoEtnico" ColumnName="DE_GrupoEtnico" />
+                <ScalarProperty Name="CO_TEDS_MH" ColumnName="CO_TEDS_MH" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Ordered" ColumnName="Ordered" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_READALL_Sexo" FunctionName="SEPSModel.Store.SP_READALL_Sexo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEPSModel.SP_READALL_Sexo_Result">
+                <ScalarProperty Name="PK_Sexo" ColumnName="PK_Sexo" />
+                <ScalarProperty Name="CO_TEDS" ColumnName="CO_TEDS" />
+                <ScalarProperty Name="CO_TEDS_MH" ColumnName="CO_TEDS_MH" />
+                <ScalarProperty Name="DE_Sexo" ColumnName="DE_Sexo" />
+                <ScalarProperty Name="Ordered" ColumnName="Ordered" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

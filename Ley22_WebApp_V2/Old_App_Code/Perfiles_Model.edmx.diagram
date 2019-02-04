@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="33f9c0539cf845e888acc579e9741271" Name="Diagram1">
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_ABUSO_SUSTANCIAS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_ALTA" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_COMPOSICION_FAMILIAR" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_DIAGNOSTICO" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_DSMIV_CAT" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_DSMIV_IV" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_DSMV" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_DSMV_ProblemasPsicosocialesAmbientales" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_FEMINA" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_INGRESO_ANUAL" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_MEDIDA" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_MUNICIPIO_RESIDENCIA" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_PROBLEMA_JUSTICIA" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_REFERIDOS_TX" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_SALUD_MENTAL" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_COND_LABORAL" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_EPISODIO_PREVIO" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_ESTADO_LEGAL" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_ESTADO_MARITAL" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_ETAPA_SERVICIO" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_FRECUENCIA" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_FRECUENCIA_AUTOAYUDA" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_FUENTE_INGRESO" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_GRADO" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_NO_FUERZA_LABORAL" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_PAGO" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_RAZA" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_REFERIDO" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_RESIDENCIA" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_SEGURO_SALUD" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_SITUACION_ESCOLAR" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_SUSTANCIA" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_TIPO_ADMISION" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TEDS_VIA_UTILIZACION" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TIEMPO_RESIDENCIA" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TIEMPO_ULT_TRAT" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_PROGRAMA" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.VW_EPISODIO" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.VW_PERFIL" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.VW_PERSONA" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_GENERO" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_MILITAR" Width="1.5" PointX="11.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_NewData" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_CompFamilia" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_Maltrato" Width="1.5" PointX="17.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_MALTRATO" Width="1.5" PointX="17.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_ProbJusticia" Width="1.5" PointX="17.375" PointY="9.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_PracticasBasadasEnEvidencia" Width="1.5" PointX="17.375" PointY="12.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_PracticasBasadasEnEvidencia" Width="1.5" PointX="17.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_CondicionesDiagnosticadas" Width="1.5" PointX="9.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_TakeHomeFrecuenciaBotellas" Width="1.5" PointX="11.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Metadona" Width="1.5" PointX="17.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_RAZONTH" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_Ref_RazonTH" Width="1.5" PointX="19.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_LKP_CATEGORIAS_CENTROS_PRIVADOS" Width="1.5" PointX="5.375" PointY="19.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

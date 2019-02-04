@@ -1,0 +1,1318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BCDDDDD0-EE34-42A9-BC79-59086B37440F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ley22_WebApp_V2</RootNamespace>
+    <AssemblyName>Ley22_WebApp_V2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\AjaxControlToolkit.18.1.1\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\AspNet.ScriptManager.bootstrap.3.3.7\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\..\..\..\..\..\source\repos\Ley22_V2\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\AddPhoneNumber.aspx" />
+    <Content Include="Account\AssignProgram.aspx" />
+    <Content Include="Account\AssignRole.aspx" />
+    <Content Include="Account\Confirm.aspx" />
+    <Content Include="Account\Forgot.aspx" />
+    <Content Include="Account\Lockout.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Manage.aspx" />
+    <Content Include="Account\ManageLogins.aspx" />
+    <Content Include="Account\ManagePassword.aspx" />
+    <Content Include="Account\OpenAuthProviders.ascx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Account\ResetPassword.aspx" />
+    <Content Include="Account\ResetPasswordConfirmation.aspx" />
+    <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
+    <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="administrador-charlas-grupales.aspx" />
+    <Content Include="Old_App_Code\ModelLey22.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelLey22.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old_App_Code\ModelLey22.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelLey221.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old_App_Code\ModelSeps.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelSeps.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old_App_Code\ModelSeps.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelSeps1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old_App_Code\Perfiles_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Perfiles_Model.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old_App_Code\Perfiles_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Perfiles_Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="asignar-citas-individual.aspx" />
+    <Content Include="balance-pago-solo-saldo.aspx" />
+    <Content Include="balance-pago.aspx" />
+    <Content Include="cargar-documentos.aspx" />
+    <Content Include="charlas-grupales.aspx" />
+    <Content Include="cierre-caso.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fa-brands.css" />
+    <Content Include="Content\fa-brands.min.css" />
+    <Content Include="Content\fa-regular.css" />
+    <Content Include="Content\fa-regular.min.css" />
+    <Content Include="Content\fa-solid.css" />
+    <Content Include="Content\fa-solid.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.ptTimeSelect.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\styles.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Entrada.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fa-brands-400.svg" />
+    <Content Include="fonts\fa-regular-400.svg" />
+    <Content Include="fonts\fa-solid-900.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Account\Web.config" />
+    <Content Include="Old_App_Code\ClassDiagram.cd" />
+    <Content Include="Old_App_Code\ClassDiagram2.cd" />
+    <Content Include="Old_App_Code\ModelLey22.Designer" />
+    <Content Include="imprimir-documentos.aspx" />
+    <Content Include="listado_perfiles.aspx" />
+    <Content Include="Mensajes.aspx" />
+    <Content Include="nuevo-confirmacion.aspx" />
+    <Content Include="nuevo-usuario.aspx" />
+    <Content Include="pruebas.aspx" />
+    <Content Include="recaudos-busqueda-usuario.aspx" />
+    <Content Include="recaudos-resultados-busqueda.aspx" />
+    <Content Include="recepcion-busquedaUsuario.aspx" />
+    <Content Include="Scripts\UIFlujoPerfil.js" />
+    <Content Include="seleccion-proximo-paso.aspx" />
+    <Content Include="Perfiles\sepsAdmision.aspx" />
+    <Content Include="Perfiles\sepsAlta.aspx" />
+    <Content Include="Perfiles\sepsEvaluacion.aspx" />
+    <Content Include="trabajor-excepciones.aspx" />
+    <Content Include="WSCalendarioGrupal.asmx" />
+    <Content Include="Perfiles\wucDatosAdmision.ascx" />
+    <Content Include="Perfiles\wucDatosAlta.ascx" />
+    <Content Include="Perfiles\wucDatosDemograficos.ascx" />
+    <Content Include="Perfiles\wucDatosDemograficosPerfil.ascx" />
+    <Content Include="Perfiles\wucDatosEvaluacion.ascx" />
+    <Content Include="Perfiles\wucDatosPersonales.ascx" />
+    <Content Include="Perfiles\wucEpisodioAdmision.ascx" />
+    <Content Include="Perfiles\wucEpisodioPerfil.ascx" />
+    <Content Include="Perfiles\wucOtrosDatos.ascx" />
+    <Content Include="Perfiles\wucOtrosDatosPerfil.ascx" />
+    <Content Include="Perfiles\wucTakeHome.ascx" />
+    <Content Include="WUC\WUCRegion.ascx" />
+    <Content Include="WUC\WUCUsuario.ascx" />
+    <EntityDeploy Include="Old_App_Code\ModelLey22.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelLey221.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Old_App_Code\ModelLey22.edmx.diagram">
+      <DependentUpon>ModelLey22.edmx</DependentUpon>
+    </Content>
+    <Content Include="Old_App_Code\ModelSeps.Designer" />
+    <EntityDeploy Include="Old_App_Code\ModelSeps.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelSeps1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Old_App_Code\ModelSeps.edmx.diagram">
+      <DependentUpon>ModelSeps.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Old_App_Code\Perfiles_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Perfiles_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Old_App_Code\Perfiles_Model.edmx.diagram">
+      <DependentUpon>Perfiles_Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="fonts\fa-brands-400.eot" />
+    <Content Include="fonts\fa-brands-400.ttf" />
+    <Content Include="fonts\fa-brands-400.woff" />
+    <Content Include="fonts\fa-brands-400.woff2" />
+    <Content Include="fonts\fa-regular-400.eot" />
+    <Content Include="fonts\fa-regular-400.ttf" />
+    <Content Include="fonts\fa-regular-400.woff" />
+    <Content Include="fonts\fa-regular-400.woff2" />
+    <Content Include="fonts\fa-solid-900.eot" />
+    <Content Include="fonts\fa-solid-900.ttf" />
+    <Content Include="fonts\fa-solid-900.woff" />
+    <Content Include="fonts\fa-solid-900.woff2" />
+    <Content Include="DocumentosPorParticipantes\126028\10-Carta de Cita.pdf" />
+    <Content Include="DocumentosPorParticipantes\126030\13-Perfil de Alta.pdf" />
+    <Content Include="DocumentosPorParticipantes\1\4-Perfil de Alta.pdf" />
+    <Content Include="Documentos\Acuse Notificacion Practicas de Privacidad.pdf" />
+    <Content Include="Documentos\Autorización para recibir servicios.pdf" />
+    <Content Include="Documentos\Autorización Suministrar Info. %28Cliente%29 Borrosa.pdf" />
+    <Content Include="Documentos\Autorización Suministrar Info. %28Cliente%29.pdf" />
+    <Content Include="Documentos\Carta de Cita.pdf" />
+    <Content Include="Documentos\Carta de derechos.pdf" />
+    <Content Include="Documentos\Cita para entrevista Inicial.pdf" />
+    <Content Include="Documentos\Compromiso de Servicios.pdf" />
+    <Content Include="Documentos\Datos de Identificación.pdf" />
+    <Content Include="Documentos\Documentos de Facturación.pdf" />
+    <Content Include="Documentos\Facturación,Plan Pago y Entrega Informe.pdf" />
+    <Content Include="Documentos\Flujograma de Servicios  %28 mapping%29.docx" />
+    <Content Include="Documentos\Hoja de Contacto.pdf" />
+    <Content Include="Documentos\Informe Pre-Sentencia.docx" />
+    <Content Include="Documentos\Normas y Procedimientos.pdf" />
+    <Content Include="Documentos\Nota de Progreso.pdf" />
+    <Content Include="Documentos\Notas de Progreso de Grupo.pdf" />
+    <Content Include="Documentos\Orden Judicial Pre-Sentencia.pdf" />
+    <Content Include="Documentos\Perfil de Admision Charla.pdf" />
+    <Content Include="Documentos\Perfil de Admision.pdf" />
+    <Content Include="Documentos\Perfil de Alta.pdf" />
+    <Content Include="Documentos\Planilla evaluativa sentenciados %28D1%29  .pdf" />
+    <Content Include="Documentos\Planilla Evaluativa.pdf" />
+    <Content Include="Documentos\Sentencia 1.1.pdf" />
+    <Content Include="Documentos\Tabla Adeudan Charlas.pdf" />
+    <Content Include="Documentos\Tabla de pt que adeudan charlas %28E4%29 .pdf" />
+    <Content Include="Documentos\Tabla Perfiles de Alta.pdf" />
+    <Content Include="Documentos\Tarjeta de Control.pdf" />
+    <Content Include="Documentos\Tarjeta de información Basica y planes de Pago.pdf" />
+    <Content Include="images\.DS_Store" />
+    <Content Include="MasterPage.master" />
+    <Content Include="MasterPage2.master" />
+    <Content Include="MasterPerfil.Master" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="images\assmca-big-logo.png" />
+    <Content Include="images\assmca-logo.svg" />
+    <Content Include="images\ban-circle-symbol.png" />
+    <Content Include="images\calendario-citas-charlas.png" />
+    <Content Include="images\calendario-citas-trabajador-social.png" />
+    <Content Include="images\cerrar-caso.png" />
+    <Content Include="images\cloud-storage-uploading-option.png" />
+    <Content Include="images\editar-usuario-registrado.png" />
+    <Content Include="images\fondo-login.jpg" />
+    <Content Include="images\logo-assmca.png" />
+    <Content Include="images\logo-gob-puerto-rico.png" />
+    <Content Include="images\print.png" />
+    <Content Include="images\recaudos.png" />
+    <Content Include="images\recepcion-documentos.png" />
+    <Content Include="images\trash.png" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.ptTimeSelect.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\tether.js" />
+    <Content Include="Scripts\tether.min.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Site.Master" />
+    <Content Include="UploadSoporteCierreCaso\noBorrar.txt" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+    <Content Include="Site.Mobile.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\AddPhoneNumber.aspx.cs">
+      <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\AddPhoneNumber.aspx.designer.cs">
+      <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\AssignProgram.aspx.cs">
+      <DependentUpon>AssignProgram.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\AssignProgram.aspx.designer.cs">
+      <DependentUpon>AssignProgram.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\AssignRole.aspx.cs">
+      <DependentUpon>AssignRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\AssignRole.aspx.designer.cs">
+      <DependentUpon>AssignRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Confirm.aspx.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Confirm.aspx.designer.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Forgot.aspx.cs">
+      <DependentUpon>Forgot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Forgot.aspx.designer.cs">
+      <DependentUpon>Forgot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Lockout.aspx.cs">
+      <DependentUpon>Lockout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Lockout.aspx.designer.cs">
+      <DependentUpon>Lockout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Manage.aspx.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Manage.aspx.designer.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ManageLogins.aspx.cs">
+      <DependentUpon>ManageLogins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ManageLogins.aspx.designer.cs">
+      <DependentUpon>ManageLogins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ManagePassword.aspx.cs">
+      <DependentUpon>ManagePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ManagePassword.aspx.designer.cs">
+      <DependentUpon>ManagePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\OpenAuthProviders.ascx.cs">
+      <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\OpenAuthProviders.ascx.designer.cs">
+      <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\RegisterExternalLogin.aspx.cs">
+      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
+      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ResetPasswordConfirmation.aspx.cs">
+      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ResetPasswordConfirmation.aspx.designer.cs">
+      <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\TwoFactorAuthenticationSignIn.aspx.cs">
+      <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\TwoFactorAuthenticationSignIn.aspx.designer.cs">
+      <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\VerifyPhoneNumber.aspx.cs">
+      <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
+      <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administrador-charlas-grupales.aspx.cs">
+      <DependentUpon>administrador-charlas-grupales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administrador-charlas-grupales.aspx.designer.cs">
+      <DependentUpon>administrador-charlas-grupales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="asignar-citas-individual.aspx.cs">
+      <DependentUpon>asignar-citas-individual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="asignar-citas-individual.aspx.designer.cs">
+      <DependentUpon>asignar-citas-individual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="balance-pago-solo-saldo.aspx.cs">
+      <DependentUpon>balance-pago-solo-saldo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="balance-pago-solo-saldo.aspx.designer.cs">
+      <DependentUpon>balance-pago-solo-saldo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="balance-pago.aspx.cs">
+      <DependentUpon>balance-pago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="balance-pago.aspx.designer.cs">
+      <DependentUpon>balance-pago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cargar-documentos.aspx.cs">
+      <DependentUpon>cargar-documentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cargar-documentos.aspx.designer.cs">
+      <DependentUpon>cargar-documentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="charlas-grupales.aspx.cs">
+      <DependentUpon>charlas-grupales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="charlas-grupales.aspx.designer.cs">
+      <DependentUpon>charlas-grupales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cierre-caso.aspx.cs">
+      <DependentUpon>cierre-caso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cierre-caso.aspx.designer.cs">
+      <DependentUpon>cierre-caso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entrada.aspx.cs">
+      <DependentUpon>Entrada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entrada.aspx.designer.cs">
+      <DependentUpon>Entrada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="imprimir-documentos.aspx.cs">
+      <DependentUpon>imprimir-documentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="imprimir-documentos.aspx.designer.cs">
+      <DependentUpon>imprimir-documentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="listado_perfiles.aspx.cs">
+      <DependentUpon>listado_perfiles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="listado_perfiles.aspx.designer.cs">
+      <DependentUpon>listado_perfiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage.master.cs">
+      <DependentUpon>MasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage.master.designer.cs">
+      <DependentUpon>MasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage2.master.cs">
+      <DependentUpon>MasterPage2.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage2.master.designer.cs">
+      <DependentUpon>MasterPage2.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPerfil.Master.cs">
+      <DependentUpon>MasterPerfil.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPerfil.Master.designer.cs">
+      <DependentUpon>MasterPerfil.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Mensajes.aspx.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mensajes.aspx.designer.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nuevo-confirmacion.aspx.cs">
+      <DependentUpon>nuevo-confirmacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nuevo-confirmacion.aspx.designer.cs">
+      <DependentUpon>nuevo-confirmacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nuevo-usuario.aspx.cs">
+      <DependentUpon>nuevo-usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nuevo-usuario.aspx.designer.cs">
+      <DependentUpon>nuevo-usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelLey221.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelSeps1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSeps.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Perfiles_Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_CATEGORIAS_CENTROS_PRIVADOS.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_MALTRATO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_PracticasBasadasEnEvidencia.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_RAZONTH.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TakeHomeFrecuenciaBotellas.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Metadona.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_CompFamilia.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_CondicionesDiagnosticadas.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_Maltrato.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_PracticasBasadasEnEvidencia.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_ProbJusticia.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_Ref_RazonTH.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pruebas.aspx.cs">
+      <DependentUpon>pruebas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pruebas.aspx.designer.cs">
+      <DependentUpon>pruebas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="recaudos-busqueda-usuario.aspx.cs">
+      <DependentUpon>recaudos-busqueda-usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recaudos-busqueda-usuario.aspx.designer.cs">
+      <DependentUpon>recaudos-busqueda-usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="recaudos-resultados-busqueda.aspx.cs">
+      <DependentUpon>recaudos-resultados-busqueda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recaudos-resultados-busqueda.aspx.designer.cs">
+      <DependentUpon>recaudos-resultados-busqueda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="recepcion-busquedaUsuario.aspx.cs">
+      <DependentUpon>recepcion-busquedaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recepcion-busquedaUsuario.aspx.designer.cs">
+      <DependentUpon>recepcion-busquedaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="seleccion-proximo-paso.aspx.cs">
+      <DependentUpon>seleccion-proximo-paso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="seleccion-proximo-paso.aspx.designer.cs">
+      <DependentUpon>seleccion-proximo-paso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\sepsAdmision.aspx.cs">
+      <DependentUpon>sepsAdmision.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\sepsAdmision.aspx.designer.cs">
+      <DependentUpon>sepsAdmision.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\sepsAlta.aspx.cs">
+      <DependentUpon>sepsAlta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\sepsAlta.aspx.designer.cs">
+      <DependentUpon>sepsAlta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\sepsEvaluacion.aspx.cs">
+      <DependentUpon>sepsEvaluacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\sepsEvaluacion.aspx.designer.cs">
+      <DependentUpon>sepsEvaluacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="trabajor-excepciones.aspx.cs">
+      <DependentUpon>trabajor-excepciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="trabajor-excepciones.aspx.designer.cs">
+      <DependentUpon>trabajor-excepciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WSCalendarioGrupal.cs">
+      <DependentUpon>WSCalendarioGrupal.asmx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosAdmision.ascx.cs">
+      <DependentUpon>wucDatosAdmision.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosAdmision.ascx.designer.cs">
+      <DependentUpon>wucDatosAdmision.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosAlta.ascx.cs">
+      <DependentUpon>wucDatosAlta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosAlta.ascx.designer.cs">
+      <DependentUpon>wucDatosAlta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosDemograficos.ascx.cs">
+      <DependentUpon>wucDatosDemograficos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosDemograficos.ascx.designer.cs">
+      <DependentUpon>wucDatosDemograficos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosDemograficosPerfil.ascx.cs">
+      <DependentUpon>wucDatosDemograficosPerfil.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosDemograficosPerfil.ascx.designer.cs">
+      <DependentUpon>wucDatosDemograficosPerfil.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosEvaluacion.ascx.cs">
+      <DependentUpon>wucDatosEvaluacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosEvaluacion.ascx.designer.cs">
+      <DependentUpon>wucDatosEvaluacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosPersonales.ascx.cs">
+      <DependentUpon>wucDatosPersonales.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucDatosPersonales.ascx.designer.cs">
+      <DependentUpon>wucDatosPersonales.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucEpisodioAdmision.ascx.cs">
+      <DependentUpon>wucEpisodioAdmision.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucEpisodioAdmision.ascx.designer.cs">
+      <DependentUpon>wucEpisodioAdmision.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucEpisodioPerfil.ascx.cs">
+      <DependentUpon>wucEpisodioPerfil.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucEpisodioPerfil.ascx.designer.cs">
+      <DependentUpon>wucEpisodioPerfil.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucOtrosDatos.ascx.cs">
+      <DependentUpon>wucOtrosDatos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucOtrosDatos.ascx.designer.cs">
+      <DependentUpon>wucOtrosDatos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucOtrosDatosPerfil.ascx.cs">
+      <DependentUpon>wucOtrosDatosPerfil.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucOtrosDatosPerfil.ascx.designer.cs">
+      <DependentUpon>wucOtrosDatosPerfil.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfiles\wucTakeHome.ascx.cs">
+      <DependentUpon>wucTakeHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfiles\wucTakeHome.ascx.designer.cs">
+      <DependentUpon>wucTakeHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WUC\WUCRegion.ascx.cs">
+      <DependentUpon>WUCRegion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WUC\WUCRegion.ascx.designer.cs">
+      <DependentUpon>WUCRegion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WUC\WUCUsuario.ascx.cs">
+      <DependentUpon>WUCUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Old_App_Code\ClassData.cs" />
+    <Compile Include="Old_App_Code\ModelLey22.Context.cs" />
+    <Compile Include="Old_App_Code\ModelLey22.cs" />
+    <Compile Include="Old_App_Code\ModelLey22.Designer.cs">
+      <DependentUpon>ModelLey22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelSeps.Context.cs" />
+    <Compile Include="Old_App_Code\ModelSeps.cs" />
+    <Compile Include="Old_App_Code\ModelSeps.Designer.cs">
+      <DependentUpon>ModelSeps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Perfiles_Model.Context.cs" />
+    <Compile Include="Old_App_Code\Perfiles_Model.cs" />
+    <Compile Include="Old_App_Code\Utilitarios.cs" />
+    <Compile Include="Old_App_Code\ModelLey22.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLey22.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\BuscarSEPSPersonaXNroSeguroSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\BusquedaSencilladePersonas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Calendario.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\CCG_Excepciones.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Centro.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\CharlaGrupal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Ciudad.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ConsultarCharlasPorParticipante_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ControldePago.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Documento.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\FormadePago.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarCharlasCalendario_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarCitasCalendario_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarDocumentosActivos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\MotivoCierre.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\NivelesdelasCharla.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\OrdenesJudiciale.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Participante.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ParticipantesPorCharla.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\PERMISO.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Precio.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Programas_Region_Mapping.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Region.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ResumendeAsistenciasCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_PERSONA.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_USUARIO_PERMISO_Mapping.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_Ciudad_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_NivelesdelasCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_Regiones_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_TipodeCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Sp_Read_CalendariobyId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_CentrobyRegion_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_ParticipantesxId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_SA_PERSONAxId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_TrabajadorSocialbyCentro_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TipodeCharla.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TrabajadorSocial.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TS_Excepciones.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelSeps.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSeps.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SP_READALL_GrupoEtnico_Result.cs">
+      <DependentUpon>ModelSeps.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SP_READALL_Sexo_Result.cs">
+      <DependentUpon>ModelSeps.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Perfiles_Model.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Perfiles_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_ABUSO_SUSTANCIAS.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_ALTA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_COMPOSICION_FAMILIAR.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_DIAGNOSTICO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_DSMIV_CAT.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_DSMIV_IV.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_DSMV.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_DSMV_ProblemasPsicosocialesAmbientales.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_FEMINA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_GENERO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_INGRESO_ANUAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_MEDIDA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_MILITAR.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_MUNICIPIO_RESIDENCIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_PROBLEMA_JUSTICIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_REFERIDOS_TX.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_SALUD_MENTAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_COND_LABORAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_EPISODIO_PREVIO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_ESTADO_LEGAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_ESTADO_MARITAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_ETAPA_SERVICIO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_FRECUENCIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_FRECUENCIA_AUTOAYUDA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_FUENTE_INGRESO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_GRADO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_NO_FUERZA_LABORAL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_PAGO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_RAZA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_REFERIDO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_RESIDENCIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_SEGURO_SALUD.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_SITUACION_ESCOLAR.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_SUSTANCIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_TIPO_ADMISION.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TEDS_VIA_UTILIZACION.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TIEMPO_RESIDENCIA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_LKP_TIEMPO_ULT_TRAT.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_NewData.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_PROGRAMA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SPR_PERFILES_LEY22_Result.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\VW_EPISODIO.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\VW_PERFIL.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\VW_PERSONA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelLey221.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLey22.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ModelSeps1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSeps.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Perfiles_Model.Designer.cs">
+      <DependentUpon>Perfiles_Model.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WUC\WUCUsuario.ascx.designer.cs">
+      <DependentUpon>WUCUsuario.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="DocumentosPorParticipantes\0\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="UploadSoporteCierreCaso\4-Perfil de Evaluación.pdf" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54986</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54986/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

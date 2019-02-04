@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="218b09bdcd244ad3bcb28e04fd31a2a1" Name="Diagram1" >
+        <EntityTypeShape EntityType="Ley22Model.Calendario" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.Centro" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.CharlaGrupal" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.Ciudad" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.ControldePago" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.Documento" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.DocumentosPorParticipante" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.FormadePago" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Ley22Model.MotivoCierre" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Ley22Model.NivelesdelasCharla" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.OrdenesJudiciale" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Ley22Model.Participante" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.ParticipantesPorCharla" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.Precio" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Ley22Model.Region" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Ley22Model.SA_PERSONA" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Ley22Model.TipodeCharla" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Ley22Model.TrabajadorSocial" Width="1.5" PointX="8.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Ley22Model.TS_Excepciones" Width="1.5" PointX="11.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Ley22Model.Programas_Region_Mapping" Width="1.5" PointX="7" PointY="17.75" />
+        <AssociationConnector Association="Ley22Model.FK__Programas__FK_Re__405A880E" />
+        <EntityTypeShape EntityType="Ley22Model.CCG_Excepciones" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Ley22Model.PERMISO" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ley22Model.SA_USUARIO_PERMISO_Mapping" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="Ley22Model.USUARIO_PROGRAMA" Width="1.5" PointX="13.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,2038 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Ley22Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calendario">
+          <Key>
+            <PropertyRef Name="Id_Calendario" />
+          </Key>
+          <Property Name="Id_Calendario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_TrabajadorSocial" Type="varchar" MaxLength="128" />
+          <Property Name="FechadeSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="Id_Participante" Type="int" Nullable="false" />
+          <Property Name="FechaInicial" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="int" Nullable="false" />
+          <Property Name="Asistio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CCG_Excepciones">
+          <Key>
+            <PropertyRef Name="PK_CCG_Excepciones" />
+          </Key>
+          <Property Name="PK_CCG_Excepciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Centro" Type="int" Nullable="false" />
+          <Property Name="FechadeSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="FechaInicial" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Centros">
+          <Key>
+            <PropertyRef Name="Id_Centro" />
+          </Key>
+          <Property Name="Id_Centro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_Region" Type="int" />
+          <Property Name="NombreDelCentro" Type="varchar" MaxLength="64" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="Telefono1" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono2" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CharlaGrupal">
+          <Key>
+            <PropertyRef Name="Id_CharlaGrupal" />
+          </Key>
+          <Property Name="Id_CharlaGrupal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Centro" Type="int" Nullable="false" />
+          <Property Name="FechaInicial" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+          <Property Name="Id_TipoCharla" Type="int" Nullable="false" />
+          <Property Name="Id_Nivel" Type="int" Nullable="false" />
+          <Property Name="NrodeParticipantes" Type="int" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" />
+          <Property Name="FechaCreacion" Type="date" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id_Ciudad" />
+          </Key>
+          <Property Name="Id_Ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Region" Type="int" Nullable="false" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ControldePagos">
+          <Key>
+            <PropertyRef Name="Id_ControldePagos" />
+          </Key>
+          <Property Name="Id_ControldePagos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Participante" Type="int" Nullable="false" />
+          <Property Name="Id_Precio" Type="int" Nullable="false" />
+          <Property Name="Id_FormadePago" Type="int" Nullable="false" />
+          <Property Name="NumerodeCheque" Type="int" />
+          <Property Name="FechadelPago" Type="date" />
+          <Property Name="Cantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Estatus" Type="int" />
+          <Property Name="Id_Usuario" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Id_Calendario" Type="int" />
+          <Property Name="Id_CharlaGrupal" Type="int" />
+          <Property Name="Id_OrdenJudicial" Type="int" />
+        </EntityType>
+        <EntityType Name="Documentos">
+          <Key>
+            <PropertyRef Name="Id_Documento" />
+          </Key>
+          <Property Name="Id_Documento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="Archivo" Type="varchar" MaxLength="512" />
+          <Property Name="FechadeRevision" Type="datetime" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentosPorParticipantes">
+          <Key>
+            <PropertyRef Name="Id_DocumentoPorParticipante" />
+          </Key>
+          <Property Name="Id_DocumentoPorParticipante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Documento" Type="int" Nullable="false" />
+          <Property Name="Id_Participante" Type="int" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="int" Nullable="false" />
+          <Property Name="FechaEntrega" Type="datetime" Nullable="false" />
+          <Property Name="PathNameDocumento" Type="varchar" MaxLength="2048" Nullable="false" />
+          <Property Name="Id_UsuarioRecibe" Type="int" Nullable="false" />
+          <Property Name="Aprobado" Type="int" Nullable="false" />
+          <Property Name="Id_UsuarioAprobacion" Type="int" />
+          <Property Name="Comentario" Type="varchar" MaxLength="2048" />
+        </EntityType>
+        <EntityType Name="FormadePago">
+          <Key>
+            <PropertyRef Name="Id_FormadePago" />
+          </Key>
+          <Property Name="Id_FormadePago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormadePago" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MotivoCierre">
+          <Key>
+            <PropertyRef Name="Id_MotivoCierre" />
+          </Key>
+          <Property Name="Id_MotivoCierre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MotivoCierre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NivelesdelasCharlas">
+          <Key>
+            <PropertyRef Name="Id_NiveldeCharla" />
+          </Key>
+          <Property Name="Id_NiveldeCharla" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nivel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdenesJudiciales">
+          <Key>
+            <PropertyRef Name="Id_OrdenJudicial" />
+          </Key>
+          <Property Name="Id_OrdenJudicial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Participante" Type="int" Nullable="false" />
+          <Property Name="NumeroOrdenJudicial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Id_UsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaCierre" Type="datetime" />
+          <Property Name="Id_MotivoCierre" Type="int" />
+          <Property Name="ComentarioCierre" Type="varchar" MaxLength="4096" />
+          <Property Name="DocumentoAprobacion" Type="varchar" MaxLength="4096" />
+          <Property Name="Id_UsuarioCierre" Type="int" />
+        </EntityType>
+        <EntityType Name="Participantes">
+          <Key>
+            <PropertyRef Name="Id_Participante" />
+          </Key>
+          <Property Name="Id_Participante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="Pasaporte" Type="varchar" MaxLength="30" />
+          <Property Name="Licencia" Type="varchar" MaxLength="30" />
+          <Property Name="IUP" Type="int" />
+          <Property Name="Expediente" Type="varchar" MaxLength="30" />
+          <Property Name="Correo" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono1" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono2" Type="varchar" MaxLength="30" />
+          <Property Name="TelefonoFamiliarMasCercano" Type="varchar" MaxLength="30" />
+          <Property Name="TelefonoCitas" Type="varchar" MaxLength="30" />
+          <Property Name="DireccionLinea1" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionLinea2" Type="varchar" MaxLength="50" />
+          <Property Name="Municipio" Type="varchar" MaxLength="50" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+          <Property Name="FE_Edicion" Type="datetime" Nullable="false" />
+          <Property Name="Fk_UsuarioEdicion" Type="int" />
+        </EntityType>
+        <EntityType Name="ParticipantesPorCharla">
+          <Key>
+            <PropertyRef Name="Id_ParticipantePorCharlaGrupal" />
+          </Key>
+          <Property Name="Id_ParticipantePorCharlaGrupal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_CharlaGrupal" Type="int" Nullable="false" />
+          <Property Name="Id_Participante" Type="int" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Asistio" Type="int" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="int" />
+        </EntityType>
+        <EntityType Name="PERMISO">
+          <Key>
+            <PropertyRef Name="PK_Permiso" />
+          </Key>
+          <Property Name="PK_Permiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NB_Permiso" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Precios">
+          <Key>
+            <PropertyRef Name="Id_Precio" />
+          </Key>
+          <Property Name="Id_Precio" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cantidad" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programas_Region_Mapping">
+          <Key>
+            <PropertyRef Name="FK_Region" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Region" Type="int" Nullable="false" />
+          <Property Name="FK_Programa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id_Region" />
+          </Key>
+          <Property Name="Id_Region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Region" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SA_PERSONA">
+          <Key>
+            <PropertyRef Name="PK_Ley22" />
+          </Key>
+          <Property Name="PK_Ley22" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NR_SeguroSocial" Type="char" MaxLength="9" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="Pasaporte" Type="varchar" MaxLength="30" />
+          <Property Name="Licencia" Type="varchar" MaxLength="30" />
+          <Property Name="IUP" Type="int" />
+          <Property Name="Expediente" Type="varchar" MaxLength="30" />
+          <Property Name="NB_Primero" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NB_Segundo" Type="varchar" MaxLength="30" />
+          <Property Name="AP_Primero" Type="varchar" MaxLength="30" />
+          <Property Name="AP_Segundo" Type="varchar" MaxLength="30" />
+          <Property Name="FE_Nacimiento" Type="datetime" Nullable="false" />
+          <Property Name="FK_Sexo" Type="tinyint" Nullable="false" />
+          <Property Name="FK_GrupoEtnico" Type="tinyint" Nullable="false" />
+          <Property Name="FK_Veterano" Type="tinyint" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono1" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono2" Type="varchar" MaxLength="30" />
+          <Property Name="TelefonoFamiliarMasCercano" Type="varchar" MaxLength="30" />
+          <Property Name="TelefonoCitas" Type="varchar" MaxLength="30" />
+          <Property Name="DireccionLinea1" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionLinea2" Type="varchar" MaxLength="50" />
+          <Property Name="Municipio" Type="varchar" MaxLength="50" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+          <Property Name="FE_Edicion" Type="datetime" Nullable="false" />
+          <Property Name="Fk_UsuarioEdicion" Type="int" />
+        </EntityType>
+        <EntityType Name="SA_USUARIO_PERMISO_Mapping">
+          <Key>
+            <PropertyRef Name="FK_Usuario" />
+            <PropertyRef Name="FK_Permiso" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Usuario" Type="int" Nullable="false" />
+          <Property Name="FK_Permiso" Type="int" Nullable="false" />
+          <Property Name="FK_Programa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipodeCharlas">
+          <Key>
+            <PropertyRef Name="Id_TipoCharla" />
+          </Key>
+          <Property Name="Id_TipoCharla" Type="int" Nullable="false" />
+          <Property Name="TipodeCharla" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrabajadorSocial">
+          <Key>
+            <PropertyRef Name="Id_TrabajadorSocial" />
+          </Key>
+          <Property Name="Id_TrabajadorSocial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_Centro" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono1" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono2" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TS_Excepciones">
+          <Key>
+            <PropertyRef Name="Id_Excepciones" />
+          </Key>
+          <Property Name="Id_Excepciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_TrabajadorSocial" Type="int" Nullable="false" />
+          <Property Name="FechadeSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="FechaInicial" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_PROGRAMA">
+          <Key>
+            <PropertyRef Name="FK_Usuario" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FK_Programa" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Programas__FK_Re__405A880E">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Programas_Region_Mapping" Type="Self.Programas_Region_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id_Region" />
+            </Principal>
+            <Dependent Role="Programas_Region_Mapping">
+              <PropertyRef Name="FK_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AsignaCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="int" Mode="In" />
+          <Parameter Name="PK_Ley22" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BuscarSEPSPersonaXNroSeguroSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
+        </Function>
+        <Function Name="BusquedaSencilladePersonas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="FE_Nacimiento" Type="date" Mode="In" />
+          <Parameter Name="NombreApellido" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CerrarordenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+          <Parameter Name="Id_MotivoCierre" Type="int" Mode="In" />
+          <Parameter Name="ComentarioCierre" Type="varchar" Mode="In" />
+          <Parameter Name="DocumentoAprobacion" Type="varchar" Mode="In" />
+          <Parameter Name="Id_UsuarioCierre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ConsultarCharlasPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ConsultarEpisodiosXPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Pk_Persona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DetalleCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Calendario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarDocuemntoPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_DocumentoPorParticipante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarParticipanteCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Centro" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="Id_TipoCharla" Type="int" Mode="In" />
+          <Parameter Name="Id_Nivel" Type="int" Mode="In" />
+          <Parameter Name="NrodeParticipantes" Type="int" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarDocumentoPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Documento" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+          <Parameter Name="PathNameDocumento" Type="varchar" Mode="In" />
+          <Parameter Name="Id_UsuarioRecibe" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarExcepcionCoordinadorCharlasGrupales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Centro" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GuardarExcepcionTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GuardarOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="NumeroOrdenJudicial" Type="varchar" Mode="In" />
+          <Parameter Name="Id_UsuarioCreacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarParticipantePorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InfoCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarBalancedePagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarCharlasCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Centro" Type="int" Mode="In" />
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ListarCitasCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="varchar" Mode="In" />
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ListarDocumentosActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarDocumentosRecibidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarExcepcionesCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Centro" Type="int" Mode="In" />
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ListarExcepcionesTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_TrabajadorSocial" Type="int" Mode="In" />
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ListarMotivosCierre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarOrdenesJudicialesActivas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarParticipantesPorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModificarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="Id_TipoCharla" Type="int" Mode="In" />
+          <Parameter Name="Id_Nivel" Type="int" Mode="In" />
+          <Parameter Name="NrodeParticipantes" Type="int" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RegistrarPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_ControldePagos" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="decimal" Mode="In" />
+          <Parameter Name="Id_FormadePago" Type="int" Mode="In" />
+          <Parameter Name="NumerodeCheque" Type="int" Mode="In" />
+          <Parameter Name="FechadelPago" Type="date" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ResumendeAsistenciasCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_Read_CalendariobyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READ_CentrobyRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Region" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READ_ParticipantesxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READ_SA_PERSONAxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Pk_Persona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READ_TrabajadorSocialbyCentro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Centro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READALL_Ciudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Region" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_READALL_NivelesdelasCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_READALL_Regiones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_READALL_TipodeCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SPC_Persona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="Pasaporte" Type="varchar" Mode="In" />
+          <Parameter Name="Licencia" Type="varchar" Mode="In" />
+          <Parameter Name="IUP" Type="int" Mode="In" />
+          <Parameter Name="Expediente" Type="varchar" Mode="In" />
+          <Parameter Name="NB_Primero" Type="varchar" Mode="In" />
+          <Parameter Name="NB_Segundo" Type="varchar" Mode="In" />
+          <Parameter Name="AP_Primero" Type="varchar" Mode="In" />
+          <Parameter Name="AP_Segundo" Type="varchar" Mode="In" />
+          <Parameter Name="FE_Nacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="FK_Sexo" Type="tinyint" Mode="In" />
+          <Parameter Name="FK_GrupoEtnico" Type="tinyint" Mode="In" />
+          <Parameter Name="FK_Veterano" Type="tinyint" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono1" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono2" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoFamiliarMasCercano" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoCitas" Type="varchar" Mode="In" />
+          <Parameter Name="DireccionLinea1" Type="varchar" Mode="In" />
+          <Parameter Name="DireccionLinea2" Type="varchar" Mode="In" />
+          <Parameter Name="Municipio" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="Fk_UsuarioEdicion" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Ley22ModelStoreContainer">
+          <EntitySet Name="Calendario" EntityType="Self.Calendario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CCG_Excepciones" EntityType="Self.CCG_Excepciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Centros" EntityType="Self.Centros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CharlaGrupal" EntityType="Self.CharlaGrupal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ControldePagos" EntityType="Self.ControldePagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documentos" EntityType="Self.Documentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentosPorParticipantes" EntityType="Self.DocumentosPorParticipantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormadePago" EntityType="Self.FormadePago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MotivoCierre" EntityType="Self.MotivoCierre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NivelesdelasCharlas" EntityType="Self.NivelesdelasCharlas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesJudiciales" EntityType="Self.OrdenesJudiciales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participantes" EntityType="Self.Participantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParticipantesPorCharla" EntityType="Self.ParticipantesPorCharla" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISO" EntityType="Self.PERMISO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Precios" EntityType="Self.Precios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programas_Region_Mapping" EntityType="Self.Programas_Region_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SA_PERSONA" EntityType="Self.SA_PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SA_USUARIO_PERMISO_Mapping" EntityType="Self.SA_USUARIO_PERMISO_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipodeCharlas" EntityType="Self.TipodeCharlas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrabajadorSocial" EntityType="Self.TrabajadorSocial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TS_Excepciones" EntityType="Self.TS_Excepciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_PROGRAMA" EntityType="Self.USUARIO_PROGRAMA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Programas__FK_Re__405A880E" Association="Self.FK__Programas__FK_Re__405A880E">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Programas_Region_Mapping" EntitySet="Programas_Region_Mapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ley22Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Ley22Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="BuscarSEPSPersonaXNroSeguroSocial" ReturnType="Collection(Ley22Model.BuscarSEPSPersonaXNroSeguroSocial_Result)">
+          <Parameter Name="NR_SeguroSocial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BusquedaSencilladePersonas" ReturnType="Collection(Ley22Model.BusquedaSencilladePersonas_Result)">
+            <Parameter Name="NR_SeguroSocial" Mode="In" Type="String" />
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="FE_Nacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="NombreApellido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CerrarordenJudicial">
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="Id_MotivoCierre" Mode="In" Type="Int32" />
+            <Parameter Name="ComentarioCierre" Mode="In" Type="String" />
+            <Parameter Name="DocumentoAprobacion" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioCierre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarCharlasPorParticipante" ReturnType="Collection(Ley22Model.ConsultarCharlasPorParticipante_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ConsultarEpisodiosXPersona" ReturnType="Collection(Ley22Model.ConsultarEpisodiosXPersona_Result)">
+          <Parameter Name="Pk_Persona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DetalleCharlaGrupal" ReturnType="Collection(Ley22Model.DetalleCharlaGrupal_Result)">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCharlaGrupal">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCitaTrabajadorSocial">
+          <Parameter Name="Id_Calendario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarDocuemntoPorParticipante">
+          <Parameter Name="Id_DocumentoPorParticipante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarParticipanteCharlaGrupal">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarCharlaGrupal">
+            <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_TipoCharla" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Nivel" Mode="In" Type="Int32" />
+            <Parameter Name="NrodeParticipantes" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarCitaTrabajadorSocial">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarDocumentoPorParticipante">
+            <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="PathNameDocumento" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioRecibe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarOrdenJudicial">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroOrdenJudicial" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarParticipantePorCharlas">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarBalancedePagos" ReturnType="Collection(Ley22Model.ListarBalancedePagos_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCharlasCalendario" ReturnType="Collection(Ley22Model.ListarCharlasCalendario_Result)">
+            <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCitasCalendario" ReturnType="Collection(Ley22Model.ListarCitasCalendario_Result)">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ListarDocumentosActivos" ReturnType="Collection(Ley22Model.ListarDocumentosActivos_Result)" />
+          <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarMotivosCierre" ReturnType="Collection(Ley22Model.ListarMotivosCierre_Result)" />
+          <FunctionImport Name="ListarOrdenesJudicialesActivas" ReturnType="Collection(Ley22Model.ListarOrdenesJudicialesActivas_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarParticipantesPorCharlas" ReturnType="Collection(Ley22Model.ListarParticipantesPorCharlas_Result)">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" ReturnType="Collection(Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result)">
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarPago">
+            <Parameter Name="Id_ControldePagos" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
+            <Parameter Name="Id_FormadePago" Mode="In" Type="Int32" />
+            <Parameter Name="NumerodeCheque" Mode="In" Type="Int32" />
+            <Parameter Name="FechadelPago" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ResumendeAsistenciasCharlas" ReturnType="Collection(Ley22Model.ResumendeAsistenciasCharlas_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Read_CalendariobyId" ReturnType="Collection(Ley22Model.Sp_Read_CalendariobyId_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READ_CentrobyRegion" ReturnType="Collection(Ley22Model.sp_READ_CentrobyRegion_Result)">
+          <Parameter Name="Id_Region" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READ_ParticipantesxId" ReturnType="Collection(Ley22Model.sp_READ_ParticipantesxId_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READ_SA_PERSONAxId" ReturnType="Collection(Ley22Model.sp_READ_SA_PERSONAxId_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Pk_Persona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READ_TrabajadorSocialbyCentro" ReturnType="Collection(Ley22Model.sp_READ_TrabajadorSocialbyCentro_Result)">
+          <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READALL_Ciudad" ReturnType="Collection(Ley22Model.sp_READALL_Ciudad_Result)">
+          <Parameter Name="Id_Region" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_READALL_NivelesdelasCharlas" ReturnType="Collection(Ley22Model.sp_READALL_NivelesdelasCharlas_Result)" />
+          <FunctionImport Name="sp_READALL_Regiones" ReturnType="Collection(Ley22Model.sp_READALL_Regiones_Result)" />
+          <FunctionImport Name="sp_READALL_TipodeCharlas" ReturnType="Collection(Ley22Model.sp_READALL_TipodeCharlas_Result)" />
+          <FunctionImport Name="SPC_Persona" ReturnType="Collection(Int32)">
+            <Parameter Name="NR_SeguroSocial" Mode="In" Type="String" />
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Pasaporte" Mode="In" Type="String" />
+            <Parameter Name="Licencia" Mode="In" Type="String" />
+            <Parameter Name="IUP" Mode="In" Type="Int32" />
+            <Parameter Name="Expediente" Mode="In" Type="String" />
+            <Parameter Name="NB_Primero" Mode="In" Type="String" />
+            <Parameter Name="NB_Segundo" Mode="In" Type="String" />
+            <Parameter Name="AP_Primero" Mode="In" Type="String" />
+            <Parameter Name="AP_Segundo" Mode="In" Type="String" />
+            <Parameter Name="FE_Nacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="FK_Sexo" Mode="In" Type="Byte" />
+            <Parameter Name="FK_GrupoEtnico" Mode="In" Type="Byte" />
+            <Parameter Name="FK_Veterano" Mode="In" Type="Byte" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Telefono1" Mode="In" Type="String" />
+            <Parameter Name="Telefono2" Mode="In" Type="String" />
+            <Parameter Name="TelefonoFamiliarMasCercano" Mode="In" Type="String" />
+            <Parameter Name="TelefonoCitas" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea1" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea2" Mode="In" Type="String" />
+            <Parameter Name="Municipio" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Fk_UsuarioEdicion" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Calendarios" EntityType="Ley22Model.Calendario" />
+          <EntitySet Name="Centros" EntityType="Ley22Model.Centro" />
+          <EntitySet Name="CharlaGrupals" EntityType="Ley22Model.CharlaGrupal" />
+          <EntitySet Name="Ciudads" EntityType="Ley22Model.Ciudad" />
+          <EntitySet Name="ControldePagos" EntityType="Ley22Model.ControldePago" />
+          <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
+          <EntitySet Name="DocumentosPorParticipantes" EntityType="Ley22Model.DocumentosPorParticipante" />
+          <EntitySet Name="FormadePagoes" EntityType="Ley22Model.FormadePago" />
+          <EntitySet Name="MotivoCierres" EntityType="Ley22Model.MotivoCierre" />
+          <EntitySet Name="NivelesdelasCharlas" EntityType="Ley22Model.NivelesdelasCharla" />
+          <EntitySet Name="OrdenesJudiciales" EntityType="Ley22Model.OrdenesJudiciale" />
+          <EntitySet Name="Participantes" EntityType="Ley22Model.Participante" />
+          <EntitySet Name="ParticipantesPorCharlas" EntityType="Ley22Model.ParticipantesPorCharla" />
+          <EntitySet Name="Precios" EntityType="Ley22Model.Precio" />
+          <EntitySet Name="Regions" EntityType="Ley22Model.Region" />
+          <EntitySet Name="SA_PERSONA" EntityType="Ley22Model.SA_PERSONA" />
+          <EntitySet Name="TipodeCharlas" EntityType="Ley22Model.TipodeCharla" />
+          <EntitySet Name="TrabajadorSocials" EntityType="Ley22Model.TrabajadorSocial" />
+          <FunctionImport Name="AsignaCitaTrabajadorSocial">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="Int32" />
+            <Parameter Name="PK_Ley22" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCalendario">
+          <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InfoCharlaGrupal" ReturnType="Collection(Ley22Model.InfoCharlaGrupal_Result)">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarCharlaGrupal">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_TipoCharla" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Nivel" Mode="In" Type="Int32" />
+            <Parameter Name="NrodeParticipantes" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarExcepcionTrabajadorSocial">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="TS_Excepciones" EntityType="Ley22Model.TS_Excepciones" />
+          <FunctionImport Name="ListarExcepcionesTrabajadorSocial" ReturnType="Collection(Ley22Model.ListarExcepcionesTrabajadorSocial_Result)">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="Int32" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Programas_Region_Mapping" EntityType="Ley22Model.Programas_Region_Mapping" />
+          <AssociationSet Name="FK__Programas__FK_Re__405A880E" Association="Ley22Model.FK__Programas__FK_Re__405A880E">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Programas_Region_Mapping" EntitySet="Programas_Region_Mapping" />
+          </AssociationSet>
+          <EntitySet Name="CCG_Excepciones" EntityType="Ley22Model.CCG_Excepciones" />
+          <EntitySet Name="PERMISOes" EntityType="Ley22Model.PERMISO" />
+          <EntitySet Name="SA_USUARIO_PERMISO_Mapping" EntityType="Ley22Model.SA_USUARIO_PERMISO_Mapping" />
+          <FunctionImport Name="GuardarExcepcionCoordinadorCharlasGrupales">
+            <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ListarExcepcionesCharlaGrupal" ReturnType="Collection(Ley22Model.ListarExcepcionesCharlaGrupal_Result)">
+            <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="USUARIO_PROGRAMA" EntityType="Ley22Model.USUARIO_PROGRAMA" />
+        </EntityContainer>
+        <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
+          <Property Type="Int32" Name="PK_Persona" Nullable="false" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="Byte" Name="FK_Sexo" Nullable="false" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="FK_Veterano" Nullable="false" />
+          <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="false" />
+          <Property Type="Guid" Name="FK_Sesion" Nullable="false" />
+          <Property Type="String" Name="TI_Edicion" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="FE_Edicion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NR_ClientId_Legacy" Nullable="true" MaxLength="12" />
+          <Property Type="Int32" Name="PK_Old" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="BusquedaSencilladePersonas_Result">
+          <Property Type="Int32" Name="PK_Persona" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="Pasaporte" Nullable="true" />
+          <Property Type="Int32" Name="Licencia" Nullable="true" />
+          <Property Type="Int32" Name="IUP" Nullable="true" />
+          <Property Type="Int32" Name="Expediente" Nullable="true" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="FK_Sexo" Nullable="false" />
+          <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="false" />
+          <Property Type="Byte" Name="FK_Veterano" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="true" />
+          <Property Type="String" Name="Telefono1" Nullable="true" />
+          <Property Type="String" Name="Telefono2" Nullable="true" />
+          <Property Type="DateTime" Name="FE_Edicion" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ConsultarCharlasPorParticipante_Result">
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="String" Name="FechaHora" Nullable="true" MaxLength="24" />
+          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
+          <Property Type="String" Name="AsistioTexto" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="ConsultarEpisodiosXPersona_Result">
+          <Property Type="Int32" Name="PK_Episodio" Nullable="false" />
+          <Property Type="DateTime" Name="FE_Episodio" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DE_Programa" Nullable="true" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="DetalleCharlaGrupal_Result">
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Horas" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="ListarBalancedePagos_Result">
+          <Property Type="Int32" Name="Id_ControldePagos" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FormadePago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumerodeCheque" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FechadelPago" Nullable="true" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="NombreCompleto" Nullable="true" MaxLength="61" />
+          <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="ListarCharlasCalendario_Result">
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="NrodeParticipantes" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ListarCitasCalendario_Result">
+          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="ListarDocumentosActivos_Result">
+          <Property Type="Int32" Name="Id_Documento" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="Archivo" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechadeRevision" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ListarDocumentosRecibidos_Result">
+          <Property Type="Int32" Name="Id_DocumentoPorParticipante" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PathNameDocumento" Nullable="false" MaxLength="2048" />
+          <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Aprobado" Nullable="false" />
+          <Property Type="String" Name="AprobadoTexto" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ListarMotivosCierre_Result">
+          <Property Type="Int32" Name="Id_MotivoCierre" Nullable="false" />
+          <Property Type="String" Name="MotivoCierre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ListarOrdenesJudicialesActivas_Result">
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Activa" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Id_UsuarioCreacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCierre" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Id_MotivoCierre" Nullable="true" />
+          <Property Type="String" Name="ComentarioCierre" Nullable="true" MaxLength="4096" />
+          <Property Type="String" Name="DocumentoAprobacion" Nullable="true" MaxLength="4096" />
+          <Property Type="Int32" Name="Id_UsuarioCierre" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarParticipantesPorCharlas_Result">
+          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
+          <Property Type="Int32" Name="Id_Documento" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="Archivo" Nullable="true" MaxLength="512" />
+          <Property Type="DateTime" Name="FechadeRevision" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ResumendeAsistenciasCharlas_Result">
+          <Property Type="Int32" Name="TotaldeCharlas" Nullable="true" />
+          <Property Type="Int32" Name="TotalAsistencias" Nullable="true" />
+          <Property Type="Int32" Name="TotalInasistencias" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_Read_CalendariobyId_Result">
+          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
+          <Property Type="String" Name="FechaHora" Nullable="true" MaxLength="24" />
+          <Property Type="String" Name="TrabajadorSocial" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
+          <Property Type="String" Name="AsistioTexto" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="sp_READ_ParticipantesxId_Result">
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Pasaporte" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Licencia" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="IUP" Nullable="false" />
+          <Property Type="String" Name="Expediente" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="FK_Sexo" Nullable="false" />
+          <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="false" />
+          <Property Type="Byte" Name="FK_Veterano" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono2" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="TelefonoFamiliarMasCercano" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="TelefonoCitas" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DireccionLinea1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DireccionLinea2" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Municipio" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoPostal" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Edicion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Fk_UsuarioEdicion" Nullable="false" />
+          <Property Type="String" Name="DE_Sexo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DE_GrupoEtnico" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="sp_READ_SA_PERSONAxId_Result">
+          <Property Type="Int32" Name="Pk_Persona" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Pasaporte" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Licencia" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="IUP" Nullable="false" />
+          <Property Type="String" Name="Expediente" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NB_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AP_Segundo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="FK_Sexo" Nullable="false" />
+          <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="false" />
+          <Property Type="Byte" Name="FK_Veterano" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono2" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="TelefonoFamiliarMasCercano" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="TelefonoCitas" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DireccionLinea1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DireccionLinea2" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Municipio" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoPostal" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Edicion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Fk_UsuarioEdicion" Nullable="false" />
+          <Property Type="String" Name="DE_Sexo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DE_GrupoEtnico" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="sp_READALL_Ciudad_Result">
+          <Property Type="Int32" Name="Id_Ciudad" Nullable="false" />
+          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_READALL_NivelesdelasCharlas_Result">
+          <Property Type="Int32" Name="Id_NiveldeCharla" Nullable="false" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_READALL_Regiones_Result">
+          <Property Type="Int32" Name="Id_region" Nullable="false" />
+          <Property Type="String" Name="region" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_READALL_TipodeCharlas_Result">
+          <Property Type="Int32" Name="Id_TipoCharla" Nullable="false" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Calendario">
+          <Key>
+            <PropertyRef Name="Id_Calendario" />
+          </Key>
+          <Property Name="Id_Calendario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_TrabajadorSocial" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+          <Property Name="FechadeSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicial" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" />
+          <Property Name="Asistio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Centro">
+          <Key>
+            <PropertyRef Name="Id_Centro" />
+          </Key>
+          <Property Name="Id_Centro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_Region" Type="Int32" />
+          <Property Name="NombreDelCentro" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CharlaGrupal">
+          <Key>
+            <PropertyRef Name="Id_CharlaGrupal" />
+          </Key>
+          <Property Name="Id_CharlaGrupal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Centro" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicial" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_TipoCharla" Type="Int32" Nullable="false" />
+          <Property Name="Id_Nivel" Type="Int32" Nullable="false" />
+          <Property Name="NrodeParticipantes" Type="Int32" Nullable="false" />
+          <Property Name="Id_Usuario" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id_Ciudad" />
+          </Key>
+          <Property Name="Id_Ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Region" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad1" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ControldePago">
+          <Key>
+            <PropertyRef Name="Id_ControldePagos" />
+          </Key>
+          <Property Name="Id_ControldePagos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="Id_Precio" Type="Int32" Nullable="false" />
+          <Property Name="Id_FormadePago" Type="Int32" Nullable="false" />
+          <Property Name="NumerodeCheque" Type="Int32" />
+          <Property Name="FechadelPago" Type="DateTime" Precision="0" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="Id_Usuario" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Id_Calendario" Type="Int32" />
+          <Property Name="Id_CharlaGrupal" Type="Int32" />
+          <Property Name="Id_OrdenJudicial" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Id_Documento" />
+          </Key>
+          <Property Name="Id_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento1" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentosPorParticipante">
+          <Key>
+            <PropertyRef Name="Id_DocumentoPorParticipante" />
+          </Key>
+          <Property Name="Id_DocumentoPorParticipante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Documento" Type="Int32" Nullable="false" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" />
+          <Property Name="FechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PathNameDocumento" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UsuarioRecibe" Type="Int32" Nullable="false" />
+          <Property Name="Aprobado" Type="Int32" Nullable="false" />
+          <Property Name="Id_UsuarioAprobacion" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FormadePago">
+          <Key>
+            <PropertyRef Name="Id_FormadePago" />
+          </Key>
+          <Property Name="Id_FormadePago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormadePago1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MotivoCierre">
+          <Key>
+            <PropertyRef Name="Id_MotivoCierre" />
+          </Key>
+          <Property Name="Id_MotivoCierre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MotivoCierre1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NivelesdelasCharla">
+          <Key>
+            <PropertyRef Name="Id_NiveldeCharla" />
+          </Key>
+          <Property Name="Id_NiveldeCharla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nivel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdenesJudiciale">
+          <Key>
+            <PropertyRef Name="Id_OrdenJudicial" />
+          </Key>
+          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="NumeroOrdenJudicial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activa" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_UsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaCierre" Type="DateTime" Precision="3" />
+          <Property Name="Id_MotivoCierre" Type="Int32" />
+          <Property Name="ComentarioCierre" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentoAprobacion" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UsuarioCierre" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="Id_Participante" />
+          </Key>
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pasaporte" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Licencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IUP" Type="Int32" />
+          <Property Name="Expediente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoFamiliarMasCercano" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCitas" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FE_Edicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fk_UsuarioEdicion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ParticipantesPorCharla">
+          <Key>
+            <PropertyRef Name="Id_ParticipantePorCharlaGrupal" />
+          </Key>
+          <Property Name="Id_ParticipantePorCharlaGrupal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_CharlaGrupal" Type="Int32" Nullable="false" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Asistio" Type="Int32" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Precio">
+          <Key>
+            <PropertyRef Name="Id_Precio" />
+          </Key>
+          <Property Name="Id_Precio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id_Region" />
+          </Key>
+          <Property Name="Id_Region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Region1" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Programas_Region_Mapping" Relationship="Ley22Model.FK__Programas__FK_Re__405A880E" FromRole="Region" ToRole="Programas_Region_Mapping" />
+        </EntityType>
+        <EntityType Name="SA_PERSONA">
+          <Key>
+            <PropertyRef Name="PK_Ley22" />
+          </Key>
+          <Property Name="PK_Ley22" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NR_SeguroSocial" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pasaporte" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Licencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IUP" Type="Int32" />
+          <Property Name="Expediente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Primero" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Segundo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AP_Primero" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AP_Segundo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FE_Nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_Sexo" Type="Byte" Nullable="false" />
+          <Property Name="FK_GrupoEtnico" Type="Byte" Nullable="false" />
+          <Property Name="FK_Veterano" Type="Byte" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoFamiliarMasCercano" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCitas" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FE_Edicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fk_UsuarioEdicion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TipodeCharla">
+          <Key>
+            <PropertyRef Name="Id_TipoCharla" />
+          </Key>
+          <Property Name="Id_TipoCharla" Type="Int32" Nullable="false" />
+          <Property Name="TipodeCharla1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrabajadorSocial">
+          <Key>
+            <PropertyRef Name="Id_TrabajadorSocial" />
+          </Key>
+          <Property Name="Id_TrabajadorSocial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_Centro" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="InfoCharlaGrupal_Result">
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Id_TipoCharla" Nullable="false" />
+          <Property Type="Int32" Name="Id_NiveldeCharla" Nullable="false" />
+          <Property Type="Int32" Name="NrodeParticipantes" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="TS_Excepciones">
+          <Key>
+            <PropertyRef Name="Id_Excepciones" />
+          </Key>
+          <Property Name="Id_Excepciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_TrabajadorSocial" Type="Int32" Nullable="false" />
+          <Property Name="FechadeSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaInicial" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <ComplexType Name="ListarExcepcionesTrabajadorSocial_Result">
+          <Property Type="Int32" Name="Id_Excepciones" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Programas_Region_Mapping">
+          <Key>
+            <PropertyRef Name="FK_Region" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Region" Type="Int32" Nullable="false" />
+          <Property Name="FK_Programa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="Ley22Model.FK__Programas__FK_Re__405A880E" FromRole="Programas_Region_Mapping" ToRole="Region" />
+        </EntityType>
+        <Association Name="FK__Programas__FK_Re__405A880E">
+          <End Type="Ley22Model.Region" Role="Region" Multiplicity="1" />
+          <End Type="Ley22Model.Programas_Region_Mapping" Role="Programas_Region_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id_Region" />
+            </Principal>
+            <Dependent Role="Programas_Region_Mapping">
+              <PropertyRef Name="FK_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_READ_CentrobyRegion_Result">
+          <Property Type="Int16" Name="PK_Programa" Nullable="false" />
+          <Property Type="String" Name="NB_Programa" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="DE_Programa" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="NB_ProgramaIngles" Nullable="true" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="sp_READ_TrabajadorSocialbyCentro_Result">
+          <Property Type="Int32" Name="PK_USUARIO" Nullable="false" />
+          <Property Type="String" Name="NB_USUARIO" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="CCG_Excepciones">
+          <Key>
+            <PropertyRef Name="PK_CCG_Excepciones" />
+          </Key>
+          <Property Name="PK_CCG_Excepciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Centro" Type="Int32" Nullable="false" />
+          <Property Name="FechadeSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaInicial" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PERMISO">
+          <Key>
+            <PropertyRef Name="PK_Permiso" />
+          </Key>
+          <Property Name="PK_Permiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NB_Permiso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SA_USUARIO_PERMISO_Mapping">
+          <Key>
+            <PropertyRef Name="FK_Usuario" />
+            <PropertyRef Name="FK_Permiso" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="FK_Permiso" Type="Int32" Nullable="false" />
+          <Property Name="FK_Programa" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="ListarExcepcionesCharlaGrupal_Result">
+          <Property Type="Int32" Name="PK_CCG_Excepciones" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="USUARIO_PROGRAMA">
+          <Key>
+            <PropertyRef Name="FK_Usuario" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Usuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Programa" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ley22ModelStoreContainer" CdmEntityContainer="Ley22Entities" >
+          <FunctionImportMapping FunctionImportName="BuscarSEPSPersonaXNroSeguroSocial" FunctionName="Ley22Model.Store.BuscarSEPSPersonaXNroSeguroSocial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.BuscarSEPSPersonaXNroSeguroSocial_Result">
+                <ScalarProperty Name="PK_Persona" ColumnName="PK_Persona" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Sesion" ColumnName="FK_Sesion" />
+                <ScalarProperty Name="TI_Edicion" ColumnName="TI_Edicion" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="NR_ClientId_Legacy" ColumnName="NR_ClientId_Legacy" />
+                <ScalarProperty Name="PK_Old" ColumnName="PK_Old" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BusquedaSencilladePersonas" FunctionName="Ley22Model.Store.BusquedaSencilladePersonas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.BusquedaSencilladePersonas_Result">
+                <ScalarProperty Name="PK_Persona" ColumnName="PK_Persona" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="IUP" ColumnName="IUP" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CerrarordenJudicial" FunctionName="Ley22Model.Store.CerrarordenJudicial" />
+          <FunctionImportMapping FunctionImportName="ConsultarCharlasPorParticipante" FunctionName="Ley22Model.Store.ConsultarCharlasPorParticipante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ConsultarCharlasPorParticipante_Result">
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="AsistioTexto" ColumnName="AsistioTexto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarEpisodiosXPersona" FunctionName="Ley22Model.Store.ConsultarEpisodiosXPersona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ConsultarEpisodiosXPersona_Result">
+                <ScalarProperty Name="PK_Episodio" ColumnName="PK_Episodio" />
+                <ScalarProperty Name="FE_Episodio" ColumnName="FE_Episodio" />
+                <ScalarProperty Name="DE_Programa" ColumnName="DE_Programa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DetalleCharlaGrupal" FunctionName="Ley22Model.Store.DetalleCharlaGrupal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.DetalleCharlaGrupal_Result">
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarCharlaGrupal" FunctionName="Ley22Model.Store.EliminarCharlaGrupal" />
+          <FunctionImportMapping FunctionImportName="EliminarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="EliminarDocuemntoPorParticipante" FunctionName="Ley22Model.Store.EliminarDocuemntoPorParticipante" />
+          <FunctionImportMapping FunctionImportName="EliminarParticipanteCharlaGrupal" FunctionName="Ley22Model.Store.EliminarParticipanteCharlaGrupal" />
+          <FunctionImportMapping FunctionImportName="GuardarCharlaGrupal" FunctionName="Ley22Model.Store.GuardarCharlaGrupal" />
+          <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="GuardarDocumentoPorParticipante" FunctionName="Ley22Model.Store.GuardarDocumentoPorParticipante" />
+          <FunctionImportMapping FunctionImportName="GuardarOrdenJudicial" FunctionName="Ley22Model.Store.GuardarOrdenJudicial" />
+          <FunctionImportMapping FunctionImportName="GuardarParticipantePorCharlas" FunctionName="Ley22Model.Store.GuardarParticipantePorCharlas" />
+          <FunctionImportMapping FunctionImportName="ListarBalancedePagos" FunctionName="Ley22Model.Store.ListarBalancedePagos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarBalancedePagos_Result">
+                <ScalarProperty Name="Id_ControldePagos" ColumnName="Id_ControldePagos" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FormadePago" ColumnName="FormadePago" />
+                <ScalarProperty Name="NumerodeCheque" ColumnName="NumerodeCheque" />
+                <ScalarProperty Name="FechadelPago" ColumnName="FechadelPago" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="CantidadAPagar" ColumnName="CantidadAPagar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarCharlasCalendario" FunctionName="Ley22Model.Store.ListarCharlasCalendario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarCharlasCalendario_Result">
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="NrodeParticipantes" ColumnName="NrodeParticipantes" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarCitasCalendario" FunctionName="Ley22Model.Store.ListarCitasCalendario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarCitasCalendario_Result">
+                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDocumentosActivos" FunctionName="Ley22Model.Store.ListarDocumentosActivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosActivos_Result">
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDocumentosRecibidos" FunctionName="Ley22Model.Store.ListarDocumentosRecibidos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosRecibidos_Result">
+                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
+                <ScalarProperty Name="AprobadoTexto" ColumnName="AprobadoTexto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarMotivosCierre" FunctionName="Ley22Model.Store.ListarMotivosCierre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarMotivosCierre_Result">
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="MotivoCierre" ColumnName="MotivoCierre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarOrdenesJudicialesActivas" FunctionName="Ley22Model.Store.ListarOrdenesJudicialesActivas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarOrdenesJudicialesActivas_Result">
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
+                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
+                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarParticipantesPorCharlas" FunctionName="Ley22Model.Store.ListarParticipantesPorCharlas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarParticipantesPorCharlas_Result">
+                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarTipodeDocumentosPorParticipanteOrdenJudicial" FunctionName="Ley22Model.Store.ListarTipodeDocumentosPorParticipanteOrdenJudicial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
+          <FunctionImportMapping FunctionImportName="ResumendeAsistenciasCharlas" FunctionName="Ley22Model.Store.ResumendeAsistenciasCharlas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ResumendeAsistenciasCharlas_Result">
+                <ScalarProperty Name="TotaldeCharlas" ColumnName="TotaldeCharlas" />
+                <ScalarProperty Name="TotalAsistencias" ColumnName="TotalAsistencias" />
+                <ScalarProperty Name="TotalInasistencias" ColumnName="TotalInasistencias" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Read_CalendariobyId" FunctionName="Ley22Model.Store.Sp_Read_CalendariobyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.Sp_Read_CalendariobyId_Result">
+                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="TrabajadorSocial" ColumnName="TrabajadorSocial" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="AsistioTexto" ColumnName="AsistioTexto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READ_CentrobyRegion" FunctionName="Ley22Model.Store.sp_READ_CentrobyRegion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READ_CentrobyRegion_Result">
+                <ScalarProperty Name="PK_Programa" ColumnName="PK_Programa" />
+                <ScalarProperty Name="NB_Programa" ColumnName="NB_Programa" />
+                <ScalarProperty Name="DE_Programa" ColumnName="DE_Programa" />
+                <ScalarProperty Name="NB_ProgramaIngles" ColumnName="NB_ProgramaIngles" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READ_ParticipantesxId" FunctionName="Ley22Model.Store.sp_READ_ParticipantesxId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READ_ParticipantesxId_Result">
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="IUP" ColumnName="IUP" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="TelefonoFamiliarMasCercano" ColumnName="TelefonoFamiliarMasCercano" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
+                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="Fk_UsuarioEdicion" ColumnName="Fk_UsuarioEdicion" />
+                <ScalarProperty Name="DE_Sexo" ColumnName="DE_Sexo" />
+                <ScalarProperty Name="DE_GrupoEtnico" ColumnName="DE_GrupoEtnico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READ_SA_PERSONAxId" FunctionName="Ley22Model.Store.sp_READ_SA_PERSONAxId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READ_SA_PERSONAxId_Result">
+                <ScalarProperty Name="Pk_Persona" ColumnName="Pk_Persona" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="IUP" ColumnName="IUP" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="TelefonoFamiliarMasCercano" ColumnName="TelefonoFamiliarMasCercano" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
+                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="Fk_UsuarioEdicion" ColumnName="Fk_UsuarioEdicion" />
+                <ScalarProperty Name="DE_Sexo" ColumnName="DE_Sexo" />
+                <ScalarProperty Name="DE_GrupoEtnico" ColumnName="DE_GrupoEtnico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READ_TrabajadorSocialbyCentro" FunctionName="Ley22Model.Store.sp_READ_TrabajadorSocialbyCentro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READ_TrabajadorSocialbyCentro_Result">
+                <ScalarProperty Name="PK_USUARIO" ColumnName="PK_USUARIO" />
+                <ScalarProperty Name="NB_USUARIO" ColumnName="NB_USUARIO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READALL_Ciudad" FunctionName="Ley22Model.Store.sp_READALL_Ciudad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READALL_Ciudad_Result">
+                <ScalarProperty Name="Id_Ciudad" ColumnName="Id_Ciudad" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READALL_NivelesdelasCharlas" FunctionName="Ley22Model.Store.sp_READALL_NivelesdelasCharlas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READALL_NivelesdelasCharlas_Result">
+                <ScalarProperty Name="Id_NiveldeCharla" ColumnName="Id_NiveldeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READALL_Regiones" FunctionName="Ley22Model.Store.sp_READALL_Regiones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READALL_Regiones_Result">
+                <ScalarProperty Name="Id_region" ColumnName="Id_region" />
+                <ScalarProperty Name="region" ColumnName="region" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_READALL_TipodeCharlas" FunctionName="Ley22Model.Store.sp_READALL_TipodeCharlas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.sp_READALL_TipodeCharlas_Result">
+                <ScalarProperty Name="Id_TipoCharla" ColumnName="Id_TipoCharla" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPC_Persona" FunctionName="Ley22Model.Store.SPC_Persona" />
+          <EntitySetMapping Name="Calendarios">
+            <EntityTypeMapping TypeName="Ley22Model.Calendario">
+              <MappingFragment StoreEntitySet="Calendario">
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="FechadeSolicitud" ColumnName="FechadeSolicitud" />
+                <ScalarProperty Name="Id_TrabajadorSocial" ColumnName="Id_TrabajadorSocial" />
+                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centros">
+            <EntityTypeMapping TypeName="Ley22Model.Centro">
+              <MappingFragment StoreEntitySet="Centros">
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+                <ScalarProperty Name="Fk_Region" ColumnName="Fk_Region" />
+                <ScalarProperty Name="Id_Centro" ColumnName="Id_Centro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CharlaGrupals">
+            <EntityTypeMapping TypeName="Ley22Model.CharlaGrupal">
+              <MappingFragment StoreEntitySet="CharlaGrupal">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="NrodeParticipantes" ColumnName="NrodeParticipantes" />
+                <ScalarProperty Name="Id_Nivel" ColumnName="Id_Nivel" />
+                <ScalarProperty Name="Id_TipoCharla" ColumnName="Id_TipoCharla" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="Id_Centro" ColumnName="Id_Centro" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudads">
+            <EntityTypeMapping TypeName="Ley22Model.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="Ciudad1" ColumnName="Ciudad" />
+                <ScalarProperty Name="Id_Region" ColumnName="Id_Region" />
+                <ScalarProperty Name="Id_Ciudad" ColumnName="Id_Ciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControldePagos">
+            <EntityTypeMapping TypeName="Ley22Model.ControldePago">
+              <MappingFragment StoreEntitySet="ControldePagos">
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechadelPago" ColumnName="FechadelPago" />
+                <ScalarProperty Name="NumerodeCheque" ColumnName="NumerodeCheque" />
+                <ScalarProperty Name="Id_FormadePago" ColumnName="Id_FormadePago" />
+                <ScalarProperty Name="Id_Precio" ColumnName="Id_Precio" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_ControldePagos" ColumnName="Id_ControldePagos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Ley22Model.Documento">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="Documento1" ColumnName="Documento" />
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentosPorParticipantes">
+            <EntityTypeMapping TypeName="Ley22Model.DocumentosPorParticipante">
+              <MappingFragment StoreEntitySet="DocumentosPorParticipantes">
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Id_UsuarioAprobacion" ColumnName="Id_UsuarioAprobacion" />
+                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
+                <ScalarProperty Name="Id_UsuarioRecibe" ColumnName="Id_UsuarioRecibe" />
+                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormadePagoes">
+            <EntityTypeMapping TypeName="Ley22Model.FormadePago">
+              <MappingFragment StoreEntitySet="FormadePago">
+                <ScalarProperty Name="FormadePago1" ColumnName="FormadePago" />
+                <ScalarProperty Name="Id_FormadePago" ColumnName="Id_FormadePago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MotivoCierres">
+            <EntityTypeMapping TypeName="Ley22Model.MotivoCierre">
+              <MappingFragment StoreEntitySet="MotivoCierre">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="MotivoCierre1" ColumnName="MotivoCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NivelesdelasCharlas">
+            <EntityTypeMapping TypeName="Ley22Model.NivelesdelasCharla">
+              <MappingFragment StoreEntitySet="NivelesdelasCharlas">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Id_NiveldeCharla" ColumnName="Id_NiveldeCharla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesJudiciales">
+            <EntityTypeMapping TypeName="Ley22Model.OrdenesJudiciale">
+              <MappingFragment StoreEntitySet="OrdenesJudiciales">
+                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
+                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
+                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participantes">
+            <EntityTypeMapping TypeName="Ley22Model.Participante">
+              <MappingFragment StoreEntitySet="Participantes">
+                <ScalarProperty Name="Fk_UsuarioEdicion" ColumnName="Fk_UsuarioEdicion" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
+                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+                <ScalarProperty Name="TelefonoFamiliarMasCercano" ColumnName="TelefonoFamiliarMasCercano" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="IUP" ColumnName="IUP" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParticipantesPorCharlas">
+            <EntityTypeMapping TypeName="Ley22Model.ParticipantesPorCharla">
+              <MappingFragment StoreEntitySet="ParticipantesPorCharla">
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Precios">
+            <EntityTypeMapping TypeName="Ley22Model.Precio">
+              <MappingFragment StoreEntitySet="Precios">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id_Precio" ColumnName="Id_Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="Ley22Model.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Region1" ColumnName="Region" />
+                <ScalarProperty Name="Id_Region" ColumnName="Id_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SA_PERSONA">
+            <EntityTypeMapping TypeName="Ley22Model.SA_PERSONA">
+              <MappingFragment StoreEntitySet="SA_PERSONA">
+                <ScalarProperty Name="Fk_UsuarioEdicion" ColumnName="Fk_UsuarioEdicion" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
+                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+                <ScalarProperty Name="TelefonoFamiliarMasCercano" ColumnName="TelefonoFamiliarMasCercano" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="IUP" ColumnName="IUP" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="Pasaporte" ColumnName="Pasaporte" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="PK_Ley22" ColumnName="PK_Ley22" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipodeCharlas">
+            <EntityTypeMapping TypeName="Ley22Model.TipodeCharla">
+              <MappingFragment StoreEntitySet="TipodeCharlas">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="TipodeCharla1" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Id_TipoCharla" ColumnName="Id_TipoCharla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrabajadorSocials">
+            <EntityTypeMapping TypeName="Ley22Model.TrabajadorSocial">
+              <MappingFragment StoreEntitySet="TrabajadorSocial">
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fk_Centro" ColumnName="Fk_Centro" />
+                <ScalarProperty Name="Id_TrabajadorSocial" ColumnName="Id_TrabajadorSocial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AsignaCitaTrabajadorSocial" FunctionName="Ley22Model.Store.AsignaCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="ListarCalendario" FunctionName="Ley22Model.Store.ListarCalendario" />
+          <FunctionImportMapping FunctionImportName="InfoCharlaGrupal" FunctionName="Ley22Model.Store.InfoCharlaGrupal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.InfoCharlaGrupal_Result">
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="Id_TipoCharla" ColumnName="Id_TipoCharla" />
+                <ScalarProperty Name="Id_NiveldeCharla" ColumnName="Id_NiveldeCharla" />
+                <ScalarProperty Name="NrodeParticipantes" ColumnName="NrodeParticipantes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ModificarCharlaGrupal" FunctionName="Ley22Model.Store.ModificarCharlaGrupal" />
+          <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
+          <EntitySetMapping Name="TS_Excepciones">
+            <EntityTypeMapping TypeName="Ley22Model.TS_Excepciones">
+              <MappingFragment StoreEntitySet="TS_Excepciones">
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechadeSolicitud" ColumnName="FechadeSolicitud" />
+                <ScalarProperty Name="Id_TrabajadorSocial" ColumnName="Id_TrabajadorSocial" />
+                <ScalarProperty Name="Id_Excepciones" ColumnName="Id_Excepciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ListarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.ListarExcepcionesTrabajadorSocial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarExcepcionesTrabajadorSocial_Result">
+                <ScalarProperty Name="Id_Excepciones" ColumnName="Id_Excepciones" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Programas_Region_Mapping">
+            <EntityTypeMapping TypeName="Ley22Model.Programas_Region_Mapping">
+              <MappingFragment StoreEntitySet="Programas_Region_Mapping">
+                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
+                <ScalarProperty Name="FK_Region" ColumnName="FK_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CCG_Excepciones">
+            <EntityTypeMapping TypeName="Ley22Model.CCG_Excepciones">
+              <MappingFragment StoreEntitySet="CCG_Excepciones">
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechadeSolicitud" ColumnName="FechadeSolicitud" />
+                <ScalarProperty Name="Id_Centro" ColumnName="Id_Centro" />
+                <ScalarProperty Name="PK_CCG_Excepciones" ColumnName="PK_CCG_Excepciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISOes">
+            <EntityTypeMapping TypeName="Ley22Model.PERMISO">
+              <MappingFragment StoreEntitySet="PERMISO">
+                <ScalarProperty Name="NB_Permiso" ColumnName="NB_Permiso" />
+                <ScalarProperty Name="PK_Permiso" ColumnName="PK_Permiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SA_USUARIO_PERMISO_Mapping">
+            <EntityTypeMapping TypeName="Ley22Model.SA_USUARIO_PERMISO_Mapping">
+              <MappingFragment StoreEntitySet="SA_USUARIO_PERMISO_Mapping">
+                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
+                <ScalarProperty Name="FK_Permiso" ColumnName="FK_Permiso" />
+                <ScalarProperty Name="FK_Usuario" ColumnName="FK_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarExcepcionCoordinadorCharlasGrupales" FunctionName="Ley22Model.Store.GuardarExcepcionCoordinadorCharlasGrupales" />
+          <FunctionImportMapping FunctionImportName="ListarExcepcionesCharlaGrupal" FunctionName="Ley22Model.Store.ListarExcepcionesCharlaGrupal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarExcepcionesCharlaGrupal_Result">
+                <ScalarProperty Name="PK_CCG_Excepciones" ColumnName="PK_CCG_Excepciones" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="USUARIO_PROGRAMA">
+            <EntityTypeMapping TypeName="Ley22Model.USUARIO_PROGRAMA">
+              <MappingFragment StoreEntitySet="USUARIO_PROGRAMA">
+                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
+                <ScalarProperty Name="FK_Usuario" ColumnName="FK_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

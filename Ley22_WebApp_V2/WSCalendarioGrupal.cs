@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Globalization;
-namespace Ley22_WebApp_V2.Old_App_Code
+using Ley22_WebApp_V2.Old_App_Code;
+namespace Ley22_WebApp_V2
 {
     public class DataCharla
     {
@@ -43,7 +45,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         }
 
         [WebMethod]
-        public DataCharla BindModalAsistencia(int Id_CharlaGrupal, int Id_Participante, string NombreParticipante)
+        public DataCharla BindModalAsistencia(int Id_CharlaGrupal, string Id_Participante, string NombreParticipante)
         //  public DataCharla BindModalAsistencia()
 
         {
@@ -117,6 +119,13 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return myData;
         }
 
+        [WebMethod]
+        public static string Prueba(int Id_CharlaGrupal)
+        {
+             
+            return Id_CharlaGrupal.ToString();
+        }
+
 
         [WebMethod]
         public DataCharla BindModalParticipantes(int Id_CharlaGrupal)
@@ -152,13 +161,13 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
 
-                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
+                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','"+ c.Id_Participante+"')\" >Eliminar</a>";
 
-
+                    
                     Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
                 }
 
-
+                
                 HreAdicionar = "";
 
                 mydata.Participantes = Parti;

@@ -399,6 +399,24 @@ public partial class administrador_charlas_grupales {
     protected global::System.Web.UI.HtmlControls.HtmlAnchor A2;
     
     /// <summary>
+    /// DdlCentro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList DdlCentro;
+    
+    /// <summary>
+    /// RequiredFieldValidator7 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+    
+    /// <summary>
     /// DivBtnModalAsignarCita control.
     /// </summary>
     /// <remarks>

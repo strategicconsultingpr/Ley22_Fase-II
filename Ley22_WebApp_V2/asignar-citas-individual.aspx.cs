@@ -424,7 +424,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                     return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
                 });
 
-                List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(Convert.ToInt32(DdlTrabajadorSocial.SelectedValue), Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
+                List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
                 List<ListarExcepcionesTrabajadorSocial_Result> ListaExcepcionesXDia = myResult2.FindAll(delegate (ListarExcepcionesTrabajadorSocial_Result bk)
                 { 
                     return (bk.FechaInicial == Convert.ToDateTime(FechaInicial) || bk.FechaFinal == Convert.ToDateTime(FechaFinal) || (bk.FechaInicial <= Convert.ToDateTime(FechaInicial) && bk.FechaFinal >= Convert.ToDateTime(FechaFinal)));
@@ -450,7 +450,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 else
                 {
-                    mylib.GuardarCitaTrabajadorSocial(Convert.ToInt32(DdlTrabajadorSocial.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);
                     verificarCitas();

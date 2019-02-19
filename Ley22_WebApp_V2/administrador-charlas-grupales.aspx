@@ -548,7 +548,13 @@
                     </div>
 
                      <div class="card-block">
+                         <div class="form-group">
+                            <label for="orden">Centro</label>
 
+                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlCentro_SelectedIndexChanged" ></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlCentro" Display="Dynamic"></asp:RequiredFieldValidator>
+
+                        </div>
                         <div class="form-group">
 
                             <div id="DivBtnModalAsignarCita" runat="server">
@@ -561,8 +567,7 @@
                                 <div class="form-group" id="Div1" runat="server">
                                 <br>
                                 <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla">Crear Charla</a>
-
-                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>

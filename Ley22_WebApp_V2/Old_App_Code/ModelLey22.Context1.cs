@@ -207,11 +207,11 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter);
         }
     
-        public virtual int GuardarCitaTrabajadorSocial(Nullable<int> id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial)
+        public virtual int GuardarCitaTrabajadorSocial(string id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial)
         {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial.HasValue ?
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
                 new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(int));
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
     
             var id_ParticipanteParameter = id_Participante.HasValue ?
                 new ObjectParameter("Id_Participante", id_Participante) :
@@ -701,11 +701,11 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarExcepcionTrabajadorSocial", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial(Nullable<int> id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
+        public virtual ObjectResult<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
         {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial.HasValue ?
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
                 new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(int));
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
     
             var fechaInicialParameter = fechaInicial.HasValue ?
                 new ObjectParameter("fechaInicial", fechaInicial) :

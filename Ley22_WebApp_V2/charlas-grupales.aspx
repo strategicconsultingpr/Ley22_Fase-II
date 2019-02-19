@@ -441,11 +441,11 @@
                     </div>
                     <div class="card-block">
                         <p>Seleccione la región y haga clic en el calendario para ver la lista de asistentes.</p>
-                        <div class="form-group">
+                        <%--<div class="form-group">
                             <label for="orden">Región</label>
                             <asp:DropDownList ID="DdlRegion" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlRegion_SelectedIndexChanged"></asp:DropDownList>
 
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label for="orden">Centro</label>
                             <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlCentro_SelectedIndexChanged"></asp:DropDownList>
@@ -875,18 +875,35 @@
             </div>
         </div>
 
-
+         <asp:Button runat="server" ID="btnSample" Text="" style="display:none;" OnClick="btnPrueba" />
     </div>
-               <script>
+               <script type="text/javascript">
 
-                   function region()
+                  <%-- function region()
                    {
                        document.getElementById('<%=DdlRegion.ClientID%>')
                        
+                   }--%>
+                   function changeDivContent4(Id_CharlaGrupal) {
+                       $.ajax({
+                           type: "POST",
+                           url: '/WSCalendarioCharlas.asmx/hello',
+                           data: "{ }",
+                           contentType: "application/json; charset=utf-8",
+                           dataType: "json",
+                           success: function (msg) { alert(msg.d); },
+                           error: function (request, status, error) {
+                               alert(request);
+                               alert(status.toString());
+                               alert(error.toString());
+                           }
+
+                           });
                    }
-
-                   function changeDivContent(Id_CharlaGrupal) {
-
+                   function changeDivContent3(Id_CharlaGrupal) {
+                      <%-- alert(Id_CharlaGrupal);
+                       alert(<%=Session["Id_Participante"].ToString()%>);
+                       alert('<%=Session["NombreParticipante"]%>');--%>
                        if (<%=Session["Id_Participante"].ToString()%> != null) {
 
                            document.getElementById("<%=Id_CharlaGrupal.ClientID %>").value = Id_CharlaGrupal;
@@ -894,35 +911,78 @@
 
                          //  var btn = document.getElementById('<%=BtnGetCharla.ClientID%>');
                          //  btn.click();
-
+                            
                            // $("Id_CharlaGrupal").value = Id_CharlaGrupal; 
 
                            var Id_Participante = <%=Session["Id_Participante"].ToString()%>;
                            var NombreParticipante = '<%=Session["NombreParticipante"].ToString()%>';
-
-                           var ajax_data = '{Id_CharlaGrupal:"' + Id_CharlaGrupal + '",Id_Participante:"' + Id_Participante + '",NombreParticipante:"' + NombreParticipante + '" }'
+                           alert(Id_Participante);
+                           var ajax_data = '{Id_CharlaGrupal:"' + Id_CharlaGrupal + '" }';
+                           
 
 
                            $.ajax({
                                type: "POST",
                                cache: false,
-                               url: "WSCalendarioGrupal.asmx/BindModalAsistencia",
+                               url: "WSCalendarioCharlas.asmx/HelloWorld",
                                data: ajax_data,
                                contentType: "application/json; charset=utf-8",
                                dataType: "json",
-                               success: OnGetAllMembersSuccess,
+                               success: suc,
                                error: function (request, status, error) {
                                    alert(request);
-                                   alert(status);
-                                   alert(error);
+                                   alert(status.toString());
+                                   alert(error.toString());
                                }
                            });
                        }
 
                    }
 
-                   function OnGetAllMembersSuccess(data, status) { 
+                   function suc(data) {
                       
+                       alert(data);
+                   }
+
+                 function changeDivContent(Id_CharlaGrupal) {
+                      
+                       if (<%=Session["Id_Participante"].ToString()%> != null) {
+
+                           document.getElementById("<%=Id_CharlaGrupal.ClientID %>").value = Id_CharlaGrupal;
+                           document.getElementById("<%=H_Id_CharlaGrupal.ClientID%>").value = Id_CharlaGrupal;
+
+                 
+
+                           var Id_Participante = <%=Session["Id_Participante"].ToString()%>;
+                           var NombreParticipante = '<%=Session["NombreParticipante"].ToString()%>';
+                           
+                           var ajax_data = '{Id_CharlaGrupal:"' + Id_CharlaGrupal + '",Id_Participante:"' + Id_Participante + '",NombreParticipante:"' + NombreParticipante + '" }';
+                           
+
+                          
+                           $.ajax({
+                               type: "POST",
+                               cache: false,
+                               url: "/WSCalendarioGrupal.asmx/BindModalAsistencia",
+                               data: ajax_data,
+                               contentType: "application/json; charset=utf-8",
+                               dataType: "json",
+                               success: OnGetAllMembersSuccess,
+                               error: function (request, status, error) {
+                                   alert(request);
+                                   alert(status.toString());
+                                   alert(error.toString());
+                               }
+                               
+                           });
+                       }
+
+                   }
+
+                   
+
+                   function OnGetAllMembersSuccess(data, status) { 
+                       
                        var myData = data.d;
                        $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);

@@ -10,14 +10,13 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TS_Excepciones
+    public partial class ListarParticipantesPorCharlas1_Result
     {
-        public int Id_Excepciones { get; set; }
-        public string Id_TrabajadorSocial { get; set; }
-        public System.DateTime FechadeSolicitud { get; set; }
-        public System.DateTime FechaInicial { get; set; }
-        public System.DateTime FechaFinal { get; set; }
+        public int Id_ParticipantePorCharlaGrupal { get; set; }
+        public int Id_CharlaGrupal { get; set; }
+        public int Id_Participante { get; set; }
+        public string NB_Primero { get; set; }
+        public string AP_Primero { get; set; }
     }
 }

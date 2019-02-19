@@ -9,6 +9,7 @@ using Ley22_WebApp_V2.Old_App_Code;
 public partial class administrador_charlas_grupales : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
     protected void Page_Load(object sender, EventArgs e)
     {
         prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
@@ -16,9 +17,17 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         if(!Page.IsPostBack)
         {
-            Session["FechaBase"] = new DateTime(2018, 05, 06);
+            Session["FechaBase"] = new DateTime(2019, 01, 27);
 
             GenerarCalendario();
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            DdlCentro.DataValueField = "Value";
+            DdlCentro.DataTextField = "Text";
+            DdlCentro.DataSource = programas;
+            DdlCentro.DataBind();
+            DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
             using (Ley22Entities mylib = new Ley22Entities())
             {
@@ -47,6 +56,12 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 DdlTipodeCharla2.DataBind();
                 DdlTipodeCharla2.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             }
+        }
+
+        if (Page.Request.Params["__EVENTTARGET"] == "EliminarParticipante")
+        {
+            EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            return;
         }
     }
 
@@ -101,10 +116,13 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         List<ListarCharlasCalendario_Result> ListarCharlasCalendario = null;
         List<ListarExcepcionesCharlaGrupal_Result> ListarExcepcionesCharlaGrupal = null;
 
-        using (Ley22Entities mylib = new Ley22Entities())
+        if (DdlCentro.SelectedValue != "0" && DdlCentro.SelectedValue != "")
         {
-            ListarCharlasCalendario = mylib.ListarCharlasCalendario(17, FechaBase, FechaBase.AddDays(35)).ToList();
-            ListarExcepcionesCharlaGrupal = mylib.ListarExcepcionesCharlaGrupal(17, FechaBase, FechaBase.AddDays(35)).ToList();
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                ListarCharlasCalendario = mylib.ListarCharlasCalendario(Convert.ToInt32(DdlCentro.SelectedValue), FechaBase, FechaBase.AddDays(35)).ToList();
+                ListarExcepcionesCharlaGrupal = mylib.ListarExcepcionesCharlaGrupal(Convert.ToInt32(DdlCentro.SelectedValue), FechaBase, FechaBase.AddDays(35)).ToList();
+            }
         }
 
 
@@ -169,8 +187,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
             foreach (ListarCharlasCalendario_Result element in ListaCharlasXDia)
             {
-                LitContCelda[i].Text += " <div class=\"item ts-disponible\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                using (Ley22Entities mylib = new Ley22Entities())
 
+                {
+                    List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(element.Id_CharlaGrupal).ToList();
+
+                    if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
+                    {
+                        LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'   data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                    }
+                    else
+                    {
+                        LitContCelda[i].Text += " <div class=\"item ts-disponible\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                    }
+                }
             }
 
         }
@@ -331,7 +361,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            mylib.GuardarCharlaGrupal(17,
+            mylib.GuardarCharlaGrupal(Convert.ToInt32(DdlCentro.SelectedValue),
                                         Convert.ToDateTime(TxtFechaCrearCharla.Text + " " + TxtInicialCrearCharla.Text),
                                         Convert.ToDateTime(TxtFechaCrearCharla.Text + " " + TxtFinalCrearCharla.Text),
                                         Convert.ToInt32(DdlTipodeCharla.SelectedValue),
@@ -341,6 +371,21 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                );
         }
+        GenerarCalendario();
+
+    }
+    protected void DdlCentro_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+        GenerarCalendario();
+    }
+
+    void EliminarParticipante(int Id_Participante)
+    {
+        //int Id_Participante = Convert.ToInt32(Request["__EVENTARGUMENT"]);
+
+        using (Ley22Entities mylib = new Ley22Entities())
+            mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
         GenerarCalendario();
 
     }

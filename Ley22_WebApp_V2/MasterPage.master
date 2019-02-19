@@ -11,6 +11,7 @@
   <title></title>
       <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr","~/bundles/master2up") %>
+          <%: Scripts.Render("~/bundles/modernizr","~/bundles/MsAjaxJs") %>
     </asp:PlaceHolder>
     <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
    
@@ -207,7 +208,7 @@
                     <li class="nav-item dropdown"">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><asp:Literal runat="server" ID="Usuario"/></a>
                             <div class="dropdown-menu">                                
-                                <a class="dropdown-item" href="#">Dashboard</a>
+                                <a class="dropdown-item" href="../Dashboard-Usuarios.aspx">Dashboard</a>
                                 <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">

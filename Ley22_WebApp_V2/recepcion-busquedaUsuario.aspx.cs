@@ -222,6 +222,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Session["Id_Participante"] = du.PK_Persona;
             Session["Id_Participante"] = du.Id_Participante;
             Session["NombreParticipante"] = resul[0].NB_Primero + " " + resul[0].AP_Primero;
+            Session["NombreParticipante2"] = 9;
             Session["DataParticipante"] = du;
 
             if(du.Id_Participante>0)

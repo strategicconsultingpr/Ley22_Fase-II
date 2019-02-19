@@ -72,7 +72,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
             ListarCharlasCalendario = mylib.ListarCitasCalendario("asdd", FechaBase, FechaBase.AddDays(35)).ToList();
-            ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial(18, FechaBase, FechaBase.AddDays(35)).ToList();
+            ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial("18", FechaBase, FechaBase.AddDays(35)).ToList();
 
         }
 

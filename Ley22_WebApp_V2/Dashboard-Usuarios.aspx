@@ -60,7 +60,7 @@
                     </ul>--%>
 
 
-                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Registro de Usuario</a>
+                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>
 
                 </div>
 

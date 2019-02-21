@@ -17,7 +17,8 @@ namespace Ley22_WebApp_V2
             if (!Page.IsPostBack)
             {
                 ExistingUser = (ApplicationUser)Session["User"];
-                LitNombre.Text = ExistingUser.Email;              
+                LitNombre.Text = ExistingUser.Email;
+                LitEmail.Text = ExistingUser.Email;
                 
             }
         }

@@ -27,7 +27,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Calendario> Calendarios { get; set; }
         public virtual DbSet<Centro> Centros { get; set; }
         public virtual DbSet<CharlaGrupal> CharlaGrupals { get; set; }
         public virtual DbSet<Ciudad> Ciudads { get; set; }
@@ -51,6 +50,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<PERMISO> PERMISOes { get; set; }
         public virtual DbSet<SA_USUARIO_PERMISO_Mapping> SA_USUARIO_PERMISO_Mapping { get; set; }
         public virtual DbSet<USUARIO_PROGRAMA> USUARIO_PROGRAMA { get; set; }
+        public virtual DbSet<Calendario> Calendarios { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -205,31 +205,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Usuario", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter);
-        }
-    
-        public virtual int GuardarCitaTrabajadorSocial(string id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial)
-        {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
-                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
-    
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("FechaInicial", fechaInicial) :
-                new ObjectParameter("FechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
-                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
-                new ObjectParameter("Id_OrdenJudicial", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter);
         }
     
         public virtual int GuardarDocumentoPorParticipante(Nullable<int> id_Documento, Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial, string pathNameDocumento, Nullable<int> id_UsuarioRecibe)
@@ -684,23 +659,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCharlaGrupal", id_CharlaGrupalParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter);
         }
     
-        public virtual int GuardarExcepcionTrabajadorSocial(Nullable<int> id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
-        {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial.HasValue ?
-                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(int));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("FechaInicial", fechaInicial) :
-                new ObjectParameter("FechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarExcepcionTrabajadorSocial", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter);
-        }
-    
         public virtual ObjectResult<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
         {
             var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
@@ -750,6 +708,82 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("FechaFinal", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesCharlaGrupal_Result>("ListarExcepcionesCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter);
+        }
+    
+        public virtual int GuardarCitaTrabajadorSocial(string id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial, Nullable<int> id_Programa)
+        {
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
+                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter, id_ProgramaParameter);
+        }
+    
+        public virtual ObjectResult<ListarCitasCalendarioUsuario_Result> ListarCitasCalendarioUsuario(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
+        {
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
+                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("fechaInicial", fechaInicial) :
+                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioUsuario_Result>("ListarCitasCalendarioUsuario", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int GuardarExcepcionTrabajadorSocial(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
+        {
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
+                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarExcepcionTrabajadorSocial", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter);
+        }
+    
+        public virtual int EliminarExcepcionesTrabajadorSocial(Nullable<int> id_Excepciones)
+        {
+            var id_ExcepcionesParameter = id_Excepciones.HasValue ?
+                new ObjectParameter("Id_Excepciones", id_Excepciones) :
+                new ObjectParameter("Id_Excepciones", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarExcepcionesTrabajadorSocial", id_ExcepcionesParameter);
         }
     }
 }

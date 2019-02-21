@@ -54,11 +54,11 @@ namespace Ley22_WebApp_V2.Account
                             Session["User"] = ExistingUser;
                             Session["Id_Participante"] = 0;
                             Session["NombreParticipante"] = "";
-                            if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Recepcion"))
+                            if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
                             {
-                                Response.Redirect("~/Entrada");
+                                Response.Redirect("~/Dashboard-Usuarios");
                             }
-                            else if (userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
+                            else if (userManager.IsInRole(ExistingUser.Id, "Recepcion"))
                             {
                                 Response.Redirect("~/Entrada");
                             }

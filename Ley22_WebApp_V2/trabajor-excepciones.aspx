@@ -261,6 +261,8 @@
         <div class="row">
              <div class="col-md-3">
 
+                 
+
                 <div class="card mb-3">
 
                     <div class="card-header">
@@ -268,6 +270,14 @@
                     </div>
 
                      <div class="card-block">
+
+                         <div class="form-group">
+                            <label for="orden">Centro</label>
+
+                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlCentro_SelectedIndexChanged"></asp:DropDownList>
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlCentro" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+
+                        </div>
 
                         <div class="form-group">
 
@@ -278,6 +288,8 @@
                                     Asignar Excepcion
                                 </button>
                             </div>
+                            <br />
+                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver al Dashboard</a>
                         </div>
                     </div>
                 </div>
@@ -315,7 +327,7 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
-                        Calendario Excepciones Trabajador Social : 
+                        Calendario Excepciones Trabajador Social : <asp:Literal ID="LitNombre" runat="server"></asp:Literal>
                      <!--   <uc1:WUCUsuario runat="server" ID="WUCUsuario" /> -->
                     </div>
                     <div class="card-block calendario-opciones">

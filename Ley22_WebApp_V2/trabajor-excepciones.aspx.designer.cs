@@ -147,6 +147,15 @@ public partial class trabajor_excepciones {
     protected global::System.Web.UI.WebControls.Literal LitResumenCitas;
     
     /// <summary>
+    /// DdlCentro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList DdlCentro;
+    
+    /// <summary>
     /// DivBtnModalAsignarCita control.
     /// </summary>
     /// <remarks>
@@ -190,6 +199,15 @@ public partial class trabajor_excepciones {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.HyperLink Hyperlink1;
+    
+    /// <summary>
+    /// LitNombre control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Literal LitNombre;
     
     /// <summary>
     /// WUCUsuario control.

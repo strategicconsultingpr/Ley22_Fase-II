@@ -4,16 +4,74 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class trabajor_excepciones : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
+    ApplicationUser ExistingUser = new ApplicationUser();
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
+    Ley22Entities dsLey22 = new Ley22Entities();
+    static string userId = String.Empty;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
-        Session["FechaBase"] = new DateTime(2018, 05, 06);
-        GenerarCalendario();
+        if (Session["User"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Response.Redirect("../Account/Login.aspx", false);
+            return;
+        }
+
+        if (!Page.IsPostBack)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
+
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
+            prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            Session["FechaBase"] = new DateTime(2019, 01, 27);
+
+            if(userManager.IsInRole(userId, "SuperAdmin"))
+            {
+                 usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short,int>(i => i).ToList();
+                
+            }
+            else
+            {
+                usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            }
+            
+
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+            if (usuarios_programas.Count() == 1)
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.SelectedValue = programas[0].Value;
+                // DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+            else
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+
+            LitNombre.Text = ExistingUser.Email;
+            GenerarCalendario();
+        }
     }
 
     void GenerarCalendario()
@@ -65,14 +123,15 @@ public partial class trabajor_excepciones : System.Web.UI.Page
               };
 
         // se obtienen ls charlas del calendario para la fecha
-        List<ListarCitasCalendario_Result> ListarCharlasCalendario = null;
+        List<ListarCitasCalendarioUsuario_Result> ListarCharlasCalendario = null;
         List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
 
         // if (DdlTrabajadorSocial.SelectedValue != "")
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            ListarCharlasCalendario = mylib.ListarCitasCalendario("asdd", FechaBase, FechaBase.AddDays(35)).ToList();
-            ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial("18", FechaBase, FechaBase.AddDays(35)).ToList();
+            //ListarCharlasCalendario = mylib.ListarCitasCalendarioUsuario(ExistingUser.Id, FechaBase, FechaBase.AddDays(35)).ToList();
+            ListarCharlasCalendario = mylib.ListarCitasCalendarioUsuario(userId, FechaBase, FechaBase.AddDays(35),Convert.ToInt32(DdlCentro.SelectedValue)).ToList();
+            ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial(userId, FechaBase, FechaBase.AddDays(35)).ToList();
 
         }
 
@@ -88,7 +147,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
            // if (DdlCentro.SelectedValue.ToString() != "")               
                 AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
-
+                      
             if (i.ToString() == "14")
                 LiMesAno.Text = UppercaseFirst(fecha.ToString("MMMM")) + " " + fecha.Year.ToString();
 
@@ -109,20 +168,20 @@ public partial class trabajor_excepciones : System.Web.UI.Page
     }
 
 
-    void AsignatCharlaPordia(int i, DateTime Fecha, List<Literal> LitContCelda, List<ListarCitasCalendario_Result> ListarCharlasCalendario)
+    void AsignatCharlaPordia(int i, DateTime Fecha, List<Literal> LitContCelda, List<ListarCitasCalendarioUsuario_Result> ListarCharlasCalendario)
     {
 
-        List<ListarCitasCalendario_Result> ListaCharlasXDia = null;
+        List<ListarCitasCalendarioUsuario_Result> ListaCharlasXDia = null;
         try
         {
-            ListaCharlasXDia = ListarCharlasCalendario.FindAll(delegate (ListarCitasCalendario_Result bk)
+            ListaCharlasXDia = ListarCharlasCalendario.FindAll(delegate (ListarCitasCalendarioUsuario_Result bk)
             {
                 return bk.FechaInicial.ToString("dd/MM/yyyy") == Fecha.ToString("dd/MM/yyyy");
             });
 
          //   LitContCelda[i].Text = "";
 
-            foreach (ListarCitasCalendario_Result element in ListaCharlasXDia)
+            foreach (ListarCitasCalendarioUsuario_Result element in ListaCharlasXDia)
             {
                 LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
             }
@@ -193,7 +252,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
                 }
                 else
                 {
-                    mylib.GuardarExcepcionTrabajadorSocial(18, Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal));
+                    mylib.GuardarExcepcionTrabajadorSocial(userId, Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal));
 
                     GenerarCalendario();
                 }
@@ -251,9 +310,14 @@ public partial class trabajor_excepciones : System.Web.UI.Page
     protected void BtnEliminarExcepcion_Click(object sender, EventArgs e)
     {
         using (Ley22Entities mylib = new Ley22Entities())
-            mylib.EliminarCitaTrabajadorSocial(Convert.ToInt32(HNroExcepcion.Value));
-
-
+            mylib.EliminarExcepcionesTrabajadorSocial(Convert.ToInt32(HNroExcepcion.Value));
+        
         GenerarCalendario();
     }
+
+    protected void DdlCentro_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GenerarCalendario();
+    }
+
 }

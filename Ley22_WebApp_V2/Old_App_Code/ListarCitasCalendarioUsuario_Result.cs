@@ -10,18 +10,17 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Calendario
+    public partial class ListarCitasCalendarioUsuario_Result
     {
         public int Id_Calendario { get; set; }
-        public string Id_TrabajadorSocial { get; set; }
-        public System.DateTime FechadeSolicitud { get; set; }
-        public int Id_Participante { get; set; }
         public System.DateTime FechaInicial { get; set; }
         public System.DateTime FechaFinal { get; set; }
-        public int Id_OrdenJudicial { get; set; }
-        public int Asistio { get; set; }
+        public string NB_Primero { get; set; }
+        public string AP_Primero { get; set; }
+        public System.DateTime FE_Nacimiento { get; set; }
+        public string NR_SeguroSocial { get; set; }
+        public string TelefonoCitas { get; set; }
         public Nullable<int> Id_Programa { get; set; }
     }
 }

@@ -785,5 +785,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarExcepcionesTrabajadorSocial", id_ExcepcionesParameter);
         }
+    
+        public virtual int AsistioCitaTrabajadorSocial(Nullable<int> id_Calendario)
+        {
+            var id_CalendarioParameter = id_Calendario.HasValue ?
+                new ObjectParameter("Id_Calendario", id_Calendario) :
+                new ObjectParameter("Id_Calendario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AsistioCitaTrabajadorSocial", id_CalendarioParameter);
+        }
     }
 }

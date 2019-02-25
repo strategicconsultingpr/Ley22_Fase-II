@@ -172,6 +172,7 @@
                 <div class="modal-footer">
 
                     <asp:Button ID="BtnELiminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click"  CausesValidation="false"/>
+                    <asp:Button ID="BtnAsistioCita" runat="server" Text="Asistio" CssClass="btn btn-success btn-lg" OnClick="BtnAsistioCita_Click" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

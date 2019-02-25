@@ -111,6 +111,15 @@ public partial class trabajor_excepciones {
     protected global::System.Web.UI.WebControls.Button BtnELiminarCita;
     
     /// <summary>
+    /// BtnAsistioCita control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnAsistioCita;
+    
+    /// <summary>
     /// HNroExcepcion control.
     /// </summary>
     /// <remarks>

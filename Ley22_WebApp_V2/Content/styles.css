@@ -352,6 +352,17 @@ input[disabled]
     color: #212121;
 }
 
+.calendario .item.proceso {
+    display: block;
+    background: #E9CA6D;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
 .calendario .item {
 	margin-bottom: 5px;
 }

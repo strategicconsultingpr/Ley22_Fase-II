@@ -170,14 +170,74 @@
                     <br />
                 </div>
                 <div class="modal-footer">
-
-                    <asp:Button ID="BtnELiminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click"  CausesValidation="false"/>
-                    <asp:Button ID="BtnAsistioCita" runat="server" Text="Asistio" CssClass="btn btn-success btn-lg" OnClick="BtnAsistioCita_Click" CausesValidation="false"/>
+                    <button type="button" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
+                    <%--<asp:Button ID="BtnEliminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClientClick="return EliminarCita()"  CausesValidation="false"/>
+                    --%><asp:Button ID="BtnAsistioCita" runat="server" Text="Asistio" CssClass="btn btn-success btn-lg" OnClick="BtnAsistioCita_Click" OnClientClick="if (!alertaAsistio()) return false;" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Observaciones -->
+    <div class="modal fade" id="modalEliminarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Agregar Obeservación</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+                <i class="fa fa-inbox"
+              <i class="fas fa-envelope prefix grey-text"></i> &nbsp;<label  for="defaultForm-email">Entre la observación</label>
+              <textarea cols="1" type="text" id="textObservacion" runat="server" class="md-textarea form-control" rows="6"></textarea>
+              
+            </div>
+              <input id="Hidden2" name="HObservacionCita" type="hidden" runat="server" />
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <asp:Button ID="BtnEnvioObs" runat="server" Text="Enviar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click" OnClientClick="return EliminarCita()" CausesValidation="false"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal Asistio-->
+
+    <div class="modal fade" id="asistio-cita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle de la Cita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+ 
+                    <h2 style="color:green; align-self:center" >Cita Completada</h2>
+                    <div id="FechaA"></div>
+                    <br />
+                    <div id="HorasA"></div>
+                    <input id="Hidden1" name="HNroCita" type="hidden" runat="server" />
+                    <br />
+                    <div id="NombreCompletoA"></div>
+                    <br />
+                    <div id="TelefonoContactoA"></div>
+                    <br />
+                </div>
+                <div class="modal-footer">
+
+                    <asp:Button ID="BtnNoAsistio" runat="server" Text="NO Asistio" CssClass="btn btn-danger btn-lg" OnClick="BtnNoAsistioCita_Click" OnClientClick="if (!alertaNoAsistio()) return false;" CausesValidation="false"/>
+                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal Excepcion -->
 
@@ -736,6 +796,17 @@
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        
+        }
+
+         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita) {
+     
+            document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
+            document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
+            document.getElementById("NombreCompletoA").innerHTML = "<b>Usuario:</b> " + NombreCompleto;
+            document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
+             
+            document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
+       
                             }
 
         function changeDivContent2(Fecha, Horas, NumerodeExcepcion) {
@@ -747,6 +818,19 @@
             document.getElementById("<%= HNroExcepcion.ClientID %>").value = NumerodeExcepcion;
 
         }
+
+        function alertaAsistio() {
+            return confirm("¿Está seguro que el participante SI asistió?");                   
+        }
+
+        function alertaNoAsistio() {
+             return confirm("¿Está seguro que el participante NO asistió?"); 
+        }
+
+        function EliminarCita() {
+            document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;            
+        }
+      
 
     </script>
 

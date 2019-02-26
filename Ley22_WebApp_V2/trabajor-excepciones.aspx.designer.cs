@@ -102,15 +102,6 @@ public partial class trabajor_excepciones {
     protected global::System.Web.UI.HtmlControls.HtmlInputHidden HNroCita;
     
     /// <summary>
-    /// BtnELiminarCita control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button BtnELiminarCita;
-    
-    /// <summary>
     /// BtnAsistioCita control.
     /// </summary>
     /// <remarks>
@@ -118,6 +109,51 @@ public partial class trabajor_excepciones {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button BtnAsistioCita;
+    
+    /// <summary>
+    /// textObservacion control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlTextArea textObservacion;
+    
+    /// <summary>
+    /// Hidden2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden2;
+    
+    /// <summary>
+    /// BtnEnvioObs control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnEnvioObs;
+    
+    /// <summary>
+    /// Hidden1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden1;
+    
+    /// <summary>
+    /// BtnNoAsistio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnNoAsistio;
     
     /// <summary>
     /// HNroExcepcion control.

@@ -19,11 +19,13 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        string alerta = "¿Está seguro que el participante asistió?";
+        //ClientScript.RegisterOnSubmitStatement(this.GetType(), "confirm", "return confirm('" + alerta + "');");
         if (Session["User"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor ingrese al sistema";
-            Response.Redirect("../Account/Login.aspx", false);
+            Response.Redirect("Account/Login.aspx", false);
             return;
         }
 
@@ -186,9 +188,9 @@ public partial class trabajor_excepciones : System.Web.UI.Page
                 var asistio = dsLey22.Calendarios.Where(u => u.Id_Calendario.Equals(element.Id_Calendario)).Single();
                 if (asistio.Asistio == 1)
                 {
-                    LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                    LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContentAsistio('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asistio-cita" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                 }
-                else if (asistio.FechaFinal.Hour < DateTime.Today.Hour && asistio.Asistio == 0)
+                else if (asistio.FechaFinal < DateTime.Today && asistio.Asistio == 0)
                 {
                     LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                 }
@@ -313,15 +315,32 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
     protected void BtnELiminarCita_Click(object sender, EventArgs e)
     {
+
         using (Ley22Entities mylib = new Ley22Entities())
+        {
+            mylib.GuardarObservaciones(Convert.ToInt32(HNroCita.Value), textObservacion.InnerText);
             mylib.EliminarCitaTrabajadorSocial(Convert.ToInt32(HNroCita.Value));
-        
+        }
         GenerarCalendario();
     }
 
     protected void BtnAsistioCita_Click(object sender, EventArgs e)
     {
+        //string alerta = "¿Está seguro que el participante asistió?";
+        //ClientScript.RegisterOnSubmitStatement(this.GetType(), "confirm", "return confirm('" + alerta + "');");
+        
         dsLey22.AsistioCitaTrabajadorSocial(Convert.ToInt32(HNroCita.Value));
+        
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante cumplió con la cita.');", true);
+
+        GenerarCalendario();
+    }
+
+    protected void BtnNoAsistioCita_Click(object sender, EventArgs e)
+    {
+        dsLey22.NoAsistioCitaTrabajadorSocial(Convert.ToInt32(HNroCita.Value));
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante NO cumplió con la cita.');", true);
+        
         GenerarCalendario();
     }
 

@@ -794,5 +794,27 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AsistioCitaTrabajadorSocial", id_CalendarioParameter);
         }
+    
+        public virtual int NoAsistioCitaTrabajadorSocial(Nullable<int> id_Calendario)
+        {
+            var id_CalendarioParameter = id_Calendario.HasValue ?
+                new ObjectParameter("Id_Calendario", id_Calendario) :
+                new ObjectParameter("Id_Calendario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NoAsistioCitaTrabajadorSocial", id_CalendarioParameter);
+        }
+    
+        public virtual int GuardarObservaciones(Nullable<int> id_Calendario, string texto)
+        {
+            var id_CalendarioParameter = id_Calendario.HasValue ?
+                new ObjectParameter("Id_Calendario", id_Calendario) :
+                new ObjectParameter("Id_Calendario", typeof(int));
+    
+            var textoParameter = texto != null ?
+                new ObjectParameter("Texto", texto) :
+                new ObjectParameter("Texto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarObservaciones", id_CalendarioParameter, textoParameter);
+        }
     }
 }

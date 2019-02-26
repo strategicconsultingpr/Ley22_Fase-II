@@ -377,6 +377,10 @@
           <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
           <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GuardarObservaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Calendario" Type="int" Mode="In" />
+          <Parameter Name="Texto" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="GuardarOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="NumeroOrdenJudicial" Type="varchar" Mode="In" />
@@ -444,6 +448,9 @@
           <Parameter Name="Id_Nivel" Type="int" Mode="In" />
           <Parameter Name="NrodeParticipantes" Type="int" Mode="In" />
           <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NoAsistioCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Calendario" Type="int" Mode="In" />
         </Function>
         <Function Name="RegistrarPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_ControldePagos" Type="int" Mode="In" />
@@ -779,7 +786,14 @@
           <Parameter Name="Id_Excepciones" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AsistioCitaTrabajadorSocial">
+          <Parameter Name="Id_Calendario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NoAsistioCitaTrabajadorSocial">
+          <Parameter Name="Id_Calendario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarObservaciones">
             <Parameter Name="Id_Calendario" Mode="In" Type="Int32" />
+            <Parameter Name="Texto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2035,6 +2049,8 @@
           <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="EliminarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarExcepcionesTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="AsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.AsistioCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="NoAsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.NoAsistioCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="GuardarObservaciones" FunctionName="Ley22Model.Store.GuardarObservaciones" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

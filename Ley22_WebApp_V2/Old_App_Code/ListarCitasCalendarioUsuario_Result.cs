@@ -22,5 +22,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string NR_SeguroSocial { get; set; }
         public string TelefonoCitas { get; set; }
         public Nullable<int> Id_Programa { get; set; }
+        public string NB_Programa { get; set; }
     }
 }

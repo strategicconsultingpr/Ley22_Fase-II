@@ -618,11 +618,6 @@
             <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="ListarCitasCalendario" ReturnType="Collection(Ley22Model.ListarCitasCalendario_Result)">
-            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
-            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="ListarDocumentosActivos" ReturnType="Collection(Ley22Model.ListarDocumentosActivos_Result)" />
           <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
           <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
@@ -771,12 +766,6 @@
             <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ListarCitasCalendarioUsuario" ReturnType="Collection(Ley22Model.ListarCitasCalendarioUsuario_Result)">
-            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
-            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GuardarExcepcionTrabajadorSocial">
             <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
             <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
@@ -794,6 +783,17 @@
           <FunctionImport Name="GuardarObservaciones">
             <Parameter Name="Id_Calendario" Mode="In" Type="Int32" />
             <Parameter Name="Texto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCitasCalendario" ReturnType="Collection(Ley22Model.ListarCitasCalendario_Result)">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCitasCalendarioUsuario" ReturnType="Collection(Ley22Model.ListarCitasCalendarioUsuario_Result)">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -875,16 +875,6 @@
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
           <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="ListarCitasCalendario_Result">
-          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
-          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
-          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
-          <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="ListarDocumentosActivos_Result">
           <Property Type="Int32" Name="Id_Documento" Nullable="false" />
@@ -1355,17 +1345,6 @@
           <Property Type="String" Name="NombreCompleto" Nullable="false" MaxLength="61" />
           <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
-        <ComplexType Name="ListarCitasCalendarioUsuario_Result">
-          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
-          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
-          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
-          <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="Id_Programa" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Calendario">
           <Key>
             <PropertyRef Name="Id_Calendario" />
@@ -1380,7 +1359,18 @@
           <Property Name="Asistio" Type="Int32" Nullable="false" />
           <Property Name="Id_Programa" Type="Int32" />
         </EntityType>
-        <ComplexType Name="ListarCitasCalendarioUsuario_Result1">
+        <ComplexType Name="ListarCitasCalendario_Result">
+          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NB_Programa" Nullable="true" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="ListarCitasCalendarioUsuario_Result">
           <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
@@ -1390,6 +1380,7 @@
           <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
           <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Id_Programa" Nullable="true" />
+          <Property Type="String" Name="NB_Programa" Nullable="true" MaxLength="60" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1496,20 +1487,6 @@
                 <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
                 <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
                 <ScalarProperty Name="Nivel" ColumnName="Nivel" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarCitasCalendario" FunctionName="Ley22Model.Store.ListarCitasCalendario">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarCitasCalendario_Result">
-                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
-                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
-                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
-                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
-                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
-                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
-                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
-                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2031,8 +2008,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="EliminarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarExcepcionesTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="AsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.AsistioCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="NoAsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.NoAsistioCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="GuardarObservaciones" FunctionName="Ley22Model.Store.GuardarObservaciones" />
           <FunctionImportMapping FunctionImportName="ListarCitasCalendarioUsuario" FunctionName="Ley22Model.Store.ListarCitasCalendarioUsuario">
-          <ResultMapping>
+            <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarCitasCalendarioUsuario_Result">
                 <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
                 <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
@@ -2043,14 +2025,11 @@
                 <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
                 <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
                 <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
+                <ScalarProperty Name="NB_Programa" ColumnName="NB_Programa" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
-          <FunctionImportMapping FunctionImportName="EliminarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarExcepcionesTrabajadorSocial" />
-          <FunctionImportMapping FunctionImportName="AsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.AsistioCitaTrabajadorSocial" />
-          <FunctionImportMapping FunctionImportName="NoAsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.NoAsistioCitaTrabajadorSocial" />
-          <FunctionImportMapping FunctionImportName="GuardarObservaciones" FunctionName="Ley22Model.Store.GuardarObservaciones" />
+          <FunctionImportMapping FunctionImportName="ListarCitasCalendario" FunctionName="Ley22Model.Store.ListarCitasCalendario" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

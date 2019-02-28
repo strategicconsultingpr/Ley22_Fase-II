@@ -156,6 +156,15 @@ public partial class asignar_citas_individual {
     protected global::System.Web.UI.WebControls.Button BtnGuardarOrdenJudicial;
     
     /// <summary>
+    /// Hidden1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden1;
+    
+    /// <summary>
     /// GVListadeCitas control.
     /// </summary>
     /// <remarks>

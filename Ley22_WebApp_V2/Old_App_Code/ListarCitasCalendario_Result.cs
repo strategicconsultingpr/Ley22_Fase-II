@@ -21,5 +21,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public System.DateTime FE_Nacimiento { get; set; }
         public string NR_SeguroSocial { get; set; }
         public string TelefonoCitas { get; set; }
+        public string NB_Programa { get; set; }
     }
 }

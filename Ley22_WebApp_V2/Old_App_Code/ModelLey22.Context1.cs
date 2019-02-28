@@ -300,23 +300,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCharlasCalendario_Result>("ListarCharlasCalendario", id_CentroParameter, fechaInicialParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<ListarCitasCalendario_Result> ListarCitasCalendario(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
-        {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
-                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("fechaInicial", fechaInicial) :
-                new ObjectParameter("fechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendario_Result>("ListarCitasCalendario", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter);
-        }
-    
         public virtual ObjectResult<ListarDocumentosActivos_Result> ListarDocumentosActivos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosActivos_Result>("ListarDocumentosActivos");
@@ -739,27 +722,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter, id_ProgramaParameter);
         }
     
-        public virtual ObjectResult<ListarCitasCalendarioUsuario_Result> ListarCitasCalendarioUsuario(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
-        {
-            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
-                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
-                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("fechaInicial", fechaInicial) :
-                new ObjectParameter("fechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            var id_ProgramaParameter = id_Programa.HasValue ?
-                new ObjectParameter("Id_Programa", id_Programa) :
-                new ObjectParameter("Id_Programa", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioUsuario_Result>("ListarCitasCalendarioUsuario", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
-        }
-    
         public virtual int GuardarExcepcionTrabajadorSocial(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
         {
             var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
@@ -815,6 +777,44 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Texto", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarObservaciones", id_CalendarioParameter, textoParameter);
+        }
+    
+        public virtual ObjectResult<ListarCitasCalendario_Result> ListarCitasCalendario(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
+        {
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
+                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("fechaInicial", fechaInicial) :
+                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendario_Result>("ListarCitasCalendario", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter);
+        }
+    
+        public virtual ObjectResult<ListarCitasCalendarioUsuario_Result> ListarCitasCalendarioUsuario(string id_TrabajadorSocial, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
+        {
+            var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
+                new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
+                new ObjectParameter("Id_TrabajadorSocial", typeof(string));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("fechaInicial", fechaInicial) :
+                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioUsuario_Result>("ListarCitasCalendarioUsuario", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
         }
     }
 }

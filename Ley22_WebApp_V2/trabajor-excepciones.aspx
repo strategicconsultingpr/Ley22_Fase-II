@@ -158,7 +158,8 @@
                 </div>
                 <div class="modal-body">
  
-
+                    <div id="Programa"></div>
+                    <br />
                     <div id="Fecha"></div>
                     <br />
                     <div id="Horas"></div>
@@ -219,6 +220,8 @@
                 <div class="modal-body">
  
                     <h2 style="color:green; align-self:center" >Cita Completada</h2>
+                    <div id="ProgramaA"></div>
+                    <br />
                     <div id="FechaA"></div>
                     <br />
                     <div id="HorasA"></div>
@@ -787,27 +790,28 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita) {
-     
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+            document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
-            document.getElementById("NombreCompleto").innerHTML = "<b>Usuario:</b> " + NombreCompleto;
+            document.getElementById("NombreCompleto").innerHTML = "<b>Participante:</b> " + NombreCompleto;
             document.getElementById("TelefonoContacto").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        
         }
 
-         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita) {
-     
+         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+
+            document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
             document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
-            document.getElementById("NombreCompletoA").innerHTML = "<b>Usuario:</b> " + NombreCompleto;
+            document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
             document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        
-                            }
+         }
 
         function changeDivContent2(Fecha, Horas, NumerodeExcepcion) {
 

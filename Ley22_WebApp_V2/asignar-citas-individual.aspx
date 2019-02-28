@@ -158,7 +158,8 @@
                 </div>
                 <div class="modal-body">
  
-
+                    <div id="Programa"></div>
+                    <br />
                     <div id="Fecha"></div>
                     <br />
                     <div id="Horas"></div>
@@ -238,6 +239,40 @@
             </div>
         </div>
     </div>
+
+     <!-- Modal Asistio-->
+
+    <div class="modal fade" id="asistio-cita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle de la Cita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+ 
+                    <h2 style="color:green; align-self:center" >Cita Completada</h2>
+                    <div id="ProgramaA"></div>
+                    <br />
+                    <div id="FechaA"></div>
+                    <br />
+                    <div id="HorasA"></div>
+                    <input id="Hidden1" name="HNroCita" type="hidden" runat="server" />
+                    <br />
+                    <div id="NombreCompletoA"></div>
+                    <br />
+                    <div id="TelefonoContactoA"></div>
+                    <br />
+                </div>
+                <div class="modal-footer">              
+                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="modal fade" id="myModalListaCitas">
@@ -760,8 +795,9 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita) {
-     
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa) {
+
+            document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluación para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
             document.getElementById("NombreCompleto").innerHTML = "<b>Usuario:</b> " + NombreCompleto;
@@ -780,6 +816,17 @@
             document.getElementById("<%= HNroExcepcion.ClientID %>").value = NumerodeExcepcion;
 
         }
+        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+
+            document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
+            document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
+            document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
+            document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
+            document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
+             
+            document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
+       
+         }
 
     </script>
 

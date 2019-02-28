@@ -696,9 +696,6 @@
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result1.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas1_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>

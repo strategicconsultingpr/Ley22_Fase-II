@@ -23,5 +23,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public int Id_OrdenJudicial { get; set; }
         public int Asistio { get; set; }
         public Nullable<int> Id_Programa { get; set; }
+        public int Activo { get; set; }
     }
 }

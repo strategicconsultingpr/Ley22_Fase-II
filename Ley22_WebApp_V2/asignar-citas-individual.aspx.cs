@@ -532,7 +532,10 @@ public partial class asignar_citas_individual : System.Web.UI.Page
     protected void BtnELiminarCita_Click(object sender, EventArgs e)
     {
         using (Ley22Entities mylib = new Ley22Entities())
-             mylib.EliminarCitaTrabajadorSocial(Convert.ToInt32 (HNroCita.Value ));
+        {
+            mylib.GuardarObservaciones(Convert.ToInt32(HNroCita.Value), textObservacion.InnerText);
+            mylib.EliminarCitaTrabajadorSocial(Convert.ToInt32(HNroCita.Value));
+        }
 
         verificarCitas();
         GenerarCalendario();

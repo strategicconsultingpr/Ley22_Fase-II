@@ -171,12 +171,39 @@
                     <br />
                 </div>
                 <div class="modal-footer">
-
-                    <asp:Button ID="BtnELiminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click"  CausesValidation="false"/>
+                    <button type="button" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
+                   <%-- <asp:Button ID="BtnELiminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click"  CausesValidation="false"/>
+                   --%>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal Observaciones -->
+    <div class="modal fade" id="modalEliminarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Agregar Obeservación</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+                <i class="fa fa-inbox"
+              <i class="fas fa-envelope prefix grey-text"></i> &nbsp;<label  for="defaultForm-email">Entre la observación</label>
+              <textarea cols="1" type="text" id="textObservacion" runat="server" class="md-textarea form-control" rows="6"></textarea>
+              
+            </div>
+              <input id="Hidden2" name="HObservacionCita" type="hidden" runat="server" />
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <asp:Button ID="BtnEnvioObs" runat="server" Text="Enviar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click" OnClientClick="return EliminarCita()" CausesValidation="false"/>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="asignar-excepcion-confirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -826,7 +853,10 @@
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        
-         }
+        }
+        function EliminarCita() {
+            document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;            
+        }
 
     </script>
 

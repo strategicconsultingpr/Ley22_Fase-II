@@ -25,11 +25,11 @@
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelPassword">Contraseña</label>
-                    <asp:TextBox ID="PasswordInput" runat="server" class="form-control" placeholder="Ingrese Contraseña"></asp:TextBox>                   
+                    <asp:TextBox ID="PasswordInput" runat="server" class="form-control" placeholder="Ingrese Contraseña" TextMode="Password"></asp:TextBox>                   
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelPassword">Contraseña</label>
-                    <asp:TextBox ID="PasswordConfirmInput" runat="server" class="form-control" placeholder="Confirme Contraseña"></asp:TextBox>                   
+                    <asp:TextBox ID="PasswordConfirmInput" runat="server" class="form-control" placeholder="Confirme Contraseña" TextMode="Password"></asp:TextBox>                   
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelRol">Rol</label>

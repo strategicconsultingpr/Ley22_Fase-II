@@ -4,12 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class administrador_charlas_grupales : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
     SEPSEntities1 dsPerfil = new SEPSEntities1();
+    ApplicationUser ExistingUser = new ApplicationUser();
+    static string userId = String.Empty;
+    Ley22Entities dsLey22 = new Ley22Entities();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if(Request.UrlReferrer == null)
@@ -19,7 +26,6 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             Response.Redirect("Account/Login.aspx", false);
             return;
         }
-        prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
         
 
         if(!Page.IsPostBack)
@@ -31,21 +37,51 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 Response.Redirect("Account/Login.aspx", false);
                 return;
             }
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
+
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
+            prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
 
             Session["FechaBase"] = new DateTime(2019, 01, 27);
 
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            }
+            else
+            {
+                usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
+            }
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            if (usuarios_programas.Count() == 1)
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.SelectedValue = programas[0].Value;
+
+                DivBtnModalAsignarCita.Disabled = false;
+                DivBtnModalAsignarCita.Visible = true;
+            }
+            else
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+                DivBtnModalAsignarCita.Disabled = true;
+                DivBtnModalAsignarCita.Visible = false;
+            }
+
             GenerarCalendario();
-
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
-
-            DdlCentro.DataValueField = "Value";
-            DdlCentro.DataTextField = "Text";
-            DdlCentro.DataSource = programas;
-            DdlCentro.DataBind();
-            DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-            DivBtnModalAsignarCita.Disabled = true;
-            DivBtnModalAsignarCita.Visible = false;
 
             using (Ley22Entities mylib = new Ley22Entities())
             {
@@ -219,23 +255,23 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                         }
                         else if(diaActual.NumeroCharla == 1)
                         {
-                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 2)
                         {
-                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 3)
                         {
-                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 4)
                         {
-                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 5)
                         {
-                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
                     //}
                     //else

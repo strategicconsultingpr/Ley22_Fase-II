@@ -121,17 +121,18 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <%--<div class="form-group">
-                                <label for="tipo-numero-charla">Tipo Charla</label>
-                                <select class="form-control" id="tipo-numero-charla">
-                                    <option selected>Seleccione</option>
+                            <div class="form-group">
+                                <label for="tipo-numero-charla">Nº De Charla</label>
+                                <select class="form-control" id="DdlNumeroCharla" runat="server">
+                                    <option selected ="0">Seleccione</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                            </div>--%>
+
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -143,16 +144,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="aforo">Nº De Charla</label>
-
-                                <asp:TextBox runat="server" ID="TxtNumeroCharla" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtNumeroCharla" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNumeroCharla" ForeColor="Red" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -267,17 +259,17 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <%--<div class="form-group">
-                                <label for="tipo-numero-charla">Tipo Charla</label>
-                                <select class="form-control" id="tipo-numero-charla">
-                                    <option selected>Seleccione</option>
+                             <div class="form-group">
+                                <label for="tipo-numero-charla">Nº De Charla</label>
+                                <select class="form-control" id="DdlNumeroCharla2" runat="server">
+                                    <option selected ="0">Seleccione</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                            </div>--%>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -289,16 +281,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="aforo">Nº Mde Charla</label>
-
-                                <asp:TextBox runat="server" ID="TxtNumeroCharla2" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtNumeroCharla2" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNumeroCharla2" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -514,11 +497,12 @@
                     <div class="card-block leyenda">
                         Leyenda: &nbsp; 
        
-                        <a href="#" data-toggle="tooltip" data-html="true" title='Alcoholismo <br><span class="bloque-leyenda grupo1"></span> Nivel 1 <br><span class="bloque-leyenda grupo1 nvl2"></span> Nivel 2 <br><span class="bloque-leyenda grupo1 nvl3"></span> Nivel 3 <br><span class="bloque-leyenda grupo1 nvl4"></span> Nivel 4 <br><span class="bloque-leyenda grupo1 nvl5"></span> Nivel 5 <br>'><span class="bloque-leyenda grupo1"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='Abuso de Substancias <br><span class="bloque-leyenda grupo2"></span> Nivel 1 <br><span class="bloque-leyenda grupo2 nvl2"></span> Nivel 2 <br><span class="bloque-leyenda grupo2 nvl3"></span> Nivel 3 <br><span class="bloque-leyenda grupo2 nvl4"></span> Nivel 4 <br><span class="bloque-leyenda grupo2 nvl5"></span> Nivel 5 <br>'><span class="bloque-leyenda grupo2"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='Grupo 3 <br><span class="bloque-leyenda grupo3"></span> Nivel 1 <br><span class="bloque-leyenda grupo3 nvl2"></span> Nivel 2 <br><span class="bloque-leyenda grupo3 nvl3"></span> Nivel 3 <br><span class="bloque-leyenda grupo3 nvl4"></span> Nivel 4 <br><span class="bloque-leyenda grupo3 nvl5"></span> Nivel 5 <br>'><span class="bloque-leyenda grupo3"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='Grupo 4 <br><span class="bloque-leyenda grupo4"></span> Nivel 1 <br><span class="bloque-leyenda grupo4 nvl2"></span> Nivel 2 <br><span class="bloque-leyenda grupo4 nvl3"></span> Nivel 3 <br><span class="bloque-leyenda grupo4 nvl4"></span> Nivel 4 <br><span class="bloque-leyenda grupo4 nvl5"></span> Nivel 5 <br>'><span class="bloque-leyenda grupo4"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
-                        No hay Plazas (Cerrado)
+                        <a href="#" data-toggle="tooltip" data-html="true" title='1era CHARLA'><span class="bloque-leyenda grupo1"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='2da CHARLA'><span class="bloque-leyenda grupo2"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='3era CHARLA'><span class="bloque-leyenda grupo3"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='4ta CHARLA'><span class="bloque-leyenda grupo4"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
+                        No hay Espacio (Cerrado)
      
                     </div>
                     <div>
@@ -1011,7 +995,6 @@
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                        $("#Participantes").html(myData.Participantes);
                        $("#AdcionarParticipante").html(myData.AdcionarParticipante);
-                       $("#NumeroCharla").html(myData.NroCharla);
 
                    }
 

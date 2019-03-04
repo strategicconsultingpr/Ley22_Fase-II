@@ -71,6 +71,54 @@
                                         </RoleGroups>
                                     </asp:LoginView>
 
+<%--Director Dashboard--%>
+
+            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                        <RoleGroups>
+                                            <asp:RoleGroup Roles="Director">
+                                                <ContentTemplate>
+        
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card text-center mb-3 card-menu">
+                                    <div class="card-block">
+                                        <p class="mt-4">
+                                            <a href="../trabajor-excepciones.aspx">
+                                                <span class="fa-stack fa-3x">
+                                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </p>                                   
+                                        <h4 class="card-title"><a href="../trabajor-excepciones.aspx">Calendario de Citas</a></h4>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="col-md-4">
+                                <div class="card text-center mb-3 card-menu">
+                                    <div class="card-block">
+                                        <p class="mt-4">
+                                            <a href="../administrador-charlas-grupales.aspx">
+                                                <span class="fa-stack fa-3x">
+                                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </p>                                   
+                                        <h4 class="card-title"><a href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a></h4>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>              
+              <%--  </div>
+            </div>--%>
+                                                </ContentTemplate>
+                                              </asp:RoleGroup>
+                                        </RoleGroups>
+                                    </asp:LoginView>
+
 <%--Trabajador Social Dashboard--%>
 
          <asp:LoginView runat="server" ViewStateMode="Disabled">

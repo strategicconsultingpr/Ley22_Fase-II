@@ -581,12 +581,12 @@
                             <div id="DivBtnModalAsignarCita" runat="server">
                                 <p class="txt-grey">Seleccione horarios disponibles en el calendario</p>
 
-                                <button type="button" class="btn btn-primary col text-center" data-toggle="modal" data-target="#modal-Asignar-Excepcion">
+                                <%--<button type="button" class="btn btn-primary col text-center" data-toggle="modal" data-target="#modal-Asignar-Excepcion">
                                     Asignar Excepcion
-                                </button>
+                                </button>--%>
 
                                 <div class="form-group" id="Div1" runat="server">
-                                <br>
+                                
                                 <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla">Crear Charla</a>
                                 </div>
                             </div>
@@ -629,7 +629,7 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='3era CHARLA'><span class="bloque-leyenda grupo3"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='4ta CHARLA'><span class="bloque-leyenda grupo4"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
-                        No hay Plazas (Cerrado)
+                        No hay Espacio (Cerrado)
      
                     </div>
 

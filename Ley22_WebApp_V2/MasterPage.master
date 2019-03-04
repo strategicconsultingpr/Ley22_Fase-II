@@ -101,7 +101,7 @@
 
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
-                                        <asp:RoleGroup Roles="Supervisor">
+                                        <asp:RoleGroup Roles="Director">
                                             <ContentTemplate>
             <div class="col">
               <nav>

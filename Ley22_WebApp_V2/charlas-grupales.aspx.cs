@@ -228,7 +228,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                             Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                             Convert.ToInt32(TxtMaxCantParticipantes.Text),
                                             Convert.ToInt32(Session["Id_UsuarioApp"]),
-                                            Convert.ToInt32(TxtNumeroCharla.Text));
+                                            Convert.ToInt32(DdlNumeroCharla.SelectedIndex));
 
                     GenerarCalendario();
                 }
@@ -375,21 +375,38 @@ public partial class charlas_grupales : System.Web.UI.Page
                 {
                     List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(element.Id_CharlaGrupal).ToList();
                     var asistio = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(element.Id_CharlaGrupal)).Single();
-                    if (asistio.FechaFinal > DateTime.Today)
-                    {
+                    //if (asistio.FechaFinal > DateTime.Today)
+                    //{
                         if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
                         {
                             LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
-                        else
+                        else if (asistio.NumeroCharla == 1)
                         {
-                            LitContCelda[i].Text += " <div class=\"item ts-disponible\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                         }
-                    }
-                    else
-                    {
-                        LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
-                    }
+                        else if (asistio.NumeroCharla == 2)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (asistio.NumeroCharla == 3)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (asistio.NumeroCharla == 4)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (asistio.NumeroCharla == 5)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal.ToString() + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                       
+                    //}
+                    //else
+                    //{
+                    //    LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                    //}
                 }
             }
 
@@ -547,7 +564,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
                                         Convert.ToInt32(Session["Id_UsuarioApp"]),
-                                        Convert.ToInt32(TxtNumeroCharla2.Text)
+                                        Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );
         }

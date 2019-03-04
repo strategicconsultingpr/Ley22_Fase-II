@@ -412,6 +412,11 @@
           <Parameter Name="fechaInicial" Type="date" Mode="In" />
           <Parameter Name="FechaFinal" Type="date" Mode="In" />
         </Function>
+        <Function Name="ListarCitasCalendarioAdministrador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarCitasCalendarioUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_TrabajadorSocial" Type="nvarchar" Mode="In" />
           <Parameter Name="fechaInicial" Type="date" Mode="In" />
@@ -771,7 +776,7 @@
           <EntitySet Name="Calendarios" EntityType="Ley22Model.Calendario" />
           <EntitySet Name="CharlaGrupals" EntityType="Ley22Model.CharlaGrupal" />
           <FunctionImport Name="DetalleCharlaGrupal" ReturnType="Collection(Ley22Model.DetalleCharlaGrupal_Result)">
-            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GuardarCharlaGrupal">
             <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
@@ -784,7 +789,7 @@
             <Parameter Name="NumeroCharla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InfoCharlaGrupal" ReturnType="Collection(Ley22Model.InfoCharlaGrupal_Result)">
-            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ListarCharlasCalendario" ReturnType="Collection(Ley22Model.ListarCharlasCalendario_Result)">
             <Parameter Name="Id_Centro" Mode="In" Type="Int32" />
@@ -800,6 +805,11 @@
             <Parameter Name="NrodeParticipantes" Mode="In" Type="Int32" />
             <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
             <Parameter Name="NumeroCharla" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCitasCalendarioAdministrador" ReturnType="Collection(Ley22Model.ListarCitasCalendarioAdministrador_Result)">
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1392,6 +1402,18 @@
           <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="NumeroCharla" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarCitasCalendarioAdministrador_Result">
+          <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="FE_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NR_SeguroSocial" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Id_Programa" Nullable="true" />
+          <Property Type="String" Name="NB_Programa" Nullable="true" MaxLength="60" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2046,6 +2068,22 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ModificarCharlaGrupal" FunctionName="Ley22Model.Store.ModificarCharlaGrupal" />
+          <FunctionImportMapping FunctionImportName="ListarCitasCalendarioAdministrador" FunctionName="Ley22Model.Store.ListarCitasCalendarioAdministrador">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarCitasCalendarioAdministrador_Result">
+                <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
+                <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
+                <ScalarProperty Name="NB_Programa" ColumnName="NB_Programa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -435,7 +435,12 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             {
 
                 List<ListarCitasCalendario_Result> myResult = mylib.ListarCitasCalendario(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
-                List<ListarCitasCalendario_Result> ListaCharlasXDia = myResult.FindAll(delegate (ListarCitasCalendario_Result bk)
+                var filtro = myResult.Select(u => u.Id_Calendario).ToList();
+                var filtro2 = mylib.Calendarios.Where(u => filtro.Contains(u.Id_Calendario) && u.Activo.Equals(1)).Select(p => p.Id_Calendario).ToList();
+                List<ListarCitasCalendario_Result> myResultFiltro = myResult.Where(u => filtro2.Contains(u.Id_Calendario)).ToList();
+
+
+                List<ListarCitasCalendario_Result> ListaCharlasXDia = myResultFiltro.FindAll(delegate (ListarCitasCalendario_Result bk)
                 {
                     return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
                 });

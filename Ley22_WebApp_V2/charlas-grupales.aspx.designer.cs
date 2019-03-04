@@ -129,6 +129,24 @@ public partial class charlas_grupales {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
+    /// TxtNumeroCharla control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtNumeroCharla;
+    
+    /// <summary>
+    /// RegularExpressionValidator6 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
+    
+    /// <summary>
     /// btnGuardarCharla control.
     /// </summary>
     /// <remarks>
@@ -235,6 +253,24 @@ public partial class charlas_grupales {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator4;
+    
+    /// <summary>
+    /// TxtNumeroCharla2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtNumeroCharla2;
+    
+    /// <summary>
+    /// RegularExpressionValidator7 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator7;
     
     /// <summary>
     /// Button1 control.

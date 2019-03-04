@@ -143,6 +143,16 @@
 
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="aforo">Nº De Charla</label>
+
+                                <asp:TextBox runat="server" ID="TxtNumeroCharla" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtNumeroCharla" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNumeroCharla" ForeColor="Red" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -279,6 +289,16 @@
 
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="aforo">Nº Mde Charla</label>
+
+                                <asp:TextBox runat="server" ID="TxtNumeroCharla2" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtNumeroCharla2" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNumeroCharla2" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -328,6 +348,9 @@
 
                         <div class="col-md-6">
                              <div id="AdcionarParticipante"></div>
+                        </div>
+                        <div class="col-md-6">
+                             <div id="NumeroCharla"></div>
                         </div>
                     </div>
 
@@ -988,7 +1011,7 @@
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                        $("#Participantes").html(myData.Participantes);
                        $("#AdcionarParticipante").html(myData.AdcionarParticipante);
-                       
+                       $("#NumeroCharla").html(myData.NroCharla);
 
                    }
 

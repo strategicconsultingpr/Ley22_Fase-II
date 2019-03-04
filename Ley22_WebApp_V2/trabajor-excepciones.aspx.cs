@@ -355,6 +355,10 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
     protected void DdlCentro_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if(DdlCentro.SelectedValue.ToString() == "0")
+        {
+
+        }
         GenerarCalendario();
     }
 

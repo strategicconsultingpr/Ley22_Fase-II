@@ -255,6 +255,15 @@ public partial class administrador_charlas_grupales {
     protected global::System.Web.UI.WebControls.DropDownList DdlNivelCharlas;
     
     /// <summary>
+    /// DdlNumeroCharla control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlSelect DdlNumeroCharla;
+    
+    /// <summary>
     /// TxtMaxCantParticipantes control.
     /// </summary>
     /// <remarks>
@@ -361,6 +370,15 @@ public partial class administrador_charlas_grupales {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList DdlNivelCharlas2;
+    
+    /// <summary>
+    /// DdlNumeroCharla2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlSelect DdlNumeroCharla2;
     
     /// <summary>
     /// TxtMaxCantParticipantes2 control.

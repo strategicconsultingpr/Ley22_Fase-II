@@ -690,7 +690,19 @@
     <Compile Include="Old_App_Code\Calendario.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\CharlaGrupal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarBalancedePagos1_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarCharlasCalendario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
@@ -956,9 +968,6 @@
     <Compile Include="Old_App_Code\Centro.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\CharlaGrupal.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\Ciudad.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -971,9 +980,6 @@
     <Compile Include="Old_App_Code\ControldePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\Documento.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -983,13 +989,7 @@
     <Compile Include="Old_App_Code\FormadePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarCharlasCalendario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCitasCalendario_Result.cs">

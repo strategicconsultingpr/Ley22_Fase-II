@@ -1,0 +1,13 @@
+Ley22:
+
+1. Crear documento tecnico sobre aplicacion y db.
+2. Encriptacion seguro social -SEPS
+
+Erreglos:
+1. Busqueda de participantes, no repetir si existe en SEPS y Ley22.
+2. Crear dashboard de usuarios (estilo 'seleccion-proximo-paso').
+3. Cargar-documentos -> desaparecer rectangulo al no seleccionar orden judicial o no deber ningun documento.
+4. Cargar-documentos -> al borrar, preguntar si esta seguro.  Verificar que como funciona 'Aprobado'.
+5. Resumen de citas y charlas -> verificar Nro. Citas
+6. Al modificar charla, pre definir campos con data a modificar. Validar horas y fechas.
+7. Anadir boton y funcionalidad de al borrar una cita o charla (re-programar)

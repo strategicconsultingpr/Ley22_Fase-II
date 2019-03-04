@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="218b09bdcd244ad3bcb28e04fd31a2a1" Name="Diagram1" >
         <EntityTypeShape EntityType="Ley22Model.Centro" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Ley22Model.CharlaGrupal" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="Ley22Model.Ciudad" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="Ley22Model.ControldePago" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="Ley22Model.Documento" Width="1.5" PointX="6.75" PointY="0.75" />
@@ -30,6 +29,7 @@
         <EntityTypeShape EntityType="Ley22Model.SA_USUARIO_PERMISO_Mapping" Width="1.5" PointX="2.75" PointY="13.75" />
         <EntityTypeShape EntityType="Ley22Model.USUARIO_PROGRAMA" Width="1.5" PointX="13.375" PointY="3.75" />
         <EntityTypeShape EntityType="Ley22Model.Calendario" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Ley22Model.CharlaGrupal" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

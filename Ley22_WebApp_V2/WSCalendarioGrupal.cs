@@ -14,6 +14,7 @@ namespace Ley22_WebApp_V2
         public string FechaHoraCharla;
         public string Participantes;
         public string AdcionarParticipante;
+        public string NroCharla;
     }
 
     public class InfoCharla
@@ -24,6 +25,7 @@ namespace Ley22_WebApp_V2
         public int Id_TipoCharla;
         public int Id_Nivel;
         public int NrodeParticipantes;
+        public int NroCharla;
 
     }
 
@@ -61,9 +63,10 @@ namespace Ley22_WebApp_V2
             {
                 List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(Id_CharlaGrupal).ToList();
                 List<DetalleCharlaGrupal_Result> resulDetalle = mylib.DetalleCharlaGrupal(Id_CharlaGrupal).ToList();
+                var asistio = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Single();
 
-
-                mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel;
+                mydata.NroCharla = resulDetalle[0].NumeroCharla.ToString();
+                mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel + " - Numero de Charla:#"+ mydata.NroCharla;
                 // derale de la charla
                 DateTime TheDate = resulDetalle[0].FechaInicial;
                 System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("es-PR");
@@ -78,7 +81,7 @@ namespace Ley22_WebApp_V2
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
 
-                    if (c.Id_Participante.ToString() == Id_Participante.ToString())
+                    if (c.Id_Participante.ToString() == Id_Participante.ToString() && asistio.FechaFinal > DateTime.Today)
                     {
                         swEstaenLaCharla = true;
                         HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
@@ -93,13 +96,14 @@ namespace Ley22_WebApp_V2
                     Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
                 }
 
-                if (swEstaenLaCharla == false)
+                if (swEstaenLaCharla == false && asistio.FechaFinal > DateTime.Today)
                     HreAdicionar = NombreParticipante + " <a href=\"#\" class=\"btn btn-secondary\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" >Añadir Particpante</A>";
                 else
                     HreAdicionar = "";
 
                 mydata.Participantes = Parti;
                 mydata.AdcionarParticipante = HreAdicionar;
+                
 
                 return mydata;
             }
@@ -145,8 +149,8 @@ namespace Ley22_WebApp_V2
                 List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(Id_CharlaGrupal).ToList();
                 List<DetalleCharlaGrupal_Result> resulDetalle = mylib.DetalleCharlaGrupal(Id_CharlaGrupal).ToList();
 
-
-                mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel;
+                mydata.NroCharla = resulDetalle[0].NumeroCharla.ToString();
+                mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel + " - Numero de Charla:#" + mydata.NroCharla; 
                 // derale de la charla
                 DateTime TheDate = resulDetalle[0].FechaInicial;
                 System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("es-PR");
@@ -172,6 +176,7 @@ namespace Ley22_WebApp_V2
 
                 mydata.Participantes = Parti;
                 mydata.AdcionarParticipante = HreAdicionar;
+                
 
                 return mydata;
             }

@@ -363,6 +363,61 @@ input[disabled]
     color: #212121;
 }
 
+.calendario .item.primera {
+    display: block;
+    background: #42f4ce;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.segunda {
+    display: block;
+    background: #42b6f4;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.tercera {
+    display: block;
+    background: #6e42f4;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.cuarta {
+    display: block;
+    background: #cb42f4;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.quinta {
+    display: block;
+    background: #f4428c;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
 .calendario .item {
 	margin-bottom: 5px;
 }
@@ -383,10 +438,11 @@ input[disabled]
 }
 /* Colores leyenda */
 .bloque-leyenda.nohay {background-color: #E96D6D; border-color: #970D0D;} 
-.bloque-leyenda.grupo1 {background-color: #66BB6A; border-color: #2E7D31;} /* Verde */
-.bloque-leyenda.grupo2 {background-color: #FB8C00; border-color: #E65100;} /* Naranja */
-.bloque-leyenda.grupo3 {background-color: #2097F3; border-color: #1A76D1;} /* Azul */
-.bloque-leyenda.grupo4 {background-color: #BCABA4; border-color: #8C6E63;} /* Marron */
+.bloque-leyenda.grupo1 {background-color: #42F4CE; border-color: #2E7D31;} /* Verde */
+.bloque-leyenda.grupo2 {background-color: #42B6F4; border-color: #E65100;} /* Naranja */
+.bloque-leyenda.grupo3 {background-color: #6E42F4; border-color: #1A76D1;} /* Azul */
+.bloque-leyenda.grupo4 {background-color: #CB42F4; border-color: #8C6E63;} /* Marron */
+.bloque-leyenda.grupo5 {background-color: #F4428C; border-color: #8C6E63;}
 
 /* Sub-niveles */
 .bloque-leyenda.grupo1.nvl2 {background-color: #8DC54F; border-color: #558B2F;} /* Verde Nivel 2*/

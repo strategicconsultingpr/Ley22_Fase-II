@@ -19,5 +19,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string TipodeCharla { get; set; }
         public string Nivel { get; set; }
         public string NombreDelCentro { get; set; }
+        public Nullable<int> NumeroCharla { get; set; }
     }
 }

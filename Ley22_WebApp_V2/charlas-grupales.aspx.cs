@@ -227,7 +227,8 @@ public partial class charlas_grupales : System.Web.UI.Page
                                             Convert.ToInt32(DdlTipodeCharla.SelectedValue),
                                             Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                             Convert.ToInt32(TxtMaxCantParticipantes.Text),
-                                            Convert.ToInt32(Session["Id_UsuarioApp"]));
+                                            Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                            Convert.ToInt32(TxtNumeroCharla.Text));
 
                     GenerarCalendario();
                 }
@@ -373,14 +374,21 @@ public partial class charlas_grupales : System.Web.UI.Page
 
                 {
                     List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(element.Id_CharlaGrupal).ToList();
-
-                    if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
+                    var asistio = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(element.Id_CharlaGrupal)).Single();
+                    if (asistio.FechaFinal > DateTime.Today)
                     {
-                        LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else
+                        {
+                            LitContCelda[i].Text += " <div class=\"item ts-disponible\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        }
                     }
                     else
                     {
-                        LitContCelda[i].Text += " <div class=\"item ts-disponible\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'  data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
+                        LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick='changeDivContent(" + element.Id_CharlaGrupal + ")'   data-toggle=\"modal\" data-target=\"#modal-asistencia\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + " " + element.TipodeCharla + "</a></div>";
                     }
                 }
             }
@@ -538,7 +546,8 @@ public partial class charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla2.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"])
+                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        Convert.ToInt32(TxtNumeroCharla2.Text)
 
                );
         }

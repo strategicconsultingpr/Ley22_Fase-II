@@ -169,6 +169,8 @@
                     <br />
                     <div id="TelefonoContacto"></div>
                     <br />
+                    <div id="TS"></div>
+                    <br />
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
@@ -230,6 +232,8 @@
                     <div id="NombreCompletoA"></div>
                     <br />
                     <div id="TelefonoContactoA"></div>
+                    <br />
+                    <div id="TSA"></div>
                     <br />
                 </div>
                 <div class="modal-footer">
@@ -790,24 +794,26 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa,TS) {
             document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
             document.getElementById("NombreCompleto").innerHTML = "<b>Participante:</b> " + NombreCompleto;
             document.getElementById("TelefonoContacto").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
-             
+            document.getElementById("TS").innerHTML = "<b>Asistente Psicosocial:</b> " + TS;
+            
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        
         }
 
-         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa,TS) {
 
             document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
             document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
             document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
-            document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
+             document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
+             document.getElementById("TSA").innerHTML = "<b>Asistente Psicosocial:</b> " + TS;
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
        

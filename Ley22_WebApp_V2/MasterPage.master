@@ -220,6 +220,17 @@
                                             </asp:RoleGroup>
                                     </RoleGroups>
                                 </asp:LoginView>
+                                <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                    <RoleGroups>
+                                        <asp:RoleGroup Roles="SuperAdmin">
+                                            <ContentTemplate>
+                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
+                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
+                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                                </ContentTemplate>
+                                            </asp:RoleGroup>
+                                    </RoleGroups>
+                                </asp:LoginView>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item">
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />

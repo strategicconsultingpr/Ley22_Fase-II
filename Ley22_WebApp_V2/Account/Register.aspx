@@ -10,7 +10,7 @@
       <div class="card card-login">
         <div class="card-block text-center">
             <div class="logo-login">
-              <img src="../images/assmca-big-logo.png" alt="ASSMCA">hola
+              <img src="../images/assmca-big-logo.png" alt="ASSMCA">
             </div>
             <p>
             <asp:Literal runat="server" ID="ErrorMessage" />

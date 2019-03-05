@@ -444,6 +444,9 @@ input[disabled]
 .bloque-leyenda.grupo4 {background-color: #CB42F4; border-color: #8C6E63;} /* Marron */
 .bloque-leyenda.grupo5 {background-color: #F4428C; border-color: #8C6E63;}
 
+.bloque-leyenda.realizarse {background-color: #E9CA6D; border-color: #8C6E63;}
+.bloque-leyenda.asistio {background-color: #D5EB98; border-color: #8C6E63;}
+
 /* Sub-niveles */
 .bloque-leyenda.grupo1.nvl2 {background-color: #8DC54F; border-color: #558B2F;} /* Verde Nivel 2*/
 .bloque-leyenda.grupo1.nvl3 {background-color: #AED581; border-color: #7BB342;} /* Verde Nivel 3*/

@@ -413,6 +413,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="card-block leyenda">
+                        Leyenda: &nbsp; 
+       
+                        <a href="#" data-toggle="tooltip" data-html="true" title='A REALIZARSE'><span class="bloque-leyenda realizarse"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='PARTICIPANTE ASISTIO'><span class="bloque-leyenda asistio"></span></a>
+                         &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
+                        No Asistio (Cerrado)
+     
+                    </div>
                     <div>
 
 

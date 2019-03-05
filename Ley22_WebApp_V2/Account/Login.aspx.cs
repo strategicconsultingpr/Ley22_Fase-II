@@ -16,7 +16,7 @@ namespace Ley22_WebApp_V2.Account
         {
             //RegisterHyperLink.NavigateUrl = "Register";
             // Enable this once you have account confirmation enabled for password reset functionality
-            //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
+            ForgotPasswordHyperLink.NavigateUrl = "Forgot";
             //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
             //if (!String.IsNullOrEmpty(returnUrl))
@@ -45,6 +45,7 @@ namespace Ley22_WebApp_V2.Account
                     {
                         FailureText.Text = "Invalid login attempt. You must have a confirmed email account.";
                         ErrorMessage.Visible = true;
+                        ResendConfirm.Visible = true;
                     }
                     else
                     {
@@ -100,6 +101,25 @@ namespace Ley22_WebApp_V2.Account
                                 break;
                         }
                     }
+                }
+            }
+        }
+
+        protected void SendEmailConfirmationToken(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindByName(EmailInput.Text);
+            if (user != null)
+            {
+                if (!user.EmailConfirmed)
+                {
+                    string code = manager.GenerateEmailConfirmationToken(user.Id);
+                    string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
+                    manager.SendEmail(user.Id, "Confirm your account", callbackUrl);
+
+                    FailureText.Text = "Confirmation email sent. Please view the email and confirm your account.";
+                    ErrorMessage.Visible = true;
+                    //ResendConfirm.Visible = false;
                 }
             }
         }

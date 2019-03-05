@@ -1,6 +1,6 @@
-﻿<%@ Page Title="Password Changed" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ResetPasswordConfirmation.aspx.cs" Inherits="Ley22_WebApp_V2.Account.ResetPasswordConfirmation" Async="true" %>
+﻿<%@ Page Title="Password Changed" Language="C#" MasterPageFile="~/MasterPage2.master" AutoEventWireup="true" CodeBehind="ResetPasswordConfirmation.aspx.cs" Inherits="Ley22_WebApp_V2.Account.ResetPasswordConfirmation" Async="true" %>
 
-<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1">
     <h2><%: Title %>.</h2>
     <div>
         <p>Your password has been changed. Click <asp:HyperLink ID="login" runat="server" NavigateUrl="~/Account/Login">here</asp:HyperLink> to login </p>

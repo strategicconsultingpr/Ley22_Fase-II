@@ -14,11 +14,21 @@ namespace Ley22_WebApp_V2.Account
         ApplicationDbContext context = new ApplicationDbContext();
         SEPSEntities1 dsPerfil = new SEPSEntities1();
         Ley22Entities dsLey22 = new Ley22Entities();
+        ApplicationUser ExistingUser = new ApplicationUser();
+        static string userId = String.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                if (Session["User"] == null)
+                {
+                    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+                    Session["MensajeError"] = "Por favor ingrese al sistema";
+                    Response.Redirect("Account/Login.aspx", false);
+                    return;
+                }
+
                 LoadDropDowns();
                 int TotalReg = BindGridView(1);
                 this.FillJumpToList(TotalReg);

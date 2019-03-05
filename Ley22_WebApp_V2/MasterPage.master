@@ -222,7 +222,7 @@
                                 </asp:LoginView>
                                 <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
-                                        <asp:RoleGroup Roles="SuperAdmin">
+                                        <asp:RoleGroup Roles="Director">
                                             <ContentTemplate>
                                 <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
                                 <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>

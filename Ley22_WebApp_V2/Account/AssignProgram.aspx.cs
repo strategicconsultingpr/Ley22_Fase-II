@@ -213,13 +213,25 @@ namespace Ley22_WebApp_V2.Account
         }
 
         int BindGridView(int pagina)
-        {         
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var programas_director = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            var emails_programas_director = dsLey22.USUARIO_PROGRAMA.Where(u => programas_director.Contains(u.FK_Programa)).Select(p => p.FK_Usuario).ToList();
+            List<ApplicationUser> emails_programas;
+
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                emails_programas = context.Users.Where(u => emails_programas_director.Contains(u.Id)).ToList();//Emails de usuarios con programas asignados
+            }
+            else
+            {
+                emails_programas = context.Users.ToList();//Emails de usuarios con programas asignados
+            }
+
 
             var usuario_programa = (from a in dsLey22.USUARIO_PROGRAMA select new { a.FK_Usuario}).Distinct();//PK de usuarios con programas asignados
 
             var programa_usuario = dsLey22.USUARIO_PROGRAMA.ToList();//PK de programas con usuarios asignados
-
-            var emails_programas = context.Users.ToList();//Emails de usuarios con programas asignados
 
             var sprogramas = dsPerfil.SA_PROGRAMA.ToList();
 

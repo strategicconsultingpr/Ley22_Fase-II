@@ -1,5 +1,7 @@
 ﻿using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,8 @@ namespace Ley22_WebApp_V2.Account
                     Response.Redirect("Account/Login.aspx", false);
                     return;
                 }
+                ExistingUser = (ApplicationUser)Session["User"];
+                userId = ExistingUser.Id;
 
                 LoadDropDowns();
                 int TotalReg = BindGridView(1);
@@ -43,10 +47,24 @@ namespace Ley22_WebApp_V2.Account
             //DdlPrograma.DataTextField = "Text";
             //DdlPrograma.DataSource = programas;
             //DdlPrograma.DataBind();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<string>();
+            var programas_usuario = new List<int>();
+            List<ListItem> email;
+
             DdlProgramA.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             DdlProgramD.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            var email = context.Users.Select(u => new ListItem { Value = u.Id, Text = u.Email }).ToList();
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+                usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => programas_usuario.Contains(u.FK_Programa)).Select(p => p.FK_Usuario).ToList();
+                email = context.Users.Where(p => usuarios_programas.Contains(p.Id)).Select(u => new ListItem { Value = u.Id, Text = u.Email }).ToList();
+            }
+            else
+            {
+                email = context.Users.Select(u => new ListItem { Value = u.Id, Text = u.Email }).ToList();
+            }
 
             DdlEmailA.DataValueField = "Value";
             DdlEmailA.DataTextField = "Text";
@@ -63,32 +81,68 @@ namespace Ley22_WebApp_V2.Account
 
         protected void LoadProgramsDdlA()
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var programas_usuario = new List<int>();
+            var programas_director = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            List<ListItem> programas;
             string email = DdlEmailA.SelectedValue;
 
-                        var usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
 
-                        var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => !usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22"))
+                    .Where(p => !programas_usuario.Contains(p.PK_Programa))
+                    .Where(a => programas_director.Contains(a.PK_Programa))
+                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
 
-                        DdlProgramA.DataValueField = "Value";
-                        DdlProgramA.DataTextField = "Text";
-                        DdlProgramA.DataSource = programas;
-                        DdlProgramA.DataBind();
-                        DdlProgramA.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+            else
+            {
+                programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
+
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => !programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+            }
+                DdlProgramA.DataValueField = "Value";
+                DdlProgramA.DataTextField = "Text";
+                DdlProgramA.DataSource = programas;
+                DdlProgramA.DataBind();
+                DdlProgramA.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            
         }
 
         protected void LoadProgramsDdlD()
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var programas_usuario = new List<int>();
             string email = DdlEmailD.SelectedValue;
+            var programas_director = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            List<ListItem> programas;
 
-            var usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
 
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22"))
+                    .Where(p => programas_usuario.Contains(p.PK_Programa))
+                    .Where(a => programas_director.Contains(a.PK_Programa))
+                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            }
+            else
+            {
+                programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
+
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            }
 
             DdlProgramD.DataValueField = "Value";
             DdlProgramD.DataTextField = "Text";
             DdlProgramD.DataSource = programas;
             DdlProgramD.DataBind();
             DdlProgramD.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
         }
 
         protected void DdlEmailA_SelectedIndexChanged(object sender, EventArgs e)

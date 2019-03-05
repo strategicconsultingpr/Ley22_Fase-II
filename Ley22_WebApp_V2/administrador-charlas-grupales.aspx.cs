@@ -117,6 +117,16 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             return;
         }
+        else if (Page.Request.Params["__EVENTTARGET"] == "AsistioParticipante")
+        {
+            AsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            return;
+        }
+        else if (Page.Request.Params["__EVENTTARGET"] == "NoAsistioParticipante")
+        {
+            NoAsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            return;
+        }
     }
 
     void GenerarCalendario()
@@ -478,6 +488,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
         GenerarCalendario();
 
+    }
+
+    void AsistioParticipante(int Id_ParticipantePorCharlaGrupal)
+    {
+        dsLey22.AsistioCharla(Id_ParticipantePorCharlaGrupal);
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante cumplió con la charla.');", true);
+        GenerarCalendario();
+    }
+
+    void NoAsistioParticipante(int Id_ParticipantePorCharlaGrupal)
+    {
+        dsLey22.NoAsistioCharla(Id_ParticipantePorCharlaGrupal);
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante NO cumplió con la charla.');", true);
+        GenerarCalendario();
     }
 
 

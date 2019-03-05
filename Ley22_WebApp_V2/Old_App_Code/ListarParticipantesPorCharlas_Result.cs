@@ -18,5 +18,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public int Id_Participante { get; set; }
         public string NB_Primero { get; set; }
         public string AP_Primero { get; set; }
+        public int Asistio { get; set; }
     }
 }

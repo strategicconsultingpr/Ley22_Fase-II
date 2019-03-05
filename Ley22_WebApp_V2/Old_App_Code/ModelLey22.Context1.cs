@@ -269,15 +269,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarOrdenesJudicialesActivas_Result>("ListarOrdenesJudicialesActivas", id_ParticipanteParameter);
         }
     
-        public virtual ObjectResult<ListarParticipantesPorCharlas_Result> ListarParticipantesPorCharlas(Nullable<int> id_CharlaGrupal)
-        {
-            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
-                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
-                new ObjectParameter("Id_CharlaGrupal", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlas_Result>("ListarParticipantesPorCharlas", id_CharlaGrupalParameter);
-        }
-    
         public virtual ObjectResult<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result> ListarTipodeDocumentosPorParticipanteOrdenJudicial(Nullable<int> id_OrdenJudicial, Nullable<int> id_Participante)
         {
             var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
@@ -840,6 +831,33 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Programa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioAdministrador_Result>("ListarCitasCalendarioAdministrador", fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int AsistioCharla(Nullable<int> id_ParticipantePorCharlaGrupal)
+        {
+            var id_ParticipantePorCharlaGrupalParameter = id_ParticipantePorCharlaGrupal.HasValue ?
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", id_ParticipantePorCharlaGrupal) :
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AsistioCharla", id_ParticipantePorCharlaGrupalParameter);
+        }
+    
+        public virtual int NoAsistioCharla(Nullable<int> id_ParticipantePorCharlaGrupal)
+        {
+            var id_ParticipantePorCharlaGrupalParameter = id_ParticipantePorCharlaGrupal.HasValue ?
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", id_ParticipantePorCharlaGrupal) :
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NoAsistioCharla", id_ParticipantePorCharlaGrupalParameter);
+        }
+    
+        public virtual ObjectResult<ListarParticipantesPorCharlas_Result> ListarParticipantesPorCharlas(Nullable<int> id_CharlaGrupal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlas_Result>("ListarParticipantesPorCharlas", id_CharlaGrupalParameter);
         }
     }
 }

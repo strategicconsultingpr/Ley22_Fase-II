@@ -301,6 +301,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AsistioCharla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_ParticipantePorCharlaGrupal" Type="int" Mode="In" />
+        </Function>
         <Function Name="AsistioCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Calendario" Type="int" Mode="In" />
         </Function>
@@ -457,6 +460,9 @@
           <Parameter Name="NrodeParticipantes" Type="int" Mode="In" />
           <Parameter Name="Id_Usuario" Type="int" Mode="In" />
           <Parameter Name="NumeroCharla" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NoAsistioCharla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_ParticipantePorCharlaGrupal" Type="int" Mode="In" />
         </Function>
         <Function Name="NoAsistioCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Calendario" Type="int" Mode="In" />
@@ -617,9 +623,6 @@
           <FunctionImport Name="ListarMotivosCierre" ReturnType="Collection(Ley22Model.ListarMotivosCierre_Result)" />
           <FunctionImport Name="ListarOrdenesJudicialesActivas" ReturnType="Collection(Ley22Model.ListarOrdenesJudicialesActivas_Result)">
           <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ListarParticipantesPorCharlas" ReturnType="Collection(Ley22Model.ListarParticipantesPorCharlas_Result)">
-          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" ReturnType="Collection(Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result)">
             <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
@@ -811,6 +814,15 @@
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AsistioCharla">
+          <Parameter Name="Id_ParticipantePorCharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NoAsistioCharla">
+          <Parameter Name="Id_ParticipantePorCharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarParticipantesPorCharlas" ReturnType="Collection(Ley22Model.ListarParticipantesPorCharlas_Result)">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -910,13 +922,6 @@
           <Property Type="String" Name="ComentarioCierre" Nullable="true" MaxLength="4096" />
           <Property Type="String" Name="DocumentoAprobacion" Nullable="true" MaxLength="4096" />
           <Property Type="Int32" Name="Id_UsuarioCierre" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ListarParticipantesPorCharlas_Result">
-          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
-          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
-          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
-          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="AP_Primero" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
           <Property Type="Int32" Name="Id_Documento" Nullable="false" />
@@ -1305,13 +1310,6 @@
           <Property Name="FK_Usuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FK_Programa" Type="Int32" Nullable="false" />
         </EntityType>
-        <ComplexType Name="ListarParticipantesPorCharlas1_Result">
-          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
-          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
-          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
-          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="ListarBalancedePagos1_Result">
           <Property Type="Int32" Name="Id_ControldePagos" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
@@ -1414,6 +1412,14 @@
           <Property Type="String" Name="TelefonoCitas" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Id_Programa" Nullable="true" />
           <Property Type="String" Name="NB_Programa" Nullable="true" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="ListarParticipantesPorCharlas_Result">
+          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1960,17 +1966,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ListarParticipantesPorCharlas" FunctionName="Ley22Model.Store.ListarParticipantesPorCharlas">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarParticipantesPorCharlas_Result">
-                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
-                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
-                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
-                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
-                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ListarBalancedePagos" FunctionName="Ley22Model.Store.ListarBalancedePagos" />
           <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
@@ -2081,6 +2076,20 @@
                 <ScalarProperty Name="TelefonoCitas" ColumnName="TelefonoCitas" />
                 <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
                 <ScalarProperty Name="NB_Programa" ColumnName="NB_Programa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AsistioCharla" FunctionName="Ley22Model.Store.AsistioCharla" />
+          <FunctionImportMapping FunctionImportName="NoAsistioCharla" FunctionName="Ley22Model.Store.NoAsistioCharla" />
+          <FunctionImportMapping FunctionImportName="ListarParticipantesPorCharlas" FunctionName="Ley22Model.Store.ListarParticipantesPorCharlas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarParticipantesPorCharlas_Result">
+                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

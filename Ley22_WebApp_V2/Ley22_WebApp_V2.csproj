@@ -729,7 +729,7 @@
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarParticipantesPorCharlas1_Result.cs">
+    <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ModelLey221.cs">
@@ -1032,9 +1032,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result.cs">

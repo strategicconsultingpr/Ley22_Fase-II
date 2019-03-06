@@ -86,7 +86,7 @@ namespace Ley22_WebApp_V2.Account
                                     }
                                     else
                                     {
-
+                                        Response.Redirect("~/Account/ResetPassword");
                                     }
                                 }
                                 catch (Exception)

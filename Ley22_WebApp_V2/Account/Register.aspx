@@ -22,22 +22,27 @@
                   <div class="form-group text-left">
                     <label for="LabelFirstName">Primer Nombre</label>
                     <asp:TextBox ID="FirstNameInput" runat="server" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su primer nombre"></asp:TextBox>  
+                      <asp:RequiredFieldValidator runat="server" ControlToValidate="FirstNameInput" CssClass="text-danger" ErrorMessage="El primer nombre es requerido." />
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelLastName">Primer Apellido</label>
                     <asp:TextBox ID="LastNameInput" runat="server" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su primer apellido" ></asp:TextBox>  
+                      <asp:RequiredFieldValidator runat="server" ControlToValidate="LastNameInput" CssClass="text-danger" ErrorMessage="El primer apellido es requerido." />
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelEmail">Email</label>
-                    <asp:TextBox ID="EmailInput" runat="server" AutoCompleteType="Email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese email" TextMode="Email"></asp:TextBox>  
+                    <asp:TextBox ID="EmailInput" runat="server" AutoCompleteType="Email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese email" TextMode="Email"></asp:TextBox>
+                      <asp:RequiredFieldValidator runat="server" ControlToValidate="EmailInput" CssClass="text-danger" ErrorMessage="El email es requerido." />
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelPassword">Contraseña</label>
-                    <asp:TextBox ID="PasswordInput" runat="server" class="form-control" placeholder="Ingrese Contraseña" TextMode="Password"></asp:TextBox>                   
+                    <asp:TextBox ID="PasswordInput" runat="server" class="form-control" placeholder="Ingrese Contraseña" TextMode="Password"></asp:TextBox> 
+                      <asp:RequiredFieldValidator runat="server" ControlToValidate="EmailInput" CssClass="text-danger" ErrorMessage="El password es requerido." />
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelPassword">Contraseña</label>
-                    <asp:TextBox ID="PasswordConfirmInput" runat="server" class="form-control" placeholder="Confirme Contraseña" TextMode="Password"></asp:TextBox>                   
+                    <asp:TextBox ID="PasswordConfirmInput" runat="server" class="form-control" placeholder="Confirme Contraseña" TextMode="Password"></asp:TextBox>
+                      <asp:RequiredFieldValidator runat="server" ControlToValidate="EmailInput" CssClass="text-danger" ErrorMessage="El password confirmado es requerido." />
                   </div>
                   <div class="form-group text-left">
                     <label for="LabelRol">Rol</label>

@@ -32,6 +32,8 @@ namespace Ley22_WebApp_V2
                 user.FirstName = "Administrador";
                 user.LastName = "LEY22";
                 user.PasswordChanged = true;
+                user.Active = true;
+                user.EmailConfirmed = true;
                 string pwd = "Admin@2018";
                 var newuser = userManager.Create(user, pwd);
                 if (newuser.Succeeded)

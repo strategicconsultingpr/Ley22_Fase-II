@@ -8,11 +8,14 @@ using System.Threading;
 using System.Globalization;
 using Ley22_WebApp_V2.Old_App_Code;
 using Ley22_WebApp_V2.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class charlas_grupales : System.Web.UI.Page
 {
     SEPSEntities1 dsPerfil = new SEPSEntities1();
     ApplicationUser ExistingUser = new ApplicationUser();
+    Ley22Entities dsley22 = new Ley22Entities();
     static string userId = String.Empty;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -34,6 +37,9 @@ public partial class charlas_grupales : System.Web.UI.Page
             if (!Page.IsPostBack)
         {
             // Page.ClientScript.RegisterStartupScript(this.GetType(), "Region", "Region()", true);
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
             ExistingUser = (ApplicationUser)Session["User"];
             userId = ExistingUser.Id;
 
@@ -42,7 +48,19 @@ public partial class charlas_grupales : System.Web.UI.Page
  
             GenerarCalendario();
             CargarOrdenesJudiciales();
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+            
+
+            if (userManager.IsInRole(userId, "SuperAdmin"))
+            {
+                usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
+            }
+            else
+            {
+                usuarios_programas = dsley22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            }
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
 
             DdlCentro.DataValueField = "Value";
             DdlCentro.DataTextField = "Text";

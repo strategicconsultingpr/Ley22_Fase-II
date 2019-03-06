@@ -72,18 +72,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
             var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
 
-            if (usuarios_programas.Count() == 1)
-            {
-                DdlCentro.DataValueField = "Value";
-                DdlCentro.DataTextField = "Text";
-                DdlCentro.DataSource = programas;
-                DdlCentro.DataBind();
-                DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-
-            }
-            else
-            {
+         
                 DdlCentro.DataValueField = "Value";
                 DdlCentro.DataTextField = "Text";
                 DdlCentro.DataSource = programas;
@@ -91,7 +80,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
               
-            }
+            
 
 
            

@@ -67,12 +67,12 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
         using (Ley22Entities ml22e = new Ley22Entities())
         {
 
-            List<BusquedaSencilladePersonas_Result> Resul = ml22e.BusquedaSencilladePersonas(Session["TxtNroSeguroSocial"].ToString(),
+            List<BusquedaSencilladePersonas_Result> Resultado = ml22e.BusquedaSencilladePersonas(Session["TxtNroSeguroSocial"].ToString(),
                                                      Session["TxtIdentificacion"].ToString(),
                                                      FechaNac,
                                                      Session["TxtNombreyApellido"].ToString()).ToList()
                                                      ;
-            Resul.Where(u => u.Identificacion.Equals("")).ToList();
+            var Resul = Resultado.Where(u => u.Identificacion.Equals("")).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
 
             GridView1.PageIndex = pagina - 1;

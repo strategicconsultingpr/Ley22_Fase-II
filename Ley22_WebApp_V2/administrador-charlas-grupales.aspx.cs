@@ -412,7 +412,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla2.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );
@@ -457,7 +457,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla.SelectedIndex)
 
                );

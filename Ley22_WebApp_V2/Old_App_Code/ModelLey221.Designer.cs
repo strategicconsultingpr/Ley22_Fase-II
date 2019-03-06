@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Alexi\source\repos\strategicconsultingpr\Ley22_Fase-II\Ley22_WebApp_V2\Old_App_Code\ModelLey22.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\alexie.ortiz\source\repos\Ley22_Fase-II\Ley22_WebApp_V2\Old_App_Code\ModelLey22.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

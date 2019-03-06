@@ -17,7 +17,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public int Id_ParticipantePorCharlaGrupal { get; set; }
         public int Id_CharlaGrupal { get; set; }
         public int Id_Participante { get; set; }
-        public int Id_Usuario { get; set; }
+        public string Id_Usuario { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int Asistio { get; set; }
         public Nullable<int> Id_OrdenJudicial { get; set; }

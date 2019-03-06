@@ -7,10 +7,14 @@ using System.Web.UI.WebControls;
 using System.Threading;
 using System.Globalization;
 using Ley22_WebApp_V2.Old_App_Code;
+using Ley22_WebApp_V2.Models;
 
 public partial class charlas_grupales : System.Web.UI.Page
 {
     SEPSEntities1 dsPerfil = new SEPSEntities1();
+    ApplicationUser ExistingUser = new ApplicationUser();
+    static string userId = String.Empty;
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -29,7 +33,9 @@ public partial class charlas_grupales : System.Web.UI.Page
 
             if (!Page.IsPostBack)
         {
-           // Page.ClientScript.RegisterStartupScript(this.GetType(), "Region", "Region()", true);
+            // Page.ClientScript.RegisterStartupScript(this.GetType(), "Region", "Region()", true);
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
 
             Session["FechaBase"] = new DateTime(2019, 01, 27);
 
@@ -227,7 +233,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                             Convert.ToInt32(DdlTipodeCharla.SelectedValue),
                                             Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                             Convert.ToInt32(TxtMaxCantParticipantes.Text),
-                                            Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                            userId,
                                             Convert.ToInt32(DdlNumeroCharla.SelectedIndex));
 
                     GenerarCalendario();
@@ -533,10 +539,14 @@ public partial class charlas_grupales : System.Web.UI.Page
     void AnadirParticipante()
     {
          int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
+        int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
         using (Ley22Entities mylib = new Ley22Entities())
-            mylib.GuardarParticipantePorCharlas(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante, Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-        GenerarCalendario();
+        {
+            var NumeroCharla = mylib.CharlaGrupals.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Select(u => u.NumeroCharla).Single();
+          mylib.GuardarParticipantePorCharlas(Id_Charla, Id_Participante, userId, Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),NumeroCharla);
+        }
+            GenerarCalendario();
 
     }
 
@@ -563,7 +573,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla2.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );

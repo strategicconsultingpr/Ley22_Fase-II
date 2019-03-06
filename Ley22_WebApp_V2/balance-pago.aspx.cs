@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 
 public partial class balance_pago : System.Web.UI.Page
@@ -12,6 +13,9 @@ public partial class balance_pago : System.Web.UI.Page
     int ContadorCharlasCitasPagadas;
     decimal TotalPagado, BalanceDebido;
     static string prevPage = String.Empty;
+    ApplicationUser ExistingUser = new ApplicationUser();
+    static string userId = String.Empty;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         // valida que se haya buscado el usuario
@@ -29,6 +33,9 @@ public partial class balance_pago : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
+
             prevPage = Request.UrlReferrer.ToString();
             ContadordeCharlaCitasPorPagar = 0;
             ContadorCharlasCitasPagadas = 0;
@@ -42,7 +49,7 @@ public partial class balance_pago : System.Web.UI.Page
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            mylib.RegistrarPago(Convert.ToInt32( IdCP.Value), Convert.ToDecimal( TxtCantidad.Text), Convert.ToInt32( DdlFormadePago.SelectedValue), Convert.ToInt32(TxtNumeroCheque.Text==""?"0": TxtNumeroCheque.Text), Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32( Session["Id_UsuarioApp"]));
+            mylib.RegistrarPago(Convert.ToInt32( IdCP.Value), Convert.ToDecimal( TxtCantidad.Text), Convert.ToInt32( DdlFormadePago.SelectedValue), Convert.ToInt32(TxtNumeroCheque.Text==""?"0": TxtNumeroCheque.Text), Convert.ToDateTime(TxtFechaDelPago.Text),userId);
 
         }
         BidGrid(sender, e);

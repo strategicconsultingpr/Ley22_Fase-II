@@ -29,7 +29,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
         public virtual DbSet<Centro> Centros { get; set; }
         public virtual DbSet<Ciudad> Ciudads { get; set; }
-        public virtual DbSet<ControldePago> ControldePagos { get; set; }
         public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<DocumentosPorParticipante> DocumentosPorParticipantes { get; set; }
         public virtual DbSet<FormadePago> FormadePagoes { get; set; }
@@ -37,7 +36,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<NivelesdelasCharla> NivelesdelasCharlas { get; set; }
         public virtual DbSet<OrdenesJudiciale> OrdenesJudiciales { get; set; }
         public virtual DbSet<Participante> Participantes { get; set; }
-        public virtual DbSet<ParticipantesPorCharla> ParticipantesPorCharlas { get; set; }
         public virtual DbSet<Precio> Precios { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<SA_PERSONA> SA_PERSONA { get; set; }
@@ -50,7 +48,9 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<SA_USUARIO_PERMISO_Mapping> SA_USUARIO_PERMISO_Mapping { get; set; }
         public virtual DbSet<USUARIO_PROGRAMA> USUARIO_PROGRAMA { get; set; }
         public virtual DbSet<Calendario> Calendarios { get; set; }
+        public virtual DbSet<ParticipantesPorCharla> ParticipantesPorCharlas { get; set; }
         public virtual DbSet<CharlaGrupal> CharlaGrupals { get; set; }
+        public virtual DbSet<ControldePago> ControldePagos { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -207,27 +207,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarOrdenJudicial", id_ParticipanteParameter, numeroOrdenJudicialParameter, id_UsuarioCreacionParameter);
         }
     
-        public virtual int GuardarParticipantePorCharlas(Nullable<int> id_CharlaGrupal, Nullable<int> id_Participante, Nullable<int> id_Usuario, Nullable<int> id_OrdenJudicial)
-        {
-            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
-                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
-                new ObjectParameter("Id_CharlaGrupal", typeof(int));
-    
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            var id_UsuarioParameter = id_Usuario.HasValue ?
-                new ObjectParameter("Id_Usuario", id_Usuario) :
-                new ObjectParameter("Id_Usuario", typeof(int));
-    
-            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
-                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
-                new ObjectParameter("Id_OrdenJudicial", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarParticipantePorCharlas", id_CharlaGrupalParameter, id_ParticipanteParameter, id_UsuarioParameter, id_OrdenJudicialParameter);
-        }
-    
         public virtual ObjectResult<ListarBalancedePagos_Result> ListarBalancedePagos(Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial)
         {
             var id_ParticipanteParameter = id_Participante.HasValue ?
@@ -269,15 +248,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarOrdenesJudicialesActivas_Result>("ListarOrdenesJudicialesActivas", id_ParticipanteParameter);
         }
     
-        public virtual ObjectResult<ListarParticipantesPorCharlas_Result> ListarParticipantesPorCharlas(Nullable<int> id_CharlaGrupal)
-        {
-            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
-                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
-                new ObjectParameter("Id_CharlaGrupal", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlas_Result>("ListarParticipantesPorCharlas", id_CharlaGrupalParameter);
-        }
-    
         public virtual ObjectResult<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result> ListarTipodeDocumentosPorParticipanteOrdenJudicial(Nullable<int> id_OrdenJudicial, Nullable<int> id_Participante)
         {
             var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
@@ -289,35 +259,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Participante", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result>("ListarTipodeDocumentosPorParticipanteOrdenJudicial", id_OrdenJudicialParameter, id_ParticipanteParameter);
-        }
-    
-        public virtual int RegistrarPago(Nullable<int> id_ControldePagos, Nullable<decimal> cantidad, Nullable<int> id_FormadePago, Nullable<int> numerodeCheque, Nullable<System.DateTime> fechadelPago, Nullable<int> id_Usuario)
-        {
-            var id_ControldePagosParameter = id_ControldePagos.HasValue ?
-                new ObjectParameter("Id_ControldePagos", id_ControldePagos) :
-                new ObjectParameter("Id_ControldePagos", typeof(int));
-    
-            var cantidadParameter = cantidad.HasValue ?
-                new ObjectParameter("Cantidad", cantidad) :
-                new ObjectParameter("Cantidad", typeof(decimal));
-    
-            var id_FormadePagoParameter = id_FormadePago.HasValue ?
-                new ObjectParameter("Id_FormadePago", id_FormadePago) :
-                new ObjectParameter("Id_FormadePago", typeof(int));
-    
-            var numerodeChequeParameter = numerodeCheque.HasValue ?
-                new ObjectParameter("NumerodeCheque", numerodeCheque) :
-                new ObjectParameter("NumerodeCheque", typeof(int));
-    
-            var fechadelPagoParameter = fechadelPago.HasValue ?
-                new ObjectParameter("FechadelPago", fechadelPago) :
-                new ObjectParameter("FechadelPago", typeof(System.DateTime));
-    
-            var id_UsuarioParameter = id_Usuario.HasValue ?
-                new ObjectParameter("Id_Usuario", id_Usuario) :
-                new ObjectParameter("Id_Usuario", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", id_ControldePagosParameter, cantidadParameter, id_FormadePagoParameter, numerodeChequeParameter, fechadelPagoParameter, id_UsuarioParameter);
         }
     
         public virtual ObjectResult<ResumendeAsistenciasCharlas_Result> ResumendeAsistenciasCharlas(Nullable<int> id_Participante)
@@ -725,43 +666,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DetalleCharlaGrupal_Result>("DetalleCharlaGrupal", id_CharlaGrupalParameter);
         }
     
-        public virtual int GuardarCharlaGrupal(Nullable<int> id_Centro, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_TipoCharla, Nullable<int> id_Nivel, Nullable<int> nrodeParticipantes, Nullable<int> id_Usuario, Nullable<int> numeroCharla)
-        {
-            var id_CentroParameter = id_Centro.HasValue ?
-                new ObjectParameter("Id_Centro", id_Centro) :
-                new ObjectParameter("Id_Centro", typeof(int));
-    
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("FechaInicial", fechaInicial) :
-                new ObjectParameter("FechaInicial", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
-    
-            var id_TipoCharlaParameter = id_TipoCharla.HasValue ?
-                new ObjectParameter("Id_TipoCharla", id_TipoCharla) :
-                new ObjectParameter("Id_TipoCharla", typeof(int));
-    
-            var id_NivelParameter = id_Nivel.HasValue ?
-                new ObjectParameter("Id_Nivel", id_Nivel) :
-                new ObjectParameter("Id_Nivel", typeof(int));
-    
-            var nrodeParticipantesParameter = nrodeParticipantes.HasValue ?
-                new ObjectParameter("NrodeParticipantes", nrodeParticipantes) :
-                new ObjectParameter("NrodeParticipantes", typeof(int));
-    
-            var id_UsuarioParameter = id_Usuario.HasValue ?
-                new ObjectParameter("Id_Usuario", id_Usuario) :
-                new ObjectParameter("Id_Usuario", typeof(int));
-    
-            var numeroCharlaParameter = numeroCharla.HasValue ?
-                new ObjectParameter("NumeroCharla", numeroCharla) :
-                new ObjectParameter("NumeroCharla", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter, numeroCharlaParameter);
-        }
-    
         public virtual ObjectResult<InfoCharlaGrupal_Result> InfoCharlaGrupal(Nullable<int> id_CharlaGrupal)
         {
             var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
@@ -788,7 +692,113 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCharlasCalendario_Result>("ListarCharlasCalendario", id_CentroParameter, fechaInicialParameter, fechaFinalParameter);
         }
     
-        public virtual int ModificarCharlaGrupal(Nullable<int> id_CharlaGrupal, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_TipoCharla, Nullable<int> id_Nivel, Nullable<int> nrodeParticipantes, Nullable<int> id_Usuario, Nullable<int> numeroCharla)
+        public virtual ObjectResult<ListarCitasCalendarioAdministrador_Result> ListarCitasCalendarioAdministrador(Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
+        {
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("fechaInicial", fechaInicial) :
+                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioAdministrador_Result>("ListarCitasCalendarioAdministrador", fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int AsistioCharla(Nullable<int> id_ParticipantePorCharlaGrupal)
+        {
+            var id_ParticipantePorCharlaGrupalParameter = id_ParticipantePorCharlaGrupal.HasValue ?
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", id_ParticipantePorCharlaGrupal) :
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AsistioCharla", id_ParticipantePorCharlaGrupalParameter);
+        }
+    
+        public virtual int NoAsistioCharla(Nullable<int> id_ParticipantePorCharlaGrupal)
+        {
+            var id_ParticipantePorCharlaGrupalParameter = id_ParticipantePorCharlaGrupal.HasValue ?
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", id_ParticipantePorCharlaGrupal) :
+                new ObjectParameter("Id_ParticipantePorCharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NoAsistioCharla", id_ParticipantePorCharlaGrupalParameter);
+        }
+    
+        public virtual ObjectResult<ListarParticipantesPorCharlas_Result> ListarParticipantesPorCharlas(Nullable<int> id_CharlaGrupal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlas_Result>("ListarParticipantesPorCharlas", id_CharlaGrupalParameter);
+        }
+    
+        public virtual int GuardarParticipantePorCharlas(Nullable<int> id_CharlaGrupal, Nullable<int> id_Participante, string id_Usuario, Nullable<int> id_OrdenJudicial, Nullable<int> numeroCharla)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_UsuarioParameter = id_Usuario != null ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(string));
+    
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            var numeroCharlaParameter = numeroCharla.HasValue ?
+                new ObjectParameter("NumeroCharla", numeroCharla) :
+                new ObjectParameter("NumeroCharla", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarParticipantePorCharlas", id_CharlaGrupalParameter, id_ParticipanteParameter, id_UsuarioParameter, id_OrdenJudicialParameter, numeroCharlaParameter);
+        }
+    
+        public virtual int GuardarCharlaGrupal(Nullable<int> id_Centro, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_TipoCharla, Nullable<int> id_Nivel, Nullable<int> nrodeParticipantes, string id_Usuario, Nullable<int> numeroCharla)
+        {
+            var id_CentroParameter = id_Centro.HasValue ?
+                new ObjectParameter("Id_Centro", id_Centro) :
+                new ObjectParameter("Id_Centro", typeof(int));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_TipoCharlaParameter = id_TipoCharla.HasValue ?
+                new ObjectParameter("Id_TipoCharla", id_TipoCharla) :
+                new ObjectParameter("Id_TipoCharla", typeof(int));
+    
+            var id_NivelParameter = id_Nivel.HasValue ?
+                new ObjectParameter("Id_Nivel", id_Nivel) :
+                new ObjectParameter("Id_Nivel", typeof(int));
+    
+            var nrodeParticipantesParameter = nrodeParticipantes.HasValue ?
+                new ObjectParameter("NrodeParticipantes", nrodeParticipantes) :
+                new ObjectParameter("NrodeParticipantes", typeof(int));
+    
+            var id_UsuarioParameter = id_Usuario != null ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(string));
+    
+            var numeroCharlaParameter = numeroCharla.HasValue ?
+                new ObjectParameter("NumeroCharla", numeroCharla) :
+                new ObjectParameter("NumeroCharla", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter, numeroCharlaParameter);
+        }
+    
+        public virtual int ModificarCharlaGrupal(Nullable<int> id_CharlaGrupal, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_TipoCharla, Nullable<int> id_Nivel, Nullable<int> nrodeParticipantes, string id_Usuario, Nullable<int> numeroCharla)
         {
             var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
                 new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
@@ -814,9 +824,9 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("NrodeParticipantes", nrodeParticipantes) :
                 new ObjectParameter("NrodeParticipantes", typeof(int));
     
-            var id_UsuarioParameter = id_Usuario.HasValue ?
+            var id_UsuarioParameter = id_Usuario != null ?
                 new ObjectParameter("Id_Usuario", id_Usuario) :
-                new ObjectParameter("Id_Usuario", typeof(int));
+                new ObjectParameter("Id_Usuario", typeof(string));
     
             var numeroCharlaParameter = numeroCharla.HasValue ?
                 new ObjectParameter("NumeroCharla", numeroCharla) :
@@ -825,21 +835,33 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCharlaGrupal", id_CharlaGrupalParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter, numeroCharlaParameter);
         }
     
-        public virtual ObjectResult<ListarCitasCalendarioAdministrador_Result> ListarCitasCalendarioAdministrador(Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
+        public virtual int RegistrarPago(Nullable<int> id_ControldePagos, Nullable<decimal> cantidad, Nullable<int> id_FormadePago, Nullable<int> numerodeCheque, Nullable<System.DateTime> fechadelPago, string id_Usuario)
         {
-            var fechaInicialParameter = fechaInicial.HasValue ?
-                new ObjectParameter("fechaInicial", fechaInicial) :
-                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+            var id_ControldePagosParameter = id_ControldePagos.HasValue ?
+                new ObjectParameter("Id_ControldePagos", id_ControldePagos) :
+                new ObjectParameter("Id_ControldePagos", typeof(int));
     
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("FechaFinal", fechaFinal) :
-                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(decimal));
     
-            var id_ProgramaParameter = id_Programa.HasValue ?
-                new ObjectParameter("Id_Programa", id_Programa) :
-                new ObjectParameter("Id_Programa", typeof(int));
+            var id_FormadePagoParameter = id_FormadePago.HasValue ?
+                new ObjectParameter("Id_FormadePago", id_FormadePago) :
+                new ObjectParameter("Id_FormadePago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCitasCalendarioAdministrador_Result>("ListarCitasCalendarioAdministrador", fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+            var numerodeChequeParameter = numerodeCheque.HasValue ?
+                new ObjectParameter("NumerodeCheque", numerodeCheque) :
+                new ObjectParameter("NumerodeCheque", typeof(int));
+    
+            var fechadelPagoParameter = fechadelPago.HasValue ?
+                new ObjectParameter("FechadelPago", fechadelPago) :
+                new ObjectParameter("FechadelPago", typeof(System.DateTime));
+    
+            var id_UsuarioParameter = id_Usuario != null ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", id_ControldePagosParameter, cantidadParameter, id_FormadePagoParameter, numerodeChequeParameter, fechadelPagoParameter, id_UsuarioParameter);
         }
     }
 }

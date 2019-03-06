@@ -29,6 +29,9 @@ namespace Ley22_WebApp_V2
                 ExistingUser = (ApplicationUser)Session["User"];
                 LitNombre.Text = ExistingUser.Email;
                 LitEmail.Text = ExistingUser.Email;
+                LitPrimerNombre.Text = ExistingUser.FirstName;
+                LitPrimerApellido.Text = ExistingUser.LastName;
+
                 
                 
                 

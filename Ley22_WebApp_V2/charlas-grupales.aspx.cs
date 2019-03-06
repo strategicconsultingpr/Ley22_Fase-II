@@ -7,10 +7,17 @@ using System.Web.UI.WebControls;
 using System.Threading;
 using System.Globalization;
 using Ley22_WebApp_V2.Old_App_Code;
+using Ley22_WebApp_V2.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class charlas_grupales : System.Web.UI.Page
 {
     SEPSEntities1 dsPerfil = new SEPSEntities1();
+    ApplicationUser ExistingUser = new ApplicationUser();
+    Ley22Entities dsley22 = new Ley22Entities();
+    static string userId = String.Empty;
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -29,14 +36,31 @@ public partial class charlas_grupales : System.Web.UI.Page
 
             if (!Page.IsPostBack)
         {
-           // Page.ClientScript.RegisterStartupScript(this.GetType(), "Region", "Region()", true);
+            // Page.ClientScript.RegisterStartupScript(this.GetType(), "Region", "Region()", true);
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
 
             Session["FechaBase"] = new DateTime(2019, 01, 27);
 
  
             GenerarCalendario();
             CargarOrdenesJudiciales();
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+            
+
+            if (userManager.IsInRole(userId, "SuperAdmin"))
+            {
+                usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
+            }
+            else
+            {
+                usuarios_programas = dsley22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            }
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
 
             DdlCentro.DataValueField = "Value";
             DdlCentro.DataTextField = "Text";
@@ -227,7 +251,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                             Convert.ToInt32(DdlTipodeCharla.SelectedValue),
                                             Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                             Convert.ToInt32(TxtMaxCantParticipantes.Text),
-                                            Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                            userId,
                                             Convert.ToInt32(DdlNumeroCharla.SelectedIndex));
 
                     GenerarCalendario();
@@ -533,10 +557,14 @@ public partial class charlas_grupales : System.Web.UI.Page
     void AnadirParticipante()
     {
          int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
+        int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
         using (Ley22Entities mylib = new Ley22Entities())
-            mylib.GuardarParticipantePorCharlas(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante, Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-        GenerarCalendario();
+        {
+            var NumeroCharla = mylib.CharlaGrupals.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Select(u => u.NumeroCharla).Single();
+          mylib.GuardarParticipantePorCharlas(Id_Charla, Id_Participante, userId, Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),NumeroCharla);
+        }
+            GenerarCalendario();
 
     }
 
@@ -563,7 +591,7 @@ public partial class charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla2.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );

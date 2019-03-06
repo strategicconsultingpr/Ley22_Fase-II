@@ -155,7 +155,7 @@
         }
 
             function Borrar() {
-                alert("borrar");
+              
             var ddlEmail = document.getElementById("<%=DdlEmailA.ClientID %>");
             var Email = ddlEmail.value;
             var ddlPrograma = document.getElementById("<%=DdlProgramA.ClientID %>");

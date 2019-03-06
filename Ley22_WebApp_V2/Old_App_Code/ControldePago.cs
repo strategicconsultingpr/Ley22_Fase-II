@@ -22,7 +22,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<System.DateTime> FechadelPago { get; set; }
         public Nullable<decimal> Cantidad { get; set; }
         public Nullable<int> Estatus { get; set; }
-        public Nullable<int> Id_Usuario { get; set; }
+        public string Id_Usuario { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public Nullable<int> Id_Calendario { get; set; }
         public Nullable<int> Id_CharlaGrupal { get; set; }

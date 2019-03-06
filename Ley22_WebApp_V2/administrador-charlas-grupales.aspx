@@ -207,7 +207,7 @@
                     </div>
                     <div class="row pl-4 pr-4">
                         <div class="col-md-6">
-                            <p><strong>Asistentes</strong></p>
+                            <p><strong>Participantes</strong></p>
                             <div id="Participantes"></div>
 
                         </div>

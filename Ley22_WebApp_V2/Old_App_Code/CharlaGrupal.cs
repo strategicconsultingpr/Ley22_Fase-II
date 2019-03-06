@@ -21,7 +21,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public int Id_TipoCharla { get; set; }
         public int Id_Nivel { get; set; }
         public int NrodeParticipantes { get; set; }
-        public Nullable<int> Id_Usuario { get; set; }
+        public string Id_Usuario { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<int> NumeroCharla { get; set; }
     }

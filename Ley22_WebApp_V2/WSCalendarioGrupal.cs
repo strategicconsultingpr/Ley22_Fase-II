@@ -161,14 +161,23 @@ namespace Ley22_WebApp_V2
                 string Parti = string.Empty;
                 string HrefRemover = string.Empty;
                 string HreAdicionar = string.Empty;
+                string HrefAsistio = string.Empty;
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
 
                     HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','"+ c.Id_Participante+"')\" >Eliminar</a>";
-
                     
-                    Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
+                    if(c.Asistio == 0)
+                    {
+                        HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
+                    }
+                    else
+                    {
+                        HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
+                    }
+                    
+                    Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "  -  " + HrefAsistio +"<br> ";
                 }
 
                 

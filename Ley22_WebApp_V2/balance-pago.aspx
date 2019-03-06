@@ -238,13 +238,16 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         <asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="CantidadAPagar" HeaderText="Costo (USD)" DataFormatString="{0:0.00}">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="FormadePago" HeaderText="Forma de Pago" />
                                 <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque">
                                     <ItemStyle HorizontalAlign="Right" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FechadelPago" HeaderText="Fecha del Pago" DataFormatString="{0:MM/dd/yyyy hh:mm tt}" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad (USD)" DataFormatString="{0:0.00}">
-                                    <ItemStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad Restante (USD)" DataFormatString="{0:0.00}">
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:TemplateField HeaderText="Estatus">
                                     <ItemTemplate>
@@ -296,8 +299,8 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
             document.getElementById("FormadePago").innerHTML = "Forma de Pago: " + FormadePago;
             document.getElementById("Fecha").innerHTML = "Fecha: " + Fecha;
-            document.getElementById("Cantidad").innerHTML = "Cantidad: " + Cantidad;
-            document.getElementById("NombreCompleto").innerHTML = "Nombre " + NombreCompleto;
+            document.getElementById("Cantidad").innerHTML = "Cantidad: $" + Cantidad;
+            document.getElementById("NombreCompleto").innerHTML = "Nombre: " + NombreCompleto;
         };
 
         function ActualizarIdCP(Valor, Cantidad) {

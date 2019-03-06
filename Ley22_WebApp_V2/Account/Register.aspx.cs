@@ -10,6 +10,7 @@ using Ley22_WebApp_V2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.UI.WebControls;
 using Ley22_WebApp_V2.Old_App_Code;
+using System.Collections.Generic;
 
 namespace Ley22_WebApp_V2.Account
 {
@@ -18,11 +19,23 @@ namespace Ley22_WebApp_V2.Account
         ApplicationDbContext context = new ApplicationDbContext();
         SEPSEntities1 dsPerfil = new SEPSEntities1();
         Ley22Entities dsLey22 = new Ley22Entities();
+        ApplicationUser ExistingUser = new ApplicationUser();
+        static string userId = String.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                if (Session["User"] == null)
+                {
+                    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+                    Session["MensajeError"] = "Por favor ingrese al sistema";
+                    Response.Redirect("Account/Login.aspx", false);
+                    return;
+                }
+                ExistingUser = (ApplicationUser)Session["User"];
+                userId = ExistingUser.Id;
+
                 LoadDropDownList();
             }
         }
@@ -31,7 +44,7 @@ namespace Ley22_WebApp_V2.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser() { UserName = EmailInput.Text, Email = EmailInput.Text };
+            var user = new ApplicationUser() { UserName = EmailInput.Text, Email = EmailInput.Text, FirstName = FirstNameInput.Text, LastName = LastNameInput.Text };
             IdentityResult result = manager.Create(user, PasswordInput.Text);
             if (result.Succeeded)
             {
@@ -71,9 +84,9 @@ namespace Ley22_WebApp_V2.Account
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                //string code = manager.GenerateEmailConfirmationToken(user.Id);
-                //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-                //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+                string code = manager.GenerateEmailConfirmationToken(user.Id);
+                string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
+                manager.SendEmail(user.Id, "Confirm your account", callbackUrl);
 
                 // signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
@@ -87,21 +100,55 @@ namespace Ley22_WebApp_V2.Account
 
         void LoadDropDownList()
         {
-            var roles = context.Roles.Select(r => new ListItem { Value = r.Name, Text = r.Name }).ToList();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
+            List<ListItem> roles;
 
-            DdlRol.DataValueField = "Value";
-            DdlRol.DataTextField = "Text";
-            DdlRol.DataSource = roles;
-            DdlRol.DataBind();
-            DdlRol.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            if (userManager.IsInRole(userId, "Director"))
+            {
+                usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
 
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                roles = context.Roles.Where(p => !p.Name.Equals("SuperAdmin")).Select(r => new ListItem { Value = r.Name, Text = r.Name }).ToList();
 
-            DdlPrograma.DataValueField = "Value";
-            DdlPrograma.DataTextField = "Text";
-            DdlPrograma.DataSource = programas;
-            DdlPrograma.DataBind();
-            DdlPrograma.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+                DdlRol.DataValueField = "Value";
+                DdlRol.DataTextField = "Text";
+                DdlRol.DataSource = roles;
+                DdlRol.DataBind();
+                DdlRol.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+            else
+            {
+                usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
+
+                roles = context.Roles.Select(r => new ListItem { Value = r.Name, Text = r.Name }).ToList();
+
+                DdlRol.DataValueField = "Value";
+                DdlRol.DataTextField = "Text";
+                DdlRol.DataSource = roles;
+                DdlRol.DataBind();
+                DdlRol.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+
+              
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            if (usuarios_programas.Count() == 1)
+            {
+                DdlPrograma.DataValueField = "Value";
+                DdlPrograma.DataTextField = "Text";
+                DdlPrograma.DataSource = programas;
+                DdlPrograma.DataBind();
+                DdlPrograma.SelectedValue = programas[0].Value;              
+            }
+            else
+            {
+                DdlPrograma.DataValueField = "Value";
+                DdlPrograma.DataTextField = "Text";
+                DdlPrograma.DataSource = programas;
+                DdlPrograma.DataBind();
+                DdlPrograma.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
         }
     }
 }

@@ -117,6 +117,16 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             return;
         }
+        else if (Page.Request.Params["__EVENTTARGET"] == "AsistioParticipante")
+        {
+            AsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            return;
+        }
+        else if (Page.Request.Params["__EVENTTARGET"] == "NoAsistioParticipante")
+        {
+            NoAsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            return;
+        }
     }
 
     void GenerarCalendario()
@@ -402,7 +412,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla2.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas2.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes2.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );
@@ -447,7 +457,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlTipodeCharla.SelectedValue),
                                         Convert.ToInt32(DdlNivelCharlas.SelectedValue),
                                         Convert.ToInt32(TxtMaxCantParticipantes.Text),
-                                        Convert.ToInt32(Session["Id_UsuarioApp"]),
+                                        userId,
                                         Convert.ToInt32(DdlNumeroCharla.SelectedIndex)
 
                );
@@ -478,6 +488,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
         GenerarCalendario();
 
+    }
+
+    void AsistioParticipante(int Id_ParticipantePorCharlaGrupal)
+    {
+        dsLey22.AsistioCharla(Id_ParticipantePorCharlaGrupal);
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante cumplió con la charla.');", true);
+        GenerarCalendario();
+    }
+
+    void NoAsistioParticipante(int Id_ParticipantePorCharlaGrupal)
+    {
+        dsLey22.NoAsistioCharla(Id_ParticipantePorCharlaGrupal);
+        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante NO cumplió con la charla.');", true);
+        GenerarCalendario();
     }
 
 

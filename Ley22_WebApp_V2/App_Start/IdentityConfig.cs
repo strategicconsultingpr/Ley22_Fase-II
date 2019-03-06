@@ -8,6 +8,11 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Ley22_WebApp_V2.Models;
 
+using System.Net.Mail;
+using System.Web;
+using System.Net.Mime;
+using System.Configuration;
+
 namespace Ley22_WebApp_V2
 {
     public class EmailService : IIdentityMessageService
@@ -15,7 +20,81 @@ namespace Ley22_WebApp_V2
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return Task.Factory.StartNew(() =>
+            {
+                sendMail(message);
+            });
+        }
+
+        public Task SendAsyncCita(string email, string subject, string body)
+        {
+            // Plug in your email service here to send an email.
+            return Task.Factory.StartNew(() =>
+            {
+                sendMailCita(email,subject,body);
+            });
+        }
+
+        void sendMail(IdentityMessage message)
+        {
+            string text = string.Empty;
+            string html = string.Empty;
+            if (message.Subject == "Reset Password")
+            {
+                #region formatter
+                 text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
+                 html = "Favor de restablecer su contraseña presionando <br/><br/> <a href=\"" + message.Body + "\">Restablecer Contraseña</a><br/><br/><br/>";
+
+                html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + message.Body);
+                #endregion
+            }
+            else
+            {
+                text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
+                html = "Please confirm your account by clicking this link: <a href=\"" + message.Body + "\">link</a><br/>";
+
+                html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser: " + message.Body);
+            }
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
+            msg.To.Add(new MailAddress(message.Destination));
+            msg.Subject = message.Subject;
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+
+            SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(msg);
+        }
+
+        void sendMailCita(string email, string subject, string body)
+        {
+            string text = string.Empty;
+            string html = string.Empty;
+            
+                #region formatter
+                text = string.Format("Please click on this link to {0}: {1}", subject, body);
+                html = body ;
+
+               // html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + body);
+                #endregion
+            
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
+            msg.To.Add(new MailAddress(email));
+            msg.Subject = subject;
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+
+            SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(msg);
         }
     }
 

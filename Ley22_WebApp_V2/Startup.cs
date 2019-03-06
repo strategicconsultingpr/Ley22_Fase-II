@@ -29,6 +29,11 @@ namespace Ley22_WebApp_V2
                 var user = new ApplicationUser();
                 user.UserName = "admin@assmca.pr.gov";
                 user.Email = "admin@assmca.pr.gov";
+                user.FirstName = "Administrador";
+                user.LastName = "LEY22";
+                user.PasswordChanged = true;
+                user.Active = true;
+                user.EmailConfirmed = true;
                 string pwd = "Admin@2018";
                 var newuser = userManager.Create(user, pwd);
                 if (newuser.Succeeded)

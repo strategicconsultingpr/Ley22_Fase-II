@@ -45,11 +45,14 @@
                         </div>
                     </div>
                   <div class="row pt-4 pb-4">
-                    <%--<div class="col text-left">
-                      <button type="submit" class="btn btn-link">OLVIDÉ MI CONTRASEÑA</button>
-                    </div>--%>
+                    <div class="col text-left">
+                      <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled" class="btn btn-link">OLVIDÉ MI CONTRASEÑA</asp:HyperLink>
+                
+                    </div>
                     <div class="col text-right">
                       <asp:Button runat="server" ID="BtnLogin" Text="INGRESAR" OnClick="BtnLogin_Click" class="btn btn-primary" UseSubmitBehavior="true"/>
+                    &nbsp;&nbsp;
+                      <asp:Button runat="server" ID="ResendConfirm"  OnClick="SendEmailConfirmationToken" Text="Reenviar Confirmación" Visible="false" CssClass="btn btn-default"/>                     
                     </div>
                   </div>
                   <%--<p>

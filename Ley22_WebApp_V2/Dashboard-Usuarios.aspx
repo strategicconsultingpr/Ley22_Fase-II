@@ -15,9 +15,15 @@
                 <div class="col-md-3">
 
                     <ul class="list-group mb-4 pb-4 slim">
-                        <li class="list-group-item justify-content-between">Email           
+                        <li class="list-group-item justify-content-between">Nombre:           
+                            <span><asp:Literal ID="LitPrimerNombre" runat="server"></asp:Literal></span>
+                        </li>
+                        <li class="list-group-item justify-content-between">Apellido:           
+                            <span><asp:Literal ID="LitPrimerApellido" runat="server"></asp:Literal></span>
+                        </li>
+                        <li class="list-group-item justify-content-between">Email:           
                             <span><asp:Literal ID="LitEmail" runat="server"></asp:Literal></span>
-                        </li>                  
+                        </li>                                               
                     </ul>
 
                  <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>

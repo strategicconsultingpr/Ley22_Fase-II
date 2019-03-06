@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 public partial class asignar_citas_individual : System.Web.UI.Page
 {
@@ -503,6 +505,9 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 else
                 {
                     mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue));
+
+                    EmailService mail = new EmailService();
+                    mail.SendAsyncCita("alexei.falu@gmail.com","Cita Pre Sentencia", "Esto es una confirmacion de cita.");
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);
                     verificarCitas();

@@ -26,6 +26,15 @@ namespace Ley22_WebApp_V2
             });
         }
 
+        public Task SendAsyncCita(string email, string subject, string body)
+        {
+            // Plug in your email service here to send an email.
+            return Task.Factory.StartNew(() =>
+            {
+                sendMailCita(email,subject,body);
+            });
+        }
+
         void sendMail(IdentityMessage message)
         {
             string text = string.Empty;
@@ -51,6 +60,33 @@ namespace Ley22_WebApp_V2
             msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
             msg.To.Add(new MailAddress(message.Destination));
             msg.Subject = message.Subject;
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+
+            SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
+            smtpClient.Credentials = credentials;
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(msg);
+        }
+
+        void sendMailCita(string email, string subject, string body)
+        {
+            string text = string.Empty;
+            string html = string.Empty;
+            
+                #region formatter
+                text = string.Format("Please click on this link to {0}: {1}", subject, body);
+                html = body ;
+
+               // html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + body);
+                #endregion
+            
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
+            msg.To.Add(new MailAddress(email));
+            msg.Subject = subject;
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 

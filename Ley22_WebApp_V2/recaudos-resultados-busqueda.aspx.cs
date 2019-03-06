@@ -72,7 +72,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
                                                      FechaNac,
                                                      Session["TxtNombreyApellido"].ToString()).ToList()
                                                      ;
-
+            Resul.Where(u => u.Identificacion.Equals("")).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
 
             GridView1.PageIndex = pagina - 1;

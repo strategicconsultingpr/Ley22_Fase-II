@@ -73,6 +73,10 @@ namespace Ley22_WebApp_V2.Account
                                     {
                                         Response.Redirect("~/Entrada");
                                     }
+                                    else if (userManager.IsInRole(ExistingUser.Id, "Recaudador"))
+                                    {
+                                        Response.Redirect("~/recaudos-busqueda-usuario");
+                                    }
                                     else
                                     {
                                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);

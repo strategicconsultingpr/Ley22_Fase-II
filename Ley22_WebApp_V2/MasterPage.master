@@ -65,6 +65,7 @@
         <img src="../images/assmca-logo.svg" alt="ASSMCA">
       </div>
     </div>
+<%--SuperAdmin--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">
@@ -74,22 +75,23 @@
               <ul class="nav">
                 <li class="nav-item">
                   <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                </li>  
+                  <li class="nav-item">
+                  <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                </li>                       
+               <%-- <li class="nav-item">
+                  <a class="nav-link" href="#">Administración</a>
+                </li>--%>
+                   
+                  <li class="nav-item">
                   <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Charlas Grupales</a>
-                </li>
-                <li class="nav-item">
+                  <li class="nav-item">
                   <a class="nav-link" href="#">Reportes</a>
-                </li>        
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Administración</a>
-                </li>
-                   <li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Trabajor Social</a>
-                </li>
+                </li> 
               </ul>
             </nav>  
             </div>
@@ -97,8 +99,9 @@
                                                  </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+       </asp:LoginView>
 
+<%--Director--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Director">
@@ -109,21 +112,23 @@
                 <li class="nav-item">
                   <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                 </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
+                </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Charlas Grupales</a>
-                </li>
+                
                 <%--<li class="nav-item">
                   <a class="nav-link" href="#">Reportes</a>
                 </li>        
                 <li class="nav-item">
                   <a class="nav-link" href="#">Administración</a>
                 </li>--%>
-                   <li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Trabajor Social</a>
-                </li>
+                   
               </ul>
             </nav>  
             </div>
@@ -133,6 +138,7 @@
                                     </RoleGroups>
                                 </asp:LoginView>
 
+<%--TrabajadorSocial--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="TrabajadorSocial">
@@ -144,10 +150,10 @@
                   <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                 </li>                
                 <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Charlas Grupales</a>
+                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
                 </li>                                      
                    <li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Trabajor Social</a>
+                  <a class="nav-link" href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a>
                 </li>
               </ul>
             </nav>  
@@ -158,6 +164,7 @@
                                     </RoleGroups>
                                 </asp:LoginView>
 
+<%--CoordinadorCharlas--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="CoordinadorCharlas">
@@ -169,11 +176,11 @@
                   <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                 </li>                
                 <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Charlas Grupales</a>
+                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
                 </li>                                      
-                   <li class="nav-item">
+                   <%--<li class="nav-item">
                   <a class="nav-link" href="../trabajor-excepciones.aspx">Trabajor Social</a>
-                </li>
+                </li>--%>
               </ul>
             </nav>  
             </div>
@@ -183,9 +190,30 @@
                                     </RoleGroups>
                                 </asp:LoginView>
 
+<%--Recepcion--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Recepcion">
+                                            <ContentTemplate>
+            <div class="col">
+              <nav>
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="../entrada.aspx">Recepción y Citas</a>
+                </li>                                
+              </ul>
+            </nav>  
+            </div>
+
+                                                 </ContentTemplate>
+                                            </asp:RoleGroup>
+                                    </RoleGroups>
+                                </asp:LoginView>
+
+<%--Recaudador--%>
+      <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                    <RoleGroups>
+                                        <asp:RoleGroup Roles="Recaudador">
                                             <ContentTemplate>
             <div class="col">
               <nav>

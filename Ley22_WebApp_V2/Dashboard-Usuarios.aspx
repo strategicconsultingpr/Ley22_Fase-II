@@ -43,7 +43,7 @@
                                                 </span>
                                             </a>
                                         </p>                                   
-                                        <h4 class="card-title"><a href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a></h4>
+                                        <h4 class="card-title"><a href="../trabajor-excepciones.aspx">Calendario de Citas</a></h4>
                                     </div>
                                 </div>
                             </div>  
@@ -79,6 +79,23 @@
                             </div>
 
                         </div> 
+                             <div class="col-md-4">
+
+                            <div class="card  text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="balance-pago-solo-saldo.aspx">
+                                            <span class="fa-stack fa-3x">
+                                                <i class="fas fa-circle fa-stack-2x"></i>
+                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../recaudos-busqueda-usuario.aspx">Recaudos</a></h4>
+                                </div>
+                            </div>
+
+                        </div>
                         </div>
                     </div>              
               <%--  </div>
@@ -144,6 +161,23 @@
                             </div>
 
                         </div> 
+                             <div class="col-md-4">
+
+                            <div class="card  text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="balance-pago-solo-saldo.aspx">
+                                            <span class="fa-stack fa-3x">
+                                                <i class="fas fa-circle fa-stack-2x"></i>
+                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../recaudos-busqueda-usuario.aspx">Recaudos</a></h4>
+                                </div>
+                            </div>
+
+                        </div>
                         </div>
                     </div>              
               <%--  </div>
@@ -225,7 +259,7 @@
                                             </span>
                                         </a>
                                     </p>                                   
-                                    <h4 class="card-title"><a href="../trabajor-excepciones.aspx">Mi Calendario de Charlas</a></h4>
+                                    <h4 class="card-title"><a href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a></h4>
                                 </div>
                             </div>
                         </div>

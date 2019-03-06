@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class asignar_citas_individual : System.Web.UI.Page
 {
@@ -14,6 +16,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
     ApplicationDbContext context = new ApplicationDbContext();
     SEPSEntities1 dsPerfil = new SEPSEntities1();
     Ley22Entities dsley22 = new Ley22Entities();
+    ApplicationUser ExistingUser = new ApplicationUser();
+    static string userId = String.Empty;
     DataParticipante du;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -46,13 +50,51 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             //        DdlRegion.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             //}
 
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
 
-            DdlCentro.DataValueField = "Value";
-            DdlCentro.DataTextField = "Text";
-            DdlCentro.DataSource = programas;
-            DdlCentro.DataBind();
-            DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usuarios_programas = new List<int>();
+
+            ExistingUser = (ApplicationUser)Session["User"];
+            userId = ExistingUser.Id;
+            prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+
+            Session["FechaBase"] = new DateTime(2019, 01, 27);
+
+            if (userManager.IsInRole(userId, "SuperAdmin"))
+            {
+                usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
+            }
+            else
+            {
+                usuarios_programas = dsley22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+             }
+
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+
+            if (usuarios_programas.Count() == 1)
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+
+            }
+            else
+            {
+                DdlCentro.DataValueField = "Value";
+                DdlCentro.DataTextField = "Text";
+                DdlCentro.DataSource = programas;
+                DdlCentro.DataBind();
+                DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+              
+            }
+
+
+           
 
             CargarOrdenesJudiciales();
             verificarCitas();

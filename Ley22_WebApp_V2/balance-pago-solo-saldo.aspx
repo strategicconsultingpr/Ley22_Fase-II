@@ -48,13 +48,16 @@
                         <asp:gridview id="GvControldePagos" runat="server" autogeneratecolumns="False" cssclass="table table-hover mb-5" datakeynames="Id_ControldePagos" gridlines="None" cellspacing="-1" onrowdatabound="GvControldePagos_RowDataBound">
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="CantidadAPagar" HeaderText="Costo (USD)" DataFormatString="{0:0.00}">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="FormadePago" HeaderText="Forma de Pago" />
                                 <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque"  >
                                     <ItemStyle HorizontalAlign="Right" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FechadelPago" HeaderText="Fecha del Pago" DataFormatString="{0:MM/dd/yyyy hh:mm tt}" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad (USD)" DataFormatString="{0:0.00}" >
-                                <ItemStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad Restante (USD)" DataFormatString="{0:0.00}" >
+                                <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:TemplateField HeaderText="Estatus">
    

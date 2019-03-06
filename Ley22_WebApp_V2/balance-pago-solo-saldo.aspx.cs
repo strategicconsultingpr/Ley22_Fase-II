@@ -10,7 +10,7 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
 {
     int ContadordeCharlaCitasPorPagar;
     int ContadorCharlasCitasPagadas;
-    decimal TotalPagado;
+    decimal TotalPagado, BalanceDebido;
     protected void Page_Load(object sender, EventArgs e)
     {
         // valida que se haya buscado el usuario
@@ -52,12 +52,12 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
              Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto;
+            string NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto, CantidadAPagar;
             NroRecibo = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
             Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
             FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
             Fecha = "\"" + "" + "\"";
-            Cantidad = DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString();
+            Cantidad = DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString();
             NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
 
 
@@ -66,18 +66,19 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
                  LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
                 ContadorCharlasCitasPagadas += 1;
-                TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
              }
             else
             {
                  LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
                 ContadordeCharlaCitasPorPagar += 1;
+                TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
 
             }
 
         }
         if (e.Row.RowType == DataControlRowType.Footer)
-            LitInfo.Text =ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago." ;
+            LitInfo.Text =ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD - " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por saldar." ;
     }
 
     protected void BtnCancelar_Click(Object sender, EventArgs e)

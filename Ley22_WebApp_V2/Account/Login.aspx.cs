@@ -65,21 +65,28 @@ namespace Ley22_WebApp_V2.Account
                                     Session["User"] = ExistingUser;
                                     Session["Id_Participante"] = 0;
                                     Session["NombreParticipante"] = "";
-                                    if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Director") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
+                                    if (ExistingUser.PasswordChanged)
                                     {
-                                        Response.Redirect("~/Dashboard-Usuarios");
-                                    }
-                                    else if (userManager.IsInRole(ExistingUser.Id, "Recepcion"))
-                                    {
-                                        Response.Redirect("~/Entrada");
-                                    }
-                                    else if (userManager.IsInRole(ExistingUser.Id, "Recaudador"))
-                                    {
-                                        Response.Redirect("~/recaudos-busqueda-usuario");
+                                        if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Director") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
+                                        {
+                                            Response.Redirect("~/Dashboard-Usuarios");
+                                        }
+                                        else if (userManager.IsInRole(ExistingUser.Id, "Recepcion"))
+                                        {
+                                            Response.Redirect("~/Entrada");
+                                        }
+                                        else if (userManager.IsInRole(ExistingUser.Id, "Recaudador"))
+                                        {
+                                            Response.Redirect("~/recaudos-busqueda-usuario");
+                                        }
+                                        else
+                                        {
+                                            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                                        }
                                     }
                                     else
                                     {
-                                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+
                                     }
                                 }
                                 catch (Exception)

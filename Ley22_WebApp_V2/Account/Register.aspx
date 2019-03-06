@@ -20,6 +20,14 @@
             <div class="col-10">
               <div>
                   <div class="form-group text-left">
+                    <label for="LabelFirstName">Primer Nombre</label>
+                    <asp:TextBox ID="FirstNameInput" runat="server" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su primer nombre"></asp:TextBox>  
+                  </div>
+                  <div class="form-group text-left">
+                    <label for="LabelLastName">Primer Apellido</label>
+                    <asp:TextBox ID="LastNameInput" runat="server" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su primer apellido" ></asp:TextBox>  
+                  </div>
+                  <div class="form-group text-left">
                     <label for="LabelEmail">Email</label>
                     <asp:TextBox ID="EmailInput" runat="server" AutoCompleteType="Email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese email" TextMode="Email"></asp:TextBox>  
                   </div>

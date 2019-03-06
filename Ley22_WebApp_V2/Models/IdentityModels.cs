@@ -25,6 +25,14 @@ namespace Ley22_WebApp_V2.Models
         {
             return Task.FromResult(GenerateUserIdentity(manager));
         }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public bool Active { get; set; }
+
+        public bool PasswordChanged { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

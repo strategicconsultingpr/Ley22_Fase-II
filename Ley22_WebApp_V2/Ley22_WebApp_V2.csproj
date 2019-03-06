@@ -691,6 +691,15 @@
     <Compile Include="Mensajes.aspx.designer.cs">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902111624107_InitialCreate.cs" />
+    <Compile Include="Migrations\201902111624107_InitialCreate.Designer.cs">
+      <DependentUpon>201902111624107_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903061610408_nuevosCampos.cs" />
+    <Compile Include="Migrations\201903061610408_nuevosCampos.Designer.cs">
+      <DependentUpon>201903061610408_nuevosCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="nuevo-confirmacion.aspx.cs">
       <DependentUpon>nuevo-confirmacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1346,6 +1355,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902111624107_InitialCreate.resx">
+      <DependentUpon>201902111624107_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061610408_nuevosCampos.resx">
+      <DependentUpon>201903061610408_nuevosCampos.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

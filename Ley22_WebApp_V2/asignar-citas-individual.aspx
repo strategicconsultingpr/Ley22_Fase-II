@@ -430,8 +430,8 @@
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="BtnHoy" runat="server" Text="Hoy" class="btn btn-secondary btn-sm" OnClick="BtnHoy_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<span class='fas fa-chevron-left'></span>" OnClick="BtnLeft_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnRight" runat="server" Text="<span class='fas fa-chevron-right'></span>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
                                 <asp:Literal ID="LiMesAno" runat="server"></asp:Literal>
 
                             </div>

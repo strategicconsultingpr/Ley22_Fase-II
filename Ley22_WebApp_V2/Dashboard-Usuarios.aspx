@@ -44,8 +44,9 @@
                                         <p class="mt-4">
                                             <a href="../trabajor-excepciones.aspx">
                                                 <span class="fa-stack fa-3x">
-                                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                    <%--<i class="fas fa-circle fa-stack-2x"></i>--%>
+                                                    <%--<i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>--%>
+                                                    <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
@@ -59,8 +60,9 @@
                                         <p class="mt-4">
                                             <a href="../administrador-charlas-grupales.aspx">
                                                 <span class="fa-stack fa-3x">
-                                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                    <%--<i class="fas fa-circle fa-stack-2x"></i>
+                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>--%>
+                                                    <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
@@ -75,8 +77,9 @@
                                     <p class="mt-4">
                                         <a href="../Entrada.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                                               <%-- <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
+                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>--%>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -92,8 +95,9 @@
                                     <p class="mt-4">
                                         <a href="balance-pago-solo-saldo.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>
+                                                <%--<i class="fas fa-circle fa-stack-2x"></i>
+                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>--%>
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -126,8 +130,7 @@
                                         <p class="mt-4">
                                             <a href="../trabajor-excepciones.aspx">
                                                 <span class="fa-stack fa-3x">
-                                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                     <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
@@ -141,8 +144,7 @@
                                         <p class="mt-4">
                                             <a href="../administrador-charlas-grupales.aspx">
                                                 <span class="fa-stack fa-3x">
-                                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                                    <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                    <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
@@ -157,8 +159,7 @@
                                     <p class="mt-4">
                                         <a href="../Entrada.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -174,8 +175,7 @@
                                     <p class="mt-4">
                                         <a href="balance-pago-solo-saldo.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -209,8 +209,7 @@
                                     <p class="mt-4">
                                         <a href="../trabajor-excepciones.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>                                   
@@ -227,8 +226,7 @@
                                     <p class="mt-4">
                                         <a href="../Entrada.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -260,8 +258,7 @@
                                     <p class="mt-4">
                                         <a href="../trabajor-excepciones.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>                                   
@@ -278,8 +275,7 @@
                                     <p class="mt-4">
                                         <a href="../Entrada.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>

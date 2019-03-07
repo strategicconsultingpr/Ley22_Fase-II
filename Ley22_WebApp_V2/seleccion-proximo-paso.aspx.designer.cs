@@ -120,11 +120,11 @@ public partial class seleccion_proximo_paso {
     protected global::System.Web.UI.WebControls.HyperLink HlCharlas;
     
     /// <summary>
-    /// iCircleDoc control.
+    /// inboxImg control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl iCircleDoc;
+    protected global::System.Web.UI.HtmlControls.HtmlImage inboxImg;
 }

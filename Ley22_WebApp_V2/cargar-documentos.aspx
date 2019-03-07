@@ -94,14 +94,14 @@
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" CssClass="fas fa-print fa-lg" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server"  data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEliminar" OnClick="lnkEliminar_Click" runat="server" CssClass="fas fa-trash-alt fa-lg" data-toggle="tooltip" title="Eliminiar" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkEliminar" OnClick="lnkEliminar_Click" runat="server" data-toggle="tooltip" title="Eliminiar" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

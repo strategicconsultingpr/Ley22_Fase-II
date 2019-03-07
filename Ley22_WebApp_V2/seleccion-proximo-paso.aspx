@@ -181,8 +181,7 @@
                                     <p class="mt-4">
                                         <a href="nuevo-confirmacion.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>                                   
@@ -199,8 +198,7 @@
                                     <p class="mt-4">
                                         <a href="cargar-documentos.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-inbox fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/recepcion-documentos.png" alt="ASSMCA" id="inboxImg" runat="server">
                                             </span>
                                         </a>
                                     </p>
@@ -218,8 +216,7 @@
                                     <p class="mt-4">
                                         <a href="asignar-citas-individual.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -237,9 +234,7 @@
                                     <p class="mt-4">
                                         <a href="charlas-grupales.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-calendar fa-stack-1x fa-inverse"></i>
-                                                <i class="fas fa-users fa-stack fa-fix-sm fa-inverse"></i>
+                                                <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -257,8 +252,7 @@
                                     <p class="mt-4">
                                         <a href="balance-pago-solo-saldo.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
@@ -276,8 +270,7 @@
                                     <p class="mt-4">
                                         <a href="cierre-caso.aspx">
                                             <span class="fa-stack fa-3x">
-                                                <i class="fas fa-circle fa-stack-2x"></i>
-                                                <i class="far fa-check-square fa-stack-1x fa-inverse"></i>
+                                                <img src="../images/cerrar-caso.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>

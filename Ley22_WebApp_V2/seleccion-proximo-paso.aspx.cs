@@ -36,7 +36,11 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
                 if(verificarFaltaDeDocumento())
                 {
-                    iCircleDoc.Style.Add("color","red");
+                    inboxImg.Attributes["src"] = "../images/inbox-rojo.png";
+                }
+                else
+                {
+                    inboxImg.Attributes["src"] = "../images/recepcion-documentos.png";
                 }
             }
             else

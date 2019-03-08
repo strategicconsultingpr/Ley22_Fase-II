@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -40,6 +41,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            du = (DataParticipante)Session["DataParticipante"];
             Session["FechaBase"] = new DateTime(2019, 01, 27);
             GenerarCalendario();
 
@@ -457,6 +459,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         string FechaInicial = TxtFecha.Text + " " + TxtHoraInicial.Text;
         string FechaFinal = TxtFecha.Text + " " + TxtHoraFinal.Text;
 
+        du = (DataParticipante)Session["DataParticipante"];
+
         DateComparisonResult comparison;
 
         comparison = (DateComparisonResult) Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
@@ -506,8 +510,10 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 {
                     mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue));
 
+                    
                     EmailService mail = new EmailService();
-                    mail.SendAsyncCita("alexei.falu@gmail.com","Cita Pre Sentencia", "Esto es una confirmacion de cita.");
+                    string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + "-" + FechaFinal, DdlTrabajadorSocial.Text, DdlCentro.Text);
+                    mail.SendAsyncCita(du.Correo,"Cita Entrevista Inicial", body);
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);
                     verificarCitas();
@@ -585,5 +591,23 @@ public partial class asignar_citas_individual : System.Web.UI.Page
     protected void BtnDocumentos_Click(object sender, EventArgs e)
     {
         Response.Redirect("imprimir-documentos.aspx", false);
+    }
+
+    private string CreateBody(string FirstName, string LastName, string FechaCita, string TrabajadorSocial, string Programa)
+    {
+        string body = string.Empty;
+       
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailCitaParticipante.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{NombreCompleto}", FirstName + " " + LastName);
+        body = body.Replace("{FechaCitaHeader}", FechaCita);
+        body = body.Replace("{FechaCita}", FechaCita);
+        body = body.Replace("{TrabajadorSocial}", TrabajadorSocial);
+        body = body.Replace("{Programa}", Programa);
+
+        return body;
+
     }
 }

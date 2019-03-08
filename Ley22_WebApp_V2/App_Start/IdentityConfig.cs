@@ -94,23 +94,30 @@ namespace Ley22_WebApp_V2
 
         void sendMailCita(string email, string subject, string body)
         {
-            string text = string.Empty;
-            string html = string.Empty;
-            
-                #region formatter
-                text = string.Format("Please click on this link to {0}: {1}", subject, body);
-                html = body ;
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
+            LinkedResource lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_1.jpg");
+            lr.ContentId = "logo_1";
+            imgview.LinkedResources.Add(lr);
 
-               // html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + body);
-                #endregion
-            
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_2.png");
+            lr.ContentId = "logo_2";
+            imgview.LinkedResources.Add(lr);
+
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/twitter-circle-colored.png");
+            lr.ContentId = "twitter";
+            imgview.LinkedResources.Add(lr);
+
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/facebook-circle-colored.png");
+            lr.ContentId = "facebook";
+            imgview.LinkedResources.Add(lr);
+
 
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
             msg.To.Add(new MailAddress(email));
             msg.Subject = subject;
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+            msg.AlternateViews.Add(imgview);
+            msg.Body = lr.ContentId;
 
             SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
             System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());

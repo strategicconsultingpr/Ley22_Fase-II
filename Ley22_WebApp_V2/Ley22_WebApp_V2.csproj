@@ -217,6 +217,7 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="administrador-charlas-grupales.aspx" />
     <Content Include="Dashboard-Usuarios.aspx" />
+    <Content Include="EmailCitaParticipante.html" />
     <Content Include="EmailConfirmation.html" />
     <Content Include="EmailPassword.html" />
     <Content Include="Old_App_Code\ModelLey22.Context.tt">

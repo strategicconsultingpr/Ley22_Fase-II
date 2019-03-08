@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.UI.WebControls;
 using Ley22_WebApp_V2.Old_App_Code;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Ley22_WebApp_V2.Account
 {
@@ -86,7 +87,8 @@ namespace Ley22_WebApp_V2.Account
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 string code = manager.GenerateEmailConfirmationToken(user.Id);
                 string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-                manager.SendEmail(user.Id, "Confirm your account", callbackUrl);
+                string body = CreateBody(callbackUrl);
+                manager.SendEmail(user.Id, "Confirmacion de su cuenta", body);
 
                 // signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
@@ -96,6 +98,23 @@ namespace Ley22_WebApp_V2.Account
             {
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
             }
+        }
+
+        private string CreateBody(string Code)
+        {
+            string body = string.Empty;
+            string code = "<a href =\"" + Code + "\" class=\"es-button\" target=\"_blank\" style=\"mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#4A7EB0;border-style:solid;border-color:#EFEFEF;border-width:10px 25px;display:inline-block;background:#EFEFEF;border-radius:0px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;\">Confirmar Cuenta</a>";
+            using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailConfirmation.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{NombreCompleto}", FirstNameInput.Text + " " + LastNameInput.Text);
+            body = body.Replace("{email}", EmailInput.Text);
+            body = body.Replace("{password}", PasswordInput.Text);
+            body = body.Replace("{botonConfirmar}", code);
+
+            return body;
+
         }
 
         void LoadDropDownList()

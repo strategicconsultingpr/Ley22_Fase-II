@@ -39,29 +39,51 @@ namespace Ley22_WebApp_V2
         {
             string text = string.Empty;
             string html = string.Empty;
-            if (message.Subject == "Reset Password")
-            {
-                #region formatter
-                 text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-                 html = "Favor de restablecer su contraseña presionando <br/><br/> <a href=\"" + message.Body + "\">Restablecer Contraseña</a><br/><br/><br/>";
+            //if (message.Subject == "Reset Password")
+            //{
+            //    #region formatter
+            //     text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
+            //     html = "Favor de restablecer su contraseña presionando <br/><br/> <a href=\"" + message.Body + "\">Restablecer Contraseña</a><br/><br/><br/>";
 
-                html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + message.Body);
-                #endregion
-            }
-            else
-            {
-                text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-                html = "Please confirm your account by clicking this link: <a href=\"" + message.Body + "\">link</a><br/>";
+            //    html += HttpUtility.HtmlEncode(@"O presione esta referencia para restablecer su contraseña: " + message.Body);
+            //    #endregion
+            //}
+            //else
+            //{
+            //   // text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
+            //    html = message.Body;
 
-                html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser: " + message.Body);
-            }
+            //    //html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser: " + message.Body);
+            //}
+
+            AlternateView imgview = AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html);
+            LinkedResource lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_1.jpg");
+            lr.ContentId = "logo_1";
+            imgview.LinkedResources.Add(lr);
+
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_2.png");
+            lr.ContentId = "logo_2";
+            imgview.LinkedResources.Add(lr);
+
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/twitter-circle-colored.png");
+            lr.ContentId = "twitter";
+            imgview.LinkedResources.Add(lr);
+
+            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/facebook-circle-colored.png");
+            lr.ContentId = "facebook";
+            imgview.LinkedResources.Add(lr);
+
+
 
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
             msg.To.Add(new MailAddress(message.Destination));
             msg.Subject = message.Subject;
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
+            msg.AlternateViews.Add(imgview);
+            msg.Body = lr.ContentId;
+
+           // msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
+           // msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
             SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
             System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());

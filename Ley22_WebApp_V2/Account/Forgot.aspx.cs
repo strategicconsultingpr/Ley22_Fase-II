@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using Ley22_WebApp_V2.Models;
+using System.IO;
 
 namespace Ley22_WebApp_V2.Account
 {
@@ -26,7 +27,7 @@ namespace Ley22_WebApp_V2.Account
                 ApplicationUser user = manager.FindByName(Email.Text);
                 if (user == null || !manager.IsEmailConfirmed(user.Id))
                 {
-                    FailureText.Text = "The user either does not exist or is not confirmed.";
+                    FailureText.Text = "EL usuario no existe o no se ha confirmado la cuenta.";
                     ErrorMessage.Visible = true;
                     return;
                 }
@@ -36,37 +37,11 @@ namespace Ley22_WebApp_V2.Account
                 string code = manager.GeneratePasswordResetToken(user.Id);
                 string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
 
-
-                string mensaje = " <div class=\"container h-100\">" +
-                           "<div class=\"row align-items-center h-100\">" +
-                           " <div class=\"col\"> " +
-                            "</div>" +
-                            "<div class=\"col-lg-6 col-md-8 col-sm-10\">" +
-                             " <div class=\"card card-login\">" +
-                               " <div class=\"card-block text-center\">" +
-                                    "<div class=\"logo-login\">" +
-                                     " <img src = \"images/assmca-big-logo.png\" alt=\"ASSMCA\">" +
-                                   " </div>" +
-                                 " <div class=\"row\">" +
-                                  "  <div class=\"col\"></div>" +
-                                  "  <div class=\"col-10\">" +
-                                 "       <hr />" +
-                                  "      Favor de restablecer su contraseña presionando" +
-                                   "     <br /><br />" +
-                                   "      < a href = \"" + callbackUrl + "\" class=\"btn btn-primary\">Restablecer Contraseña</a> " +
-                                  "   </div>" +
-                                  "   < div class=\"col\"></div>" +
-                                "   </div>" +
-                              "   </div>" +
-                            "   </div>" +
-                           "  </div>" +
-                          "   < div class=\"col\">" +
-                         "    </div>" +
-                       "    </div>" +
-                      "   </div> ";
+                string body = CreateBody(callbackUrl, user.FirstName, user.LastName);
+                manager.SendEmail(user.Id, "Restablecer Cuenta", body);
 
 
-                manager.SendEmail(user.Id, "Reset Password",  callbackUrl);
+               // manager.SendEmail(user.Id, "Reset Password",  callbackUrl);
                 loginForm.Visible = false;
                 DisplayEmail.Visible = true;
             }
@@ -77,5 +52,22 @@ namespace Ley22_WebApp_V2.Account
             Response.Redirect("~/Account/Login");
             return;
         }
+
+        private string CreateBody(string Code, string FirstName, string LastName)
+        {
+            string body = string.Empty;                
+            string code = "<a href =\"" + Code + "\" class=\"es-button\" target=\"_blank\" style=\"mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#4A7EB0;border-style:solid;border-color:#EFEFEF;border-width:10px 25px;display:inline-block;background:#EFEFEF;border-radius:0px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center;\">Crear Contraseña</a>";
+
+            using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailPassword.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{NombreCompleto}", FirstName + " " + LastName);
+            body = body.Replace("{botonCrear}", code);
+
+            return body;
+
+        }
+
     }
 }

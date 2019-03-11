@@ -512,7 +512,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                     
                     EmailService mail = new EmailService();
-                    string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + "-" + FechaFinal, DdlTrabajadorSocial.Text, DdlCentro.Text);
+                    string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
                     mail.SendAsyncCita(du.Correo,"Cita Entrevista Inicial", body);
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);

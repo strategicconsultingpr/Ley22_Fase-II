@@ -27,5 +27,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<int> Id_Calendario { get; set; }
         public Nullable<int> Id_CharlaGrupal { get; set; }
         public Nullable<int> Id_OrdenJudicial { get; set; }
+        public string NumeroRecibo { get; set; }
     }
 }

@@ -22,5 +22,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<int> Estatus { get; set; }
         public string NombreCompleto { get; set; }
         public decimal CantidadAPagar { get; set; }
+        public string NumeroRecibo { get; set; }
     }
 }

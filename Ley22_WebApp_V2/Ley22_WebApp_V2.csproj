@@ -733,7 +733,7 @@
     <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarBalancedePagos1_Result.cs">
+    <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCharlasCalendario_Result.cs">
@@ -1024,9 +1024,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\FormadePago.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCitasCalendario_Result.cs">

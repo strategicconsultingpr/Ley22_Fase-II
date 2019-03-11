@@ -111,6 +111,24 @@ public partial class balance_pago {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
     
     /// <summary>
+    /// TxtNumeroRecibo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtNumeroRecibo;
+    
+    /// <summary>
+    /// RequiredFieldValidator4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+    
+    /// <summary>
     /// LabelBalance control.
     /// </summary>
     /// <remarks>

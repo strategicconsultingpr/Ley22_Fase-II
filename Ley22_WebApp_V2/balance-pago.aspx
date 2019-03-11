@@ -163,6 +163,15 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                             </div>
 
+                            <div class="col">
+
+                                <label for="fecha-pago">Numero de Recibo</label>
+                                <asp:TextBox ID="TxtNumeroRecibo" runat="server" class="form-control" placeholder="59456" MaxLength="10"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroRecibo" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+
+
+                            </div>
+
                             <div style="margin-left:auto;margin-right:auto;">
 
                                 <label for="fecha-pago">Balance</label>
@@ -237,6 +246,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                         <asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
                             <Columns>
+                               
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
                                 <asp:BoundField DataField="CantidadAPagar" HeaderText="Costo (USD)" DataFormatString="{0:0.00}">
                                     <ItemStyle HorizontalAlign="Center" />
@@ -260,6 +270,13 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:Literal ID="LitColocarModal" runat="server"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField>
+
+                                    <ItemTemplate>
+                                        <asp:Label DataField="NumeroRecibo" runat="server" Visible="false"></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                
                             </Columns>
                         </asp:GridView>
 

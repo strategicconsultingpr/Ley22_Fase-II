@@ -49,7 +49,7 @@ public partial class balance_pago : System.Web.UI.Page
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            mylib.RegistrarPago(Convert.ToInt32( IdCP.Value), Convert.ToDecimal( TxtCantidad.Text), Convert.ToInt32( DdlFormadePago.SelectedValue), Convert.ToInt32(TxtNumeroCheque.Text==""?"0": TxtNumeroCheque.Text), Convert.ToDateTime(TxtFechaDelPago.Text),userId);
+            mylib.RegistrarPago(Convert.ToInt32( IdCP.Value), Convert.ToDecimal( TxtCantidad.Text), Convert.ToInt32( DdlFormadePago.SelectedValue), Convert.ToInt32(TxtNumeroCheque.Text==""?"0": TxtNumeroCheque.Text), Convert.ToDateTime(TxtFechaDelPago.Text),userId,TxtNumeroRecibo.Text);
 
         }
         BidGrid(sender, e);
@@ -90,9 +90,10 @@ public partial class balance_pago : System.Web.UI.Page
         {
             Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
             Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto;
+            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
             decimal Cantidad, CantidadAPagar;
-            NroRecibo = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
+            NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+            Id_Pago = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
             Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
             FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
             Fecha = "\"" + ""+ "\"";
@@ -115,7 +116,7 @@ public partial class balance_pago : System.Web.UI.Page
                 ContadordeCharlaCitasPorPagar += 1;
                 TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
                 BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-                LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ NroRecibo + ","+Cantidad +")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
+                LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad +")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
                 LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
 
             }

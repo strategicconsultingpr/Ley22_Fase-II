@@ -81,6 +81,7 @@
           <Property Name="Id_Calendario" Type="int" />
           <Property Name="Id_CharlaGrupal" Type="int" />
           <Property Name="Id_OrdenJudicial" Type="int" />
+          <Property Name="NumeroRecibo" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Documentos">
           <Key>
@@ -475,6 +476,7 @@
           <Parameter Name="NumerodeCheque" Type="int" Mode="In" />
           <Parameter Name="FechadelPago" Type="date" Mode="In" />
           <Parameter Name="Id_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroRecibo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="ResumendeAsistenciasCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
@@ -606,10 +608,6 @@
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
             <Parameter Name="NumeroOrdenJudicial" Mode="In" Type="String" />
             <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ListarBalancedePagos" ReturnType="Collection(Ley22Model.ListarBalancedePagos_Result)">
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ListarDocumentosActivos" ReturnType="Collection(Ley22Model.ListarDocumentosActivos_Result)" />
           <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
@@ -824,6 +822,11 @@
             <Parameter Name="NumerodeCheque" Mode="In" Type="Int32" />
             <Parameter Name="FechadelPago" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Usuario" Mode="In" Type="String" />
+            <Parameter Name="NumeroRecibo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarBalancedePagos" ReturnType="Collection(Ley22Model.ListarBalancedePagos_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -878,17 +881,6 @@
           <Property Type="Int32" Name="PK_Episodio" Nullable="false" />
           <Property Type="DateTime" Name="FE_Episodio" Nullable="false" Precision="23" />
           <Property Type="String" Name="DE_Programa" Nullable="true" MaxLength="60" />
-        </ComplexType>
-        <ComplexType Name="ListarBalancedePagos_Result">
-          <Property Type="Int32" Name="Id_ControldePagos" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="FormadePago" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NumerodeCheque" Nullable="true" MaxLength="30" />
-          <Property Type="DateTime" Name="FechadelPago" Nullable="true" />
-          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="Estatus" Nullable="true" />
-          <Property Type="String" Name="NombreCompleto" Nullable="true" MaxLength="61" />
-          <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="ListarDocumentosActivos_Result">
           <Property Type="Int32" Name="Id_Documento" Nullable="false" />
@@ -1282,17 +1274,6 @@
           <Property Name="FK_Usuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FK_Programa" Type="Int32" Nullable="false" />
         </EntityType>
-        <ComplexType Name="ListarBalancedePagos1_Result">
-          <Property Type="Int32" Name="Id_ControldePagos" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="FormadePago" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NumerodeCheque" Nullable="true" MaxLength="30" />
-          <Property Type="DateTime" Name="FechadelPago" Nullable="true" />
-          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="Estatus" Nullable="true" />
-          <Property Type="String" Name="NombreCompleto" Nullable="false" MaxLength="61" />
-          <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
-        </ComplexType>
         <ComplexType Name="ListarCitasCalendario_Result">
           <Property Type="Int32" Name="Id_Calendario" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
@@ -1422,7 +1403,20 @@
           <Property Name="Id_Calendario" Type="Int32" />
           <Property Name="Id_CharlaGrupal" Type="Int32" />
           <Property Name="Id_OrdenJudicial" Type="Int32" />
+          <Property Name="NumeroRecibo" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="ListarBalancedePagos_Result">
+          <Property Type="Int32" Name="Id_ControldePagos" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FormadePago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumerodeCheque" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="FechadelPago" Nullable="true" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="NombreCompleto" Nullable="false" MaxLength="61" />
+          <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="NumeroRecibo" Nullable="true" MaxLength="128" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1934,7 +1928,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ListarBalancedePagos" FunctionName="Ley22Model.Store.ListarBalancedePagos" />
           <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="GuardarExcepcionTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarExcepcionTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="EliminarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarExcepcionesTrabajadorSocial" />
@@ -2078,6 +2071,7 @@
           <EntitySetMapping Name="ControldePagos">
             <EntityTypeMapping TypeName="Ley22Model.ControldePago">
               <MappingFragment StoreEntitySet="ControldePagos">
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
                 <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
                 <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
                 <ScalarProperty Name="Id_Calendario" ColumnName="Id_Calendario" />
@@ -2095,6 +2089,22 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
+          <FunctionImportMapping FunctionImportName="ListarBalancedePagos" FunctionName="Ley22Model.Store.ListarBalancedePagos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarBalancedePagos_Result">
+                <ScalarProperty Name="Id_ControldePagos" ColumnName="Id_ControldePagos" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FormadePago" ColumnName="FormadePago" />
+                <ScalarProperty Name="NumerodeCheque" ColumnName="NumerodeCheque" />
+                <ScalarProperty Name="FechadelPago" ColumnName="FechadelPago" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="CantidadAPagar" ColumnName="CantidadAPagar" />
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

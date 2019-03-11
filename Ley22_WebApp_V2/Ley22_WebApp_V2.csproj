@@ -220,6 +220,7 @@
     <Content Include="EmailCitaParticipante.html" />
     <Content Include="EmailConfirmation.html" />
     <Content Include="EmailPassword.html" />
+    <Content Include="EmailReciboPago.html" />
     <Content Include="Old_App_Code\ModelLey22.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelLey22.Context1.cs</LastGenOutput>

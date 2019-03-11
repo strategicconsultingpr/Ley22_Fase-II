@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 
@@ -14,7 +16,9 @@ public partial class balance_pago : System.Web.UI.Page
     decimal TotalPagado, BalanceDebido;
     static string prevPage = String.Empty;
     ApplicationUser ExistingUser = new ApplicationUser();
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
     static string userId = String.Empty;
+    DataParticipante du;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -47,9 +51,19 @@ public partial class balance_pago : System.Web.UI.Page
 
     protected void BtnGuardarPago_Click(object sender, EventArgs e)
     {
+        du = (DataParticipante)Session["DataParticipante"];
+
         using (Ley22Entities mylib = new Ley22Entities())
         {
             mylib.RegistrarPago(Convert.ToInt32( IdCP.Value), Convert.ToDecimal( TxtCantidad.Text), Convert.ToInt32( DdlFormadePago.SelectedValue), Convert.ToInt32(TxtNumeroCheque.Text==""?"0": TxtNumeroCheque.Text), Convert.ToDateTime(TxtFechaDelPago.Text),userId,TxtNumeroRecibo.Text);
+            int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+            var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+            short aa = Convert.ToInt16(a);
+            var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa).First();
+
+            EmailService mail = new EmailService();
+            string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text,DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa ,IdDesc.Value, TxtNumeroRecibo.Text);
+            mail.SendAsyncCita(du.Correo, "Recibo de Pago", body);
 
         }
         BidGrid(sender, e);
@@ -116,7 +130,7 @@ public partial class balance_pago : System.Web.UI.Page
                 ContadordeCharlaCitasPorPagar += 1;
                 TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
                 BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-                LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad +")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
+                LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
                 LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
 
             }
@@ -149,5 +163,26 @@ public partial class balance_pago : System.Web.UI.Page
         Response.Redirect(prevPage, false);
     }
 
+    private string CreateBody(string FirstName, string LastName, string Fecha, string CantidadPagada, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
+    {
+        string body = string.Empty;
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailReciboPago.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{Participante}", FirstName + " " + LastName);
+        body = body.Replace("{Fecha}", Fecha);
+        body = body.Replace("{CantidadPagada}", "$" + CantidadPagada);
+        body = body.Replace("{Metodo}", Metodo);
+        body = body.Replace("{Programa}", Programa);
+        body = body.Replace("{Descripcion}", Descripcion);
+        body = body.Replace("{Order}", Order);
+        body = body.Replace("{Cantidad}", "$" + Cantidad);
+        body = body.Replace("{Recibo}", Recibo);
+
+        return body;
+
+    }
 
 }

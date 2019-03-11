@@ -23,6 +23,7 @@
 
 
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
+    <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
     <!-- Modal -->
     <div class="modal fade" id="imprimir-recibo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -119,7 +120,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                                 <div class="form-group">
                                     <label for="sexo">Forma de Pago</label>
-                                    <asp:DropDownList ID="DdlFormadePago" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="DdlFormadePago_SelectedIndexChanged">
+                                    <asp:DropDownList ID="DdlFormadePago" runat="server" CssClass="form-control" onchange="javascript:Cheque();">
                                         <asp:ListItem Value="0">-Seleccione-</asp:ListItem>
                                         <asp:ListItem Value="1">Cash</asp:ListItem>
                                         <asp:ListItem Value="2">Cheque Certificado</asp:ListItem>
@@ -320,10 +321,31 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             document.getElementById("NombreCompleto").innerHTML = "Nombre: " + NombreCompleto;
         };
 
-        function ActualizarIdCP(Valor, Cantidad) {
+        function ActualizarIdCP(Valor, Cantidad, Descripcion) {
             document.getElementById("<%= IdCP.ClientID %>").value = Valor;
             document.getElementById("<%=LabelBalance.ClientID %>").innerHTML = " &nbsp;&nbsp;&nbsp; $ " + Cantidad;
-            };
+            document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
+        };
+
+        function Cheque() {
+            var DdlForma = document.getElementById("<%=DdlFormadePago.ClientID %>");
+            var TxtCheque = document.getElementById("<%=TxtNumeroCheque.ClientID %>");
+            var val = document.getElementById("<%=RFVNumeroCheque.ClientID %>");
+           
+            var selectedValue = DdlForma.value;
+            if (selectedValue == "2") {
+                TxtCheque.style.visibility = 'visible';
+                ValidatorEnable(val, true);
+            }
+            else {
+                TxtCheque.style.visibility = 'hidden';
+                ValidatorEnable(val, false);
+            }
+               // alert(selectedValue);
+            
+
+        };
+        
 
     </script>
 </asp:Content>

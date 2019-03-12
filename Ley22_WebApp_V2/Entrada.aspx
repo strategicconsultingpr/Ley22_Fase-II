@@ -12,8 +12,8 @@
                 Búsqueda
             </div>
             <div class="card-block">
-<!--
-                <div class="row mb-4 pb-4 pt-4 bb">
+
+                <div class="row mb-4 pb-4 pt-4 bb" id="DivPrograma" runat="server">
                     <div class="col-md-2">
                         <strong>El Usuario Viene Con</strong>
                     </div>
@@ -26,12 +26,9 @@
                                 <div class="form-check">
                                     <label class="form-check-label">
 
-                                        <asp:RadioButtonList ID="RBLDocumentos" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" CssClass="form-check-input" Width="100%">
-                                            <asp:ListItem Value="1">&nbsp;Documento Requerido </asp:ListItem>
-                                            <asp:ListItem Value="2">&nbsp;Cita </asp:ListItem>
-                                            <asp:ListItem Value="3">&nbsp;Orden Tribunal</asp:ListItem>
+                                        <asp:DropDownList ID="DdlPrograma" runat="server" class="form-control" onchange="DdlPrograma_Changed" AutoPostBack="true"></asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="ValidatorPrograma" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPrograma" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
 
-                                        </asp:RadioButtonList>
                                     </label>
                                 </div>
                             </div>
@@ -39,7 +36,7 @@
 
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 <div class="row pb-4">
                     <div class="col-md-2">
                         <strong>Buscar Por</strong><br>
@@ -127,10 +124,7 @@
                     <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
                     <div class="col-md-10 offset-md-2">
 
-                      <!--  <asp:CustomValidator ID="valValidateTextBox" runat="server" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red"/> -->
-                        
-                       <!-- <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator> -->
-                       
+                     
 
                         <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" class="btn btn-primary inline mr-4" OnClick="BtnBuscar_Click" OnClientClick="return CheckTextBoxes();" UseSubmitBehavior="true"/>
 

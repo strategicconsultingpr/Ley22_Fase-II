@@ -415,7 +415,7 @@
           <Property Name="Ordered" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SEPS.dbo.SA_Metadona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SEPS_Test.dbo.SA_Metadona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SA_Metadona">
           <Key>
             <PropertyRef Name="PK_ID" />
@@ -430,7 +430,7 @@ warning 6002: The table/view 'SEPS.dbo.SA_Metadona' does not have a primary key 
           <Property Name="NR_Botellas" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SEPS.dbo.SA_NewData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SEPS_Test.dbo.SA_NewData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SA_NewData">
           <Key>
             <PropertyRef Name="PK_ID" />
@@ -441,6 +441,19 @@ warning 6002: The table/view 'SEPS.dbo.SA_NewData' does not have a primary key d
           <Property Name="FK_Militar" Type="int" />
           <Property Name="FK_FamMilitar" Type="int" />
           <Property Name="FK_Genero" Type="int" />
+        </EntityType>
+        <EntityType Name="SA_PERSONA_PROGRAMA">
+          <Key>
+            <PropertyRef Name="FK_Persona" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Persona" Type="int" Nullable="false" />
+          <Property Name="FK_Programa" Type="smallint" Nullable="false" />
+          <Property Name="NR_Expediente" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="FK_Sesion" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TI_Edicion" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FE_Edicion" Type="datetime" Nullable="false" />
+          <Property Name="PK_Old" Type="int" />
         </EntityType>
         <EntityType Name="SA_PROGRAMA">
           <Key>
@@ -514,7 +527,7 @@ warning 6002: The table/view 'SEPS.dbo.SA_NewData' does not have a primary key d
           <Property Name="FK_Razon" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SEPS.dbo.VW_EPISODIO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SEPS_Test.dbo.VW_EPISODIO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_EPISODIO">
           <Key>
             <PropertyRef Name="PK_Episodio" />
@@ -526,13 +539,11 @@ warning 6002: The table/view 'SEPS.dbo.VW_EPISODIO' does not have a primary key 
             <PropertyRef Name="FK_SeguroSalud" />
             <PropertyRef Name="FK_FuentePago" />
             <PropertyRef Name="FK_FeminaHijos" />
-            <PropertyRef Name="IN_VaronHijos" />
             <PropertyRef Name="FK_FuenteIngreso" />
             <PropertyRef Name="FK_TiempoResidencia" />
             <PropertyRef Name="FK_Municipio" />
             <PropertyRef Name="IN_Zona" />
             <PropertyRef Name="FK_EtapaServicio" />
-            <PropertyRef Name="DE_EtapaServicio" />
             <PropertyRef Name="IN_Metadona" />
             <PropertyRef Name="IN_CodDependiente" />
             <PropertyRef Name="FK_FuenteReferido" />
@@ -550,6 +561,8 @@ warning 6002: The table/view 'SEPS.dbo.VW_EPISODIO' does not have a primary key 
             <PropertyRef Name="IN_TI_Maltrato" />
             <PropertyRef Name="DE_ES_Episodio" />
             <PropertyRef Name="IN_Suicida" />
+            <PropertyRef Name="IN_VaronHijos" />
+            <PropertyRef Name="DE_EtapaServicio" />
           </Key>
           <Property Name="PK_Episodio" Type="int" Nullable="false" />
           <Property Name="FK_Persona" Type="int" Nullable="false" />
@@ -649,7 +662,7 @@ warning 6002: The table/view 'SEPS.dbo.VW_EPISODIO' does not have a primary key 
           <Property Name="FE_Alta" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SEPS.dbo.VW_PERFIL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SEPS_Test.dbo.VW_PERFIL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_PERFIL">
           <Key>
             <PropertyRef Name="PK_NR_Perfil" />
@@ -843,7 +856,7 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERFIL' does not have a primary key de
           <Property Name="FK_Persona" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_PERSONA">
           <Key>
             <PropertyRef Name="PK_Persona" />
@@ -878,6 +891,20 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
           <Property Name="TI_Edicion" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="FE_Edicion" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_SA_PERSONA_CENTRO_SA_CENTRO">
+          <End Role="SA_PROGRAMA" Type="Self.SA_PROGRAMA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SA_PERSONA_PROGRAMA" Type="Self.SA_PERSONA_PROGRAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SA_PROGRAMA">
+              <PropertyRef Name="PK_Programa" />
+            </Principal>
+            <Dependent Role="SA_PERSONA_PROGRAMA">
+              <PropertyRef Name="FK_Programa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SPC_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
           <Parameter Name="PK_Programa" Type="smallint" Mode="In" />
@@ -895,6 +922,21 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
         </Function>
         <Function Name="SPR_PERFILES_LEY22" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PK_Episodio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPU_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PK_Persona" Type="int" Mode="In" />
+          <Parameter Name="FK_Programa" Type="smallint" Mode="In" />
+          <Parameter Name="NR_Expediente" Type="varchar" Mode="In" />
+          <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
+          <Parameter Name="FK_Sexo" Type="tinyint" Mode="In" />
+          <Parameter Name="AP_Primero" Type="varchar" Mode="In" />
+          <Parameter Name="AP_Segundo" Type="varchar" Mode="In" />
+          <Parameter Name="NB_Primero" Type="varchar" Mode="In" />
+          <Parameter Name="NB_Segundo" Type="varchar" Mode="In" />
+          <Parameter Name="FE_Nacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="FK_Veterano" Type="char" Mode="In" />
+          <Parameter Name="FK_GrupoEtnico" Type="char" Mode="In" />
+          <Parameter Name="FK_Sesion" Type="uniqueidentifier" Mode="In" />
         </Function>
         <EntityContainer Name="SEPSModel1StoreContainer">
           <EntitySet Name="SA_LKP_ABUSO_SUSTANCIAS" EntityType="Self.SA_LKP_ABUSO_SUSTANCIAS" Schema="dbo" store:Type="Tables" />
@@ -940,6 +982,7 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
           <EntitySet Name="SA_LKP_TEDS_VIA_UTILIZACION" EntityType="Self.SA_LKP_TEDS_VIA_UTILIZACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_LKP_TIEMPO_RESIDENCIA" EntityType="Self.SA_LKP_TIEMPO_RESIDENCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_LKP_TIEMPO_ULT_TRAT" EntityType="Self.SA_LKP_TIEMPO_ULT_TRAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SA_PERSONA_PROGRAMA" EntityType="Self.SA_PERSONA_PROGRAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_PROGRAMA" EntityType="Self.SA_PROGRAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_Ref_CompFamilia" EntityType="Self.SA_Ref_CompFamilia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_Ref_CondicionesDiagnosticadas" EntityType="Self.SA_Ref_CondicionesDiagnosticadas" Schema="dbo" store:Type="Tables" />
@@ -1253,6 +1296,10 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
     [VW_PERSONA].[FE_Edicion] AS [FE_Edicion]
     FROM [dbo].[VW_PERSONA] AS [VW_PERSONA]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_SA_PERSONA_CENTRO_SA_CENTRO" Association="Self.FK_SA_PERSONA_CENTRO_SA_CENTRO">
+            <End Role="SA_PROGRAMA" EntitySet="SA_PROGRAMA" />
+            <End Role="SA_PERSONA_PROGRAMA" EntitySet="SA_PERSONA_PROGRAMA" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1629,6 +1676,7 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
           <Property Name="IN_INF_ANUAL" Type="Boolean" />
           <Property Name="REP_TEDS_MH" Type="Boolean" />
           <Property Name="IN_SELECCIONADO_REP" Type="Boolean" />
+          <NavigationProperty Name="SA_PERSONA_PROGRAMA" Relationship="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_CENTRO" FromRole="SA_PROGRAMA" ToRole="SA_PERSONA_PROGRAMA" />
         </EntityType>
         <EntityType Name="VW_EPISODIO">
           <Key>
@@ -2063,6 +2111,26 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
           <EntitySet Name="SA_LKP_RAZONTH" EntityType="SEPSModel1.SA_LKP_RAZONTH" />
           <EntitySet Name="SA_Ref_RazonTH" EntityType="SEPSModel1.SA_Ref_RazonTH" />
           <EntitySet Name="SA_LKP_CATEGORIAS_CENTROS_PRIVADOS" EntityType="SEPSModel1.SA_LKP_CATEGORIAS_CENTROS_PRIVADOS" />
+          <EntitySet Name="SA_PERSONA_PROGRAMA" EntityType="SEPSModel1.SA_PERSONA_PROGRAMA" />
+          <AssociationSet Name="FK_SA_PERSONA_CENTRO_SA_CENTRO" Association="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_CENTRO">
+            <End Role="SA_PROGRAMA" EntitySet="SA_PROGRAMA" />
+            <End Role="SA_PERSONA_PROGRAMA" EntitySet="SA_PERSONA_PROGRAMA" />
+          </AssociationSet>
+          <FunctionImport Name="SPU_PERSONA">
+            <Parameter Name="PK_Persona" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Programa" Mode="In" Type="Int16" />
+            <Parameter Name="NR_Expediente" Mode="In" Type="String" />
+            <Parameter Name="NR_SeguroSocial" Mode="In" Type="String" />
+            <Parameter Name="FK_Sexo" Mode="In" Type="Byte" />
+            <Parameter Name="AP_Primero" Mode="In" Type="String" />
+            <Parameter Name="AP_Segundo" Mode="In" Type="String" />
+            <Parameter Name="NB_Primero" Mode="In" Type="String" />
+            <Parameter Name="NB_Segundo" Mode="In" Type="String" />
+            <Parameter Name="FE_Nacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="FK_Veterano" Mode="In" Type="String" />
+            <Parameter Name="FK_GrupoEtnico" Mode="In" Type="String" />
+            <Parameter Name="FK_Sesion" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPR_PERFILES_LEY22_Result">
           <Property Type="Int32" Name="PK_NR_Perfil" Nullable="false" />
@@ -2203,6 +2271,34 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
           <Property Name="PK_CategoriaCentroPrivado" Type="Byte" Nullable="false" />
           <Property Name="DE_CategoriaCentroPrivado" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="SA_PERSONA_PROGRAMA">
+          <Key>
+            <PropertyRef Name="FK_Persona" />
+            <PropertyRef Name="FK_Programa" />
+          </Key>
+          <Property Name="FK_Persona" Type="Int32" Nullable="false" />
+          <Property Name="FK_Programa" Type="Int16" Nullable="false" />
+          <Property Name="NR_Expediente" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Sesion" Type="Guid" Nullable="false" />
+          <Property Name="TI_Edicion" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FE_Edicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PK_Old" Type="Int32" />
+          <NavigationProperty Name="SA_PROGRAMA" Relationship="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_CENTRO" FromRole="SA_PERSONA_PROGRAMA" ToRole="SA_PROGRAMA" />
+        </EntityType>
+        <Association Name="FK_SA_PERSONA_CENTRO_SA_CENTRO">
+          <End Type="SEPSModel1.SA_PROGRAMA" Role="SA_PROGRAMA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SEPSModel1.SA_PERSONA_PROGRAMA" Role="SA_PERSONA_PROGRAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SA_PROGRAMA">
+              <PropertyRef Name="PK_Programa" />
+            </Principal>
+            <Dependent Role="SA_PERSONA_PROGRAMA">
+              <PropertyRef Name="FK_Programa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3061,6 +3157,20 @@ warning 6002: The table/view 'SEPS.dbo.VW_PERSONA' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SA_PERSONA_PROGRAMA">
+            <EntityTypeMapping TypeName="SEPSModel1.SA_PERSONA_PROGRAMA">
+              <MappingFragment StoreEntitySet="SA_PERSONA_PROGRAMA">
+                <ScalarProperty Name="PK_Old" ColumnName="PK_Old" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="TI_Edicion" ColumnName="TI_Edicion" />
+                <ScalarProperty Name="FK_Sesion" ColumnName="FK_Sesion" />
+                <ScalarProperty Name="NR_Expediente" ColumnName="NR_Expediente" />
+                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
+                <ScalarProperty Name="FK_Persona" ColumnName="FK_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPU_PERSONA" FunctionName="SEPSModel1.Store.SPU_PERSONA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

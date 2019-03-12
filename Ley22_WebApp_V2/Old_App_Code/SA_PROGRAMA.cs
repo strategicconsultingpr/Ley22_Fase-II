@@ -14,6 +14,12 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
     public partial class SA_PROGRAMA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SA_PROGRAMA()
+        {
+            this.SA_PERSONA_PROGRAMA = new HashSet<SA_PERSONA_PROGRAMA>();
+        }
+    
         public short PK_Programa { get; set; }
         public byte FK_Administracion { get; set; }
         public Nullable<short> CO_Tipo { get; set; }
@@ -32,5 +38,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<bool> IN_INF_ANUAL { get; set; }
         public Nullable<bool> REP_TEDS_MH { get; set; }
         public Nullable<bool> IN_SELECCIONADO_REP { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SA_PERSONA_PROGRAMA> SA_PERSONA_PROGRAMA { get; set; }
     }
 }

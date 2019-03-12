@@ -12,13 +12,31 @@
 public partial class Entrada {
     
     /// <summary>
-    /// RBLDocumentos control.
+    /// DivPrograma control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.RadioButtonList RBLDocumentos;
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivPrograma;
+    
+    /// <summary>
+    /// DdlPrograma control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList DdlPrograma;
+    
+    /// <summary>
+    /// ValidatorPrograma control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidatorPrograma;
     
     /// <summary>
     /// TxtNroSeguroSocial control.
@@ -91,24 +109,6 @@ public partial class Entrada {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label label4;
-    
-    /// <summary>
-    /// valValidateTextBox control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.CustomValidator valValidateTextBox;
-    
-    /// <summary>
-    /// RequiredFieldValidator1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
     
     /// <summary>
     /// BtnBuscar control.

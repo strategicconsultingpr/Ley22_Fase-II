@@ -4,14 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 
 public partial class nuevo_usuario : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
+    ApplicationUser ExistingUser = new ApplicationUser();
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        ExistingUser = (ApplicationUser)Session["User"];
+
         if (!Page.IsPostBack)
         {
 
@@ -19,7 +23,7 @@ public partial class nuevo_usuario : System.Web.UI.Page
             {
                 prevPage = Request.UrlReferrer.ToString();
             }
-           
+            
             LoadDropDownList();
             if (Session["DataParticipante"] != null)
             {
@@ -34,7 +38,7 @@ public partial class nuevo_usuario : System.Web.UI.Page
                 TxtPrimerNombre.Text = du.NB_Primero;
                 TxtSegundoNombre.Text = du.NB_Segundo;
                 TxtPrimerApellido.Text = du.AP_Primero;
-                TxtSegundoNombre.Text = du.AP_Segundo;
+                TxtSegundoApellido.Text = du.AP_Segundo;
                 TxtFechaNacimiento.Text = du.FE_Nacimiento.ToString("MM/dd/yyyy");
                 DdlSexo.SelectedValue = du.FK_Sexo.ToString ();
                 DdlGrupoEtnico.SelectedValue = du.FK_GrupoEtnico.ToString();
@@ -115,7 +119,7 @@ public partial class nuevo_usuario : System.Web.UI.Page
 
     void BuscarXNroSeguroSocial()
     {
-        LimpiarCampos();
+        //LimpiarCampos();
 
         using (Ley22Entities mylib = new Ley22Entities())
         {
@@ -208,16 +212,47 @@ public partial class nuevo_usuario : System.Web.UI.Page
                     Id_Participante = mydu.Id_Participante;
                 }
 
+                using (SEPSEntities1 mlib = new SEPSEntities1())
+                {
+
+                    short aa;
+
+                    aa = Convert.ToInt16(Session["Programa"]);
+
+
+                    var spy = mlib.SPU_PERSONA(Id_Participante,
+                                 aa,                                                              
+                                 TxtExpediente.Text,
+                                 TxtNroSeguroSocial.Text,
+                                 Convert.ToByte(DdlSexo.SelectedValue.ToString()),                                 
+                                 TxtPrimerApellido.Text,
+                                 TxtSegundoApellido.Text,
+                                 TxtPrimerNombre.Text,
+                                 TxtSegundoNombre.Text,
+                                 DateTime.Parse(TxtFechaNacimiento.Text),
+                                 ChkVeterano.Checked == true ? "1" : "2",
+                                 DdlGrupoEtnico.SelectedValue,
+                                 Guid.NewGuid()
+                                 //Convert.ToInt32(Session["Id_UsuarioApp"])                                    
+                                 );
+                  
+
+                }
             }
             else
             {
                 System.Data.Entity.Core.Objects.ObjectParameter myOutputParamString = new System.Data.Entity.Core.Objects.ObjectParameter("PK_Persona", typeof(int));
                 using (SEPSEntities1 mlib = new SEPSEntities1())
                 {
-
-                    var spc = mlib.SPC_PERSONA(
+                    
+                    short aa;
+                    
+                        aa = Convert.ToInt16(Session["Programa"]);
+                    
+                        
+                        var spc = mlib.SPC_PERSONA(
                                     TxtNroSeguroSocial.Text,
-                                     Convert.ToInt16(61),
+                                     aa,
                                      TxtExpediente.Text,
                                      Convert.ToByte(DdlSexo.SelectedValue.ToString()),
                                      TxtPrimerNombre.Text,

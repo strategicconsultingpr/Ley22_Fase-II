@@ -82,6 +82,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<SA_LKP_RAZONTH> SA_LKP_RAZONTH { get; set; }
         public virtual DbSet<SA_Ref_RazonTH> SA_Ref_RazonTH { get; set; }
         public virtual DbSet<SA_LKP_CATEGORIAS_CENTROS_PRIVADOS> SA_LKP_CATEGORIAS_CENTROS_PRIVADOS { get; set; }
+        public virtual DbSet<SA_PERSONA_PROGRAMA> SA_PERSONA_PROGRAMA { get; set; }
     
         public virtual ObjectResult<SPR_PERFILES_LEY22_Result> SPR_PERFILES_LEY22(Nullable<int> pK_Episodio)
         {
@@ -143,6 +144,63 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("FK_Sesion", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPC_PERSONA", nR_SeguroSocialParameter, pK_ProgramaParameter, nR_ExpedienteParameter, fK_SexoParameter, aP_PrimeroParameter, aP_SegundoParameter, nB_PrimeroParameter, nB_SegundoParameter, fE_NacimientoParameter, fK_VeteranoParameter, fK_GrupoEtnicoParameter, fK_SesionParameter, pK_Persona);
+        }
+    
+        public virtual int SPU_PERSONA(Nullable<int> pK_Persona, Nullable<short> fK_Programa, string nR_Expediente, string nR_SeguroSocial, Nullable<byte> fK_Sexo, string aP_Primero, string aP_Segundo, string nB_Primero, string nB_Segundo, Nullable<System.DateTime> fE_Nacimiento, string fK_Veterano, string fK_GrupoEtnico, Nullable<System.Guid> fK_Sesion)
+        {
+            var pK_PersonaParameter = pK_Persona.HasValue ?
+                new ObjectParameter("PK_Persona", pK_Persona) :
+                new ObjectParameter("PK_Persona", typeof(int));
+    
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(short));
+    
+            var nR_ExpedienteParameter = nR_Expediente != null ?
+                new ObjectParameter("NR_Expediente", nR_Expediente) :
+                new ObjectParameter("NR_Expediente", typeof(string));
+    
+            var nR_SeguroSocialParameter = nR_SeguroSocial != null ?
+                new ObjectParameter("NR_SeguroSocial", nR_SeguroSocial) :
+                new ObjectParameter("NR_SeguroSocial", typeof(string));
+    
+            var fK_SexoParameter = fK_Sexo.HasValue ?
+                new ObjectParameter("FK_Sexo", fK_Sexo) :
+                new ObjectParameter("FK_Sexo", typeof(byte));
+    
+            var aP_PrimeroParameter = aP_Primero != null ?
+                new ObjectParameter("AP_Primero", aP_Primero) :
+                new ObjectParameter("AP_Primero", typeof(string));
+    
+            var aP_SegundoParameter = aP_Segundo != null ?
+                new ObjectParameter("AP_Segundo", aP_Segundo) :
+                new ObjectParameter("AP_Segundo", typeof(string));
+    
+            var nB_PrimeroParameter = nB_Primero != null ?
+                new ObjectParameter("NB_Primero", nB_Primero) :
+                new ObjectParameter("NB_Primero", typeof(string));
+    
+            var nB_SegundoParameter = nB_Segundo != null ?
+                new ObjectParameter("NB_Segundo", nB_Segundo) :
+                new ObjectParameter("NB_Segundo", typeof(string));
+    
+            var fE_NacimientoParameter = fE_Nacimiento.HasValue ?
+                new ObjectParameter("FE_Nacimiento", fE_Nacimiento) :
+                new ObjectParameter("FE_Nacimiento", typeof(System.DateTime));
+    
+            var fK_VeteranoParameter = fK_Veterano != null ?
+                new ObjectParameter("FK_Veterano", fK_Veterano) :
+                new ObjectParameter("FK_Veterano", typeof(string));
+    
+            var fK_GrupoEtnicoParameter = fK_GrupoEtnico != null ?
+                new ObjectParameter("FK_GrupoEtnico", fK_GrupoEtnico) :
+                new ObjectParameter("FK_GrupoEtnico", typeof(string));
+    
+            var fK_SesionParameter = fK_Sesion.HasValue ?
+                new ObjectParameter("FK_Sesion", fK_Sesion) :
+                new ObjectParameter("FK_Sesion", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPU_PERSONA", pK_PersonaParameter, fK_ProgramaParameter, nR_ExpedienteParameter, nR_SeguroSocialParameter, fK_SexoParameter, aP_PrimeroParameter, aP_SegundoParameter, nB_PrimeroParameter, nB_SegundoParameter, fE_NacimientoParameter, fK_VeteranoParameter, fK_GrupoEtnicoParameter, fK_SesionParameter);
         }
     }
 }

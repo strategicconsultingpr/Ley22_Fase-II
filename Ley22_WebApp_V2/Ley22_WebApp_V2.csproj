@@ -785,6 +785,9 @@
     <Compile Include="Old_App_Code\SA_Metadona.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\SA_PERSONA_PROGRAMA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\SA_Ref_CompFamilia.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>

@@ -93,7 +93,7 @@
                             <div class="card  text-center mb-3 card-menu">
                                 <div class="card-block">
                                     <p class="mt-4">
-                                        <a href="balance-pago-solo-saldo.aspx">
+                                        <a href="../recaudos-busqueda-usuario.aspx">
                                             <span class="fa-stack fa-3x">
                                                 <%--<i class="fas fa-circle fa-stack-2x"></i>
                                                 <i class="far fa-list-alt fa-stack-1x fa-inverse"></i>--%>
@@ -173,7 +173,7 @@
                             <div class="card  text-center mb-3 card-menu">
                                 <div class="card-block">
                                     <p class="mt-4">
-                                        <a href="balance-pago-solo-saldo.aspx">
+                                        <a href="../recaudos-busqueda-usuario.aspx">
                                             <span class="fa-stack fa-3x">
                                                 <img src="../images/recaudos.png" alt="ASSMCA">
                                             </span>

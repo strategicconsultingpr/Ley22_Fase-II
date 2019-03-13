@@ -24,5 +24,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public int Aprobado { get; set; }
         public Nullable<int> Id_UsuarioAprobacion { get; set; }
         public string Comentario { get; set; }
+        public Nullable<int> Id_Programa { get; set; }
     }
 }

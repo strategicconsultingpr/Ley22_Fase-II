@@ -107,6 +107,7 @@
           <Property Name="Aprobado" Type="int" Nullable="false" />
           <Property Name="Id_UsuarioAprobacion" Type="int" />
           <Property Name="Comentario" Type="varchar" MaxLength="2048" />
+          <Property Name="Id_Programa" Type="int" />
         </EntityType>
         <EntityType Name="FormadePago">
           <Key>
@@ -374,6 +375,7 @@
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
           <Parameter Name="PathNameDocumento" Type="varchar" Mode="In" />
           <Parameter Name="Id_UsuarioRecibe" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
         <Function Name="GuardarExcepcionCoordinadorCharlasGrupales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Centro" Type="int" Mode="In" />
@@ -433,6 +435,7 @@
         <Function Name="ListarDocumentosActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarDocumentosRecibidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
         <Function Name="ListarExcepcionesCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Centro" Type="int" Mode="In" />
@@ -455,6 +458,7 @@
         <Function Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
         <Function Name="ModificarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
@@ -600,22 +604,8 @@
             <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GuardarDocumentoPorParticipante">
-            <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
-            <Parameter Name="PathNameDocumento" Mode="In" Type="String" />
-            <Parameter Name="Id_UsuarioRecibe" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ListarDocumentosActivos" ReturnType="Collection(Ley22Model.ListarDocumentosActivos_Result)" />
-          <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
-          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ListarMotivosCierre" ReturnType="Collection(Ley22Model.ListarMotivosCierre_Result)" />
-          <FunctionImport Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" ReturnType="Collection(Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result)">
-            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ResumendeAsistenciasCharlas" ReturnType="Collection(Ley22Model.ResumendeAsistenciasCharlas_Result)">
           <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -671,7 +661,6 @@
           <EntitySet Name="Centros" EntityType="Ley22Model.Centro" />
           <EntitySet Name="Ciudads" EntityType="Ley22Model.Ciudad" />
           <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
-          <EntitySet Name="DocumentosPorParticipantes" EntityType="Ley22Model.DocumentosPorParticipante" />
           <EntitySet Name="FormadePagoes" EntityType="Ley22Model.FormadePago" />
           <EntitySet Name="MotivoCierres" EntityType="Ley22Model.MotivoCierre" />
           <EntitySet Name="NivelesdelasCharlas" EntityType="Ley22Model.NivelesdelasCharla" />
@@ -833,6 +822,24 @@
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DocumentosPorParticipantes" EntityType="Ley22Model.DocumentosPorParticipante" />
+          <FunctionImport Name="GuardarDocumentoPorParticipante">
+            <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="PathNameDocumento" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioRecibe" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" ReturnType="Collection(Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result)">
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -894,26 +901,9 @@
           <Property Type="Int32" Name="Activo" Nullable="false" />
           <Property Type="DateTime" Name="FechadeRevision" Nullable="true" Precision="23" />
         </ComplexType>
-        <ComplexType Name="ListarDocumentosRecibidos_Result">
-          <Property Type="Int32" Name="Id_DocumentoPorParticipante" Nullable="false" />
-          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
-          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PathNameDocumento" Nullable="false" MaxLength="2048" />
-          <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Aprobado" Nullable="false" />
-          <Property Type="String" Name="AprobadoTexto" Nullable="false" MaxLength="2" />
-          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="ListarMotivosCierre_Result">
           <Property Type="Int32" Name="Id_MotivoCierre" Nullable="false" />
           <Property Type="String" Name="MotivoCierre" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Activo" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
-          <Property Type="Int32" Name="Id_Documento" Nullable="false" />
-          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
-          <Property Type="String" Name="Archivo" Nullable="true" MaxLength="512" />
-          <Property Type="DateTime" Name="FechadeRevision" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="Activo" Nullable="false" />
         </ComplexType>
         <ComplexType Name="ResumendeAsistenciasCharlas_Result">
@@ -1036,21 +1026,6 @@
           <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
           <Property Name="Activo" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DocumentosPorParticipante">
-          <Key>
-            <PropertyRef Name="Id_DocumentoPorParticipante" />
-          </Key>
-          <Property Name="Id_DocumentoPorParticipante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Documento" Type="Int32" Nullable="false" />
-          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
-          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" />
-          <Property Name="FechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PathNameDocumento" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="false" />
-          <Property Name="Id_UsuarioRecibe" Type="Int32" Nullable="false" />
-          <Property Name="Aprobado" Type="Int32" Nullable="false" />
-          <Property Name="Id_UsuarioAprobacion" Type="Int32" />
-          <Property Name="Comentario" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FormadePago">
           <Key>
@@ -1424,6 +1399,39 @@
           <Property Type="Int32" Name="Id_UsuarioCierre" Nullable="true" />
           <Property Type="Int32" Name="Id_Programa" Nullable="true" />
         </ComplexType>
+        <EntityType Name="DocumentosPorParticipante">
+          <Key>
+            <PropertyRef Name="Id_DocumentoPorParticipante" />
+          </Key>
+          <Property Name="Id_DocumentoPorParticipante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Documento" Type="Int32" Nullable="false" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" />
+          <Property Name="FechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PathNameDocumento" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UsuarioRecibe" Type="Int32" Nullable="false" />
+          <Property Name="Aprobado" Type="Int32" Nullable="false" />
+          <Property Name="Id_UsuarioAprobacion" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Programa" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="ListarDocumentosRecibidos_Result">
+          <Property Type="Int32" Name="Id_DocumentoPorParticipante" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PathNameDocumento" Nullable="false" MaxLength="2048" />
+          <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Aprobado" Nullable="false" />
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
+          <Property Type="String" Name="AprobadoTexto" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
+          <Property Type="Int32" Name="Id_Documento" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="Archivo" Nullable="true" MaxLength="512" />
+          <Property Type="DateTime" Name="FechadeRevision" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Activo" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1504,7 +1512,6 @@
           <FunctionImportMapping FunctionImportName="EliminarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarCitaTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="EliminarDocuemntoPorParticipante" FunctionName="Ley22Model.Store.EliminarDocuemntoPorParticipante" />
           <FunctionImportMapping FunctionImportName="EliminarParticipanteCharlaGrupal" FunctionName="Ley22Model.Store.EliminarParticipanteCharlaGrupal" />
-          <FunctionImportMapping FunctionImportName="GuardarDocumentoPorParticipante" FunctionName="Ley22Model.Store.GuardarDocumentoPorParticipante" />
           <FunctionImportMapping FunctionImportName="ListarDocumentosActivos" FunctionName="Ley22Model.Store.ListarDocumentosActivos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosActivos_Result">
@@ -1516,35 +1523,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarDocumentosRecibidos" FunctionName="Ley22Model.Store.ListarDocumentosRecibidos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosRecibidos_Result">
-                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
-                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
-                <ScalarProperty Name="AprobadoTexto" ColumnName="AprobadoTexto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ListarMotivosCierre" FunctionName="Ley22Model.Store.ListarMotivosCierre">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarMotivosCierre_Result">
                 <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
                 <ScalarProperty Name="MotivoCierre" ColumnName="MotivoCierre" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarTipodeDocumentosPorParticipanteOrdenJudicial" FunctionName="Ley22Model.Store.ListarTipodeDocumentosPorParticipanteOrdenJudicial">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
-                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -1687,22 +1670,6 @@
                 <ScalarProperty Name="Archivo" ColumnName="Archivo" />
                 <ScalarProperty Name="Documento1" ColumnName="Documento" />
                 <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DocumentosPorParticipantes">
-            <EntityTypeMapping TypeName="Ley22Model.DocumentosPorParticipante">
-              <MappingFragment StoreEntitySet="DocumentosPorParticipantes">
-                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
-                <ScalarProperty Name="Id_UsuarioAprobacion" ColumnName="Id_UsuarioAprobacion" />
-                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
-                <ScalarProperty Name="Id_UsuarioRecibe" ColumnName="Id_UsuarioRecibe" />
-                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
-                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
-                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
-                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2111,6 +2078,49 @@
                 <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
                 <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
                 <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DocumentosPorParticipantes">
+            <EntityTypeMapping TypeName="Ley22Model.DocumentosPorParticipante">
+              <MappingFragment StoreEntitySet="DocumentosPorParticipantes">
+                <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Id_UsuarioAprobacion" ColumnName="Id_UsuarioAprobacion" />
+                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
+                <ScalarProperty Name="Id_UsuarioRecibe" ColumnName="Id_UsuarioRecibe" />
+                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarDocumentoPorParticipante" FunctionName="Ley22Model.Store.GuardarDocumentoPorParticipante" />
+          <FunctionImportMapping FunctionImportName="ListarDocumentosRecibidos" FunctionName="Ley22Model.Store.ListarDocumentosRecibidos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosRecibidos_Result">
+                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="AprobadoTexto" ColumnName="AprobadoTexto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarTipodeDocumentosPorParticipanteOrdenJudicial" FunctionName="Ley22Model.Store.ListarTipodeDocumentosPorParticipanteOrdenJudicial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

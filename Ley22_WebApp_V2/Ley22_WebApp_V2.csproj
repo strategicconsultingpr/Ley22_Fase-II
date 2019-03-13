@@ -731,6 +731,9 @@
     <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -746,10 +749,16 @@
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ModelLey221.cs">
@@ -1030,9 +1039,6 @@
     <Compile Include="Old_App_Code\Documento.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\FormadePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1042,9 +1048,6 @@
     <Compile Include="Old_App_Code\ListarDocumentosActivos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1052,9 +1055,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\MotivoCierre.cs">

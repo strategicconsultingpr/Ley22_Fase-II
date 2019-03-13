@@ -13,7 +13,7 @@
                 Recepción de Documentos. Usuario:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
  
             </div>
-            <div class="card-menu-mensaje">
+            <div class="card-menu-mensaje" id="DivDocumentos" runat="server">
               
                 <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False" PagerSettings-Visible="false" AllowPaging="True" GridLines="None" CellSpacing="-1" DataKeyNames="Id_Documento">
                     <Columns>

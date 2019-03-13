@@ -30,7 +30,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<Centro> Centros { get; set; }
         public virtual DbSet<Ciudad> Ciudads { get; set; }
         public virtual DbSet<Documento> Documentos { get; set; }
-        public virtual DbSet<DocumentosPorParticipante> DocumentosPorParticipantes { get; set; }
         public virtual DbSet<FormadePago> FormadePagoes { get; set; }
         public virtual DbSet<MotivoCierre> MotivoCierres { get; set; }
         public virtual DbSet<NivelesdelasCharla> NivelesdelasCharlas { get; set; }
@@ -51,6 +50,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<CharlaGrupal> CharlaGrupals { get; set; }
         public virtual DbSet<ControldePago> ControldePagos { get; set; }
         public virtual DbSet<OrdenesJudiciale> OrdenesJudiciales { get; set; }
+        public virtual DbSet<DocumentosPorParticipante> DocumentosPorParticipantes { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -165,61 +165,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarParticipanteCharlaGrupal", id_CharlaGrupalParameter, id_ParticipanteParameter);
         }
     
-        public virtual int GuardarDocumentoPorParticipante(Nullable<int> id_Documento, Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial, string pathNameDocumento, Nullable<int> id_UsuarioRecibe)
-        {
-            var id_DocumentoParameter = id_Documento.HasValue ?
-                new ObjectParameter("Id_Documento", id_Documento) :
-                new ObjectParameter("Id_Documento", typeof(int));
-    
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
-                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
-                new ObjectParameter("Id_OrdenJudicial", typeof(int));
-    
-            var pathNameDocumentoParameter = pathNameDocumento != null ?
-                new ObjectParameter("PathNameDocumento", pathNameDocumento) :
-                new ObjectParameter("PathNameDocumento", typeof(string));
-    
-            var id_UsuarioRecibeParameter = id_UsuarioRecibe.HasValue ?
-                new ObjectParameter("Id_UsuarioRecibe", id_UsuarioRecibe) :
-                new ObjectParameter("Id_UsuarioRecibe", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarDocumentoPorParticipante", id_DocumentoParameter, id_ParticipanteParameter, id_OrdenJudicialParameter, pathNameDocumentoParameter, id_UsuarioRecibeParameter);
-        }
-    
         public virtual ObjectResult<ListarDocumentosActivos_Result> ListarDocumentosActivos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosActivos_Result>("ListarDocumentosActivos");
         }
     
-        public virtual ObjectResult<ListarDocumentosRecibidos_Result> ListarDocumentosRecibidos(Nullable<int> id_Participante)
-        {
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidos_Result>("ListarDocumentosRecibidos", id_ParticipanteParameter);
-        }
-    
         public virtual ObjectResult<ListarMotivosCierre_Result> ListarMotivosCierre()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarMotivosCierre_Result>("ListarMotivosCierre");
-        }
-    
-        public virtual ObjectResult<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result> ListarTipodeDocumentosPorParticipanteOrdenJudicial(Nullable<int> id_OrdenJudicial, Nullable<int> id_Participante)
-        {
-            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
-                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
-                new ObjectParameter("Id_OrdenJudicial", typeof(int));
-    
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result>("ListarTipodeDocumentosPorParticipanteOrdenJudicial", id_OrdenJudicialParameter, id_ParticipanteParameter);
         }
     
         public virtual ObjectResult<ResumendeAsistenciasCharlas_Result> ResumendeAsistenciasCharlas(Nullable<int> id_Participante)
@@ -874,6 +827,65 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Programa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarOrdenesJudicialesActivas_Result>("ListarOrdenesJudicialesActivas", id_ParticipanteParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int GuardarDocumentoPorParticipante(Nullable<int> id_Documento, Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial, string pathNameDocumento, Nullable<int> id_UsuarioRecibe, Nullable<int> id_Programa)
+        {
+            var id_DocumentoParameter = id_Documento.HasValue ?
+                new ObjectParameter("Id_Documento", id_Documento) :
+                new ObjectParameter("Id_Documento", typeof(int));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            var pathNameDocumentoParameter = pathNameDocumento != null ?
+                new ObjectParameter("PathNameDocumento", pathNameDocumento) :
+                new ObjectParameter("PathNameDocumento", typeof(string));
+    
+            var id_UsuarioRecibeParameter = id_UsuarioRecibe.HasValue ?
+                new ObjectParameter("Id_UsuarioRecibe", id_UsuarioRecibe) :
+                new ObjectParameter("Id_UsuarioRecibe", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarDocumentoPorParticipante", id_DocumentoParameter, id_ParticipanteParameter, id_OrdenJudicialParameter, pathNameDocumentoParameter, id_UsuarioRecibeParameter, id_ProgramaParameter);
+        }
+    
+        public virtual ObjectResult<ListarDocumentosRecibidos_Result> ListarDocumentosRecibidos(Nullable<int> id_Participante, Nullable<int> id_Programa)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidos_Result>("ListarDocumentosRecibidos", id_ParticipanteParameter, id_ProgramaParameter);
+        }
+    
+        public virtual ObjectResult<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result> ListarTipodeDocumentosPorParticipanteOrdenJudicial(Nullable<int> id_OrdenJudicial, Nullable<int> id_Participante, Nullable<int> id_Programa)
+        {
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result>("ListarTipodeDocumentosPorParticipanteOrdenJudicial", id_OrdenJudicialParameter, id_ParticipanteParameter, id_ProgramaParameter);
         }
     }
 }

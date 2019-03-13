@@ -10,6 +10,7 @@ using Ley22_WebApp_V2.Old_App_Code;
 public partial class cargar_documentos : System.Web.UI.Page
 {
     protected DataParticipante du;
+    int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -17,8 +18,10 @@ public partial class cargar_documentos : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             this.du = (DataParticipante)Session["DataParticipante"];
-            BidGrid();
-            CargarOrdenesJudiciales();
+            Programa = Convert.ToInt32(Session["Programa"].ToString());
+            // BidGrid();
+             CargarOrdenesJudiciales();
+            DivDocumentos.Visible = false;
             DdlDocumento.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
         }
@@ -29,7 +32,7 @@ public partial class cargar_documentos : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
 
         {
-            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidos(Convert.ToInt32(Session["Id_Participante"]));
+            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             GvRecepcionDocumentos.DataBind();
 
            
@@ -81,23 +84,26 @@ public partial class cargar_documentos : System.Web.UI.Page
             list.Add(6);
             list.Add(8);
 
+            Programa = Convert.ToInt32(Session["Programa"].ToString());
+
             var DocNecesarios = list.AsQueryable();
 
             int Participante = Convert.ToInt32(Session["Id_Participante"]);
 
-            var ordens = mylib.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(Participante)).Where(a => a.Activa.Equals(1));
+            var ordens = mylib.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(Participante)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == Programa);
 
             int OrdenJudicial = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
             var orden = ordens.Where(u => u.Id_OrdenJudicial.Equals(OrdenJudicial)).Select(p => p.Id_OrdenJudicial);
 
             if (orden.Count() > 0)
             {
-                var docs = mylib.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
+                var docs = mylib.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Where(a => a.Id_Programa == Programa).Select(p => p.Id_Documento);
 
                 if ((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))
                 {
                     GridView1.DataSource = null;
                     GridView1.DataBind();
+                    DivDocumentos.Visible = false;
                 }
                 else
                 {
@@ -111,6 +117,7 @@ public partial class cargar_documentos : System.Web.UI.Page
 
                     GridView1.DataSource = DocumentosFaltantes;
                     GridView1.DataBind();
+                    DivDocumentos.Visible = true;
 
                 }
             }
@@ -118,6 +125,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 GridView1.DataSource = null;
                 GridView1.DataBind();
+                DivDocumentos.Visible = false;
             }
         }
     }
@@ -127,6 +135,7 @@ public partial class cargar_documentos : System.Web.UI.Page
     {
         LinkButton btn = (LinkButton)(sender);
         int Id_DocumentoPorParticipante = Convert.ToInt32(btn.CommandArgument);
+        Programa = Convert.ToInt32(Session["Programa"].ToString());
 
         string Id = Session["Id_Participante"].ToString();
         using (Ley22Entities mylib = new Ley22Entities())
@@ -137,21 +146,22 @@ public partial class cargar_documentos : System.Web.UI.Page
         {
             if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
             {
-                File.Delete(Server.MapPath("~/DocumentosPorParticipantes/"+ Id +"/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
+                File.Delete(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id +"/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
             }
-        } 
+        }
 
-        
-        
-       
+
+
+        ActualizarDocumentosDdl();
         BidGrid();
         CargarDocumentosFaltantes();
     }
     protected void lnkImprimir_Click(object sender, EventArgs e)
     {
         string Id = Session["Id_Participante"].ToString();
+        Programa = Convert.ToInt32(Session["Programa"].ToString());
         LinkButton btn = (LinkButton)(sender);       
-        string PathNameDocumento = "/DocumentosPorParticipantes/" + Id +"/" + btn.CommandArgument.ToString();
+        string PathNameDocumento = "/DocumentosPorParticipantes/" + Programa + "/" + Id +"/" + btn.CommandArgument.ToString();
 
 
         Response.Clear();
@@ -181,17 +191,37 @@ public partial class cargar_documentos : System.Web.UI.Page
 
     protected void DdlNumeroOrdenJudicial_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if(DdlNumeroOrdenJudicial.SelectedValue != "0")
+        {
+            ActualizarDocumentosDdl();
+            BidGrid();
+        }
+        else
+        {
+            DdlDocumento.DataSource = null;
+            DdlDocumento.DataBind();
+            DdlDocumento.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            GvRecepcionDocumentos.DataSource = null;
+            GvRecepcionDocumentos.DataBind();
+
+        }
+       
+        CargarDocumentosFaltantes();
+    }
+
+    protected void ActualizarDocumentosDdl()
+    {
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
             DdlDocumento.DataTextField = "Documento";
             DdlDocumento.DataValueField = "Id_Documento";
-            DdlDocumento.DataSource = mylib.ListarTipodeDocumentosPorParticipanteOrdenJudicial(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(Session["Id_Participante"]));
+            DdlDocumento.DataSource = mylib.ListarTipodeDocumentosPorParticipanteOrdenJudicial(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlDocumento.DataBind();
-            DdlDocumento.Items.Insert(0, new ListItem("-Seleccione-", "0"));           
+            DdlDocumento.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
         }
-        CargarDocumentosFaltantes();
     }
 
     protected void BtnSubirDocumento_Click(object sender, EventArgs e)
@@ -203,15 +233,17 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 string filename = DdlNumeroOrdenJudicial.SelectedValue + "-" + Path.GetFileName(FileUpload1.FileName);
                 string Id = Session["Id_Participante"].ToString();
-                if (!Directory.Exists(Server.MapPath("~/DocumentosPorParticipantes/"+Id)))
+                Programa = Convert.ToInt32(Session["Programa"].ToString());
+                if (!Directory.Exists(Server.MapPath("~/DocumentosPorParticipantes/"+Programa+"/"+Id)))
                 {
-                    Directory.CreateDirectory(Server.MapPath("~/DocumentosPorParticipantes/" + Id+"/"));
+                    Directory.CreateDirectory(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id+"/"));
                 }
-                FileUpload1.SaveAs(Server.MapPath("~/DocumentosPorParticipantes/"+Id+"/") + filename);
+                FileUpload1.SaveAs(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id+"/") + filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
                 GuardarDocumento(Convert.ToInt32(DdlDocumento.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), filename, Convert.ToInt32(Session["Id_UsuarioApp"]));
                 BidGrid();
                 CargarDocumentosFaltantes();
+                ActualizarDocumentosDdl();
             }
             catch (Exception ex)
             {
@@ -223,8 +255,9 @@ public partial class cargar_documentos : System.Web.UI.Page
 
    protected void GuardarDocumento(int Id_Documento, int Id_Participante, int Id_OrdenJudicial, string PathNameDocumento, int Id_UsuarioRecibe)
     {
+        Programa = Convert.ToInt32(Session["Programa"].ToString());
         using (Ley22Entities mylib = new Ley22Entities())
-             mylib.GuardarDocumentoPorParticipante(Id_Documento, Id_Participante, Id_OrdenJudicial, PathNameDocumento, Id_UsuarioRecibe);
+             mylib.GuardarDocumentoPorParticipante(Id_Documento, Id_Participante, Id_OrdenJudicial, PathNameDocumento, Id_UsuarioRecibe,Programa);
  
     }
 

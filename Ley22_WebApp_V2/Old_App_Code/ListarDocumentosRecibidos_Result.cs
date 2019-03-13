@@ -19,7 +19,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string PathNameDocumento { get; set; }
         public System.DateTime FechaEntrega { get; set; }
         public int Aprobado { get; set; }
-        public string AprobadoTexto { get; set; }
         public int Id_OrdenJudicial { get; set; }
+        public string AprobadoTexto { get; set; }
     }
 }

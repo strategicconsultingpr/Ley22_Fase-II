@@ -1067,6 +1067,17 @@
 
                             }
 
+                            function modalModificar(Fecha,FechaInicial, FechaFinal, Id_TipoCharla, Id_NiveldeCharla, NrodeParticipantes, NumeroCharla) {
+
+                                document.getElementById("<%=TxtFechaModCharla.ClientID %>").value = Fecha;
+                                document.getElementById("<%=TxtIncialModCharla.ClientID %>").value = FechaInicial;
+                                document.getElementById("<%=TxtFinalModCharla.ClientID %>").value = FechaFinal;
+                                document.getElementById("<%=DdlTipodeCharla2.ClientID %>").value = Id_TipoCharla;
+                                document.getElementById("<%=DdlNivelCharlas2.ClientID %>").value = Id_NiveldeCharla;
+                                document.getElementById("<%=DdlNumeroCharla2.ClientID %>").value = NrodeParticipantes;
+                                document.getElementById("<%=TxtMaxCantParticipantes2.ClientID %>").value = NumeroCharla;
+                            }
+
     </script>
 
 </asp:Content>

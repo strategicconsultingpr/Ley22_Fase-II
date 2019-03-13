@@ -144,9 +144,8 @@
                         </li>
 
                         <li class="list-group-item justify-content-between">
-                            <strong>Estatus</strong>
-                            <span><strong>
-                                <asp:Literal ID="LitEstatus" runat="server"></asp:Literal></strong></span>
+                            <strong>Estatus: </strong><asp:Literal ID="LitEstatus" runat="server"></asp:Literal>
+                            
                         </li>
 
                     </ul>

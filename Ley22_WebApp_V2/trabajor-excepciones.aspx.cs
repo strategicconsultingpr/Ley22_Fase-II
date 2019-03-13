@@ -136,7 +136,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
             //ListarCharlasCalendario = mylib.ListarCitasCalendarioUsuario(ExistingUser.Id, FechaBase, FechaBase.AddDays(35)).ToList();
-            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
             {
                 ListarCitasCalendarioAdministrador = mylib.ListarCitasCalendarioAdministrador(FechaBase, FechaBase.AddDays(35), Convert.ToInt32(DdlCentro.SelectedValue)).ToList();
             }
@@ -158,7 +158,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
            // if (DdlCentro.SelectedValue.ToString() != "")               
                 AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
-            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
             {
                 AsignatCitasPordiaAdministrador(i, fecha, LitContCelda, ListarCitasCalendarioAdministrador);
             }

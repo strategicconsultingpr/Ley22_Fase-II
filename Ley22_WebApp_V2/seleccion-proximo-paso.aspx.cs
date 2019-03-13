@@ -36,7 +36,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             
             if(verificarOrdenJudicialAbierta())
             {
-                LitEstatus.Text = "Tiene caso Abierto bajo este programa";
+                LitEstatus.Text = "Abierto bajo este programa";
 
                 if(verificarFaltaDeDocumento())
                 {
@@ -49,7 +49,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             }
             else
             {
-                LitEstatus.Text = "Tiene caso Cerrado bajo este programa";
+                LitEstatus.Text = "Cerrado bajo este programa";
             }
             verificarEpisodiosAnteriores(du.Id_Participante);
             ConsultarCharlasPorParticipante(du.Id_Participante);

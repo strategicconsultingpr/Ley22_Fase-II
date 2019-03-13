@@ -303,7 +303,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
         var usuarios2 = context.Users.ToList();
 
-        var usuariofinal = (from a in usuarios2 join b in us on a.Id equals b.FK_Usuario select new ListItem { Value = a.Id, Text = a.Email }).ToList();
+        var usuariofinal = (from a in usuarios2 join b in us on a.Id equals b.FK_Usuario select new ListItem { Value = a.Id, Text = a.FirstName +" "+ a.LastName }).ToList();
 
         DdlTrabajadorSocial.DataTextField = "Text";
         DdlTrabajadorSocial.DataValueField = "Value";

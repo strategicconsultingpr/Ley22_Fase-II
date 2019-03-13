@@ -202,11 +202,11 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
         <div class="card mb-5">
             <div class="card-header">
                 Balance de Cuenta. Usuario:
-                <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                <uc1:WUCUsuario runat="server" ID="WUCUsuario" />  &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
 
             </div>
             <div class="card-block">
-
+                
                 <div class="row">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10">

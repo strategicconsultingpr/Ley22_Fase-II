@@ -41,9 +41,9 @@ namespace Ley22_WebApp_V2
                     var result = userManager.AddToRole(user.Id, "SuperAdmin");
                 }
             }
-            if (!roleManager.RoleExists("Director"))
+            if (!roleManager.RoleExists("Supervisor"))
             {
-                var role = new IdentityRole("Director");
+                var role = new IdentityRole("Supervisor");
                 roleManager.Create(role);
             }
             if (!roleManager.RoleExists("Recepcion"))

@@ -111,7 +111,7 @@
 
     <div class="card">
         <div class="card-header">
-            Próximo Paso. Usuario:<uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+            Próximo Paso. Usuario:<uc1:WUCUsuario runat="server" ID="WUCUsuario" /> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
 
         </div>
         <div class="card-block">
@@ -121,6 +121,11 @@
 
 
                     <ul class="list-group mb-4 pb-4 slim">
+                        <li class="list-group-item justify-content-between">Expediente
+           
+                            <span>
+                                <asp:Literal ID="LitExpediente" runat="server"></asp:Literal></span>
+                        </li>
                         <li class="list-group-item justify-content-between">IUP
            
                             <span>

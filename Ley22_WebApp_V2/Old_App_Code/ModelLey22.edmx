@@ -146,6 +146,7 @@
           <Property Name="ComentarioCierre" Type="varchar" MaxLength="4096" />
           <Property Name="DocumentoAprobacion" Type="varchar" MaxLength="4096" />
           <Property Name="Id_UsuarioCierre" Type="int" />
+          <Property Name="Id_Programa" Type="int" />
         </EntityType>
         <EntityType Name="Participantes">
           <Key>
@@ -392,6 +393,7 @@
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="NumeroOrdenJudicial" Type="varchar" Mode="In" />
           <Parameter Name="Id_UsuarioCreacion" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
         <Function Name="GuardarParticipantePorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
@@ -445,6 +447,7 @@
         <Function Name="ListarMotivosCierre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarOrdenesJudicialesActivas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
         <Function Name="ListarParticipantesPorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
@@ -604,19 +607,11 @@
             <Parameter Name="PathNameDocumento" Mode="In" Type="String" />
             <Parameter Name="Id_UsuarioRecibe" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GuardarOrdenJudicial">
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="NumeroOrdenJudicial" Mode="In" Type="String" />
-            <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ListarDocumentosActivos" ReturnType="Collection(Ley22Model.ListarDocumentosActivos_Result)" />
           <FunctionImport Name="ListarDocumentosRecibidos" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidos_Result)">
           <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ListarMotivosCierre" ReturnType="Collection(Ley22Model.ListarMotivosCierre_Result)" />
-          <FunctionImport Name="ListarOrdenesJudicialesActivas" ReturnType="Collection(Ley22Model.ListarOrdenesJudicialesActivas_Result)">
-          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" ReturnType="Collection(Ley22Model.ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result)">
             <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
@@ -680,7 +675,6 @@
           <EntitySet Name="FormadePagoes" EntityType="Ley22Model.FormadePago" />
           <EntitySet Name="MotivoCierres" EntityType="Ley22Model.MotivoCierre" />
           <EntitySet Name="NivelesdelasCharlas" EntityType="Ley22Model.NivelesdelasCharla" />
-          <EntitySet Name="OrdenesJudiciales" EntityType="Ley22Model.OrdenesJudiciale" />
           <EntitySet Name="Participantes" EntityType="Ley22Model.Participante" />
           <EntitySet Name="Precios" EntityType="Ley22Model.Precio" />
           <EntitySet Name="Regions" EntityType="Ley22Model.Region" />
@@ -828,6 +822,17 @@
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
             <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="OrdenesJudiciales" EntityType="Ley22Model.OrdenesJudiciale" />
+          <FunctionImport Name="GuardarOrdenJudicial">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroOrdenJudicial" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarOrdenesJudicialesActivas" ReturnType="Collection(Ley22Model.ListarOrdenesJudicialesActivas_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -903,19 +908,6 @@
           <Property Type="Int32" Name="Id_MotivoCierre" Nullable="false" />
           <Property Type="String" Name="MotivoCierre" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Activo" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="ListarOrdenesJudicialesActivas_Result">
-          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
-          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
-          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Activa" Nullable="false" />
-          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Id_UsuarioCreacion" Nullable="false" />
-          <Property Type="DateTime" Name="FechaCierre" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="Id_MotivoCierre" Nullable="true" />
-          <Property Type="String" Name="ComentarioCierre" Nullable="true" MaxLength="4096" />
-          <Property Type="String" Name="DocumentoAprobacion" Nullable="true" MaxLength="4096" />
-          <Property Type="Int32" Name="Id_UsuarioCierre" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result">
           <Property Type="Int32" Name="Id_Documento" Nullable="false" />
@@ -1082,22 +1074,6 @@
           <Property Name="Id_NiveldeCharla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nivel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Activo" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrdenesJudiciale">
-          <Key>
-            <PropertyRef Name="Id_OrdenJudicial" />
-          </Key>
-          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
-          <Property Name="NumeroOrdenJudicial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Activa" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Id_UsuarioCreacion" Type="Int32" Nullable="false" />
-          <Property Name="FechaCierre" Type="DateTime" Precision="3" />
-          <Property Name="Id_MotivoCierre" Type="Int32" />
-          <Property Name="ComentarioCierre" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
-          <Property Name="DocumentoAprobacion" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
-          <Property Name="Id_UsuarioCierre" Type="Int32" />
         </EntityType>
         <EntityType Name="Participante">
           <Key>
@@ -1417,6 +1393,37 @@
           <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="NumeroRecibo" Nullable="true" MaxLength="128" />
         </ComplexType>
+        <EntityType Name="OrdenesJudiciale">
+          <Key>
+            <PropertyRef Name="Id_OrdenJudicial" />
+          </Key>
+          <Property Name="Id_OrdenJudicial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="NumeroOrdenJudicial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activa" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_UsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaCierre" Type="DateTime" Precision="3" />
+          <Property Name="Id_MotivoCierre" Type="Int32" />
+          <Property Name="ComentarioCierre" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentoAprobacion" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UsuarioCierre" Type="Int32" />
+          <Property Name="Id_Programa" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="ListarOrdenesJudicialesActivas_Result">
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NumeroOrdenJudicial" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Activa" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Id_UsuarioCreacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCierre" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Id_MotivoCierre" Nullable="true" />
+          <Property Type="String" Name="ComentarioCierre" Nullable="true" MaxLength="4096" />
+          <Property Type="String" Name="DocumentoAprobacion" Nullable="true" MaxLength="4096" />
+          <Property Type="Int32" Name="Id_UsuarioCierre" Nullable="true" />
+          <Property Type="Int32" Name="Id_Programa" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1498,7 +1505,6 @@
           <FunctionImportMapping FunctionImportName="EliminarDocuemntoPorParticipante" FunctionName="Ley22Model.Store.EliminarDocuemntoPorParticipante" />
           <FunctionImportMapping FunctionImportName="EliminarParticipanteCharlaGrupal" FunctionName="Ley22Model.Store.EliminarParticipanteCharlaGrupal" />
           <FunctionImportMapping FunctionImportName="GuardarDocumentoPorParticipante" FunctionName="Ley22Model.Store.GuardarDocumentoPorParticipante" />
-          <FunctionImportMapping FunctionImportName="GuardarOrdenJudicial" FunctionName="Ley22Model.Store.GuardarOrdenJudicial" />
           <FunctionImportMapping FunctionImportName="ListarDocumentosActivos" FunctionName="Ley22Model.Store.ListarDocumentosActivos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosActivos_Result">
@@ -1529,23 +1535,6 @@
                 <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
                 <ScalarProperty Name="MotivoCierre" ColumnName="MotivoCierre" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarOrdenesJudicialesActivas" FunctionName="Ley22Model.Store.ListarOrdenesJudicialesActivas">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarOrdenesJudicialesActivas_Result">
-                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
-                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
-                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
-                <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
-                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
-                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
-                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1740,23 +1729,6 @@
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Nivel" ColumnName="Nivel" />
                 <ScalarProperty Name="Id_NiveldeCharla" ColumnName="Id_NiveldeCharla" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrdenesJudiciales">
-            <EntityTypeMapping TypeName="Ley22Model.OrdenesJudiciale">
-              <MappingFragment StoreEntitySet="OrdenesJudiciales">
-                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
-                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
-                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
-                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
-                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
-                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2102,6 +2074,43 @@
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="CantidadAPagar" ColumnName="CantidadAPagar" />
                 <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="OrdenesJudiciales">
+            <EntityTypeMapping TypeName="Ley22Model.OrdenesJudiciale">
+              <MappingFragment StoreEntitySet="OrdenesJudiciales">
+                <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
+                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
+                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
+                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarOrdenJudicial" FunctionName="Ley22Model.Store.GuardarOrdenJudicial" />
+          <FunctionImportMapping FunctionImportName="ListarOrdenesJudicialesActivas" FunctionName="Ley22Model.Store.ListarOrdenesJudicialesActivas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarOrdenesJudicialesActivas_Result">
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NumeroOrdenJudicial" ColumnName="NumeroOrdenJudicial" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
+                <ScalarProperty Name="DocumentoAprobacion" ColumnName="DocumentoAprobacion" />
+                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
+                <ScalarProperty Name="Id_Programa" ColumnName="Id_Programa" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

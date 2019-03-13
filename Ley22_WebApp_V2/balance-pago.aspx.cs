@@ -17,6 +17,7 @@ public partial class balance_pago : System.Web.UI.Page
     static string prevPage = String.Empty;
     ApplicationUser ExistingUser = new ApplicationUser();
     SEPSEntities1 dsPerfil = new SEPSEntities1();
+    Ley22Entities dsLey22 = new Ley22Entities();
     static string userId = String.Empty;
     DataParticipante du;
 
@@ -41,13 +42,18 @@ public partial class balance_pago : System.Web.UI.Page
             userId = ExistingUser.Id;
 
             prevPage = Request.UrlReferrer.ToString();
+            NombrePrograma.Text = Session["NombrePrograma"].ToString();
             ContadordeCharlaCitasPorPagar = 0;
             ContadorCharlasCitasPagadas = 0;
             TotalPagado = 0;
+           // CargarProgramas();
             CargarOrdenesJudiciales();
          //   BidGrid();
         }
     }
+
+    
+
 
     protected void BtnGuardarPago_Click(object sender, EventArgs e)
     {
@@ -147,7 +153,7 @@ public partial class balance_pago : System.Web.UI.Page
 
             DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
             DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]));
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
@@ -184,5 +190,7 @@ public partial class balance_pago : System.Web.UI.Page
         return body;
 
     }
+
+    
 
 }

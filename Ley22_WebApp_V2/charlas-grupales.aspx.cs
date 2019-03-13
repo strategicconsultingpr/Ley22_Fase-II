@@ -511,7 +511,7 @@ public partial class charlas_grupales : System.Web.UI.Page
     protected void BtnGuardarOrdenJudicial_Click(object sender, EventArgs e)
     {
         using (Ley22Entities mylib = new Ley22Entities())
-            mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNumeroOrdenJudicial.Text, Convert.ToInt32(Session["Id_UsuarioApp"]));
+            mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNumeroOrdenJudicial.Text, Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]));
 
         CargarOrdenesJudiciales();
     }
@@ -523,7 +523,7 @@ public partial class charlas_grupales : System.Web.UI.Page
 
             DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
             DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]));
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 

@@ -47,7 +47,7 @@ namespace Ley22_WebApp_V2.Account
             List<ListItem> email;
             List<ListItem> roles;
 
-            if (userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "Supervisor"))
             {
                 programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => programas_usuario.Contains(u.FK_Programa)).Select(p => p.FK_Usuario).ToList();
@@ -124,7 +124,7 @@ namespace Ley22_WebApp_V2.Account
             var emails_programas_director = dsLey22.USUARIO_PROGRAMA.Where(u => programas_director.Contains(u.FK_Programa)).Select(p => p.FK_Usuario).ToList();
             List<ApplicationUser> emails_programas;
 
-            if (userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "Supervisor"))
             {
                 emails_programas = context.Users.Where(u => emails_programas_director.Contains(u.Id)).ToList();//Emails de usuarios con programas asignados
             }

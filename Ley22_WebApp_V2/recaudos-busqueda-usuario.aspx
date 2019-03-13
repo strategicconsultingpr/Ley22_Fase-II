@@ -13,9 +13,9 @@
             </div>
             <div class="card-block">
 
-            <!--    <div class="row mb-4 pb-4 pt-4 bb">
+            <div class="row mb-4 pb-4 pt-4 bb" id="DivPrograma" runat="server">
                     <div class="col-md-2">
-                        <strong>El Usuario Viene Con</strong>
+                        <strong>Escoger un Programa: </strong>
                     </div>
 
 
@@ -26,20 +26,15 @@
                                 <div class="form-check">
                                     <label class="form-check-label">
 
-                                        <asp:RadioButtonList ID="RBLDocumentos" runat="server" RepeatDirection="Horizontal"  RepeatLayout="Table"  CssClass="form-check-input"  Width="100%"  >
-                                            <asp:ListItem Value="1" >&nbsp;Documento Requerido </asp:ListItem>
-                                            <asp:ListItem Value="2">&nbsp;Cita </asp:ListItem>
-                                            <asp:ListItem Value="3">&nbsp;Orden Tribunal</asp:ListItem>
-                                             
-                                        </asp:RadioButtonList>
+                                        <asp:DropDownList ID="DdlPrograma" runat="server" class="form-control" OnSelectedIndexChanged="DdlPrograma_Changed" AutoPostBack="true"></asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="ValidatorPrograma" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPrograma" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+
                                     </label>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 <div class="row pb-4">
                     <div class="col-md-2">
                         <strong>Buscar Por</strong><br>
@@ -81,56 +76,11 @@
                         </div>
                     </div>
                 </div>
-                <%--           <div id="form-avanzada">
-                    <div class="row pt-4 pb-4 bt">
-                        <div class="col-md-2">
-                            <strong>Búsqueda Avanzada</strong><br>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput">Expediente</label>
-                                    <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 124567"></asp:TextBox>
-                                    </div>
-                                </div>
-   
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput">Licencia</label>
-                                    <asp:TextBox ID="TxtLicencia" runat="server" class="form-control" placeholder="Ej. 124567"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtLicencia" ForeColor="Red"></asp:RegularExpressionValidator>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput">Cliente IUP</label>
-                                    <asp:TextBox ID="TxtClienteIUP" runat="server" class="form-control" placeholder="Ej. 124567"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtClienteIUP" ForeColor="Red"></asp:RegularExpressionValidator>
-                                         </div>
-                                </div>
-                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput">Episodio</label>
-                                    <asp:TextBox ID="TxtEpisodio" runat="server" class="form-control" placeholder="Ej. 124567"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtEpisodio" ForeColor="Red"></asp:RegularExpressionValidator>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
-
+               
                 <div class="row">
                     <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
                     <div class="col-md-10 offset-md-2">
 
-                 <!--       <asp:CustomValidator ID="valValidateTextBox" runat="server" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" />
-
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
--->
                         <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" class="btn btn-primary inline mr-4" OnClick="BtnBuscar_Click" OnClientClick="return CheckTextBoxes();" UseSubmitBehavior="true"/>
 
 
@@ -141,33 +91,35 @@
                                 var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
                                 var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
                                 var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
-
+                                var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
                                 
-                                //
-<%--                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
-                            var TxtLicencia = document.getElementById("<%=TxtLicencia.ClientID %>").value;
-                            var TxtClienteIUP = document.getElementById("<%=TxtClienteIUP.ClientID %>").value;
-                            var TxtEpisodio = document.getElementById("<%=TxtEpisodio.ClientID %>").value;--%>
+                               
 
                                 if (TxtNroSeguroSocial == "" &&
                                     TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == ""
-
-                                    // && TxtExpediente == "" &&
-                                    // TxtLicencia == "" &&
-                                    // TxtClienteIUP == "" &&
-                                    // TxtEpisodio == ""
-
-                                ) {
-                                    //args.IsValid = false;
-                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";
+                                    TxtNombreyApellido == "" && DdlPrograma != "0")
+                                {
+                                    
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda";                             
+                                    return false;  
+                                }
+                                else if(TxtNroSeguroSocial == "" &&
+                                    TxtIdentificacion == "" &&
+                                    TxtFechaNacimiento == "" &&
+                                    TxtNombreyApellido == "" && DdlPrograma == "0")
+                                {
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda y seleccione un programa";                             
                                     return false;
                                 }
-                                
+                                else if (DdlPrograma == "0")
+                                {
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Seleccione un programa";                             
+                                    return false;
+                                }
                                 else {
-                                    // args.IsValid = true;
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "";
+                                  //  args.IsValid = true;
                                     return true;
                                 }
                             }

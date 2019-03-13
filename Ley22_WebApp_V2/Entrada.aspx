@@ -15,7 +15,7 @@
 
                 <div class="row mb-4 pb-4 pt-4 bb" id="DivPrograma" runat="server">
                     <div class="col-md-2">
-                        <strong>El Usuario Viene Con</strong>
+                        <strong>Escoger un Programa: </strong>
                     </div>
 
 
@@ -26,7 +26,7 @@
                                 <div class="form-check">
                                     <label class="form-check-label">
 
-                                        <asp:DropDownList ID="DdlPrograma" runat="server" class="form-control" onchange="DdlPrograma_Changed" AutoPostBack="true"></asp:DropDownList>
+                                        <asp:DropDownList ID="DdlPrograma" runat="server" class="form-control" OnSelectedIndexChanged="DdlPrograma_Changed" AutoPostBack="true"></asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="ValidatorPrograma" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPrograma" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
 
                                     </label>
@@ -136,6 +136,7 @@
                                 var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
                                 var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
                                 var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                                var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
                                 //
 <%--                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
                             var TxtLicencia = document.getElementById("<%=TxtLicencia.ClientID %>").value;
@@ -145,18 +146,24 @@
                                 if (TxtNroSeguroSocial == "" &&
                                     TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == ""
-
-                                    // && TxtExpediente == "" &&
-                                    // TxtLicencia == "" &&
-                                    // TxtClienteIUP == "" &&
-                                    // TxtEpisodio == ""
-
-                                ) {
-                                    //  alert("*introduzca al menos 1 campo de búsqueda");
-                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";
-                                 //   args.IsValid = false;
+                                    TxtNombreyApellido == "" && DdlPrograma != "0")
+                                {
+                                    
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda";                             
                                     return false;  
+                                }
+                                else if(TxtNroSeguroSocial == "" &&
+                                    TxtIdentificacion == "" &&
+                                    TxtFechaNacimiento == "" &&
+                                    TxtNombreyApellido == "" && DdlPrograma == "0")
+                                {
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda y seleccione un programa";                             
+                                    return false;
+                                }
+                                else if (DdlPrograma == "0")
+                                {
+                                    document.getElementById("<%=label4.ClientID%>").innerHTML = "*Seleccione un programa";                             
+                                    return false;
                                 }
                                 else {
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "";

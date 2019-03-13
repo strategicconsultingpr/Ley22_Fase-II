@@ -11,6 +11,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
     protected Ley22Entities ley22;
     protected DataParticipante du;
     protected OrdenesJudiciale ordenes;
+    int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -29,10 +30,13 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
             LitIUP.Text = du.IUP.ToString();
             LitLicencia.Text = du.Licencia;
+            Programa = Convert.ToInt32(Session["Programa"].ToString());
+            NombrePrograma.Text = Session["NombrePrograma"].ToString();
+            LitExpediente.Text = du.Expediente;
             
             if(verificarOrdenJudicialAbierta())
             {
-                LitEstatus.Text = "Abierto";
+                LitEstatus.Text = "Tiene caso Abierto bajo este programa";
 
                 if(verificarFaltaDeDocumento())
                 {
@@ -45,7 +49,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             }
             else
             {
-                LitEstatus.Text = "Cerrado";
+                LitEstatus.Text = "Tiene caso Cerrado bajo este programa";
             }
             verificarEpisodiosAnteriores(du.Id_Participante);
             ConsultarCharlasPorParticipante(du.Id_Participante);
@@ -56,7 +60,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
     bool verificarOrdenJudicialAbierta()
     {
         
-        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.Id_Participante)).Where(a => a.Activa.Equals(1));
+        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.Id_Participante)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == Programa);
         if(orden.Count() > 0)
         {
             return true;

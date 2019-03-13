@@ -183,9 +183,16 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
         string valores = btn.CommandArgument;
         int Id_Participante = Convert.ToInt32(valores.Split(',')[0]);
         int Pk_Persona = Convert.ToInt32(valores.Split(',')[1]);
+        string expediente;
 
+        using (SEPSEntities1 mlib = new SEPSEntities1())
+        {
+           
+            short idPrograma = Convert.ToInt16(Session["Programa"]);
+            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa).Single();
 
-
+            expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(Id_Participante)).Select(u => u.NR_Expediente).SingleOrDefault();
+        }
         using (Ley22Entities mylib = new Ley22Entities())
         {
             List<sp_READ_SA_PERSONAxId_Result> resul = mylib.sp_READ_SA_PERSONAxId(Id_Participante, Pk_Persona).ToList();
@@ -198,7 +205,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
                 Pasaporte = resul[0].Pasaporte,
                 Licencia = resul[0].Licencia,
                 IUP = (int)resul[0].IUP,
-                Expediente = resul[0].Expediente,
+                Expediente = expediente,
                 NB_Primero = resul[0].NB_Primero,
                 NB_Segundo = resul[0].NB_Segundo,
                 AP_Primero = resul[0].AP_Primero,

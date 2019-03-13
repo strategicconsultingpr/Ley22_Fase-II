@@ -746,6 +746,9 @@
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -758,6 +761,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelSeps.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\OrdenesJudiciale.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ParticipantesPorCharla.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
@@ -1048,9 +1054,6 @@
     <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\ListarTipodeDocumentosPorParticipanteOrdenJudicial_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1058,9 +1061,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\NivelesdelasCharla.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\OrdenesJudiciale.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\Participante.cs">

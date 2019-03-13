@@ -93,7 +93,7 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
 
             DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
             DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]));
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 

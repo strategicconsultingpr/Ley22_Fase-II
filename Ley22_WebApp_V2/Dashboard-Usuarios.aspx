@@ -119,7 +119,7 @@
 
             <asp:LoginView runat="server" ViewStateMode="Disabled">
                                         <RoleGroups>
-                                            <asp:RoleGroup Roles="Director">
+                                            <asp:RoleGroup Roles="Supervisor">
                                                 <ContentTemplate>
         
                     <div class="col-md-9">

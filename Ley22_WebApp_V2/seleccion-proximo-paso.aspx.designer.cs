@@ -66,6 +66,24 @@ public partial class seleccion_proximo_paso {
     protected global::WUC_WUCUsuario WUCUsuario;
     
     /// <summary>
+    /// NombrePrograma control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Literal NombrePrograma;
+    
+    /// <summary>
+    /// LitExpediente control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Literal LitExpediente;
+    
+    /// <summary>
     /// LitIUP control.
     /// </summary>
     /// <remarks>

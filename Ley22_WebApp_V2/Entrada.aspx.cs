@@ -21,6 +21,11 @@ public partial class Entrada : System.Web.UI.Page
          Session["Id_Participante"] = null;
          Session["NombreParticipante"] = null;
          Session["DataParticipante"] = null;  */
+        if (Session["User"] == null)
+        {
+            Response.Redirect("~/Account/Login.aspx", false);
+            return;
+        }
         if (!Page.IsPostBack)
         {
 

@@ -68,7 +68,7 @@ namespace Ley22_WebApp_V2.Account
                                     Session["NombreParticipante"] = "";
                                     if (ExistingUser.PasswordChanged)
                                     {
-                                        if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Director") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
+                                        if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
                                         {
                                             Response.Redirect("~/Dashboard-Usuarios");
                                         }

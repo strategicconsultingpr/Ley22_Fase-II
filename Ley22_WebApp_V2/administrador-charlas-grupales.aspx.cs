@@ -47,7 +47,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
             Session["FechaBase"] = new DateTime(2019, 01, 27);
 
-            if (userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "Supervisor"))
             {
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
             }

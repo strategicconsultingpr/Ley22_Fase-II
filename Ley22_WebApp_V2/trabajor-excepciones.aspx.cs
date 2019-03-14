@@ -244,7 +244,9 @@ public partial class trabajor_excepciones : System.Web.UI.Page
             {
                 var asistio = dsLey22.Calendarios.Where(u => u.Id_Calendario.Equals(element.Id_Calendario)).Single();
 
-                var TS = userManager.GetEmail(asistio.Id_TrabajadorSocial);
+                // var TS = userManager.GetEmail(asistio.Id_TrabajadorSocial);
+                ExistingUser = (ApplicationUser)Session["User"];
+                var TS = ExistingUser.FirstName + " " + ExistingUser.LastName;
 
                 if (asistio.Asistio == 1)
                 {

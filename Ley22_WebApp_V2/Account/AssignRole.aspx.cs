@@ -87,6 +87,12 @@ namespace Ley22_WebApp_V2.Account
                 {
                     userManager.AddToRole(ExistingUser.Id, DdlRol.SelectedValue);
 
+                    string mensaje = "El rol " + DdlRol.SelectedItem.Text + " se le añadió al usuario con email " + ExistingUser.Email + " correctamente.";
+                    string script = "window.onload = function(){ alert('";
+                    script += mensaje;
+                    script += "')};";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", script, true);
+
                     int TotalReg = BindGridView(1);
                     this.FillJumpToList(TotalReg);
                 }
@@ -106,6 +112,12 @@ namespace Ley22_WebApp_V2.Account
                 if (userManager.IsInRole(ExistingUser.Id, DdlRol.SelectedValue))
                 {
                     userManager.RemoveFromRole(ExistingUser.Id, DdlRol.SelectedValue);
+
+                    string mensaje = "El rol " + DdlRol.SelectedItem.Text + " se removió del usuario con email " + ExistingUser.Email + " correctamente.";
+                    string script = "window.onload = function(){ alert('";
+                    script += mensaje;
+                    script += "')};";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Rol Removido", script, true);
 
                     int TotalReg = BindGridView(1);
                     this.FillJumpToList(TotalReg);

@@ -90,6 +90,12 @@ namespace Ley22_WebApp_V2.Account
                 string body = CreateBody(callbackUrl);
                 manager.SendEmail(user.Id, "Confirmacion de su cuenta", body);
 
+                string mensaje = "El registro del usuario fué correcto. Se envió un email de confirmación al nuevo usuario.";
+                string script = "window.onload = function(){ alert('";
+                script += mensaje;
+                script += "')};";
+                ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+
                 // signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                 Response.Redirect("Register.aspx", false);

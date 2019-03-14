@@ -172,6 +172,13 @@ namespace Ley22_WebApp_V2.Account
                 });
 
                 dsLey22.SaveChanges();
+
+                string mensaje = "El programa "+DdlProgramA.SelectedItem.Text+ " se añadió al usuario con email "+ExistingUser.Email+" correctamente.";
+                string script = "window.onload = function(){ alert('";
+                script += mensaje;
+                script += "')};";
+                ClientScript.RegisterStartupScript(this.GetType(), "Programa Registrado", script, true);
+
                 int TotalReg = BindGridView(1);
                 this.FillJumpToList(TotalReg);
                 this.LoadProgramsDdlA();
@@ -201,6 +208,13 @@ namespace Ley22_WebApp_V2.Account
                 dsLey22.USUARIO_PROGRAMA.Attach(userprog);
                 dsLey22.USUARIO_PROGRAMA.Remove(userprog);
                 dsLey22.SaveChanges();
+
+                string mensaje = "El programa " + DdlProgramA.SelectedItem.Text + " se removió del usuario con email " + ExistingUser.Email + " correctamente.";
+                string script = "window.onload = function(){ alert('";
+                script += mensaje;
+                script += "')};";
+                ClientScript.RegisterStartupScript(this.GetType(), "Programa Removido", script, true);
+
                 int TotalReg = BindGridView(1);
                 this.FillJumpToList(TotalReg);
                 this.LoadProgramsDdlD();

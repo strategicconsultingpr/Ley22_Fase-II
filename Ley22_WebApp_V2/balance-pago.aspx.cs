@@ -191,6 +191,16 @@ public partial class balance_pago : System.Web.UI.Page
 
     }
 
-    
+    protected void BtnPrint_Click(object sender, EventArgs e)
+    {
+        //Response.ContentType = "application/pdf";
+        //Response.AddHeader("content-disposition", "attachment;filename=print.pdf");
+        //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+        //StringWriter sw = new StringWriter();
+        //HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+      //  panelPDF.RenderControl()
+    }
 
 }

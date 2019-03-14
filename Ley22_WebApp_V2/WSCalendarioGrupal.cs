@@ -38,6 +38,7 @@ namespace Ley22_WebApp_V2
     [System.Web.Script.Services.ScriptService]
     public class WSCalendarioGrupal : System.Web.Services.WebService
     {
+        Ley22Entities dsLey22 = new Ley22Entities();
 
         public WSCalendarioGrupal()
         {
@@ -165,6 +166,10 @@ namespace Ley22_WebApp_V2
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
+                    var orden = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_ParticipantePorCharlaGrupal.Equals(c.Id_ParticipantePorCharlaGrupal)).Select(p => p.Id_OrdenJudicial).SingleOrDefault();
+                    var balance = dsLey22.ControldePagos.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial.Equals(orden)).Select(a => a.Cantidad).Sum();
+
+                    var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial.Equals(orden)).Select(a => a.Asistio).Sum();
 
                     HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','"+ c.Id_Participante+"')\" >Eliminar</a>";
                     
@@ -174,7 +179,16 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
+                        if(balance.Equals(0.00) && status == 5)
+                        {
+                            
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio  <span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                        }
+                        else
+                        {
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio  <span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                        }
+                        
                     }
                     
                     Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "  -  " + HrefAsistio +"<br> ";

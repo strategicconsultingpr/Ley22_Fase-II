@@ -85,7 +85,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary mr-3" data-dismiss="modal">Imprimir</button>
+                    <button type="button" runat="server" class="btn btn-primary mr-3" data-dismiss="modal" OnClick="BtnPrint_Click" UseSubmitBehavior="false">Imprimir</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

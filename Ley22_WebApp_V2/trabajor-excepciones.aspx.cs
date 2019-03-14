@@ -40,7 +40,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
             ExistingUser = (ApplicationUser)Session["User"];
             userId = ExistingUser.Id;
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
-            Session["FechaBase"] = new DateTime(2019, 01, 27);
+            Session["FechaBase"] = new DateTime(2019, 02, 24);
 
             if(userManager.IsInRole(userId, "SuperAdmin"))
             {

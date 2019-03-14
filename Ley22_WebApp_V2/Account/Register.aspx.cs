@@ -65,6 +65,19 @@ namespace Ley22_WebApp_V2.Account
                 try
                 {
                     dsLey22.SaveChanges();
+
+                    string mensaje = "El registro del usuario fué correcto. Se envió un email de confirmación al nuevo usuario.";
+                    string script = "window.onload = function(){ alert('";
+                    script += mensaje;
+                    script += "')};";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+
+                    string code = manager.GenerateEmailConfirmationToken(user.Id);
+                    string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
+                    string body = CreateBody(callbackUrl);
+                    manager.SendEmail(user.Id, "Confirmacion de su cuenta", body);
+
+                    
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                 {
@@ -85,16 +98,7 @@ namespace Ley22_WebApp_V2.Account
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                string code = manager.GenerateEmailConfirmationToken(user.Id);
-                string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-                string body = CreateBody(callbackUrl);
-                manager.SendEmail(user.Id, "Confirmacion de su cuenta", body);
-
-                string mensaje = "El registro del usuario fué correcto. Se envió un email de confirmación al nuevo usuario.";
-                string script = "window.onload = function(){ alert('";
-                script += mensaje;
-                script += "')};";
-                ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+                
 
                 // signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);

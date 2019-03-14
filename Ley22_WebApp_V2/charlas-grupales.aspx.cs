@@ -43,7 +43,7 @@ public partial class charlas_grupales : System.Web.UI.Page
             ExistingUser = (ApplicationUser)Session["User"];
             userId = ExistingUser.Id;
 
-            Session["FechaBase"] = new DateTime(2019, 01, 27);
+            Session["FechaBase"] = new DateTime(2019, 02, 24);
 
  
             GenerarCalendario();

@@ -49,9 +49,6 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
             TxtFechaNacimiento.Attributes["placeholder"] = "Ej. mm/dd/yyyy";
             TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
-
-
-
         }
 
     }

@@ -63,7 +63,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             userId = ExistingUser.Id;
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
 
-            Session["FechaBase"] = new DateTime(2019, 01, 27);
+            Session["FechaBase"] = new DateTime(2019, 02, 24);
 
             if (userManager.IsInRole(userId, "SuperAdmin"))
             {
@@ -148,7 +148,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
         // se obtienen ls charlas del calendario para la fecha
         List<ListarCitasCalendario_Result> ListarCharlasCalendario = null;
-        List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
+        //List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
 
         if (DdlTrabajadorSocial.SelectedValue != "")
             using (Ley22Entities mylib = new Ley22Entities())

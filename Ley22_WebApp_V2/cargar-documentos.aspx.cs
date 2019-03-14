@@ -30,7 +30,6 @@ public partial class cargar_documentos : System.Web.UI.Page
 
     {
         using (Ley22Entities mylib = new Ley22Entities())
-
         {
             GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             GvRecepcionDocumentos.DataBind();

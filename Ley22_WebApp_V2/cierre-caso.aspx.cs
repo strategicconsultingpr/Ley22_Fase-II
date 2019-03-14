@@ -55,8 +55,6 @@ public partial class cierre_caso : System.Web.UI.Page
     protected void BtnGuardar_Click(object sender, EventArgs e)
         {
 
-
-
         if( FileUpload1.HasFile )
             {
             try
@@ -76,7 +74,7 @@ public partial class cierre_caso : System.Web.UI.Page
 
         }
 
-    void ActualizarCierreOrden( string FileName)
+    void ActualizarCierreOrden(string FileName)
         {
         using( Ley22Entities mylib = new Ley22Entities() )
             {

@@ -39,6 +39,7 @@ namespace Ley22_WebApp_V2
         {
             string text = string.Empty;
             string html = string.Empty;
+
             //if (message.Subject == "Reset Password")
             //{
             //    #region formatter

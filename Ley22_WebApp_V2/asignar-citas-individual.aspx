@@ -55,18 +55,19 @@
 
 
                         <script type="text/javascript">
-                            var $ele = $('input[name="<%=TxtHoraInicial.UniqueID %>"]');
-                                $ele.ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined /*function (selectedTime) {
+                            $(document).ready(function () {
+                                $('input[name="<%=TxtHoraInicial.UniqueID %>"]')
+                                    .ptTimeSelect({
+                                        containerClass: undefined,
+                                        containerWidth: undefined,
+                                        hoursLabel: 'Hora',
+                                        minutesLabel: 'Minutos',
+                                        setButtonLabel: 'Seleccionar',
+                                        popupImage: undefined,
+                                        onFocusDisplay: true,
+                                        zIndex: 10000,
+                                        onBeforeShow: undefined,
+                                        onClose: undefined /*function (selectedTime) {
 
 
                                         var re = /([0-9]{1,2}).*:.*([0-9]{2}).*(PM|AM)/i;
@@ -97,22 +98,25 @@
 
                                     } */
 
-                                    
-                                });
- 
-                            $('input[name="<%=TxtHoraFinal.UniqueID %>"]')
-                                .ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined
-                                });
+
+                                    });
+                            });
+
+                            $(document).ready(function () {
+                                $('input[name="<%=TxtHoraFinal.UniqueID %>"]')
+                                    .ptTimeSelect({
+                                        containerClass: undefined,
+                                        containerWidth: undefined,
+                                        hoursLabel: 'Hora',
+                                        minutesLabel: 'Minutos',
+                                        setButtonLabel: 'Seleccionar',
+                                        popupImage: undefined,
+                                        onFocusDisplay: true,
+                                        zIndex: 10000,
+                                        onBeforeShow: undefined,
+                                        onClose: undefined
+                                    });
+                            });
 
                             function checkDate(sender, args) {
                                 if (sender._selectedDate.getDate() != new Date().getDate() && sender._selectedDate < new Date()) {

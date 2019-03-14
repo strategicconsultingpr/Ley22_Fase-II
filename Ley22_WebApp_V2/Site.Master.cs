@@ -70,7 +70,7 @@ namespace Ley22_WebApp_V2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            if ((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated && Session["Role_Usuario"] != null)
             {
                 ApplicationUser ExistingUser = (ApplicationUser)Session["User"];
                 Usuario.Text = ExistingUser.UserName + "<br/><small>" + Session["Role_Usuario"].ToString() + "</small>";

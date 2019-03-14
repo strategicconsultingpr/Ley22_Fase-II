@@ -330,53 +330,53 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         TheSame = 0
     };
 
-    protected void BtnAsignarExcepcion_Click(object sender, EventArgs e)
-    {
-        string FechaInicial = TxtFecha.Text + " " + TxtHoraInicial.Text;
-        string FechaFinal = TxtFecha.Text + " " + TxtHoraFinal.Text;
+    //protected void BtnAsignarExcepcion_Click(object sender, EventArgs e)
+    //{
+    //    string FechaInicial = TxtFecha.Text + " " + TxtHoraInicial.Text;
+    //    string FechaFinal = TxtFecha.Text + " " + TxtHoraFinal.Text;
 
-        DateComparisonResult comparison;
+    //    DateComparisonResult comparison;
 
-        comparison = (DateComparisonResult)Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
+    //    comparison = (DateComparisonResult)Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
 
-        if (comparison == DateComparisonResult.Later && Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
-        {
+    //    if (comparison == DateComparisonResult.Later && Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
+    //    {
 
-            using (Ley22Entities mylib = new Ley22Entities())
-            {
+    //        using (Ley22Entities mylib = new Ley22Entities())
+    //        {
 
-                List<ListarCharlasCalendario_Result> myResult = mylib.ListarCharlasCalendario(17, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
-                List<ListarCharlasCalendario_Result> ListaCharlasXDia = myResult.FindAll(delegate (ListarCharlasCalendario_Result bk)
-                {
-                    return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
-                });
+    //            List<ListarCharlasCalendario_Result> myResult = mylib.ListarCharlasCalendario(17, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
+    //            List<ListarCharlasCalendario_Result> ListaCharlasXDia = myResult.FindAll(delegate (ListarCharlasCalendario_Result bk)
+    //            {
+    //                return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
+    //            });
 
-                if (ListaCharlasXDia.Count > 0)
-                {
-                    ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('YA EXISTE UNA CHARLA PARA ESTE MISMO DIA Y HORA!');", true);
-                    return;
-                }
-                else
-                {
-                    mylib.GuardarExcepcionCoordinadorCharlasGrupales(17, Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal));
+    //            if (ListaCharlasXDia.Count > 0)
+    //            {
+    //                ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('YA EXISTE UNA CHARLA PARA ESTE MISMO DIA Y HORA!');", true);
+    //                return;
+    //            }
+    //            else
+    //            {
+    //                mylib.GuardarExcepcionCoordinadorCharlasGrupales(17, Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal));
 
-                    GenerarCalendario();
-                }
+    //                GenerarCalendario();
+    //            }
 
-            }
-        }
-        else if (Convert.ToDateTime(FechaInicial) > Convert.ToDateTime(FechaFinal))
-        {
-            ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);
-            return;
-        }
-        else if (Convert.ToDateTime(FechaInicial) == Convert.ToDateTime(FechaFinal))
-        {
-            ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
-            return;
-        }
+    //        }
+    //    }
+    //    else if (Convert.ToDateTime(FechaInicial) > Convert.ToDateTime(FechaFinal))
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);
+    //        return;
+    //    }
+    //    else if (Convert.ToDateTime(FechaInicial) == Convert.ToDateTime(FechaFinal))
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(BtnAsignarExcepcion, BtnAsignarExcepcion.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
+    //        return;
+    //    }
 
-    }
+    //}
 
     static string UppercaseFirst(string s)
     {

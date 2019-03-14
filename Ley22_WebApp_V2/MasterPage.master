@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title></title>
+      <link rel="stylesheet" type="text/css" href="Content/jquery-ui.css" />
+      <link rel="stylesheet" type="text/css" href="Content/jquery.ptTimeSelect.css" />
       <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr","~/bundles/master2up") %>
           <%: Scripts.Render("~/bundles/modernizr","~/bundles/MsAjaxJs") %>
@@ -26,10 +28,10 @@
 
 
 <%--    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>--%>
-    <link rel="stylesheet" type="text/css" href="Content/jquery-ui.css" />
+    
 
     <!-- Plugin files below -->
-    <link rel="stylesheet" type="text/css" href="Content/jquery.ptTimeSelect.css" />
+    
     <%--<script type="text/javascript" src="js/jquery.ptTimeSelect.js"></script>--%>
 
       

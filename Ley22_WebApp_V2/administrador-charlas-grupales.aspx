@@ -8,143 +8,15 @@
             <asp:HiddenField ID="H_Id_CharlaGrupal" runat="server" />
 
     <!-- Modal Crear Excepcion -->
-     <div class="modal fade" id="modal-Asignar-Excepcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel5">Asignar Excepcion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">Fecha:</div>
-                            <div class="col">
-
-                                <asp:TextBox ID="TxtFecha" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" MaxLength="10"></asp:TextBox>
-                                <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFecha_CalendarExtender" runat="server" BehaviorID="TxtFecha_CalendarExtender" TargetControlID="TxtFecha" OnClientDateSelectionChanged="checkDate"/>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Display="Dynamic" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFecha" ForeColor="Red"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtFecha" Display="Dynamic"> </asp:RequiredFieldValidator>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col">Hora inicial:</div>
-                            <div class="col">
-                                <asp:TextBox ID="TxtHoraInicial" runat="server" class="form-control"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="TxtHoraInicial"  ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                                <asp:regularexpressionvalidator ControlToValidate="TxtHoraInicial" runat="server" errormessage="*Formato hh:mm am/pm" ForeColor ="Red"  Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))"></asp:regularexpressionvalidator>
-
-                           </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col">Hora Final:</div>
-                            <div class="col">
-                                <asp:TextBox ID="TxtHoraFinal" runat="server" class="form-control"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="TxtHoraFinal" ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido"  Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                                <asp:regularexpressionvalidator ControlToValidate="TxtHoraFinal" runat="server" errormessage="*Formato hh:mm am/pm" ForeColor ="Red"  Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))"></asp:regularexpressionvalidator>
-                             </div>
-
-                        </div>
-
-
-                        <script type="text/javascript">
-                            var $ele = $('input[name="<%=TxtHoraInicial.UniqueID %>"]');
-                                $ele.ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined /*function (selectedTime) {
-
-
-                                        var re = /([0-9]{1,2}).*:.*([0-9]{2}).*(PM|AM)/i;
-                                        var match = re.exec(selectedTime);
-                                        alert(re.exec(selectedTime));
-                                      //  alert(String(match[3]));
-                                        
-
-                                            var hr = parseInt(match[1]),
-                                                min = parseInt(match[2]),
-                                                tm = String(match[3]).toLowerCase()
-
-                                            if (tm === "am" && hr < 9) {
-
-                                                alert("Error: Time is prior to 9AM");
-                                                $ele.val("");
-                                                return;
-
-                                            } else if (tm === "pm" && (hr > 5 || (hr === 5 && min !== 0))) {
-
-                                                alert("Error: Time is after 5PM");
-                                                $ele.val("");
-                                                return;
-
-                                            }
-
-                                        
-
-                                    } */
-
-                                    
-                                });
- 
-                            $('input[name="<%=TxtHoraFinal.UniqueID %>"]')
-                                .ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined
-                                });
-
-                            function checkDate(sender, args) {
+     
+                           <%-- function checkDate(sender, args) {
                                 if (sender._selectedDate.getDate() != new Date().getDate() && sender._selectedDate < new Date()) {
                                     alert("You cannot select a day earlier than today!");
                                     sender._selectedDate = new Date();
                                     // set the date back to the current date
-                                    sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+                                    sender._textbox.set_Value(sender._selectedDate.format(sender._format))--%>
                                     
-                                }                               
-
-                            }                          
-                        </script>
-
-
-
-
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <asp:Button ID="BtnAsignarExcepcion" runat="server" Text="Completar la Excepcion" CssClass="btn btn-primary" OnClick="BtnAsignarExcepcion_Click" />
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </div>
+            
 
     <!-- Modal Cita De Trabajor Social NO ES PARA ESTO -->
 
@@ -310,34 +182,41 @@
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalCrearCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
 
                                     <script type="text/javascript">
-                                        $('input[name="<%=TxtInicialCrearCharla.UniqueID %>"]')
-                                            .ptTimeSelect({
-                                                containerClass: undefined,
-                                                containerWidth: undefined,
-                                                hoursLabel: 'Hora',
-                                                minutesLabel: 'Minutos',
-                                                setButtonLabel: 'Seleccionar',
-                                                popupImage: undefined,
-                                                onFocusDisplay: true,
-                                                zIndex: 10000,
-                                                onBeforeShow: undefined,
-                                                onClose: undefined
-                                            });
+                                        $(document).ready(function () {
+                                            $('input[name="<%=TxtInicialCrearCharla.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined,
+                                                    defaultHr:      '10',         
+                                                    defaultMin:     '00',
+                                                    defaultAmPm:    'AM'
+                                                });
+                                        });
+                                        
 
-
-                                        $('input[name="<%=TxtFinalCrearCharla.UniqueID %>"]')
-                                            .ptTimeSelect({
-                                                containerClass: undefined,
-                                                containerWidth: undefined,
-                                                hoursLabel: 'Hora',
-                                                minutesLabel: 'Minutos',
-                                                setButtonLabel: 'Seleccionar',
-                                                popupImage: undefined,
-                                                onFocusDisplay: true,
-                                                zIndex: 10000,
-                                                onBeforeShow: undefined,
-                                                onClose: undefined
-                                            });
+                                        $(document).ready(function () {
+                                            $('input[name="<%=TxtFinalCrearCharla.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined
+                                                });
+                                        });
                                     </script>
 
                                 </div>
@@ -457,34 +336,37 @@
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalModCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
 
                                     <script type="text/javascript">
-                                        $('input[name="<%=TxtIncialModCharla.UniqueID %>"]')
-                                            .ptTimeSelect({
-                                                containerClass: undefined,
-                                                containerWidth: undefined,
-                                                hoursLabel: 'Hora',
-                                                minutesLabel: 'Minutos',
-                                                setButtonLabel: 'Seleccionar',
-                                                popupImage: undefined,
-                                                onFocusDisplay: true,
-                                                zIndex: 10000,
-                                                onBeforeShow: undefined,
-                                                onClose: undefined
-                                            });
+                                        $(document).ready(function () {
+                                            $('input[name="<%=TxtIncialModCharla.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined
+                                                });
+                                        });
 
-
-                                        $('input[name="<%=TxtFinalModCharla.UniqueID %>"]')
-                                            .ptTimeSelect({
-                                                containerClass: undefined,
-                                                containerWidth: undefined,
-                                                hoursLabel: 'Hora',
-                                                minutesLabel: 'Minutos',
-                                                setButtonLabel: 'Seleccionar',
-                                                popupImage: undefined,
-                                                onFocusDisplay: true,
-                                                zIndex: 10000,
-                                                onBeforeShow: undefined,
-                                                onClose: undefined
-                                            });
+                                        $(document).ready(function () {
+                                            $('input[name="<%=TxtFinalModCharla.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined
+                                                });
+                                        });
                                     </script>
 
                                 </div>
@@ -1076,7 +958,16 @@
                                 document.getElementById("<%=DdlNivelCharlas2.ClientID %>").value = Id_NiveldeCharla;
                                 document.getElementById("<%=DdlNumeroCharla2.ClientID %>").value = NrodeParticipantes;
                                 document.getElementById("<%=TxtMaxCantParticipantes2.ClientID %>").value = NumeroCharla;
-                            }
+        }
+
+        function checkDate(sender, args) {
+            if (sender._selectedDate.getDate() != new Date().getDate() && sender._selectedDate < new Date()) {
+                alert("You cannot select a day earlier than today!");
+                sender._selectedDate = new Date();
+                // set the date back to the current date
+                sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+            }
+        }
 
     </script>
 

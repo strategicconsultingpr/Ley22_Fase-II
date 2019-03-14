@@ -41,13 +41,13 @@ namespace Ley22_WebApp_V2
 
             bundles.Add(new ScriptBundle("~/bundles/master2up").Include(
                       "~/Scripts/jquery-{version}.js",
-                      "~/Scripts/jquery-3.3.1.min.js",                                         
-                      "~/Scripts/jquery.ptTimeSelect.js",
+                      "~/Scripts/jquery-3.3.1.min.js", 
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/master2down").Include(
                       "~/Scripts/tether.min.js",
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/jquery.ptTimeSelect.js",
                       "~/Scripts/bootstrap-datetimepicker.min.js"));
         }
     }

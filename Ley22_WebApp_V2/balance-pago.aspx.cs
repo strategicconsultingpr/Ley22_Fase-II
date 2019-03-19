@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+//using iTextSharp.text;
+//using iTextSharp.text.html.simpleparser;
+//using iTextSharp.text.pdf;
 using Ley22_WebApp_V2;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Syncfusion.HtmlConverter;
+using Syncfusion.Pdf;
 
 public partial class balance_pago : System.Web.UI.Page
 {
@@ -20,6 +26,7 @@ public partial class balance_pago : System.Web.UI.Page
     Ley22Entities dsLey22 = new Ley22Entities();
     static string userId = String.Empty;
     DataParticipante du;
+    int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -70,6 +77,49 @@ public partial class balance_pago : System.Web.UI.Page
             EmailService mail = new EmailService();
             string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text,DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa ,IdDesc.Value, TxtNumeroRecibo.Text);
             mail.SendAsyncCita(du.Correo, "Recibo de Pago", body);
+
+            string Id = Session["Id_Participante"].ToString();
+            Programa = Convert.ToInt32(Session["Programa"].ToString());
+            if (!Directory.Exists(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/")))
+            {
+                Directory.CreateDirectory(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/"));
+            }
+
+            // FileStream fs = new FileStream("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value+".pdf",FileMode.Create);
+            // Document document = new Document(iTextSharp.text.PageSize.LETTER, 0, 0, 0, 0);
+            // PdfWriter pw = PdfWriter.GetInstance(document, fs);
+
+            //StringBuilder sbHtmlText = new StringBuilder();
+            //sbHtmlText.Append(body);
+
+            //Document document = new Document();
+            //PdfWriter.GetInstance(document, fs);
+
+            //document.Open();
+            //HTMLWorker hw = new HTMLWorker(document);
+            //hw.Parse(new StringReader(sbHtmlText.ToString()));
+            // document.Add(new Paragraph(body));
+            //document.Close();
+            
+            HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter(HtmlRenderingEngine.WebKit);
+            WebKitConverterSettings webKitSettings = new WebKitConverterSettings();
+
+            //string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/";
+            string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+
+            webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
+
+            string bodyPDF = CreateBodyPDF(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, IdDesc.Value, TxtNumeroRecibo.Text);
+
+
+            htmlConverter.ConverterSettings = webKitSettings;
+
+            PdfDocument document = htmlConverter.Convert(bodyPDF, baseUrl);
+
+            document.Save(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value + ".pdf"));
+            
+            document.Close(true);
+            
 
         }
         BidGrid(sender, e);
@@ -155,7 +205,7 @@ public partial class balance_pago : System.Web.UI.Page
             DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
             DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
-            DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            DdlNumeroOrdenJudicial.Items.Insert(0, new System.Web.UI.WebControls.ListItem("-Seleccione-", "0"));
 
         }
 
@@ -191,6 +241,28 @@ public partial class balance_pago : System.Web.UI.Page
 
     }
 
+    private string CreateBodyPDF(string FirstName, string LastName, string Fecha, string CantidadPagada, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
+    {
+        string body = string.Empty;
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailReciboPago_PDF.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{Participante}", FirstName + " " + LastName);
+        body = body.Replace("{Fecha}", Fecha);
+        body = body.Replace("{CantidadPagada}", "$" + CantidadPagada);
+        body = body.Replace("{Metodo}", Metodo);
+        body = body.Replace("{Programa}", Programa);
+        body = body.Replace("{Descripcion}", Descripcion);
+        body = body.Replace("{Order}", Order);
+        body = body.Replace("{Cantidad}", "$" + Cantidad);
+        body = body.Replace("{Recibo}", Recibo);
+
+        return body;
+
+    }
+
     protected void BtnPrint_Click(object sender, EventArgs e)
     {
         //Response.ContentType = "application/pdf";
@@ -200,7 +272,23 @@ public partial class balance_pago : System.Web.UI.Page
         //StringWriter sw = new StringWriter();
         //HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-      //  panelPDF.RenderControl()
+        //panelPDF.RenderControl(hw);
+        //StringReader sr = new StringReader(sw.ToString());
+        //Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 10f);
+        //HTMLWorker htmlParse = new HTMLWorker(pdfDoc);
+        //PdfWriter.GetInstance(pdfDoc,Response.OutputStream);
+         
+        //pdfDoc.Open();
+        //htmlParse.Parse(sr);
+        //pdfDoc.Close();
+
+        //Response.Write(pdfDoc);
+        //Response.End();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        return;
     }
 
 }

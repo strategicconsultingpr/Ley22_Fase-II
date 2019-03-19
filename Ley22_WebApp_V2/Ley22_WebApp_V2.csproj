@@ -61,6 +61,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Desktop\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
@@ -110,6 +113,15 @@
     </Reference>
     <Reference Include="SendGrid, Version=9.10.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>packages\Sendgrid.9.10.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=16.4460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.HtmlToPdfConverter.QtWebKit.AspNet.16.4.0.52\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.HtmlConverter.Base, Version=16.4460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.HtmlToPdfConverter.QtWebKit.AspNet.16.4.0.52\lib\net46\Syncfusion.HtmlConverter.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=16.4460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.HtmlToPdfConverter.QtWebKit.AspNet.16.4.0.52\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -216,12 +228,16 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="administrador-charlas-grupales.aspx" />
+    <Content Include="bin\itextsharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dashboard-Usuarios.aspx" />
     <Content Include="DocumentosPorParticipantes\61\649373\1-Ley22-ToDo.txt" />
     <Content Include="EmailCitaParticipante.html" />
     <Content Include="EmailConfirmation.html" />
     <Content Include="EmailPassword.html" />
     <Content Include="EmailReciboPago.html" />
+    <Content Include="EmailReciboPago_PDF.html" />
     <Content Include="images\64951510234941531.png" />
     <Content Include="images\derecha.png" />
     <Content Include="images\facebook-circle-colored.png" />
@@ -302,6 +318,45 @@
     <Content Include="nuevo-confirmacion.aspx" />
     <Content Include="nuevo-usuario.aspx" />
     <Content Include="pruebas.aspx" />
+    <Content Include="bin\QtBinaries\icudt49.dll" />
+    <Content Include="bin\QtBinaries\icuin49.dll" />
+    <Content Include="bin\QtBinaries\icuuc49.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qdds.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qgif.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qicns.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qico.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qjp2.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qjpeg.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qmng.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qsvg.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qtga.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qtiff.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qwbmp.dll" />
+    <Content Include="bin\QtBinaries\imageformats\qwebp.dll" />
+    <Content Include="bin\QtBinaries\libEGL.dll" />
+    <Content Include="bin\QtBinaries\libGLESv2.dll" />
+    <Content Include="bin\QtBinaries\platforms\qminimal.dll" />
+    <Content Include="bin\QtBinaries\platforms\qoffscreen.dll" />
+    <Content Include="bin\QtBinaries\platforms\qwindows.dll" />
+    <Content Include="bin\QtBinaries\Qt5Core.dll" />
+    <Content Include="bin\QtBinaries\Qt5Gui.dll" />
+    <Content Include="bin\QtBinaries\Qt5Multimedia.dll" />
+    <Content Include="bin\QtBinaries\Qt5MultimediaWidgets.dll" />
+    <Content Include="bin\QtBinaries\Qt5Network.dll" />
+    <Content Include="bin\QtBinaries\Qt5OpenGL.dll" />
+    <Content Include="bin\QtBinaries\Qt5Positioning.dll" />
+    <Content Include="bin\QtBinaries\Qt5PrintSupport.dll" />
+    <Content Include="bin\QtBinaries\Qt5Qml.dll" />
+    <Content Include="bin\QtBinaries\Qt5Quick.dll" />
+    <Content Include="bin\QtBinaries\Qt5Sensors.dll" />
+    <Content Include="bin\QtBinaries\Qt5Sql.dll" />
+    <Content Include="bin\QtBinaries\Qt5Svg.dll" />
+    <Content Include="bin\QtBinaries\Qt5WebChannel.dll" />
+    <Content Include="bin\QtBinaries\Qt5WebKit.dll" />
+    <Content Include="bin\QtBinaries\Qt5WebKitWidgets.dll" />
+    <Content Include="bin\QtBinaries\Qt5Widgets.dll" />
+    <Content Include="bin\QtBinaries\Syncfusion.WebKitWrapper.dll" />
+    <Content Include="bin\QtBinaries\zlib1.dll" />
     <Content Include="recaudos-busqueda-usuario.aspx" />
     <Content Include="recaudos-resultados-busqueda.aspx" />
     <Content Include="recepcion-busquedaUsuario.aspx" />

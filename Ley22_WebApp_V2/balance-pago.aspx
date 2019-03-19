@@ -25,8 +25,8 @@
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
     <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
     <!-- Modal -->
-    <div class="modal fade" id="imprimir-recibo-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="imprimir-recibo-modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document" runat="server" id="panelPDF">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,7 +85,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" runat="server" class="btn btn-primary mr-3" data-dismiss="modal" OnClick="BtnPrint_Click" UseSubmitBehavior="false">Imprimir</button>
+                    <asp:Button type="button" runat="server" class="btn btn-primary mr-3" Text="Imprimir"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

@@ -111,9 +111,10 @@ public partial class balance_pago : System.Web.UI.Page
 
             string bodyPDF = CreateBodyPDF(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, IdDesc.Value, TxtNumeroRecibo.Text);
 
+            webKitSettings.SinglePageLayout = Syncfusion.Pdf.HtmlToPdf.SinglePageLayout.None;
 
             htmlConverter.ConverterSettings = webKitSettings;
-
+            
             PdfDocument document = htmlConverter.Convert(bodyPDF, baseUrl);
 
             document.Save(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value + ".pdf"));

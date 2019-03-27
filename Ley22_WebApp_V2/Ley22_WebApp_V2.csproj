@@ -317,6 +317,9 @@
     <Content Include="Mensajes.aspx" />
     <Content Include="nuevo-confirmacion.aspx" />
     <Content Include="nuevo-usuario.aspx" />
+    <Content Include="OrdenNuevo.aspx" />
+    <Content Include="ParticipanteNuevo.aspx" />
+    <Content Include="ParticipanteNuevo2.aspx" />
     <Content Include="pruebas.aspx" />
     <Content Include="bin\QtBinaries\icudt49.dll" />
     <Content Include="bin\QtBinaries\icuin49.dll" />
@@ -887,6 +890,27 @@
     </Compile>
     <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenNuevo.aspx.cs">
+      <DependentUpon>OrdenNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenNuevo.aspx.designer.cs">
+      <DependentUpon>OrdenNuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipanteNuevo.aspx.cs">
+      <DependentUpon>ParticipanteNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParticipanteNuevo.aspx.designer.cs">
+      <DependentUpon>ParticipanteNuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipanteNuevo2.aspx.cs">
+      <DependentUpon>ParticipanteNuevo2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParticipanteNuevo2.aspx.designer.cs">
+      <DependentUpon>ParticipanteNuevo2.aspx</DependentUpon>
     </Compile>
     <Compile Include="pruebas.aspx.cs">
       <DependentUpon>pruebas.aspx</DependentUpon>

@@ -137,7 +137,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
     protected void BtnCrearNuevaCuenta_Click(object sender, EventArgs e)
     {
         Session["DataParticipante"] = null;
-        Response.Redirect("nuevo-usuario.aspx", false);
+        Response.Redirect("ParticipanteNuevo.aspx", false);
     }
 
 

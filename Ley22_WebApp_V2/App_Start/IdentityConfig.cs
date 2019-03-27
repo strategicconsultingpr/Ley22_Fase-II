@@ -86,10 +86,10 @@ namespace Ley22_WebApp_V2
            // msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
            // msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
-            SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
+            SmtpClient smtpClient = new SmtpClient("vassmcaweb", Convert.ToInt32(25));
             System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
             smtpClient.Credentials = credentials;
-            smtpClient.EnableSsl = true;
+           // smtpClient.EnableSsl = true;
             smtpClient.Send(msg);
         }
 
@@ -120,10 +120,10 @@ namespace Ley22_WebApp_V2
             msg.AlternateViews.Add(imgview);
             msg.Body = lr.ContentId;
 
-            SmtpClient smtpClient = new SmtpClient("smtp.live.com", Convert.ToInt32(25));
+            SmtpClient smtpClient = new SmtpClient("vassmcaweb", Convert.ToInt32(25));
             System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
             smtpClient.Credentials = credentials;
-            smtpClient.EnableSsl = true;
+            //smtpClient.EnableSsl = true;
             smtpClient.Send(msg);
         }
     }

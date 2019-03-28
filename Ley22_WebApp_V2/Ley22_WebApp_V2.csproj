@@ -789,10 +789,16 @@
     <Compile Include="Old_App_Code\Calendario.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\CasoCriminal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\CharlaGrupal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\DesempleoRazon.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
@@ -887,6 +893,9 @@
     </Compile>
     <Compile Include="Old_App_Code\SA_Ref_RazonTH.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Tribunal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>

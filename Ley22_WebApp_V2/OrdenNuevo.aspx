@@ -403,9 +403,9 @@
                         <div class="col-md-3">
 
                             <div class="form-group">
-                                <label for="primer-apellido">Municipio (*)</label>
-                                <asp:TextBox ID="TxtMunicipio" runat="server" CssClass="form-control" placeholder="Ej. San Juan"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtMunicipio" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <label for="municipio">Pueblo (*)</label>
+                                <asp:DropDownList ID="DdlPueblo" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPueblo" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
 
                         </div>
@@ -460,9 +460,9 @@
                         <div class="col-md-3">
 
                             <div class="form-group">
-                                <label for="primer-apellido">Municipio (*)</label>
-                                <asp:TextBox ID="TxtMunicipioPostal" runat="server" CssClass="form-control" placeholder="Ej. San Juan"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtMunicipioPostal" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <label for="municipio-postal">Pueblo (*)</label>
+                                <asp:DropDownList ID="DdlPuebloPostal" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPuebloPostal" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
 
                         </div>
@@ -508,8 +508,12 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="tratamiento">¿Condición de salud? (*)</label>
-                                <asp:DropDownList ID="DdlTratamiento" runat="server" class="form-control"></asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTratamiento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                <asp:DropDownList ID="DdlTratamiento" runat="server" class="form-control">
+                                    <asp:ListItem Value="0">No condición de salud</asp:ListItem>
+                                    <asp:ListItem Value="1">Mental</asp:ListItem>
+                                    <asp:ListItem Value="2">Fisica</asp:ListItem>
+                                </asp:DropDownList>
+                               <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTratamiento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>--%>
                             </div>
                         </div>
                         <!-- col -->
@@ -517,7 +521,11 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="impedimento">¿Tiene algún impedimento? (*)</label>
-                                <asp:DropDownList ID="DdlImpedimento" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:DropDownList ID="DdlImpedimento" runat="server" class="form-control">
+                                    <asp:ListItem Value="0">No impedimento</asp:ListItem>
+                                    <asp:ListItem Value="1">Mental</asp:ListItem>
+                                    <asp:ListItem Value="2">Fisica</asp:ListItem>
+                                </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlImpedimento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
                         </div>

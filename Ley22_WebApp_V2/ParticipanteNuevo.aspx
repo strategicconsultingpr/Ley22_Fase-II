@@ -28,6 +28,8 @@
                             <div class="form-group">
                                 <label for="n-seguro-social">Expediente</label>
                                 <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="30"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtExpediente" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtExpediente" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                         </div>
 

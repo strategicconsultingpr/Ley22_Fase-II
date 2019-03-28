@@ -270,7 +270,7 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ej. assmca@assmca.com"></asp:TextBox>
-                               <!-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtEmail" Display="Dynamic"></asp:RequiredFieldValidator> -->
+                               <!-- <asp:RequiredFieldValidator ID="RequiredFieldValidator122" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtEmail" Display="Dynamic"></asp:RequiredFieldValidator> -->
                                <!-- <asp:RegularExpressionValidator ID="RegularExpressionValidator77" runat="server" ErrorMessage="* El correo no se válido " ControlToValidate="TxtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator> -->
                             </div>
 
@@ -361,8 +361,8 @@
                         </div>
                         <!-- col -->
 
-                    </div>
-                </div>--%>
+                    </div>--%>
+                </div>
                 <!-- col-9 -->
 
             </div>
@@ -370,7 +370,7 @@
 
             <div class="row pb-4 mb-4 bb">
                 <div class="col-md-2 text-right">
-                    <strong>Dirección</strong>
+                    <strong>Dirección Fisica</strong>
                 </div>
 
                 <div class="col-md-10">
@@ -428,6 +428,201 @@
                     </div>
                 </div>
                 <!-- col-9 -->
+                <div class="col-md-2 text-right">
+                    <strong>Dirección Postal</strong>
+                </div>
+                 <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="primer-nombre">Dirección Linea 1 (*)</label>
+
+                                <asp:TextBox ID="TxtPostalLinea1" runat="server" CssClass="form-control" placeholder="Ej. Calle / Avenida  "></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPostalLinea1" Display="Dynamic"></asp:RequiredFieldValidator>
+
+
+                            </div>
+
+                        </div>
+                        <!-- col -->
+
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="segundo-nombre">Dirección Linea 2</label>
+                                <asp:TextBox ID="TxtPostalLinea2" runat="server" CssClass="form-control" placeholder="Ej. Calle / Avenida  "></asp:TextBox>
+                            </div>
+
+                        </div>
+                        <!-- col -->
+
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="primer-apellido">Municipio (*)</label>
+                                <asp:TextBox ID="TxtMunicipioPostal" runat="server" CssClass="form-control" placeholder="Ej. San Juan"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtMunicipioPostal" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+
+                        </div>
+                        <!-- col -->
+
+
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label for="segundo-apellido">Código Postal (*)</label>
+                                <asp:TextBox ID="TxtCodigoPostalPostal" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtCodigoPostalPostal" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+
+                        </div>
+                        <!-- col -->
+
+
+
+                    </div>
+                </div>
+                        </div>
+
+
+             <div class="row pb-4 mb-4 bb">
+                <div class="col-md-2 text-right">
+                    <strong>Otros datos</strong>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <!-- col -->
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="plan-medico">Plan Médico (*)</label>
+                                <asp:DropDownList ID="DdlPlanMedico" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlPlanMedico" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <!-- col -->
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="tratamiento">¿Condición de salud? (*)</label>
+                                <asp:DropDownList ID="DdlTratamiento" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTratamiento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <!-- col -->
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="impedimento">¿Tiene algún impedimento? (*)</label>
+                                <asp:DropDownList ID="DdlImpedimento" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlImpedimento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                         <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="grado">Último grado completado (*)</label>
+                                <asp:DropDownList ID="DdlGrado" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlGrado" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="lugar-trabajo">Lugar de trabajo</label>
+                                <asp:TextBox ID="TxtTrabajo" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTrabajo" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="locupacion">Ocupación</label>
+                                <asp:TextBox ID="TxtOcupacion" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtOcupacion" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <p>&nbsp;</p>
+                                <label class="form-check-label">
+                                    <asp:CheckBox ID="ChkNoTrabajo" runat="server" class="form-check-input" />
+                                    No Trabajo
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="desempleado">Motivo de no empleabilidad</label>
+                                <asp:DropDownList ID="DdlDesempleado" runat="server" class="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlDesempleado" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                 </div>
+
+
+            <div class="row pb-4 mb-4 bb">
+                <div class="col-md-2 text-right">
+                    <strong>Estructura Familiar</strong>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="row">
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="composicion-familiar">Composición familiar</label>
+                                <asp:TextBox ID="TxtFamiliar" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtFamiliar" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="nombre-pareja">Nombre de esposo(a) o pareja</label>
+                                <asp:TextBox ID="TxtPareja" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPareja" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="nombre-padre">Nombre de padre</label>
+                                <asp:TextBox ID="TxtPadre" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPadre" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="nombre-madre">Nombre de madre</label>
+                                <asp:TextBox ID="TxtMadre" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtMadre" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                     </div>
+
 
             </div>
             <!-- row -->
@@ -439,9 +634,9 @@
 
                 <div class="col-md-10">
 
-                   <%-- <asp:Button ID="BtnCrear" runat="server" Text="Crear" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnCrear_Click"/>
+                    <asp:Button ID="BtnCrear" runat="server" Text="Crear" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnCrear_Click"/>
 
-                    <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click"/>--%>
+                    <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click"/>
 
                 </div>
                 <!-- col-9 -->

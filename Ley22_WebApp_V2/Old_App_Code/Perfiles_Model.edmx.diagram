@@ -62,6 +62,8 @@
         <EntityTypeShape EntityType="SEPSModel1.SA_LKP_CATEGORIAS_CENTROS_PRIVADOS" Width="1.5" PointX="5.375" PointY="19.75" />
         <EntityTypeShape EntityType="SEPSModel1.SA_PERSONA_PROGRAMA" Width="1.5" PointX="17" PointY="22.75" />
         <AssociationConnector Association="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_CENTRO" />
+        <EntityTypeShape EntityType="SEPSModel1.SA_PERSONA" Width="1.5" PointX="19.375" PointY="7" />
+        <AssociationConnector Association="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_PERSONA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

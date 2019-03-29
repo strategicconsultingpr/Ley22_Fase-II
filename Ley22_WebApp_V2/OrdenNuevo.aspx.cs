@@ -21,13 +21,28 @@ namespace Ley22_WebApp_V2
         {
             ExistingUser = (ApplicationUser)Session["User"];
             sa_persona = (Data_SA_Persona)Session["SA_Persona"];
-            
-            if (Request.UrlReferrer != null)
-            {
-                prevPage = Request.UrlReferrer.ToString();
-            }
 
-            LoadDropDownList();
+            if (!Page.IsPostBack)
+            {
+                if (Request.UrlReferrer != null)
+                {
+                    prevPage = Request.UrlReferrer.ToString();
+                }
+
+                TxtIUP.Text = sa_persona.PK_Persona.ToString();
+
+                if(Session["Expediente"] != null)
+                {
+                    TxtExpediente.Text = Session["Expediente"].ToString();
+                    
+                }
+                else
+                {
+                    Response.Redirect("ParticipanteNuevo.aspx", false);
+                }
+
+                LoadDropDownList();
+            }
         }
 
         void LoadDropDownList()
@@ -40,7 +55,7 @@ namespace Ley22_WebApp_V2
             DdlTribunal.DataBind();
             DdlTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            var estados_civiles = dsPerfil.SA_LKP_TEDS_ESTADO_MARITAL.Where(a => a.Active.Equals(1)).Select(r => new ListItem { Value = r.PK_EstadoMarital.ToString(), Text = r.DE_EstadoMarital }).ToList();
+            var estados_civiles = dsPerfil.SA_LKP_TEDS_ESTADO_MARITAL.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_EstadoMarital.ToString(), Text = r.DE_EstadoMarital }).ToList();
 
             DdlEstadoCivil.DataValueField = "Value";
             DdlEstadoCivil.DataTextField = "Text";
@@ -48,7 +63,7 @@ namespace Ley22_WebApp_V2
             DdlEstadoCivil.DataBind();
             DdlEstadoCivil.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            var pueblos = dsPerfil.SA_LKP_MUNICIPIO_RESIDENCIA.Where(a => a.Active.Equals(1)).Select(r => new ListItem { Value = r.PK_Municipio.ToString(), Text = r.DE_Municipio }).ToList();
+            var pueblos = dsPerfil.SA_LKP_MUNICIPIO_RESIDENCIA.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_Municipio.ToString(), Text = r.DE_Municipio }).ToList();
 
             DdlPueblo.DataValueField = "Value";
             DdlPueblo.DataTextField = "Text";
@@ -62,7 +77,7 @@ namespace Ley22_WebApp_V2
             DdlPuebloPostal.DataBind();
             DdlPuebloPostal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            var planesmedicos = dsPerfil.SA_LKP_TEDS_SEGURO_SALUD.Where(a => a.Active.Equals(1)).Select(r => new ListItem { Value = r.PK_SeguroSalud.ToString(), Text = r.DE_SeguroSalud }).ToList();
+            var planesmedicos = dsPerfil.SA_LKP_TEDS_SEGURO_SALUD.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_SeguroSalud.ToString(), Text = r.DE_SeguroSalud }).ToList();
 
             DdlPlanMedico.DataValueField = "Value";
             DdlPlanMedico.DataTextField = "Text";
@@ -70,7 +85,7 @@ namespace Ley22_WebApp_V2
             DdlPlanMedico.DataBind();
             DdlPlanMedico.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            var grados = dsPerfil.SA_LKP_TEDS_GRADO.Where(a => a.Active.Equals(1)).Select(r => new ListItem { Value = r.PK_Grado.ToString(), Text = r.DE_Grado}).ToList();
+            var grados = dsPerfil.SA_LKP_TEDS_GRADO.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_Grado.ToString(), Text = r.DE_Grado}).ToList();
 
             DdlGrado.DataValueField = "Value";
             DdlGrado.DataTextField = "Text";
@@ -90,7 +105,7 @@ namespace Ley22_WebApp_V2
         protected void BtnCrear_Click(object sender, EventArgs e)
         {
             using (Ley22Entities mylib = new Ley22Entities())
-                mylib.GuardarCasoCriminal(Convert.ToInt32(Session["Id_Participante"]), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), 
+                mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), 
                     Convert.ToDateTime(TxtSentencia.Text),Txtalcohol.Text,Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text, Convert.ToDateTime(TxtFechaOrden.Text),
                     Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
                     Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text,TxtTelHogar.Text, 
@@ -100,12 +115,23 @@ namespace Ley22_WebApp_V2
                     TxtTrabajo.Text,TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
                     TxtPareja.Text, TxtPadre.Text,TxtMadre.Text);
 
-               // mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]));
+            string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
+            string script = "window.onload = function(){ alert('";
+            script += mensaje;
+            script += "')};";
+            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", script, true);
+
+            Response.Redirect("seleccion-proximo-paso.aspx", false);
+            // mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]));
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-
+            if(prevPage != "ParticipanteNuevo.aspx")
+            {
+                Response.Redirect(prevPage, false);
+            }
+            
         }
     }
 }

@@ -83,6 +83,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<SA_Ref_RazonTH> SA_Ref_RazonTH { get; set; }
         public virtual DbSet<SA_LKP_CATEGORIAS_CENTROS_PRIVADOS> SA_LKP_CATEGORIAS_CENTROS_PRIVADOS { get; set; }
         public virtual DbSet<SA_PERSONA_PROGRAMA> SA_PERSONA_PROGRAMA { get; set; }
+        public virtual DbSet<SA_PERSONA> SA_PERSONA { get; set; }
     
         public virtual ObjectResult<SPR_PERFILES_LEY22_Result> SPR_PERFILES_LEY22(Nullable<int> pK_Episodio)
         {

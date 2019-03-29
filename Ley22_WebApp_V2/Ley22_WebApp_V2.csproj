@@ -786,6 +786,9 @@
     <Compile Include="nuevo-usuario.aspx.designer.cs">
       <DependentUpon>nuevo-usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\BusquedaSencilladePersonasRecepcion_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\Calendario.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1179,7 +1182,7 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\SA_PERSONA.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\SA_USUARIO_PERMISO_Mapping.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>

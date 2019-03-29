@@ -23,5 +23,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<int> PK_Old { get; set; }
     
         public virtual SA_PROGRAMA SA_PROGRAMA { get; set; }
+        public virtual SA_PERSONA SA_PERSONA { get; set; }
     }
 }

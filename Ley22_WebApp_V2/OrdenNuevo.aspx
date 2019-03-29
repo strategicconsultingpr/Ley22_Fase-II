@@ -98,7 +98,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="n-seguro-social">Expediente</label>
-                                <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="30"></asp:TextBox>
+                                <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="30" ReadOnly="true"></asp:TextBox>
+                                
                             </div>
                         </div>
                         <!-- col -->
@@ -644,7 +645,7 @@
 
                     <asp:Button ID="BtnCrear" runat="server" Text="Crear" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnCrear_Click"/>
 
-                    <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click"/>
+                    <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false"/>
 
                 </div>
                 <!-- col-9 -->

@@ -442,6 +442,26 @@ warning 6002: The table/view 'SEPS_Test.dbo.SA_NewData' does not have a primary 
           <Property Name="FK_FamMilitar" Type="int" />
           <Property Name="FK_Genero" Type="int" />
         </EntityType>
+        <EntityType Name="SA_PERSONA">
+          <Key>
+            <PropertyRef Name="PK_Persona" />
+          </Key>
+          <Property Name="PK_Persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NR_SeguroSocial" Type="char" MaxLength="9" />
+          <Property Name="FK_Sexo" Type="tinyint" Nullable="false" />
+          <Property Name="AP_Primero" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="AP_Segundo" Type="varchar" MaxLength="30" />
+          <Property Name="NB_Primero" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NB_Segundo" Type="varchar" MaxLength="30" />
+          <Property Name="FE_Nacimiento" Type="datetime" Nullable="false" />
+          <Property Name="FK_Veterano" Type="tinyint" Nullable="false" />
+          <Property Name="FK_GrupoEtnico" Type="tinyint" Nullable="false" />
+          <Property Name="FK_Sesion" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TI_Edicion" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FE_Edicion" Type="datetime" Nullable="false" />
+          <Property Name="NR_ClientId_Legacy" Type="varchar" MaxLength="12" />
+          <Property Name="PK_Old" Type="int" />
+        </EntityType>
         <EntityType Name="SA_PERSONA_PROGRAMA">
           <Key>
             <PropertyRef Name="FK_Persona" />
@@ -905,6 +925,18 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SA_PERSONA_CENTRO_SA_PERSONA">
+          <End Role="SA_PERSONA" Type="Self.SA_PERSONA" Multiplicity="1" />
+          <End Role="SA_PERSONA_PROGRAMA" Type="Self.SA_PERSONA_PROGRAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SA_PERSONA">
+              <PropertyRef Name="PK_Persona" />
+            </Principal>
+            <Dependent Role="SA_PERSONA_PROGRAMA">
+              <PropertyRef Name="FK_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SPC_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NR_SeguroSocial" Type="char" Mode="In" />
           <Parameter Name="PK_Programa" Type="smallint" Mode="In" />
@@ -982,6 +1014,7 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
           <EntitySet Name="SA_LKP_TEDS_VIA_UTILIZACION" EntityType="Self.SA_LKP_TEDS_VIA_UTILIZACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_LKP_TIEMPO_RESIDENCIA" EntityType="Self.SA_LKP_TIEMPO_RESIDENCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_LKP_TIEMPO_ULT_TRAT" EntityType="Self.SA_LKP_TIEMPO_ULT_TRAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SA_PERSONA" EntityType="Self.SA_PERSONA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_PERSONA_PROGRAMA" EntityType="Self.SA_PERSONA_PROGRAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_PROGRAMA" EntityType="Self.SA_PROGRAMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SA_Ref_CompFamilia" EntityType="Self.SA_Ref_CompFamilia" Schema="dbo" store:Type="Tables" />
@@ -1298,6 +1331,10 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
           </EntitySet>
           <AssociationSet Name="FK_SA_PERSONA_CENTRO_SA_CENTRO" Association="Self.FK_SA_PERSONA_CENTRO_SA_CENTRO">
             <End Role="SA_PROGRAMA" EntitySet="SA_PROGRAMA" />
+            <End Role="SA_PERSONA_PROGRAMA" EntitySet="SA_PERSONA_PROGRAMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SA_PERSONA_CENTRO_SA_PERSONA" Association="Self.FK_SA_PERSONA_CENTRO_SA_PERSONA">
+            <End Role="SA_PERSONA" EntitySet="SA_PERSONA" />
             <End Role="SA_PERSONA_PROGRAMA" EntitySet="SA_PERSONA_PROGRAMA" />
           </AssociationSet>
         </EntityContainer>
@@ -2131,6 +2168,11 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
             <Parameter Name="FK_GrupoEtnico" Mode="In" Type="String" />
             <Parameter Name="FK_Sesion" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="SA_PERSONA" EntityType="SEPSModel1.SA_PERSONA" />
+          <AssociationSet Name="FK_SA_PERSONA_CENTRO_SA_PERSONA" Association="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_PERSONA">
+            <End Role="SA_PERSONA" EntitySet="SA_PERSONA" />
+            <End Role="SA_PERSONA_PROGRAMA" EntitySet="SA_PERSONA_PROGRAMA" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SPR_PERFILES_LEY22_Result">
           <Property Type="Int32" Name="PK_NR_Perfil" Nullable="false" />
@@ -2284,6 +2326,7 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
           <Property Name="FE_Edicion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PK_Old" Type="Int32" />
           <NavigationProperty Name="SA_PROGRAMA" Relationship="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_CENTRO" FromRole="SA_PERSONA_PROGRAMA" ToRole="SA_PROGRAMA" />
+          <NavigationProperty Name="SA_PERSONA" Relationship="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_PERSONA" FromRole="SA_PERSONA_PROGRAMA" ToRole="SA_PERSONA" />
         </EntityType>
         <Association Name="FK_SA_PERSONA_CENTRO_SA_CENTRO">
           <End Type="SEPSModel1.SA_PROGRAMA" Role="SA_PROGRAMA" Multiplicity="1">
@@ -2296,6 +2339,39 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
             </Principal>
             <Dependent Role="SA_PERSONA_PROGRAMA">
               <PropertyRef Name="FK_Programa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SA_PERSONA">
+          <Key>
+            <PropertyRef Name="PK_Persona" />
+          </Key>
+          <Property Name="PK_Persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NR_SeguroSocial" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="FK_Sexo" Type="Byte" Nullable="false" />
+          <Property Name="AP_Primero" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AP_Segundo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Primero" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Segundo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FE_Nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_Veterano" Type="Byte" Nullable="false" />
+          <Property Name="FK_GrupoEtnico" Type="Byte" Nullable="false" />
+          <Property Name="FK_Sesion" Type="Guid" Nullable="false" />
+          <Property Name="TI_Edicion" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FE_Edicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NR_ClientId_Legacy" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PK_Old" Type="Int32" />
+          <NavigationProperty Name="SA_PERSONA_PROGRAMA" Relationship="SEPSModel1.FK_SA_PERSONA_CENTRO_SA_PERSONA" FromRole="SA_PERSONA" ToRole="SA_PERSONA_PROGRAMA" />
+        </EntityType>
+        <Association Name="FK_SA_PERSONA_CENTRO_SA_PERSONA">
+          <End Type="SEPSModel1.SA_PERSONA" Role="SA_PERSONA" Multiplicity="1" />
+          <End Type="SEPSModel1.SA_PERSONA_PROGRAMA" Role="SA_PERSONA_PROGRAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SA_PERSONA">
+              <PropertyRef Name="PK_Persona" />
+            </Principal>
+            <Dependent Role="SA_PERSONA_PROGRAMA">
+              <PropertyRef Name="FK_Persona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3171,6 +3247,27 @@ warning 6002: The table/view 'SEPS_Test.dbo.VW_PERSONA' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPU_PERSONA" FunctionName="SEPSModel1.Store.SPU_PERSONA" />
+          <EntitySetMapping Name="SA_PERSONA">
+            <EntityTypeMapping TypeName="SEPSModel1.SA_PERSONA">
+              <MappingFragment StoreEntitySet="SA_PERSONA">
+                <ScalarProperty Name="PK_Old" ColumnName="PK_Old" />
+                <ScalarProperty Name="NR_ClientId_Legacy" ColumnName="NR_ClientId_Legacy" />
+                <ScalarProperty Name="FE_Edicion" ColumnName="FE_Edicion" />
+                <ScalarProperty Name="TI_Edicion" ColumnName="TI_Edicion" />
+                <ScalarProperty Name="FK_Sesion" ColumnName="FK_Sesion" />
+                <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
+                <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
+                <ScalarProperty Name="FE_Nacimiento" ColumnName="FE_Nacimiento" />
+                <ScalarProperty Name="NB_Segundo" ColumnName="NB_Segundo" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Segundo" ColumnName="AP_Segundo" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="FK_Sexo" ColumnName="FK_Sexo" />
+                <ScalarProperty Name="NR_SeguroSocial" ColumnName="NR_SeguroSocial" />
+                <ScalarProperty Name="PK_Persona" ColumnName="PK_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

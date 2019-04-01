@@ -62,7 +62,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
     bool verificarOrdenJudicialAbierta()
     {
         
-        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == Programa);
+        var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.FK_Programa == Programa);
         if(orden.Count() > 0)
         {
             return true;
@@ -76,7 +76,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
     bool verificarFaltaDeDocumento()
     {
-        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_OrdenJudicial);
+        var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_CasoCriminal);
         var docs = ley22.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
 
         if((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))

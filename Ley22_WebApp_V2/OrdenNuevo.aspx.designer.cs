@@ -274,13 +274,13 @@ namespace Ley22_WebApp_V2 {
         protected global::System.Web.UI.WebControls.TextBox TxtTelHogar;
         
         /// <summary>
-        /// CustomValidator1 control.
+        /// RequiredFieldValidator66 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator66;
         
         /// <summary>
         /// RegularExpressionValidator3 control.
@@ -301,13 +301,13 @@ namespace Ley22_WebApp_V2 {
         protected global::System.Web.UI.WebControls.TextBox TxtTelefonoFamiliarMasCercano;
         
         /// <summary>
-        /// CustomValidator2 control.
+        /// RequiredFieldValidator65 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator CustomValidator2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator65;
         
         /// <summary>
         /// RegularExpressionValidator4 control.
@@ -497,15 +497,6 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlImpedimento;
-        
-        /// <summary>
-        /// RequiredFieldValidator13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
         
         /// <summary>
         /// DdlGrado control.

@@ -85,7 +85,7 @@
 
                         <asp:GridView ID="GvRecepcionDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_DocumentoPorParticipante , PathNameDocumento" GridLines="None" CellSpacing="-1">
                             <Columns>
-                                <asp:BoundField DataField="NumeroOrdenJudicial" HeaderText="N# Orden Judicial" />
+                                <asp:BoundField DataField="NumeroCasoCriminal" HeaderText="N# Orden Judicial" />
                                 <asp:BoundField DataField="Documento" HeaderText="Tipo de Documento" />
                                 <asp:BoundField DataField="PathNameDocumento" HeaderText="Documento" />
                                 <asp:BoundField DataField="FechaEntrega" HeaderText="Fecha de Entrega" DataFormatString="{0:MM/dd/yyyy}"/>            

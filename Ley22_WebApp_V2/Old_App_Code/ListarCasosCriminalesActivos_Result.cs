@@ -10,9 +10,8 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CasoCriminal
+    public partial class ListarCasosCriminalesActivos_Result
     {
         public int Id_CasoCriminal { get; set; }
         public int Id_Participante { get; set; }
@@ -56,7 +55,5 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string NB_Pareja { get; set; }
         public string NB_Padre { get; set; }
         public string NB_Madre { get; set; }
-    
-        public virtual Tribunal Tribunal { get; set; }
     }
 }

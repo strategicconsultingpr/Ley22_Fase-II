@@ -299,7 +299,7 @@
                             <div class="form-group">
                                 <label for="tel-hogar">Teléfono Hogar </label>
                                 <asp:TextBox ID="TxtTelHogar" runat="server" CssClass="form-control" placeholder="Ej. 7875559999"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="CustomValidator1" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelHogar" Display="Dynamic"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator66" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelHogar" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelHogar" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
 
@@ -311,7 +311,7 @@
                                 <label for="tel-trabajo">Teléfono Trabajo </label>
                                 <asp:TextBox ID="TxtTelefonoFamiliarMasCercano" runat="server" CssClass="form-control" placeholder="Ej. 7875559999"></asp:TextBox>
                                 <%--                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                <asp:RegularExpressionValidator ID="CustomValidator2" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator65" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoFamiliarMasCercano" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                         </div>
@@ -382,7 +382,7 @@
                             <div class="form-group">
                                 <label for="primer-nombre">Dirección Linea 1 (*)</label>
 
-                                <asp:TextBox ID="TxtDireccionLinea1" runat="server" CssClass="form-control" placeholder="Ej. Calle / Avenida  "></asp:TextBox>
+                                <asp:TextBox ID="TxtDireccionLinea1" runat="server" CssClass="form-control" placeholder="Ej. Urb. Los Paseos  "></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtDireccionLinea1" Display="Dynamic"></asp:RequiredFieldValidator>
 
 
@@ -439,7 +439,7 @@
                             <div class="form-group">
                                 <label for="primer-nombre">Dirección Linea 1 (*)</label>
 
-                                <asp:TextBox ID="TxtPostalLinea1" runat="server" CssClass="form-control" placeholder="Ej. Calle / Avenida  "></asp:TextBox>
+                                <asp:TextBox ID="TxtPostalLinea1" runat="server" CssClass="form-control" placeholder="Ej. Urb. Los Paseos  "></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPostalLinea1" Display="Dynamic"></asp:RequiredFieldValidator>
 
 
@@ -527,7 +527,7 @@
                                     <asp:ListItem Value="1">Mental</asp:ListItem>
                                     <asp:ListItem Value="2">Fisica</asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlImpedimento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlImpedimento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>--%>
                             </div>
                         </div>
 
@@ -544,7 +544,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="lugar-trabajo">Lugar de trabajo</label>
-                                <asp:TextBox ID="TxtTrabajo" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtTrabajo" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTrabajo" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -552,7 +552,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="locupacion">Ocupación</label>
-                                <asp:TextBox ID="TxtOcupacion" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtOcupacion" runat="server" CssClass="form-control" placeholder="Ej. Maestro"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtOcupacion" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -594,7 +594,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="composicion-familiar">Composición familiar</label>
-                                <asp:TextBox ID="TxtFamiliar" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtFamiliar" runat="server" CssClass="form-control" placeholder="Cantidad de Miembros"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtFamiliar" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -603,7 +603,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre-pareja">Nombre de esposo(a) o pareja</label>
-                                <asp:TextBox ID="TxtPareja" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtPareja" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPareja" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -612,7 +612,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre-padre">Nombre de padre</label>
-                                <asp:TextBox ID="TxtPadre" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtPadre" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPadre" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -621,7 +621,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre-madre">Nombre de madre</label>
-                                <asp:TextBox ID="TxtMadre" runat="server" CssClass="form-control" placeholder="Ej. 00725"></asp:TextBox>
+                                <asp:TextBox ID="TxtMadre" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtMadre" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -629,16 +629,13 @@
                         </div>
                     </div>
                 </div>
-
-                     </div>
-
-
-            </div>
+           
             <!-- row -->
 
 
             <div class="row">
                 <div class="col-md-2">
+                    
                 </div>
 
                 <div class="col-md-10">

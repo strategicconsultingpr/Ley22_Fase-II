@@ -9,7 +9,8 @@ using Ley22_WebApp_V2.Old_App_Code;
 
 public partial class cargar_documentos : System.Web.UI.Page
 {
-    protected DataParticipante du;
+    //protected DataParticipante du;
+    protected Data_SA_Persona du;
     int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -17,7 +18,17 @@ public partial class cargar_documentos : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
-            this.du = (DataParticipante)Session["DataParticipante"];
+            if (Session["SA_Persona"] == null)
+            {
+                Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+                Session["MensajeError"] = "Por favor seleccione el participante";
+                Response.Redirect("Mensajes.aspx", false);
+                return;
+            }
+
+            // this.du = (DataParticipante)Session["DataParticipante"];
+
+            this.du = (Data_SA_Persona)Session["SA_Persona"];
             Programa = Convert.ToInt32(Session["Programa"].ToString());
             // BidGrid();
              CargarOrdenesJudiciales();
@@ -31,7 +42,7 @@ public partial class cargar_documentos : System.Web.UI.Page
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidosCasoCriminal(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             GvRecepcionDocumentos.DataBind();
 
            
@@ -89,10 +100,10 @@ public partial class cargar_documentos : System.Web.UI.Page
 
             int Participante = Convert.ToInt32(Session["Id_Participante"]);
 
-            var ordens = mylib.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(Participante)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == Programa);
+            var ordens = mylib.CasoCriminals.Where(u => u.Id_Participante.Equals(Participante)).Where(a => a.Activa.Equals(1)).Where(p => p.FK_Programa == Programa);
 
             int OrdenJudicial = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-            var orden = ordens.Where(u => u.Id_OrdenJudicial.Equals(OrdenJudicial)).Select(p => p.Id_OrdenJudicial);
+            var orden = ordens.Where(u => u.Id_CasoCriminal.Equals(OrdenJudicial)).Select(p => p.Id_CasoCriminal);
 
             if (orden.Count() > 0)
             {
@@ -179,9 +190,9 @@ public partial class cargar_documentos : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
          }

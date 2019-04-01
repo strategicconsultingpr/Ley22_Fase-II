@@ -106,8 +106,8 @@ namespace Ley22_WebApp_V2
         {
             using (Ley22Entities mylib = new Ley22Entities())
                 mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), 
-                    Convert.ToDateTime(TxtSentencia.Text),Txtalcohol.Text,Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text, Convert.ToDateTime(TxtFechaOrden.Text),
-                    Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
+                    Convert.ToDateTime(TxtSentencia.Text),Txtalcohol.Text,Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
+                    ExistingUser.Id, Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
                     Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text,TxtTelHogar.Text, 
                     TxtTelefonoFamiliarMasCercano.Text,TxtDireccionLinea1.Text, TxtDireccionLinea2.Text,Convert.ToInt32(DdlPueblo.SelectedValue),TxtCodigoPostal.Text, 
                     TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,

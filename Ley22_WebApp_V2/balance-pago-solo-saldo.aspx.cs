@@ -15,7 +15,14 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
     {
         // valida que se haya buscado el usuario
         // -----------------------------------------------------------------------------
-        if (Session["DataParticipante"] == null)
+        //if (Session["DataParticipante"] == null)
+        //{
+        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+        //    Session["MensajeError"] = "Por favor seleccione el participante";
+        //    Response.Redirect("Mensajes.aspx", false);
+        //    return;
+        //}
+        if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
@@ -42,7 +49,8 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
 
         {
-            GvControldePagos.DataSource = mylib.ListarBalancedePagos(Convert.ToInt32(Session["Id_Participante"]),Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            //GvControldePagos.DataSource = mylib.ListarBalancedePagos(Convert.ToInt32(Session["Id_Participante"]),Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            GvControldePagos.DataSource = mylib.ListarBalancedePagosCasosCriminales(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
             GvControldePagos.DataBind();
 
         }
@@ -91,9 +99,15 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataBind();
+            //DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 

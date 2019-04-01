@@ -167,9 +167,9 @@ namespace Ley22_WebApp_V2
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
                     var orden = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_ParticipantePorCharlaGrupal.Equals(c.Id_ParticipantePorCharlaGrupal)).Select(p => p.Id_OrdenJudicial).SingleOrDefault();
-                    var balance = dsLey22.ControldePagos.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial.Equals(orden)).Select(a => a.Cantidad).Sum();
+                    var balance = dsLey22.ControldePagos.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Cantidad).Sum();
 
-                    var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial.Equals(orden)).Select(a => a.Asistio).Sum();
+                    var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
                     HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','"+ c.Id_Participante+"')\" >Eliminar</a>";
                     

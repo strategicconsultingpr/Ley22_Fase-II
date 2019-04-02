@@ -101,7 +101,7 @@
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEliminar" OnClick="lnkEliminar_Click" runat="server" data-toggle="tooltip" title="Eliminiar" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkEliminar" OnClick="lnkEliminar_Click" runat="server" data-toggle="tooltip" title="Eliminiar" OnClientClick="if (!alertaAsistio()) return false;" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -124,7 +124,22 @@
     </div>
     <!-- container-fluid -->
 
+    <script>
 
+        
+
+        function alertaAsistio() {
+           return swal("Are you sure?", {
+              dangerMode: true,
+              buttons: true,
+            });
+            //return confirm("¿Está seguro que el participante SI asistió?");                   
+        }
+
+       
+      
+
+    </script>
 
 </asp:Content>
 

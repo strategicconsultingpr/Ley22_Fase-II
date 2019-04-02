@@ -170,6 +170,14 @@
             }
             else { return true;}
         }
+
+        function sweetAlert(titulo,texto,icono) {
+            swal(
+              title: titulo,
+              text: texto,
+              icon: icono
+            )
+        }
     </script>
 
 </asp:Content>

@@ -71,5 +71,14 @@
     </div>
   </div>
 </div>
-
+    <script type="text/javascript">
+       
+        function sweetAlert(titulo,texto,icono) {
+            swal(
+              title: titulo,
+              text: texto,
+              icon: icono
+            )
+        }
+    </script>
 </asp:Content>

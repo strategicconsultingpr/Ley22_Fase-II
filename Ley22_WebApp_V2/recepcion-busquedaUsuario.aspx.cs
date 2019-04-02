@@ -29,14 +29,19 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             if (Session["TxtNroSeguroSocial"].ToString() != "")
                 strParametroBusqueda.Append( "Número de seguro social =" + Session["TxtNroSeguroSocial"].ToString() + ", ");
 
-            if (Session["TxtIdentificacion"].ToString() != "")
-                strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
+            //if (Session["TxtIdentificacion"].ToString() != "")
+            //    strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
 
             if (Session["TxtFechaNacimiento"].ToString() != "")
                 strParametroBusqueda.Append("Fecha de nacimiento =" + Session["TxtFechaNacimiento"].ToString() + ", ");
 
-            if (Session["TxtNombreyApellido"].ToString() != "")
-                strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString() );
+            if (Session["TxtNombre"].ToString() != "")
+                strParametroBusqueda.Append("Nombre =" + Session["TxtNombre"].ToString());
+
+            if (Session["TxtApellido"].ToString() != "")
+                strParametroBusqueda.Append("Apellido =" + Session["TxtApellido"].ToString());
+            //if (Session["TxtNombreyApellido"].ToString() != "")
+            //    strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString() );
 
             LitParametrodeBusqueda.Text = strParametroBusqueda.ToString() ;
 
@@ -48,7 +53,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             TxtNroSeguroSocial.Attributes["placeholder"] = "Ej. 999-99-9999";
             TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
             TxtFechaNacimiento.Attributes["placeholder"] = "Ej. mm/dd/yyyy";
-            TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
+           // TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
         }
 
     }
@@ -72,7 +77,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
 
             List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
-                                                                     Session["TxtNombreyApellido"].ToString()).ToList();
+                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString()).ToList();
                                                      
 
             LitCantidadUsuarios.Text = Resul.Count.ToString();

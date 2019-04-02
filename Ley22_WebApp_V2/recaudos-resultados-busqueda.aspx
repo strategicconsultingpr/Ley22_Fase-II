@@ -92,22 +92,22 @@
                     <asp:Literal ID="LitParametrodeBusqueda" runat="server"></asp:Literal>
                 </div>
 
-                <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False" PagerSettings-Visible="false" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting" GridLines="None" CellSpacing="-1" DataKeyNames="Id_Participante,PK_Persona">
+                <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False" PagerSettings-Visible="false" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting" GridLines="None" CellSpacing="-1" DataKeyNames="PK_Persona">
                     <Columns>
                         <asp:BoundField DataField="Identificacion" HeaderText="Identificacion" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
-                        <asp:BoundField DataField="Pasaporte" HeaderText="Pasaporte" HeaderStyle-HorizontalAlign="Center">
+                        <%--<asp:BoundField DataField="Pasaporte" HeaderText="Pasaporte" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
                         <asp:BoundField DataField="Licencia" HeaderText="Licencia" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
  
                         <asp:TemplateField HeaderText="Nombre">
 
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkNombre1" runat="server" Text='<%# Bind("NB_Primero") %>'  OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_Participante") +","+ Eval("Pk_Persona") %>'></asp:LinkButton>
+                                <asp:LinkButton ID="lnkNombre1" runat="server" Text='<%# Bind("NB_Primero") %>'  OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("PK_Persona") +","+ Eval("PK_Persona") %>'></asp:LinkButton>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -116,7 +116,7 @@
                         <asp:TemplateField HeaderText="Apellido">
 
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkNombre2" runat="server" Text='<%# Bind("AP_Primero") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_Participante") +","+ Eval("Pk_Persona") %>'></asp:LinkButton>
+                                <asp:LinkButton ID="lnkNombre2" runat="server" Text='<%# Bind("AP_Primero") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("PK_Persona") +","+ Eval("PK_Persona") %>'></asp:LinkButton>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -124,9 +124,9 @@
                         <asp:BoundField DataField="FE_Nacimiento" HeaderText="Fecha de Nacimiento" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Nacimiento" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
-                        <asp:BoundField DataField="FE_Edicion" HeaderText="Fecha Registro" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Edicion" HeaderStyle-HorizontalAlign="Center">
+                       <%-- <asp:BoundField DataField="FE_Edicion" HeaderText="Fecha Registro" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Edicion" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
                     </Columns>
                     <EmptyDataTemplate>
                         <div class="card-block">

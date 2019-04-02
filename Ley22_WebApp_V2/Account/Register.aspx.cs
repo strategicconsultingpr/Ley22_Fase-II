@@ -67,10 +67,11 @@ namespace Ley22_WebApp_V2.Account
                     dsLey22.SaveChanges();
 
                     string mensaje = "El registro del usuario fué correcto. Se envió un email de confirmación al nuevo usuario.";
-                    string script = "window.onload = function(){ alert('";
-                    script += mensaje;
-                    script += "')};";
-                    ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+                    //string script = "window.onload = function(){ alert('";
+                    //script += mensaje;
+                    //script += "')};";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", "sweetAlert('Usuario Registrado','" + mensaje + "','success')", true);
 
                     string code = manager.GenerateEmailConfirmationToken(user.Id);
                     string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);

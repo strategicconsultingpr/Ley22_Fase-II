@@ -15,12 +15,14 @@
         <%: Scripts.Render("~/bundles/modernizr","~/bundles/master2up") %>
           <%: Scripts.Render("~/bundles/modernizr","~/bundles/MsAjaxJs") %>
     </asp:PlaceHolder>
+     <%--<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--%>
     <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
-   
+      <script type="text/javascript" src="../Scripts/sweetalert.min.js"></script>
   <link rel="stylesheet" href="Content/bootstrap.min.css">
      <%-- <link rel="stylesheet" href="Content/bootstrap-theme.min.css">--%>
   <link rel="stylesheet" href="Content/styles.css">
        <link rel="stylesheet" href="~/Content/fontawesome-all.css">
+      
       <%--<link rel="stylesheet" href="Content/global.css">--%>
  <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>

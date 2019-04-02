@@ -51,12 +51,12 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                           <%-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Identificación</label>
                                     <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control" placeholder="Ej. 22222"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Fecha de Nacimiento</label>
@@ -69,8 +69,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Nombre y Apellido</label>
-                                    <asp:TextBox ID="TxtNombreyApellido" runat="server" class="form-control" placeholder="Ej. John Doe"></asp:TextBox>
+                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <asp:TextBox ID="TxtNombre" runat="server" class="form-control" placeholder="Ej. Luis"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Apellido</label>
+                                    <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -88,26 +94,29 @@
 
                             function CheckTextBoxes(sender, args) {
                                 var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
-                                var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
+                                //var TxtIdentificacion = document.getElementById("<TxtIdentificacion.ClientID %>").value;
                                 var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
-                                var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                                var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
+                                var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
                                 var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
                                 
                                
 
                                 if (TxtNroSeguroSocial == "" &&
-                                    TxtIdentificacion == "" &&
+                                    //TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == "" && DdlPrograma != "0")
+                                    TxtNombre == "" &&
+                                    TxtApellido == ""  && DdlPrograma != "0")
                                 {
                                     
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda";                             
                                     return false;  
                                 }
                                 else if(TxtNroSeguroSocial == "" &&
-                                    TxtIdentificacion == "" &&
+                                    //TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == "" && DdlPrograma == "0")
+                                    TxtNombre == "" &&
+                                    TxtApellido == "" && DdlPrograma == "0")
                                 {
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda y seleccione un programa";                             
                                     return false;

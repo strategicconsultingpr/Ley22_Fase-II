@@ -39,16 +39,19 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
          Session["txtDocumentos"] = RBLDocumentos.SelectedItem.Text;
          */
         if ((TxtNroSeguroSocial.Text.Trim() == "" &&
-           TxtIdentificacion.Text.Trim() == "" &&
+           //TxtIdentificacion.Text.Trim() == "" &&
            TxtFechaNacimiento.Text.Trim() == "" &&
-           TxtNombreyApellido.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
+           TxtNombre.Text.Trim() == "" &&
+            TxtApellido.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
 
         else
         {
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();
-            Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
+            Session["TxtIdentificacion"] = "";// TxtIdentificacion.Text.Trim();
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombreyApellido.Text.Trim();
+            Session["TxtNombre"] = TxtNombre.Text.Trim();
+            Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
 
 
             Response.Redirect("recaudos-resultados-busqueda.aspx", false);

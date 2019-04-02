@@ -11,6 +11,8 @@ using Ley22_WebApp_V2.Old_App_Code;
 
 public partial class recaudos_resultados_busqueda : System.Web.UI.Page
 {
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["TxtNroSeguroSocial"] == null)
@@ -29,14 +31,17 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
             if (Session["TxtNroSeguroSocial"].ToString() != "")
                 strParametroBusqueda.Append("Número de seguro social =" + Session["TxtNroSeguroSocial"].ToString() + ", ");
 
-            if (Session["TxtIdentificacion"].ToString() != "")
-                strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
+            //if (Session["TxtIdentificacion"].ToString() != "")
+            //    strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
 
             if (Session["TxtFechaNacimiento"].ToString() != "")
                 strParametroBusqueda.Append("Fecha de nacimiento =" + Session["TxtFechaNacimiento"].ToString() + ", ");
 
-            if (Session["TxtNombreyApellido"].ToString() != "")
-                strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString());
+            if (Session["TxtNombre"].ToString() != "")
+                strParametroBusqueda.Append("Nombre =" + Session["TxtNombre"].ToString());
+
+            if (Session["TxtApellido"].ToString() != "")
+                strParametroBusqueda.Append("Apellido =" + Session["TxtApellido"].ToString());
 
             LitParametrodeBusqueda.Text = strParametroBusqueda.ToString();
 
@@ -48,7 +53,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
             TxtNroSeguroSocial.Attributes["placeholder"] = "Ej. 999-99-9999";
             TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
             TxtFechaNacimiento.Attributes["placeholder"] = "Ej. mm/dd/yyyy";
-            TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
+           // TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
 
 
 
@@ -59,6 +64,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
     int BindGridView(int pagina)
     {
         DateTime FechaNac;
+        short idPrograma = Convert.ToInt16(Session["Programa"]);
         if (Session["TxtFechaNacimiento"].ToString() == "")
             FechaNac = Convert.ToDateTime("01-01-1900");
         else
@@ -69,9 +75,11 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
 
             List<BusquedaSencilladePersonasRecepcion_Result> Resultado = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
-                                                                     Session["TxtNombreyApellido"].ToString()).ToList();
+                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString()).ToList();
 
-            var Resul = Resultado.Where(u => u.Identificacion.Equals("LEY 22")).ToList();
+            var Result = Resultado.Where(u => u.Identificacion.Equals("LEY 22")).ToList();
+            var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+            var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
 
             GridView1.PageIndex = pagina - 1;

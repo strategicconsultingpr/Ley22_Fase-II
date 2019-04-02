@@ -10,16 +10,9 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SA_PERSONA
+    public partial class BusquedaSencilladePersonasRecepcion_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SA_PERSONA()
-        {
-            this.SA_PERSONA_PROGRAMA = new HashSet<SA_PERSONA_PROGRAMA>();
-        }
-    
         public int PK_Persona { get; set; }
         public string NR_SeguroSocial { get; set; }
         public byte FK_Sexo { get; set; }
@@ -30,13 +23,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public System.DateTime FE_Nacimiento { get; set; }
         public byte FK_Veterano { get; set; }
         public byte FK_GrupoEtnico { get; set; }
-        public System.Guid FK_Sesion { get; set; }
-        public string TI_Edicion { get; set; }
-        public System.DateTime FE_Edicion { get; set; }
-        public string NR_ClientId_Legacy { get; set; }
-        public Nullable<int> PK_Old { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SA_PERSONA_PROGRAMA> SA_PERSONA_PROGRAMA { get; set; }
+        public string Identificacion { get; set; }
     }
 }

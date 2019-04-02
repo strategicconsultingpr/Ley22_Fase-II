@@ -21,14 +21,22 @@ public partial class asignar_citas_individual : System.Web.UI.Page
     Ley22Entities dsley22 = new Ley22Entities();
     ApplicationUser ExistingUser = new ApplicationUser();
     static string userId = String.Empty;
-    DataParticipante du;
+    //DataParticipante du;
+    protected Data_SA_Persona du;
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
         // valida que se haya buscado el usuario
         // -----------------------------------------------------------------------------
-        if (Session["DataParticipante"] == null)
+        //if (Session["DataParticipante"] == null)
+        //{
+        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+        //    Session["MensajeError"] = "Por favor seleccione el participante";
+        //    Response.Redirect("Mensajes.aspx", false);
+        //    return;
+        //}
+        if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
@@ -41,7 +49,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
-            du = (DataParticipante)Session["DataParticipante"];
+            //du = (DataParticipante)Session["DataParticipante"];
+            du = (Data_SA_Persona)Session["SA_Persona"];
             Session["FechaBase"] = new DateTime(2019, 01, 27);
             GenerarCalendario();
 
@@ -183,9 +192,15 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"] ), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"] ), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataBind();
+            //DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
@@ -459,7 +474,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         string FechaInicial = TxtFecha.Text + " " + TxtHoraInicial.Text;
         string FechaFinal = TxtFecha.Text + " " + TxtHoraFinal.Text;
 
-        du = (DataParticipante)Session["DataParticipante"];
+        //du = (DataParticipante)Session["DataParticipante"];
+        du = (Data_SA_Persona)Session["SA_Persona"];
 
         DateComparisonResult comparison;
 
@@ -510,10 +526,16 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 {
                     mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue));
 
-                    
-                    EmailService mail = new EmailService();
-                    string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
-                    mail.SendAsyncCita(du.Correo,"Cita Entrevista Inicial", body);
+                    int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                    var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
+
+                    if (email.Count() > 0)
+                    {
+
+                        EmailService mail = new EmailService();
+                        string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                        mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                    }
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);
                     verificarCitas();

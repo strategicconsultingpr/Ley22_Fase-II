@@ -47,6 +47,21 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public const int Danger = 4;
 
     }
+
+    public struct Data_SA_Persona
+    {
+        public int PK_Persona;
+        public string NR_SeguroSocial;
+        public int FK_Sexo;
+        public string NB_Primero;
+        public string NB_Segundo;
+        public string AP_Primero;
+        public string AP_Segundo;
+        public DateTime FE_Nacimiento;
+        public int FK_Veterano;
+        public int FK_GrupoEtnico;
+
+    }
 }
 
  

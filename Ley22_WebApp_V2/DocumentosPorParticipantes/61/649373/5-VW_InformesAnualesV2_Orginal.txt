@@ -1,0 +1,67 @@
+SELECT DISTINCT 
+                         TOP (100) PERCENT dbo.VW_PERFILES_MATRIX.PK_NR_Perfil, dbo.SA_PROGRAMA.CO_Tipo, dbo.SA_PROGRAMA.REP_TEDS, dbo.SA_PROGRAMA.REP_TEDS_MH, dbo.VW_PERFILES_MATRIX.IN_TI_Perfil, 
+                         dbo.SA_LKP_ABUSO_SUSTANCIAS.ServiceReportsToTEDS_SA, dbo.VW_PERSONAS_MATRIX.PK_Persona, dbo.VW_PERSONAS_MATRIX.NR_SeguroSocial, dbo.VW_PERSONAS_MATRIX.DE_Sexo, 
+                         dbo.VW_PERSONAS_MATRIX.Nombre, dbo.VW_PERSONAS_MATRIX.FE_Nacimiento, dbo.VW_PERSONAS_MATRIX.NR_Edad, dbo.VW_PERSONAS_MATRIX.DE_Veterano, 
+                         dbo.VW_PERSONAS_MATRIX.DE_GrupoEtnico, dbo.VW_PERSONAS_MATRIX.DE_Raza, dbo.VW_EPISODIO.PK_Episodio, dbo.VW_EPISODIO.FK_Persona, dbo.VW_EPISODIO.FK_Programa, 
+                         dbo.VW_EPISODIO.NB_Programa, dbo.VW_EPISODIO.PK_Administracion, dbo.VW_EPISODIO.NB_Administracion, dbo.VW_EPISODIO.FE_Episodio, dbo.VW_EPISODIO.FK_SeguroSalud, 
+                         dbo.VW_EPISODIO.DE_SeguroSalud, dbo.VW_EPISODIO.FK_FuentePago, dbo.VW_EPISODIO.DE_Pago, dbo.VW_EPISODIO.FK_FeminaHijos, dbo.VW_EPISODIO.DE_Femina, dbo.VW_EPISODIO.IN_VaronHijos, 
+                         dbo.VW_EPISODIO.DE_VaronHijos, dbo.VW_EPISODIO.FK_FuenteIngreso, dbo.VW_EPISODIO.DE_FuenteIngreso, dbo.VW_EPISODIO.FK_IngresoIndividual, dbo.VW_EPISODIO.DE_IngresoAnualIndividual, 
+                         dbo.VW_EPISODIO.FK_IngresoFamiliar, dbo.VW_EPISODIO.DE_IngresoAnualFamiliar, dbo.VW_EPISODIO.FK_TiempoResidencia, dbo.VW_EPISODIO.DE_TiempoResidencia, dbo.VW_EPISODIO.FK_Municipio, 
+                         dbo.VW_EPISODIO.DE_Municipio, dbo.VW_EPISODIO.IN_Zona, dbo.VW_EPISODIO.DE_Zona, dbo.VW_EPISODIO.NR_ZipCode, dbo.VW_EPISODIO.DE_Barrio, dbo.VW_EPISODIO.FK_EtapaServicio, 
+                         dbo.VW_EPISODIO.DE_EtapaServicio, dbo.VW_EPISODIO.FK_NivelCuidadoSustancias, dbo.VW_EPISODIO.DE_AbusoSustancias, dbo.VW_EPISODIO.FK_NivelCuidadoMental, 
+                         dbo.VW_EPISODIO.DE_SaludMental, dbo.VW_EPISODIO.IN_Metadona, dbo.VW_EPISODIO.DE_Metadona, dbo.VW_EPISODIO.IN_CodDependiente, dbo.VW_EPISODIO.DE_CodDependiente, 
+                         dbo.VW_EPISODIO.IN_DiagnosticoDual, dbo.VW_EPISODIO.DE_DiagnosticoDual, dbo.VW_EPISODIO.FK_FuenteReferido, dbo.VW_EPISODIO.DE_Referido, dbo.VW_EPISODIO.FK_EstadoLegal, 
+                         dbo.VW_EPISODIO.DE_EstadoLegal, dbo.VW_EPISODIO.IN_ArrestadoAnteriormente, dbo.VW_EPISODIO.DE_ArrestadoAnteriormente, dbo.VW_EPISODIO.NR_TotalArrestosPasado, dbo.VW_EPISODIO.FK_Justicia, 
+                         dbo.VW_EPISODIO.DE_ProbJusticia, dbo.VW_EPISODIO.NR_DiasEsperaSustancias, dbo.VW_EPISODIO.FK_EpisodiosSustancias, dbo.VW_EPISODIO.DE_EpisodiosPreviosSustancias, 
+                         dbo.VW_EPISODIO.FK_DuracionSustancias, dbo.VW_EPISODIO.DE_TiempoUltTratSustancias, dbo.VW_EPISODIO.NR_DiasUltimaAltaSustancias, dbo.VW_EPISODIO.NR_MesesUltimaAltaSustancias, 
+                         dbo.VW_EPISODIO.FK_NivelCuidadoSustanciasAnterior, dbo.VW_EPISODIO.DE_AbusoSustanciasAnterior, dbo.VW_EPISODIO.IN_SaludMental, dbo.VW_EPISODIO.DE_IN_SaludMental, 
+                         dbo.VW_EPISODIO.NR_DiasEsperaMental, dbo.VW_EPISODIO.FK_EpisodiosMental, dbo.VW_EPISODIO.DE_EpisodiosPreviosMental, dbo.VW_EPISODIO.FK_DuracionMental, 
+                         dbo.VW_EPISODIO.DE_TiempoUltTratMental, dbo.VW_EPISODIO.NR_DiasUltimaAltaMental, dbo.VW_EPISODIO.NR_MesesUltimaAltaMental, dbo.VW_EPISODIO.FK_NivelCuidadoMentalAnterior, 
+                         dbo.VW_EPISODIO.DE_SaludMentalAnterior, dbo.VW_EPISODIO.IN_AbusoSustancias, dbo.VW_EPISODIO.DE_IN_AbusoSustancias, dbo.VW_EPISODIO.IN_ViolenciaDomestica, 
+                         dbo.VW_EPISODIO.DE_ViolenciaDomestica, dbo.VW_EPISODIO.IN_Maltrato, dbo.VW_EPISODIO.DE_Maltrato, dbo.VW_EPISODIO.IN_TI_Maltrato, dbo.VW_EPISODIO.DE_TI_Maltrato, 
+                         dbo.VW_EPISODIO.DE_Suicida, dbo.VW_EPISODIO.ES_Episodio, dbo.VW_EPISODIO.DE_ES_Episodio, dbo.VW_EPISODIO.IN_IdeaSuicida, dbo.VW_EPISODIO.DE_IdeaSuicida, dbo.VW_EPISODIO.IN_Suicida, 
+                         dbo.VW_EPISODIO.FE_Alta, dbo.VW_PERFILES_MATRIX.FK_Episodio, dbo.VW_PERFILES_MATRIX.FE_Perfil, dbo.VW_PERFILES_MATRIX.FE_Contacto, dbo.VW_PERFILES_MATRIX.Emancipado, 
+                         dbo.VW_PERFILES_MATRIX.DE_EstadoMarital, dbo.VW_PERFILES_MATRIX.DE_CondLaboral, dbo.VW_PERFILES_MATRIX.DE_NoFuerzaLaboral, dbo.VW_PERFILES_MATRIX.EmabarazosTrat, 
+                         dbo.VW_PERFILES_MATRIX.NR_Hijos, dbo.VW_PERFILES_MATRIX.DE_Grado, dbo.VW_PERFILES_MATRIX.IN_Emancipado, dbo.VW_PERFILES_MATRIX.FE_UltimoInformeEscolar, 
+                         dbo.VW_PERFILES_MATRIX.NR_PromedioAcademico, dbo.VW_PERFILES_MATRIX.NR_AusenciasAcad, dbo.VW_PERFILES_MATRIX.EducacionEspecial, dbo.VW_PERFILES_MATRIX.DesertorEscolar, 
+                         dbo.VW_PERFILES_MATRIX.DE_Familiar, dbo.VW_PERFILES_MATRIX.NR_Familiar, dbo.VW_PERFILES_MATRIX.DE_Residencia, dbo.VW_PERFILES_MATRIX.ReunGrupo, 
+                         dbo.VW_PERFILES_MATRIX.DE_FreqAutoAyuda, dbo.VW_PERFILES_MATRIX.Arrestado30dias, dbo.VW_PERFILES_MATRIX.NR_Arrestos30dias, dbo.VW_PERFILES_MATRIX.Arrestado365dias, 
+                         dbo.VW_PERFILES_MATRIX.IN_Arrestado365dias, dbo.VW_PERFILES_MATRIX.EstadoLegal, dbo.VW_PERFILES_MATRIX.DiagnosticoPrimario, dbo.VW_PERFILES_MATRIX.DiagnosticoSecundario, 
+                         dbo.VW_PERFILES_MATRIX.DiagnosticoTerciario, dbo.VW_PERFILES_MATRIX.[DSMIV1-1], dbo.VW_PERFILES_MATRIX.[DSMIV1-2], dbo.VW_PERFILES_MATRIX.[DSMIV1-3], 
+                         dbo.VW_PERFILES_MATRIX.[DSMIV2-1], dbo.VW_PERFILES_MATRIX.[DSMIV2-2], dbo.VW_PERFILES_MATRIX.[DSMIV2-3], dbo.VW_PERFILES_MATRIX.CO_CondicionesMedicasPrimario, 
+                         dbo.VW_PERFILES_MATRIX.CO_CondicionesMedicasSecundario, dbo.VW_PERFILES_MATRIX.CO_CondicionesMedicasTerciario, dbo.VW_PERFILES_MATRIX.[Eje4-1], dbo.VW_PERFILES_MATRIX.[Eje4-2], 
+                         dbo.VW_PERFILES_MATRIX.[Eje4-3], dbo.VW_PERFILES_MATRIX.NR_EscalaGAF, dbo.VW_PERFILES_MATRIX.DE_ReferidosTX, dbo.VW_PERFILES_MATRIX.FK_DisposicionFinalReferido, 
+                         dbo.VW_PERFILES_MATRIX.Droga1, dbo.VW_PERFILES_MATRIX.Via1, dbo.VW_PERFILES_MATRIX.Frecuencia1, dbo.VW_PERFILES_MATRIX.IN_EdadInicioPrimario, 
+                         dbo.VW_PERFILES_MATRIX.NR_CantidadPrimario, dbo.VW_PERFILES_MATRIX.Medida1, dbo.VW_PERFILES_MATRIX.NR_GastoPrimario, dbo.VW_PERFILES_MATRIX.Droga2, dbo.VW_PERFILES_MATRIX.Via2, 
+                         dbo.VW_PERFILES_MATRIX.Frecuencia2, dbo.VW_PERFILES_MATRIX.IN_EdadInicioSecundario, dbo.VW_PERFILES_MATRIX.NR_CantidadSecundario, dbo.VW_PERFILES_MATRIX.Medida2, 
+                         dbo.VW_PERFILES_MATRIX.NR_GastoSecundario, dbo.VW_PERFILES_MATRIX.Droga3, dbo.VW_PERFILES_MATRIX.Via3, dbo.VW_PERFILES_MATRIX.Frecuencia3, 
+                         dbo.VW_PERFILES_MATRIX.IN_EdadInicioTerciario, dbo.VW_PERFILES_MATRIX.NR_CantidadTerciario, dbo.VW_PERFILES_MATRIX.Medida3, dbo.VW_PERFILES_MATRIX.NR_GastoTerciario, 
+                         dbo.VW_PERFILES_MATRIX.NR_PromedioVisitas, dbo.VW_PERFILES_MATRIX.RazonAlta, dbo.VW_PERFILES_MATRIX.CentroTraslado, dbo.VW_PERFILES_MATRIX.TI_Transaccion, 
+                         dbo.VW_PERFILES_MATRIX.FE_Edicion, dbo.VW_PERFILES_MATRIX.FK_Sesion, dbo.SA_USUARIO.NB_Usuario + ' ' + dbo.SA_USUARIO.AP_Usuario AS Usuario, 
+                         dbo.VW_PERFILES_MATRIX.FK_CategoriaCentroPrivado, dbo.VW_PERFILES_MATRIX.DE_CategoriaCentroPrivado, dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosClinicos1, 
+                         dbo.VW_PERFILES_MATRIX.[EjeV1-1], dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosClinicos2, dbo.VW_PERFILES_MATRIX.[EjeV1-2], dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosClinicos3, 
+                         dbo.VW_PERFILES_MATRIX.[EjeV1-3], dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosPersonalidadRM1, dbo.VW_PERFILES_MATRIX.[EjeV2-1], 
+                         dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosPersonalidadRM2, dbo.VW_PERFILES_MATRIX.[EjeV2-2], dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosPersonalidadRM3, 
+                         dbo.VW_PERFILES_MATRIX.[EjeV2-3], dbo.VW_PERFILES_MATRIX.FK_DSMV_ProblemasPsicosocialesAmbientales1, dbo.VW_PERFILES_MATRIX.EjeVPPA1, 
+                         dbo.VW_PERFILES_MATRIX.FK_DSMV_ProblemasPsicosocialesAmbientales2, dbo.VW_PERFILES_MATRIX.EjeVPPA2, dbo.VW_PERFILES_MATRIX.FK_DSMV_ProblemasPsicosocialesAmbientales3, 
+                         dbo.VW_PERFILES_MATRIX.EjeVPPA3, dbo.VW_PERFILES_MATRIX.NR_DSMV_FuncionamientoGlobal, dbo.VW_PERFILES_MATRIX.DE_DSMV_OtrasObservaciones, 
+                         dbo.VW_PERFILES_MATRIX.DE_DSMV_Comentarios, dbo.VW_PERFILES_MATRIX.IN_DSMV_DiagnosticoDual, dbo.VW_PERFILES_MATRIX.FK_TipoAdmision, dbo.VW_PERFILES_MATRIX.DE_TipoAdmision, 
+                         dbo.VW_PERFILES_MATRIX.FK_SituacionEscolar, dbo.VW_PERFILES_MATRIX.DE_SituacionEscolar, dbo.VW_PERFILES_MATRIX.FK_Familia, dbo.VW_PERFILES_MATRIX.FK_Residencia, 
+                         CASE WHEN dbo.In_Perfil_Age(dbo.VW_PERSONAS_MATRIX.FE_Nacimiento, ISNULL(dbo.VW_PERFILES_MATRIX.fe_contacto, dbo.VW_PERFILES_MATRIX.fe_Perfil)) >= 18 AND 
+                         dbo.SA_LKP_DSMV.PK_DSMV IN
+                             (SELECT        [Diagnostic_Code]
+                               FROM            [dbo].[SMI_SED_Diagnostics]
+                               WHERE        [STATUS] = 'SMI') THEN 'SMI' WHEN dbo.In_Perfil_Age(dbo.VW_PERSONAS_MATRIX.FE_Nacimiento, ISNULL(dbo.VW_PERFILES_MATRIX.fe_contacto, dbo.VW_PERFILES_MATRIX.fe_Perfil)) 
+                         < 18 AND dbo.SA_LKP_DSMV.PK_DSMV IN
+                             (SELECT        [Diagnostic_Code]
+                               FROM            [dbo].[SMI_SED_Diagnostics]
+                               WHERE        [STATUS] = 'SED') THEN 'SED' ELSE 'No en Tabla' END AS [Smi/Sed Status]
+FROM            dbo.VW_EPISODIO INNER JOIN
+                         dbo.VW_PERSONAS_MATRIX ON dbo.VW_EPISODIO.FK_Persona = dbo.VW_PERSONAS_MATRIX.PK_Persona INNER JOIN
+                         dbo.VW_PERFILES_MATRIX ON dbo.VW_EPISODIO.PK_Episodio = dbo.VW_PERFILES_MATRIX.FK_Episodio INNER JOIN
+                         dbo.SA_PROGRAMA ON dbo.SA_PROGRAMA.PK_Programa = dbo.VW_EPISODIO.FK_Programa LEFT OUTER JOIN
+                         dbo.SA_USUARIO INNER JOIN
+                         dbo.SA_SESION ON dbo.SA_USUARIO.PK_Usuario = dbo.SA_SESION.FK_Usuario ON dbo.VW_PERFILES_MATRIX.FK_Sesion = dbo.SA_SESION.PK_Sesion LEFT OUTER JOIN
+                         dbo.SA_LKP_DSMV ON dbo.SA_LKP_DSMV._PK_DSMV = dbo.VW_PERFILES_MATRIX.FK_DSMV_TrastornosClinicos1 LEFT OUTER JOIN
+                         dbo.SA_LKP_ABUSO_SUSTANCIAS ON dbo.VW_EPISODIO.FK_NivelCuidadoSustancias = dbo.SA_LKP_ABUSO_SUSTANCIAS.PK_AbusoSustancias
+WHERE        (dbo.VW_PERFILES_MATRIX.FE_Perfil BETWEEN CONVERT(DATETIME, '2018-01-01 00:00:00', 102) AND CONVERT(DATETIME, '2018-11-26 00:00:00', 102))

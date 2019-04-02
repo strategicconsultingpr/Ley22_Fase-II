@@ -67,12 +67,11 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
         using (Ley22Entities ml22e = new Ley22Entities())
         {
 
-            List<BusquedaSencilladePersonas_Result> Resultado = ml22e.BusquedaSencilladePersonas(Session["TxtNroSeguroSocial"].ToString(),
-                                                     Session["TxtIdentificacion"].ToString(),
-                                                     FechaNac,
-                                                     Session["TxtNombreyApellido"].ToString()).ToList()
-                                                     ;
-            var Resul = Resultado.Where(u => u.Identificacion.Equals("")).ToList();
+            List<BusquedaSencilladePersonasRecepcion_Result> Resultado = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
+                                                                     Session["TxtIdentificacion"].ToString(), FechaNac,
+                                                                     Session["TxtNombreyApellido"].ToString()).ToList();
+
+            var Resul = Resultado.Where(u => u.Identificacion.Equals("LEY 22")).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
 
             GridView1.PageIndex = pagina - 1;
@@ -192,53 +191,78 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
             Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa).Single();
 
             expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(Id_Participante)).Select(u => u.NR_Expediente).SingleOrDefault();
-        }
-        using (Ley22Entities mylib = new Ley22Entities())
-        {
-            List<sp_READ_SA_PERSONAxId_Result> resul = mylib.sp_READ_SA_PERSONAxId(Id_Participante, Pk_Persona).ToList();
 
-            DataParticipante du = new DataParticipante()
+            var sa_personas = mlib.SA_PERSONA.Where(a => a.PK_Persona.Equals(Id_Participante)).Single();
+
+            Data_SA_Persona sa_persona = new Data_SA_Persona()
             {
-                PK_Persona = resul[0].Pk_Persona,
-                NR_SeguroSocial = resul[0].NR_SeguroSocial,
-                Identificacion = resul[0].Identificacion,
-                Pasaporte = resul[0].Pasaporte,
-                Licencia = resul[0].Licencia,
-                IUP = (int)resul[0].IUP,
-                Expediente = expediente,
-                NB_Primero = resul[0].NB_Primero,
-                NB_Segundo = resul[0].NB_Segundo,
-                AP_Primero = resul[0].AP_Primero,
-                AP_Segundo = resul[0].AP_Segundo,
-                FE_Nacimiento = resul[0].FE_Nacimiento,
-                FK_Sexo = resul[0].FK_Sexo,
-                SexoDescripcion = resul[0].DE_Sexo,
-                FK_GrupoEtnico = resul[0].FK_GrupoEtnico,
-                GrupoEtnicoDescripcion = resul[0].DE_GrupoEtnico,
-                FK_Veterano = resul[0].FK_Veterano,
-                Correo = resul[0].Correo,
-                Telefono1 = resul[0].Telefono1,
-                Telefono2 = resul[0].Telefono2,
-                TelefonoFamiliaraMasCercano = resul[0].TelefonoFamiliarMasCercano,
-                TelefonoCitas = resul[0].TelefonoCitas,
-                DireccionLinea1 = resul[0].DireccionLinea1,
-                DireccionLinea2 = resul[0].DireccionLinea2,
-                Municipio = resul[0].Municipio,
-                CodigoPostal = resul[0].CodigoPostal,
-                Id_Participante = Id_Participante
+                PK_Persona = sa_personas.PK_Persona,
+                NR_SeguroSocial = sa_personas.NR_SeguroSocial,
+                FK_Sexo = Convert.ToInt32(sa_personas.FK_Sexo),
+                NB_Primero = sa_personas.NB_Primero,
+                NB_Segundo = sa_personas.NB_Segundo,
+                AP_Primero = sa_personas.AP_Primero,
+                AP_Segundo = sa_personas.AP_Segundo,
+                FE_Nacimiento = Convert.ToDateTime(sa_personas.FE_Nacimiento),
+                FK_Veterano = Convert.ToInt32(sa_personas.FK_Veterano),
+                FK_GrupoEtnico = Convert.ToInt32(sa_personas.FK_GrupoEtnico)
+
             };
 
- 
-            Session["Id_Participante"] = du.PK_Persona;
-            Session["Id_Participante"] = du.Id_Participante;
-            Session["NombreParticipante"] = resul[0].NB_Primero + " " + resul[0].AP_Primero;
-            Session["DataParticipante"] = du;
+            Session["Id_Participante"] = sa_persona.PK_Persona;
+            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero;
+            Session["NombreParticipante2"] = 9;
+            Session["SA_Persona"] = sa_persona;
+            Session["Expediente"] = expediente;
 
-            if (du.Id_Participante > 0)
-                Response.Redirect("balance-pago.aspx", false);
-            else
-                Response.Redirect("nuevo-usuario.aspx", false);
+            Response.Redirect("balance-pago.aspx", false);
         }
+        //using (Ley22Entities mylib = new Ley22Entities())
+        //{
+        //    List<sp_READ_SA_PERSONAxId_Result> resul = mylib.sp_READ_SA_PERSONAxId(Id_Participante, Pk_Persona).ToList();
+
+        //    DataParticipante du = new DataParticipante()
+        //    {
+        //        PK_Persona = resul[0].Pk_Persona,
+        //        NR_SeguroSocial = resul[0].NR_SeguroSocial,
+        //        Identificacion = resul[0].Identificacion,
+        //        Pasaporte = resul[0].Pasaporte,
+        //        Licencia = resul[0].Licencia,
+        //        IUP = (int)resul[0].IUP,
+        //        Expediente = expediente,
+        //        NB_Primero = resul[0].NB_Primero,
+        //        NB_Segundo = resul[0].NB_Segundo,
+        //        AP_Primero = resul[0].AP_Primero,
+        //        AP_Segundo = resul[0].AP_Segundo,
+        //        FE_Nacimiento = resul[0].FE_Nacimiento,
+        //        FK_Sexo = resul[0].FK_Sexo,
+        //        SexoDescripcion = resul[0].DE_Sexo,
+        //        FK_GrupoEtnico = resul[0].FK_GrupoEtnico,
+        //        GrupoEtnicoDescripcion = resul[0].DE_GrupoEtnico,
+        //        FK_Veterano = resul[0].FK_Veterano,
+        //        Correo = resul[0].Correo,
+        //        Telefono1 = resul[0].Telefono1,
+        //        Telefono2 = resul[0].Telefono2,
+        //        TelefonoFamiliaraMasCercano = resul[0].TelefonoFamiliarMasCercano,
+        //        TelefonoCitas = resul[0].TelefonoCitas,
+        //        DireccionLinea1 = resul[0].DireccionLinea1,
+        //        DireccionLinea2 = resul[0].DireccionLinea2,
+        //        Municipio = resul[0].Municipio,
+        //        CodigoPostal = resul[0].CodigoPostal,
+        //        Id_Participante = Id_Participante
+        //    };
+
+ 
+        //    Session["Id_Participante"] = du.PK_Persona;
+        //    Session["Id_Participante"] = du.Id_Participante;
+        //    Session["NombreParticipante"] = resul[0].NB_Primero + " " + resul[0].AP_Primero;
+        //    Session["DataParticipante"] = du;
+
+        //    if (du.Id_Participante > 0)
+        //        Response.Redirect("balance-pago.aspx", false);
+        //    else
+        //        Response.Redirect("nuevo-usuario.aspx", false);
+        //}
 
 
     }

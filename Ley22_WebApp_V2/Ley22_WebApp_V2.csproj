@@ -317,6 +317,8 @@
     <Content Include="Mensajes.aspx" />
     <Content Include="nuevo-confirmacion.aspx" />
     <Content Include="nuevo-usuario.aspx" />
+    <Content Include="OrdenNuevo.aspx" />
+    <Content Include="ParticipanteNuevo.aspx" />
     <Content Include="pruebas.aspx" />
     <Content Include="bin\QtBinaries\icudt49.dll" />
     <Content Include="bin\QtBinaries\icuin49.dll" />
@@ -783,13 +785,22 @@
     <Compile Include="nuevo-usuario.aspx.designer.cs">
       <DependentUpon>nuevo-usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\BusquedaSencilladePersonasRecepcion_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\Calendario.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\CasoCriminal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\CharlaGrupal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\DesempleoRazon.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
@@ -801,7 +812,13 @@
     <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarBalancedePagosCasosCriminales_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarCasosCriminalesActivos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCharlasCalendario_Result.cs">
@@ -811,6 +828,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarDocumentosRecibidosCasoCriminal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
@@ -864,6 +884,9 @@
     <Compile Include="Old_App_Code\SA_Metadona.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\SA_PERSONA.cs">
+      <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\SA_PERSONA_PROGRAMA.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
@@ -885,8 +908,25 @@
     <Compile Include="Old_App_Code\SA_Ref_RazonTH.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\Tribunal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenNuevo.aspx.cs">
+      <DependentUpon>OrdenNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenNuevo.aspx.designer.cs">
+      <DependentUpon>OrdenNuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipanteNuevo.aspx.cs">
+      <DependentUpon>ParticipanteNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParticipanteNuevo.aspx.designer.cs">
+      <DependentUpon>ParticipanteNuevo.aspx</DependentUpon>
     </Compile>
     <Compile Include="pruebas.aspx.cs">
       <DependentUpon>pruebas.aspx</DependentUpon>
@@ -1143,9 +1183,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ResumendeAsistenciasCharlas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\SA_PERSONA.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\SA_USUARIO_PERMISO_Mapping.cs">

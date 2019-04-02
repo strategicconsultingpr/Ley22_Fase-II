@@ -9,13 +9,14 @@ using Ley22_WebApp_V2.Old_App_Code;
 public partial class seleccion_proximo_paso : System.Web.UI.Page
 {
     protected Ley22Entities ley22;
-    protected DataParticipante du;
+   // protected DataParticipante du;
+    protected Data_SA_Persona du;
     protected OrdenesJudiciale ordenes;
     int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["DataParticipante"] == null)
+        if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
@@ -26,13 +27,14 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             this.ley22 = new Ley22Entities();
-           du = (DataParticipante)Session["DataParticipante"];
+            //du = (DataParticipante)Session["DataParticipante"];
+            du = (Data_SA_Persona)Session["SA_Persona"];
 
-            LitIUP.Text = du.IUP.ToString();
-            LitLicencia.Text = du.Licencia;
+            LitIUP.Text = du.PK_Persona.ToString();
+            LitLicencia.Text = "12345";
             Programa = Convert.ToInt32(Session["Programa"].ToString());
             NombrePrograma.Text = Session["NombrePrograma"].ToString();
-            LitExpediente.Text = du.Expediente;
+            LitExpediente.Text = Session["Expediente"].ToString();
             
             if(verificarOrdenJudicialAbierta())
             {
@@ -51,16 +53,16 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             {
                 LitEstatus.Text = "Cerrado bajo este programa";
             }
-            verificarEpisodiosAnteriores(du.Id_Participante);
-            ConsultarCharlasPorParticipante(du.Id_Participante);
-            verificarCitas(du.Id_Participante);
+            verificarEpisodiosAnteriores(du.PK_Persona);
+            ConsultarCharlasPorParticipante(du.PK_Persona);
+            verificarCitas(du.PK_Persona);
         }
     }
 
     bool verificarOrdenJudicialAbierta()
     {
         
-        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.Id_Participante)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == Programa);
+        var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.FK_Programa == Programa);
         if(orden.Count() > 0)
         {
             return true;
@@ -74,7 +76,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
     bool verificarFaltaDeDocumento()
     {
-        var orden = ley22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.Id_Participante)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_OrdenJudicial);
+        var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_CasoCriminal);
         var docs = ley22.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
 
         if((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))

@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="Ley22Model.Participante" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="Ley22Model.Precio" Width="1.5" PointX="10.75" PointY="4.75" />
         <EntityTypeShape EntityType="Ley22Model.Region" Width="1.5" PointX="4.75" PointY="10.75" />
-        <EntityTypeShape EntityType="Ley22Model.SA_PERSONA" Width="1.5" PointX="6.75" PointY="10.75" />
         <EntityTypeShape EntityType="Ley22Model.TipodeCharla" Width="1.5" PointX="10.75" PointY="7.75" />
         <EntityTypeShape EntityType="Ley22Model.TrabajadorSocial" Width="1.5" PointX="8.75" PointY="10.75" />
         <EntityTypeShape EntityType="Ley22Model.TS_Excepciones" Width="1.5" PointX="11.375" PointY="10.75" />
@@ -30,6 +29,10 @@
         <EntityTypeShape EntityType="Ley22Model.ControldePago" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="Ley22Model.OrdenesJudiciale" Width="1.5" PointX="13.375" PointY="10.75" />
         <EntityTypeShape EntityType="Ley22Model.DocumentosPorParticipante" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.Tribunal" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Ley22Model.DesempleoRazon" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Ley22Model.CasoCriminal" Width="1.5" PointX="17.625" PointY="15" />
+        <AssociationConnector Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

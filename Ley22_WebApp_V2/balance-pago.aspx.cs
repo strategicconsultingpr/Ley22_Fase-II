@@ -25,14 +25,22 @@ public partial class balance_pago : System.Web.UI.Page
     SEPSEntities1 dsPerfil = new SEPSEntities1();
     Ley22Entities dsLey22 = new Ley22Entities();
     static string userId = String.Empty;
-    DataParticipante du;
+    //DataParticipante du;
+    protected Data_SA_Persona du;
     int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         // valida que se haya buscado el usuario
         // -----------------------------------------------------------------------------
-        if (Session["DataParticipante"] == null)
+        //if (Session["DataParticipante"] == null)
+        //{
+        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+        //    Session["MensajeError"] = "Por favor seleccione el participante";
+        //    Response.Redirect("Mensajes.aspx", false);
+        //    return;
+        //}
+        if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
@@ -64,7 +72,8 @@ public partial class balance_pago : System.Web.UI.Page
 
     protected void BtnGuardarPago_Click(object sender, EventArgs e)
     {
-        du = (DataParticipante)Session["DataParticipante"];
+        // du = (DataParticipante)Session["DataParticipante"];
+        du = (Data_SA_Persona)Session["SA_Persona"];
 
         using (Ley22Entities mylib = new Ley22Entities())
         {
@@ -74,9 +83,15 @@ public partial class balance_pago : System.Web.UI.Page
             short aa = Convert.ToInt16(a);
             var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa).First();
 
-            EmailService mail = new EmailService();
-            string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text,DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa ,IdDesc.Value, TxtNumeroRecibo.Text);
-            mail.SendAsyncCita(du.Correo, "Recibo de Pago", body);
+            int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+            var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+
+            if (email.Count() > 0)
+            {
+                EmailService mail = new EmailService();
+                string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, IdDesc.Value, TxtNumeroRecibo.Text);
+                mail.SendAsyncCita(email, "Recibo de Pago", body);
+            }
 
             string Id = Session["Id_Participante"].ToString();
             Programa = Convert.ToInt32(Session["Programa"].ToString());
@@ -149,7 +164,7 @@ public partial class balance_pago : System.Web.UI.Page
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            GvControldePagos.DataSource = mylib.ListarBalancedePagos( Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            GvControldePagos.DataSource = mylib.ListarBalancedePagosCasosCriminales( Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
             GvControldePagos.DataBind();
 
         }
@@ -202,11 +217,16 @@ public partial class balance_pago : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
+            //DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            //DdlNumeroOrdenJudicial.DataBind();
+            //DdlNumeroOrdenJudicial.Items.Insert(0, new System.Web.UI.WebControls.ListItem("-Seleccione-", "0"));
+            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
-            DdlNumeroOrdenJudicial.Items.Insert(0, new System.Web.UI.WebControls.ListItem("-Seleccione-", "0"));
+            DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
         }
 

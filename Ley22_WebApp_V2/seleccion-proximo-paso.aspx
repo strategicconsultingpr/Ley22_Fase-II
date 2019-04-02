@@ -176,24 +176,39 @@
 
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-9">                    
 
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card text-center mb-3 card-menu">
                                 <div class="card-block">
                                     <p class="mt-4">
-                                        <a href="nuevo-confirmacion.aspx">
+                                        <a href="ParticipanteNuevo.aspx">
                                             <span class="fa-stack fa-3x">
                                                 <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>                                   
-                                    <h4 class="card-title"><a href="nuevo-confirmacion.aspx">Editar Registro de Usuario</a></h4>
+                                    <h4 class="card-title"><a href="ParticipanteNuevo.aspx">Editar Registro de Usuario</a></h4>
                                 </div>
                             </div>
                         </div>
                         <!-- col-4 -->
+
+                        <div class="col-md-4">
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="OrdenNuevo.aspx">
+                                            <span class="fa-stack fa-3x">
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>                                   
+                                    <h4 class="card-title"><a href="OrdenNuevo.aspx">Abrir Caso Criminal</a></h4>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-md-4">
 

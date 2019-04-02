@@ -6,14 +6,24 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using Ley22_WebApp_V2.Old_App_Code;
+using Ley22_WebApp_V2.Models;
 
 public partial class cierre_caso : System.Web.UI.Page
     {
+    ApplicationUser ExistingUser = new ApplicationUser();
+
     protected void Page_Load(object sender, EventArgs e)
         {
         // valida que se haya buscado el usuario
         // -----------------------------------------------------------------------------
-        if (Session["DataParticipante"] == null)
+        //if (Session["DataParticipante"] == null)
+        //{
+        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+        //    Session["MensajeError"] = "Por favor seleccione el participante";
+        //    Response.Redirect("Mensajes.aspx", false);
+        //    return;
+        //}
+        if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
@@ -33,9 +43,9 @@ public partial class cierre_caso : System.Web.UI.Page
         {
         using( Ley22Entities mylib = new Ley22Entities() )
             {
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlNumeroOrdenJudicial.DataBind();
             DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
@@ -76,14 +86,15 @@ public partial class cierre_caso : System.Web.UI.Page
 
     void ActualizarCierreOrden(string FileName)
         {
-        using( Ley22Entities mylib = new Ley22Entities() )
+        ExistingUser = (ApplicationUser)Session["User"];
+        using ( Ley22Entities mylib = new Ley22Entities() )
             {
 
-            mylib.CerrarordenJudicial(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),
+            mylib.CerrarCasoCriminal(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),
                 Convert.ToInt32(DdlMotivoCierre.SelectedValue),
                 TxtCometarios.Text,
                 FileName,
-                Convert.ToInt32(Session["Id_UsuarioApp"]));
+                ExistingUser.Id);
             }
         BindOrdenJudicial();
         DdlMotivoCierre.SelectedIndex = -1;

@@ -12,17 +12,9 @@ namespace Ley22_WebApp_V2.Old_App_Code
     using System;
     using System.Collections.Generic;
     
-    public partial class SA_PERSONA_PROGRAMA
+    public partial class DesempleoRazon
     {
-        public int FK_Persona { get; set; }
-        public short FK_Programa { get; set; }
-        public string NR_Expediente { get; set; }
-        public System.Guid FK_Sesion { get; set; }
-        public string TI_Edicion { get; set; }
-        public System.DateTime FE_Edicion { get; set; }
-        public Nullable<int> PK_Old { get; set; }
-    
-        public virtual SA_PROGRAMA SA_PROGRAMA { get; set; }
-        public virtual SA_PERSONA SA_PERSONA { get; set; }
+        public int Id_DesempleoRazon { get; set; }
+        public string NB_DesempleoRazon { get; set; }
     }
 }

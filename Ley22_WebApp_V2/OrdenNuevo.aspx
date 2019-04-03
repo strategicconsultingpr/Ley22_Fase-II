@@ -299,7 +299,7 @@
                             <div class="form-group">
                                 <label for="tel-hogar">Teléfono Hogar </label>
                                 <asp:TextBox ID="TxtTelHogar" runat="server" CssClass="form-control" placeholder="Ej. 7875559999"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator66" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelHogar" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator66" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelHogar" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelHogar" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
 
@@ -311,7 +311,7 @@
                                 <label for="tel-trabajo">Teléfono Trabajo </label>
                                 <asp:TextBox ID="TxtTelefonoFamiliarMasCercano" runat="server" CssClass="form-control" placeholder="Ej. 7875559999"></asp:TextBox>
                                 <%--                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator65" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator65" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoFamiliarMasCercano" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoFamiliarMasCercano" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                         </div>

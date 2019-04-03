@@ -58,19 +58,19 @@ namespace Ley22_WebApp_V2
             //}
 
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html);
-            LinkedResource lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_1.jpg");
+            LinkedResource lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_1.jpg");
             lr.ContentId = "logo_1";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_2.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_2.png");
             lr.ContentId = "logo_2";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/twitter-circle-colored.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/twitter-circle-colored.png");
             lr.ContentId = "twitter";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/facebook-circle-colored.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/facebook-circle-colored.png");
             lr.ContentId = "facebook";
             imgview.LinkedResources.Add(lr);
 
@@ -96,19 +96,19 @@ namespace Ley22_WebApp_V2
         void sendMailCita(string email, string subject, string body)
         {
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
-            LinkedResource lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_1.jpg");
+            LinkedResource lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_1.jpg");
             lr.ContentId = "logo_1";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/logo_2.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_2.png");
             lr.ContentId = "logo_2";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/twitter-circle-colored.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/twitter-circle-colored.png");
             lr.ContentId = "twitter";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/facebook-circle-colored.png");
+            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/facebook-circle-colored.png");
             lr.ContentId = "facebook";
             imgview.LinkedResources.Add(lr);
 

@@ -10,6 +10,8 @@ using System.Data.Sql;
 using Ley22_WebApp_V2.Old_App_Code;
 public partial class recepcion_busquedaUsuario : System.Web.UI.Page
 {
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -18,6 +20,16 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Response.Redirect("Entrada.aspx",false);
             return;
         }
+
+        if (Session["SA_Persona"] != null)
+        {
+            Session["Id_Participante"] = null;
+            Session["NombreParticipante"] = null;
+            Session["NombreParticipante2"] = null;
+            Session["SA_Persona"] = null;
+            Session["Expediente"] = null;
+        }
+            
 
             if (!Page.IsPostBack)
         {
@@ -61,6 +73,8 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
     int  BindGridView( int pagina)
     {
         DateTime FechaNac;
+        short idPrograma = Convert.ToInt16(Session["Programa"]);
+
         if (Session["TxtFechaNacimiento"].ToString() == "")
             FechaNac = Convert.ToDateTime("01-01-1900");
         else
@@ -78,10 +92,11 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
                                                                      Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString()).ToList();
-                                                     
 
+            //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+            //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
- 
+                  
             GridView1.PageIndex = pagina - 1; 
             GridView1.DataSource = Resul;
             GridView1.DataBind();

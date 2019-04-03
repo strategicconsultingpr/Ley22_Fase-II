@@ -128,7 +128,7 @@
                     </Columns>
                     <EmptyDataTemplate>
                         <div class="card-block">
-                            <p class="text-center pt-4 pb-4">Ningún usuario coincide con su búsqueda. <a href="nuevo-usuario.aspx">Crear Cuenta Nueva</a></p>
+                            <p class="text-center pt-4 pb-4">Ningún usuario coincide con su búsqueda. <a href="ParticipanteNuevo.aspx.aspx">Crear Cuenta Nueva</a></p>
                         </div>
                      </EmptyDataTemplate>
 

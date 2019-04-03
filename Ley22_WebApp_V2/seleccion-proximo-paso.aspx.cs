@@ -33,6 +33,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             LitIUP.Text = du.PK_Persona.ToString();
             LitLicencia.Text = "12345";
             Programa = Convert.ToInt32(Session["Programa"].ToString());
+            NombreParticipante.Text = Session["NombreParticipante"].ToString();
             NombrePrograma.Text = Session["NombrePrograma"].ToString();
             LitExpediente.Text = Session["Expediente"].ToString();
             
@@ -54,6 +55,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
                 LitEstatus.Text = "Cerrado bajo este programa";
             }
             verificarEpisodiosAnteriores(du.PK_Persona);
+            verificarCasosAnteriores(du.PK_Persona);
             ConsultarCharlasPorParticipante(du.PK_Persona);
             verificarCitas(du.PK_Persona);
         }
@@ -104,6 +106,26 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
                 HyperLink1.Enabled = true;
             else
                 HyperLink1.Enabled = false;
+
+        }
+
+    }
+
+    void verificarCasosAnteriores(int Pk_Persona)
+    {
+        using (Ley22Entities mylib = new Ley22Entities())
+        {
+            List<ConsultarCasosXPersona_Result> myresul = mylib.ConsultarCasosXPersona(Pk_Persona).ToList();
+
+            GVListaDeCasos.DataSource = myresul;
+            GVListaDeCasos.DataBind();
+
+            HyperLink2.Text = myresul.Count().ToString() + " Casos";
+
+            if (myresul.Count > 0)
+                HyperLink2.Enabled = true;
+            else
+                HyperLink2.Enabled = false;
 
         }
 
@@ -160,6 +182,18 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
         //ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup('" + title + "', '" + episodio_num + "');", true);
         //ScriptManager.RegisterStartupScript(this, this.GetType(), "MyPopup", "$('#MyPopup').modal();", true);
         Response.Redirect("listado_perfiles.aspx?pk_episodio=" + episodio, false);
+    }
+
+    protected void lnkCasoCriminal_Click(object sender, EventArgs e)
+    {
+        LinkButton btn = (LinkButton)(sender);
+        string caso = btn.CommandArgument;
+        int caso_num = Convert.ToInt32(caso);
+
+        //string title = "Episodio = ";
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup('" + title + "', '" + episodio_num + "');", true);
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "MyPopup", "$('#MyPopup').modal();", true);
+        Response.Redirect("OrdenNuevo.aspx?id_caso=" + caso_num, false);
     }
 
 }

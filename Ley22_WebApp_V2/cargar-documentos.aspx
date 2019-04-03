@@ -10,7 +10,7 @@
 
         <div class="card">
             <div class="card-header">
-                Recepción de Documentos. Usuario:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                Recepción de Documentos - Participante:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
  
             </div>
             <div class="card-menu-mensaje" id="DivDocumentos" runat="server">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-lg-1"></div>
                     <div class="col">
-                        Orden Judicial                   
+                        Caso Criminal                   
                     </div>
                     <div class="col">
                         Tipo de documento                   

@@ -1123,5 +1123,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonasRecepcion_Result>("BusquedaSencilladePersonasRecepcion", nR_SeguroSocialParameter, identificacionParameter, fE_NacimientoParameter, nombreParameter, apellidoParameter);
         }
+    
+        public virtual ObjectResult<ConsultarCasosXPersona_Result> ConsultarCasosXPersona(Nullable<int> pk_Persona)
+        {
+            var pk_PersonaParameter = pk_Persona.HasValue ?
+                new ObjectParameter("Pk_Persona", pk_Persona) :
+                new ObjectParameter("Pk_Persona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCasosXPersona_Result>("ConsultarCasosXPersona", pk_PersonaParameter);
+        }
     }
 }

@@ -304,9 +304,10 @@
           <Property Name="Id_Tribunal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NB_Tribunal" Type="varchar(max)" Nullable="false" />
           <Property Name="Direccion" Type="varchar(max)" />
-          <Property Name="Telefono" Type="varchar" MaxLength="128" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
           <Property Name="FK_Categoria" Type="int" Nullable="false" />
           <Property Name="FK_Region" Type="int" Nullable="false" />
+          <Property Name="PO_BOX" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TS_Excepciones">
           <Key>
@@ -387,6 +388,9 @@
           <Parameter Name="ComentarioCierre" Type="varchar" Mode="In" />
           <Parameter Name="DocumentoAprobacion" Type="varchar" Mode="In" />
           <Parameter Name="Id_UsuarioCierre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ConsultarCasosXPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Pk_Persona" Type="int" Mode="In" />
         </Function>
         <Function Name="ConsultarCharlasPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
@@ -1026,6 +1030,9 @@
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Apellido" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarCasosXPersona" ReturnType="Collection(Ley22Model.ConsultarCasosXPersona_Result)">
+            <Parameter Name="Pk_Persona" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -1594,10 +1601,11 @@
           <Property Name="Id_Tribunal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NB_Tribunal" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="FK_Categoria" Type="Int32" Nullable="false" />
           <Property Name="FK_Region" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CasoCriminals" Relationship="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" FromRole="Tribunal" ToRole="CasoCriminal" />
+          <Property Name="PO_BOX" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DesempleoRazon">
           <Key>
@@ -1746,6 +1754,13 @@
           <Property Type="Byte" Name="FK_Veterano" Nullable="true" />
           <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="true" />
           <Property Type="String" Name="Identificacion" Nullable="true" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="ConsultarCasosXPersona_Result">
+          <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
+          <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="FechaSentencia" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DE_Programa" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Estatus" Nullable="false" MaxLength="7" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2410,6 +2425,7 @@
           <EntitySetMapping Name="Tribunals">
             <EntityTypeMapping TypeName="Ley22Model.Tribunal">
               <MappingFragment StoreEntitySet="Tribunal">
+                <ScalarProperty Name="PO_BOX" ColumnName="PO_BOX" />
                 <ScalarProperty Name="FK_Region" ColumnName="FK_Region" />
                 <ScalarProperty Name="FK_Categoria" ColumnName="FK_Categoria" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
@@ -2569,6 +2585,17 @@
                 <ScalarProperty Name="FK_Veterano" ColumnName="FK_Veterano" />
                 <ScalarProperty Name="FK_GrupoEtnico" ColumnName="FK_GrupoEtnico" />
                 <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarCasosXPersona" FunctionName="Ley22Model.Store.ConsultarCasosXPersona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ConsultarCasosXPersona_Result">
+                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
+                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+                <ScalarProperty Name="FechaSentencia" ColumnName="FechaSentencia" />
+                <ScalarProperty Name="DE_Programa" ColumnName="DE_Programa" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

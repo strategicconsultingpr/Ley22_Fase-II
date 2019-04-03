@@ -798,6 +798,9 @@
     <Compile Include="Old_App_Code\CharlaGrupal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ConsultarCasosXPersona_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>

@@ -39,6 +39,44 @@
             </div>
         </div>
     </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModalListaCasos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Casos Criminales</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <asp:GridView ID="GVListaDeCasos" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False">
+                        <Columns>
+
+                            <asp:TemplateField HeaderText="Casos">
+                                <ItemTemplate>
+                                   <asp:LinkButton ItemStyle-HorizontalAlign="Right" ID="lnkCaso" runat="server" Text='<%# Bind("NumeroCasoCriminal") %>'  OnClick="lnkCasoCriminal_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_CasoCriminal") %>'></asp:LinkButton>
+                                </ItemTemplate>
+                               <HeaderStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <%--<asp:BoundField DataField="PK_Episodio" HeaderText="Episodio" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />--%>
+                            <asp:BoundField DataField="FechaSentencia" HeaderText="Fecha de Sentencia" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="DE_Programa" HeaderText="Programa" HeaderStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="Estatus" HeaderText="Estatus" HeaderStyle-HorizontalAlign="Center" />
+                        </Columns>
+
+                    </asp:GridView>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="myModalListaCitas">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -111,7 +149,7 @@
 
     <div class="card">
         <div class="card-header">
-            Próximo Paso. Usuario:<uc1:WUCUsuario runat="server" ID="WUCUsuario" /> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
+            Próximo Paso. Usuario: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
 
         </div>
         <div class="card-block">
@@ -135,6 +173,12 @@
            
                             <span>
                                 <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaEpisodios"></asp:HyperLink>
+                            </span>
+                        </li>
+                        <li class="list-group-item justify-content-between">Casos Criminales
+           
+                            <span>
+                                <asp:HyperLink ID="HyperLink2" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCasos"></asp:HyperLink>
                             </span>
                         </li>
                         <li class="list-group-item justify-content-between">Licencia

@@ -63,7 +63,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //
 
             TxtNroSeguroSocial.Attributes["placeholder"] = "Ej. 999-99-9999";
-            TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
+            //TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
             TxtFechaNacimiento.Attributes["placeholder"] = "Ej. mm/dd/yyyy";
            // TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
         }
@@ -143,16 +143,19 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
            Session["txtDocumentos"] = RBLDocumentos.SelectedItem.Text;
            */
         if (!(TxtNroSeguroSocial.Text.Trim() == "" &&
-            TxtIdentificacion.Text.Trim() == "" &&
+            //TxtIdentificacion.Text.Trim() == "" &&
             TxtFechaNacimiento.Text.Trim() == "" &&
-            TxtNombreyApellido.Text.Trim() == ""))
+            TxtNombre.Text.Trim() == "" &&
+            TxtApellido.Text.Trim() == ""))
         {
 
 
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();
-            Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
+            //Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombreyApellido.Text.Trim();
+            Session["TxtNombre"] = TxtNombre.Text.Trim();
+            Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
         }
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

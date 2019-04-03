@@ -191,10 +191,10 @@
 
                     </div>
 
-                    <div class="form-group">
+                   <%-- <div class="form-group">
                         <label for="formGroupExampleInput">Identificación</label>
                         <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Fecha de Nacimiento</label>
@@ -203,10 +203,19 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaNacimiento" ForeColor="Red"></asp:RegularExpressionValidator>
                     </div>
 
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Nombre y Apellido</label>
-                        <asp:TextBox ID="TxtNombreyApellido" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                    
+                     
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <asp:TextBox ID="TxtNombre" runat="server" class="form-control" placeholder="Ej. Luis"></asp:TextBox>
+                                </div>
+                           
+                             
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Apellido</label>
+                                    <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
+                                </div>
+                            
                 <!--    <asp:CustomValidator ID="valValidateTextBox" runat="server" ValidateEmptyText="true" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" /> -->
                     <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
                 <!--    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator> -->

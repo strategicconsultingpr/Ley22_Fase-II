@@ -42,7 +42,7 @@ namespace Ley22_WebApp_V2
                     TxtFechaOrden.Text = caso.FechaOrden.ToString();
                     TxtSentencia.Text = caso.FechaSentencia.ToString();
                     Txtalcohol.Text = caso.Alcohol;
-                    DdlTribunal.SelectedValue = caso.Tribunal.ToString();
+                    DdlTribunal.SelectedValue = caso.FK_Tribunal.ToString();
                     TxtJuez.Text = caso.NB_Juez;
                     TxtLicencia.Text = caso.NumLicencia.ToString();
                     DdlEstadoCivil.SelectedValue = caso.FK_EstadoCivil.ToString();

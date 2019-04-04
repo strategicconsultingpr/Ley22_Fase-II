@@ -193,10 +193,10 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="formGroupExampleInput">Identificación</label>
                         <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Fecha de Nacimiento</label>
@@ -206,9 +206,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Nombre y Apellido</label>
-                        <asp:TextBox ID="TxtNombreyApellido" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <asp:TextBox ID="TxtNombre" runat="server" class="form-control" placeholder="Ej. Luis"></asp:TextBox>
+                                </div>
+                           
+                             
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Apellido</label>
+                                    <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
+                                </div>
                 <!--    <asp:CustomValidator ID="valValidateTextBox" runat="server" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" />
 
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -220,11 +226,11 @@
 
                         function CheckTextBoxes(sender, args) {
                             var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
-                            var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
                             var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
-                            var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                            var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
+                            var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
 
-                            if (TxtNroSeguroSocial == "" && TxtIdentificacion == "" && TxtFechaNacimiento == "" && TxtNombreyApellido == "") {
+                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "") {
                                // args.IsValid = false;
                                 document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";
                                 return false;

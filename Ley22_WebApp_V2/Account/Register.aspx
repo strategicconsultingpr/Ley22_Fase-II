@@ -78,7 +78,10 @@
               title: titulo,
               text: texto,
               icon: icono
-            )
+            )            
+            window.location.href = 'Register.aspx';
+            //this.form.reset();
+         
         }
     </script>
 </asp:Content>

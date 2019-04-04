@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ley22_WebApp_V2
 {
@@ -21,6 +23,8 @@ namespace Ley22_WebApp_V2
 
             if (!Page.IsPostBack)
             {
+                ApplicationDbContext context = new ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
                 if (Request.UrlReferrer != null)
                 {
@@ -29,17 +33,18 @@ namespace Ley22_WebApp_V2
 
                 LoadDropDownList();
 
+                //Si participante existe en base de datos SEPS
                 if (Session["SA_Persona"] != null)
                 {
-                    if (Session["Expediente"] != null)
-                    {
-                        TxtExpediente.Text = Session["Expediente"].ToString();
-                        TxtExpediente.ReadOnly = true;
-                    }
                     
+                    //Seleccion de datos del participante
                     Data_SA_Persona sa_persona = (Data_SA_Persona)Session["SA_Persona"];
+                    string ssn = sa_persona.NR_SeguroSocial;
+                    string asterisk = new string('*', ssn.Length - 4);
+                    string last = ssn.Substring(ssn.Length - 4);
+
                     TxtIUP.Text = sa_persona.PK_Persona.ToString();
-                    TxtNroSeguroSocial.Text = sa_persona.NR_SeguroSocial;
+                    TxtNroSeguroSocial.Text = asterisk + last;
                     DdlSexo.SelectedValue = sa_persona.FK_Sexo.ToString();
                     TxtPrimerNombre.Text = sa_persona.NB_Primero;
                     TxtSegundoNombre.Text = sa_persona.NB_Segundo;
@@ -49,6 +54,7 @@ namespace Ley22_WebApp_V2
                     ChkVeterano.Checked = sa_persona.FK_Veterano == 1 ? true : false;
                     DdlGrupoEtnico.SelectedValue = sa_persona.FK_GrupoEtnico.ToString();
 
+                    //Bloqueo de campos para poder modificarlos
                     TxtNroSeguroSocial.ReadOnly = true;
                     DdlSexo.Enabled = false;
                     TxtPrimerNombre.ReadOnly = true;
@@ -60,7 +66,47 @@ namespace Ley22_WebApp_V2
                     DdlGrupoEtnico.Enabled = false;
 
                     BtnCrear.Visible = false;
-                    BtnActualizar.Visible = true;
+                    
+                    //Si participante tiene expediente bajo este programa
+                    if (Session["Expediente"] != null)
+                    {
+                        TxtExpediente.Text = Session["Expediente"].ToString();
+                        TxtExpediente.ReadOnly = true;
+
+                        DateTime FE_Creacion = Convert.ToDateTime(sa_persona.FE_Edicion.ToString());
+                        TimeSpan ts = DateTime.Now.Subtract(FE_Creacion);
+                        Char TI = sa_persona.TI_Edicion;
+
+                        //Si el usuario tiene acceso a modificacion de participante
+                        if ((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || (ts.Days < 3 && TI == 'C')))
+                        {
+                            if(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor"))
+                            {
+                                TxtNroSeguroSocial.Text = ssn;
+                                TxtNroSeguroSocial.ReadOnly = false;
+                            }
+                            else if((ts.Days < 2 && TI == 'C'))
+                            {
+                                TxtNroSeguroSocial.Text = ssn;
+                                TxtNroSeguroSocial.ReadOnly = false;
+                            }
+                            
+                            DdlSexo.Enabled = true;
+                            TxtPrimerNombre.ReadOnly = false;
+                            TxtSegundoNombre.ReadOnly = false;
+                            TxtPrimerApellido.ReadOnly = false;
+                            TxtSegundoApellido.ReadOnly = false;
+                            TxtFechaNacimiento.ReadOnly = false;
+                            ChkVeterano.Enabled = true;
+                            DdlGrupoEtnico.Enabled = false;
+                            TxtExpediente.ReadOnly = false;
+
+                            BtnActualizar.Visible = true;
+                        }
+                        
+
+                    }
+             
                 }
             }
         }
@@ -128,7 +174,9 @@ namespace Ley22_WebApp_V2
                     AP_Segundo = TxtSegundoApellido.Text,
                     FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
                     FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
-                    FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue)
+                    FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue),
+                    FE_Edicion = DateTime.Now,
+                    TI_Edicion = 'C'
 
                 };
 
@@ -136,10 +184,8 @@ namespace Ley22_WebApp_V2
                 Session["Expediente"] = TxtExpediente.Text;
 
                 string mensaje = "El participante " + TxtPrimerNombre.Text+ " "+ TxtPrimerApellido.Text + " se añadió correctamente.";
-                string script = "window.onload = function(){ alert('";
-                script += mensaje;
-                script += "')};";
-                ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", script, true);
+                
+                ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", "sweetAlert('Participante Registrado','" + mensaje + "','success')", true);
 
                 Response.Redirect("OrdenNuevo.aspx", false);
 
@@ -152,51 +198,50 @@ namespace Ley22_WebApp_V2
         {
             Data_SA_Persona sa_persona;
             short programa = Convert.ToInt16(Session["Programa"]);
-
-            using (SEPSEntities1 seps = new SEPSEntities1())
+            try
             {
-                
-
-                var sa_personas = seps.SPU_PERSONA(
-                    Convert.ToInt32(TxtIUP.Text),
-                    programa,
-                    TxtNroSeguroSocial.Text,
-                    TxtExpediente.Text,
-                    Convert.ToByte(DdlSexo.SelectedValue.ToString()),
-                    TxtPrimerApellido.Text,
-                    TxtSegundoApellido.Text,
-                    TxtPrimerNombre.Text,
-                    TxtSegundoNombre.Text,
-                    DateTime.Parse(TxtFechaNacimiento.Text),
-                    ChkVeterano.Checked == true ? "1" : "2",
-                    DdlGrupoEtnico.SelectedValue,
-                    Guid.NewGuid()
-                    );
-
-                sa_persona = new Data_SA_Persona()
+                using (SEPSEntities1 seps = new SEPSEntities1())
                 {
-                    PK_Persona = Convert.ToInt32(TxtIUP.Text),
-                    NR_SeguroSocial = TxtNroSeguroSocial.Text,
-                    FK_Sexo = Convert.ToInt32(DdlSexo.SelectedValue),
-                    NB_Primero = TxtPrimerNombre.Text,
-                    NB_Segundo = TxtSegundoNombre.Text,
-                    AP_Primero = TxtPrimerApellido.Text,
-                    AP_Segundo = TxtSegundoApellido.Text,
-                    FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
-                    FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
-                    FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue)
 
-                };
-            }
+
+                    var sa_personas = seps.SPU_PERSONA(
+                        Convert.ToInt32(TxtIUP.Text),
+                        programa,
+                        TxtNroSeguroSocial.Text,
+                        TxtExpediente.Text,
+                        Convert.ToByte(DdlSexo.SelectedValue.ToString()),
+                        TxtPrimerApellido.Text,
+                        TxtSegundoApellido.Text,
+                        TxtPrimerNombre.Text,
+                        TxtSegundoNombre.Text,
+                        DateTime.Parse(TxtFechaNacimiento.Text),
+                        ChkVeterano.Checked == true ? "1" : "2",
+                        DdlGrupoEtnico.SelectedValue,
+                        Guid.NewGuid()
+                        );
+
+                    sa_persona = new Data_SA_Persona()
+                    {
+                        PK_Persona = Convert.ToInt32(TxtIUP.Text),
+                        NR_SeguroSocial = TxtNroSeguroSocial.Text,
+                        FK_Sexo = Convert.ToInt32(DdlSexo.SelectedValue),
+                        NB_Primero = TxtPrimerNombre.Text,
+                        NB_Segundo = TxtSegundoNombre.Text,
+                        AP_Primero = TxtPrimerApellido.Text,
+                        AP_Segundo = TxtSegundoApellido.Text,
+                        FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
+                        FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
+                        FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue)
+
+                    };
+                }
 
                 Session["SA_Persona"] = sa_persona;
                 Session["Expediente"] = TxtExpediente.Text;
 
                 string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se actualizo correctamente.";
-                string script = "window.onload = function(){ alert('";
-                script += mensaje;
-                script += "')};";
-                ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", script, true);
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Participante Actualizado", "sweetAlert('Participante Actualizado','" + mensaje + "','success')", true);
 
                 var casos = dsLey22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(sa_persona.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == programa);
                 if (casos.Count() > 0)
@@ -207,6 +252,13 @@ namespace Ley22_WebApp_V2
                 {
                     Response.Redirect("OrdenNuevo.aspx", false);
                 }
+            }
+            catch(Exception ex)
+            {
+                string mensaje = ex.Message;
+                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','success')", true);
+                
+            }
 
                 
 

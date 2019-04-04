@@ -18,6 +18,7 @@ namespace Ley22_WebApp_V2
         Data_SA_Persona sa_persona = new Data_SA_Persona();
         Ley22Entities dsLey22 = new Ley22Entities();
         SEPSEntities1 dsPerfil = new SEPSEntities1();
+        int Id_Caso;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +40,7 @@ namespace Ley22_WebApp_V2
 
                 if (Request.QueryString["id_caso"] != null)
                 {
-                    int Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+                    this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
 
                     var caso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_Caso)).SingleOrDefault();
 
@@ -82,6 +83,51 @@ namespace Ley22_WebApp_V2
                     TxtPareja.Text = caso.NB_Pareja;
                     TxtPadre.Text = caso.NB_Padre;
                     TxtMadre.Text = caso.NB_Madre;
+
+                    BtnActualizar.Visible = true;
+
+                    DateTime FE_Creacion = Convert.ToDateTime(caso.FechaCreacion.ToString());
+                    TimeSpan ts = DateTime.Now.Subtract(FE_Creacion);
+
+                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 1))
+                    {
+                        TxtNroCasoCriminal.ReadOnly = true;
+                        TxtFechaOrden.ReadOnly = true;
+                        TxtSentencia.ReadOnly = true;
+                        Txtalcohol.ReadOnly = true;
+                        DdlTribunal.Enabled = false;
+                        TxtJuez.ReadOnly = true;
+                        TxtLicencia.ReadOnly = true;
+                        DdlEstadoCivil.Enabled = false;
+                        TxtEmail.ReadOnly = true;
+                        TxtCelular.ReadOnly = true;
+                        TxtTelHogar.ReadOnly = true;
+                        TxtTelefonoFamiliarMasCercano.ReadOnly = true;
+                        TxtDireccionLinea1.ReadOnly = true;
+                        TxtDireccionLinea2.ReadOnly = true;
+                        DdlPueblo.Enabled = false;
+                        TxtCodigoPostal.ReadOnly = true;
+                        TxtPostalLinea1.ReadOnly = true;
+                        TxtPostalLinea2.ReadOnly = true;
+                        DdlPuebloPostal.Enabled = false;
+                        TxtCodigoPostalPostal.ReadOnly = true;
+                        DdlPlanMedico.Enabled = false;
+                        DdlTratamiento.Enabled = false;
+                        DdlImpedimento.Enabled = false;
+                        DdlGrado.Enabled = false;
+                        TxtTrabajo.ReadOnly = true;
+                        TxtOcupacion.ReadOnly = true;
+                        ChkNoTrabajo.Enabled = false;
+                        DdlDesempleado.Enabled = false;
+                        TxtFamiliar.ReadOnly = true;
+                        TxtPareja.ReadOnly = true;
+                        TxtPadre.ReadOnly = true;
+                        TxtMadre.ReadOnly = true;
+
+                        BtnActualizar.Visible = false;
+                    }
+
+                    BtnCrear.Visible = false;
 
                 }
                 else
@@ -172,13 +218,32 @@ namespace Ley22_WebApp_V2
                     TxtPareja.Text, TxtPadre.Text,TxtMadre.Text);
 
             string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
-            string script = "window.onload = function(){ alert('";
-            script += mensaje;
-            script += "')};";
-            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", script, true);
+           
+            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
 
             Response.Redirect("seleccion-proximo-paso.aspx", false);
             // mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]));
+        }
+
+        protected void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            using (Ley22Entities mylib = new Ley22Entities())
+                mylib.ModificarCasoCriminal(this.Id_Caso, TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text),
+                    Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
+                    Convert.ToInt32(TxtLicencia.Text),
+                    Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,
+                    TxtTelefonoFamiliarMasCercano.Text, TxtDireccionLinea1.Text, TxtDireccionLinea2.Text, Convert.ToInt32(DdlPueblo.SelectedValue),
+                    TxtCodigoPostal.Text,
+                    TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
+                    Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
+                    TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
+                    TxtPareja.Text, TxtPadre.Text, TxtMadre.Text);
+
+            string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Actualizado", "sweetAlert('Caso Criminal Actualizado','" + mensaje + "','success')", true);
+
+            Response.Redirect("OrdenNuevo.aspx", false);
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

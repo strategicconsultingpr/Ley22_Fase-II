@@ -95,9 +95,9 @@ public partial class balance_pago : System.Web.UI.Page
 
             string Id = Session["Id_Participante"].ToString();
             Programa = Convert.ToInt32(Session["Programa"].ToString());
-            if (!Directory.Exists(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/")))
+            if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"))
             {
-                Directory.CreateDirectory(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/"));
+                Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/");
             }
 
             // FileStream fs = new FileStream("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value+".pdf",FileMode.Create);
@@ -132,7 +132,7 @@ public partial class balance_pago : System.Web.UI.Page
             
             PdfDocument document = htmlConverter.Convert(bodyPDF, baseUrl);
 
-            document.Save(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value + ".pdf"));
+            document.Save("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" +Id +"/"+ DdlNumeroOrdenJudicial.SelectedValue+"/Pagos/" + IdCP.Value + ".pdf");
             
             document.Close(true);
             
@@ -191,7 +191,7 @@ public partial class balance_pago : System.Web.UI.Page
             if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
             {
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
-                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + CantidadAPagar +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + CantidadAPagar +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
                 LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
                 ContadorCharlasCitasPagadas += 1;
                 TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
@@ -298,13 +298,29 @@ public partial class balance_pago : System.Web.UI.Page
         //Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 10f);
         //HTMLWorker htmlParse = new HTMLWorker(pdfDoc);
         //PdfWriter.GetInstance(pdfDoc,Response.OutputStream);
-         
+
         //pdfDoc.Open();
         //htmlParse.Parse(sr);
         //pdfDoc.Close();
 
         //Response.Write(pdfDoc);
         //Response.End();
+
+
+        string Id = Session["Id_Participante"].ToString();
+        Programa = Convert.ToInt32(Session["Programa"].ToString());
+       
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdCP.Value + ".pdf";
+
+
+        Response.Clear();
+        Response.ClearHeaders();
+        Response.ClearContent();
+        Response.ContentType = "application/octet-stream";
+        Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+        Response.TransmitFile(PathNameDocumento);
+        Response.End();
+        Response.Redirect("/");
     }
 
     public override void VerifyRenderingInServerForm(Control control)

@@ -156,7 +156,7 @@ public partial class cargar_documentos : System.Web.UI.Page
         {
             if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
             {
-                File.Delete(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id +"/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
+                File.Delete("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
             }
         }
 
@@ -171,7 +171,7 @@ public partial class cargar_documentos : System.Web.UI.Page
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
         LinkButton btn = (LinkButton)(sender);       
-        string PathNameDocumento = "/DocumentosPorParticipantes/" + Programa + "/" + Id +"/" + btn.CommandArgument.ToString();
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + btn.CommandArgument.ToString();
 
 
         Response.Clear();
@@ -179,7 +179,7 @@ public partial class cargar_documentos : System.Web.UI.Page
         Response.ClearContent();
         Response.ContentType = "application/octet-stream";
         Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
-        Response.TransmitFile(Server.MapPath("~" + PathNameDocumento));
+        Response.TransmitFile(PathNameDocumento);
         Response.End();
         Response.Redirect("/");
     }
@@ -241,14 +241,14 @@ public partial class cargar_documentos : System.Web.UI.Page
         { 
             try
             {
-                string filename = DdlNumeroOrdenJudicial.SelectedValue + "-" + Path.GetFileName(FileUpload1.FileName);
+                string filename = Path.GetFileName(FileUpload1.FileName);
                 string Id = Session["Id_Participante"].ToString();
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists(Server.MapPath("~/DocumentosPorParticipantes/"+Programa+"/"+Id)))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue))
                 {
-                    Directory.CreateDirectory(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id+"/"));
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/");
                 }
-                FileUpload1.SaveAs(Server.MapPath("~/DocumentosPorParticipantes/" + Programa + "/" + Id+"/") + filename);
+                FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
                 GuardarDocumento(Convert.ToInt32(DdlDocumento.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), filename, Convert.ToInt32(Session["Id_UsuarioApp"]));
                 BidGrid();

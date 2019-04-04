@@ -24,6 +24,7 @@
 
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
     <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
+    
     <!-- Modal -->
     <div class="modal fade" id="imprimir-recibo-modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document" runat="server" id="panelPDF">
@@ -55,7 +56,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         </div>
                     </div>
 
-
+                    
                     <ul class="list-unstyled ml-3">
                         <li><strong>
                             <div id="NroRecibo"></div>
@@ -75,7 +76,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         <li><strong>
                             <div id="NombreCompleto"></div>
                         </strong></li>
-
+                        
                     </ul>
 
                     <p class="ml-3">
@@ -85,7 +86,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                 </div>
                 <div class="modal-footer">
-                    <asp:Button type="button" runat="server" class="btn btn-primary mr-3" Text="Imprimir"/>
+                    <asp:Button type="button" runat="server" class="btn btn-primary mr-3" OnClick="BtnPrint_Click" Text="Imprimir" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -219,7 +220,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                             </div>
                            
                                 <div class="col-md-3">
-                                    <strong><label for="orden">Orden Judicial</label></strong> 
+                                    <strong><label for="orden">Numero Caso Criminal</label></strong> 
 
 
                                           <div class="row">
@@ -311,7 +312,8 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
 
     <script>
-        function changeDivContent(NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
+        function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
+            document.getElementById("<%= IdCP.ClientID %>").value = Valor;
             document.getElementById("NroRecibo").innerHTML = "Recibo #: " + NroRecibo;
             document.getElementById("Descripcion").innerHTML = "Descripción: " + Descripcion;
 

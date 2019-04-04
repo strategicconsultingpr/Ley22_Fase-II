@@ -433,6 +433,17 @@
                     <strong>Dirección Postal</strong>
                 </div>
                  <div class="col-md-10">
+                     <div class="row">
+                         <div class="col">
+                             <div class="form-check">
+                                <p>&nbsp;</p>
+                                <label class="form-check-label">
+                                    <asp:CheckBox ID="ChkPostal" runat="server" class="form-check-input" OnClick="postalDireccion();"/>
+                                    Direccón Postal igual que dirección fisica.
+                                </label>
+                            </div>
+                         </div>
+                     </div>
                     <div class="row">
                         <div class="col-md-3">
 
@@ -665,7 +676,13 @@
               text: texto,
               icon: icono
             )
-        }
+          }
+
+          function postalDireccion() {
+              var TxtDireccionLinea1 = document.getElementById("<%=TxtDireccionLinea1.ClientID %>").value;
+              var TxtDireccionLinea2 = document.getElementById("<%=TxtDireccionLinea2.ClientID %>").value;
+              var DdlPueblo = document.getElementById("<%=DdlPueblo.ClientID %>").value;
+          }
     </script>
    
 </asp:Content>

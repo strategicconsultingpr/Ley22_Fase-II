@@ -226,11 +226,12 @@
 
                         function CheckTextBoxes(sender, args) {
                             var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
-                            var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
+                          
                             var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
-                            var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                            var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
+                            var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
 
-                            if (TxtNroSeguroSocial == "" && TxtIdentificacion == "" && TxtFechaNacimiento == "" && TxtNombreyApellido == "") {
+                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "") {
                               //  args.IsValid = false;
                                 
                                document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";

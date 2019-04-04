@@ -1,5 +1,7 @@
 ﻿using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,9 @@ namespace Ley22_WebApp_V2
 
             if (!Page.IsPostBack)
             {
+                ApplicationDbContext context = new ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
                 if (Request.UrlReferrer != null)
                 {
                     prevPage = Request.UrlReferrer.ToString();

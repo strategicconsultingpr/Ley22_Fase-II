@@ -75,7 +75,8 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
 
             List<BusquedaSencilladePersonasRecepcion_Result> Resultado = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
-                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString()).ToList();
+                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(),
+                                                                     Session["TxtSegundoApellido"].ToString(),idPrograma).ToList();
 
             var Result = Resultado.Where(u => u.Identificacion.Equals("LEY 22")).ToList();
             var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
@@ -131,12 +132,14 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
         if (!(TxtNroSeguroSocial.Text.Trim() == "" &&           
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
-            TxtApellido.Text.Trim() == ""))
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == ""))
         {
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();          
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
             Session["TxtNombre"] = TxtNombre.Text.Trim();
             Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
         }
 

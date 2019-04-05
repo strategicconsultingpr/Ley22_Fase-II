@@ -63,27 +63,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuscarSEPSPersonaXNroSeguroSocial_Result>("BuscarSEPSPersonaXNroSeguroSocial", nR_SeguroSocialParameter);
         }
     
-        public virtual ObjectResult<BusquedaSencilladePersonas_Result> BusquedaSencilladePersonas(string nR_SeguroSocial, string identificacion, Nullable<System.DateTime> fE_Nacimiento, string nombreApellido)
-        {
-            var nR_SeguroSocialParameter = nR_SeguroSocial != null ?
-                new ObjectParameter("NR_SeguroSocial", nR_SeguroSocial) :
-                new ObjectParameter("NR_SeguroSocial", typeof(string));
-    
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(string));
-    
-            var fE_NacimientoParameter = fE_Nacimiento.HasValue ?
-                new ObjectParameter("FE_Nacimiento", fE_Nacimiento) :
-                new ObjectParameter("FE_Nacimiento", typeof(System.DateTime));
-    
-            var nombreApellidoParameter = nombreApellido != null ?
-                new ObjectParameter("NombreApellido", nombreApellido) :
-                new ObjectParameter("NombreApellido", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonas_Result>("BusquedaSencilladePersonas", nR_SeguroSocialParameter, identificacionParameter, fE_NacimientoParameter, nombreApellidoParameter);
-        }
-    
         public virtual int CerrarordenJudicial(Nullable<int> id_OrdenJudicial, Nullable<int> id_MotivoCierre, string comentarioCierre, string documentoAprobacion, Nullable<int> id_UsuarioCierre)
         {
             var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
@@ -1099,31 +1078,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCasoCriminal", id_ParticipanteParameter, numeroCasoCriminalParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, id_UsuarioCreacionParameter, fK_ProgramaParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
         }
     
-        public virtual ObjectResult<BusquedaSencilladePersonasRecepcion_Result> BusquedaSencilladePersonasRecepcion(string nR_SeguroSocial, string identificacion, Nullable<System.DateTime> fE_Nacimiento, string nombre, string apellido)
-        {
-            var nR_SeguroSocialParameter = nR_SeguroSocial != null ?
-                new ObjectParameter("NR_SeguroSocial", nR_SeguroSocial) :
-                new ObjectParameter("NR_SeguroSocial", typeof(string));
-    
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(string));
-    
-            var fE_NacimientoParameter = fE_Nacimiento.HasValue ?
-                new ObjectParameter("FE_Nacimiento", fE_Nacimiento) :
-                new ObjectParameter("FE_Nacimiento", typeof(System.DateTime));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoParameter = apellido != null ?
-                new ObjectParameter("Apellido", apellido) :
-                new ObjectParameter("Apellido", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonasRecepcion_Result>("BusquedaSencilladePersonasRecepcion", nR_SeguroSocialParameter, identificacionParameter, fE_NacimientoParameter, nombreParameter, apellidoParameter);
-        }
-    
         public virtual ObjectResult<ConsultarCasosXPersona_Result> ConsultarCasosXPersona(Nullable<int> pk_Persona)
         {
             var pk_PersonaParameter = pk_Persona.HasValue ?
@@ -1268,6 +1222,39 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("NB_Madre", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCasoCriminal", id_CasoCriminalParameter, numeroCasoCriminalParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
+        }
+    
+        public virtual ObjectResult<BusquedaSencilladePersonasRecepcion_Result> BusquedaSencilladePersonasRecepcion(string nR_SeguroSocial, string identificacion, Nullable<System.DateTime> fE_Nacimiento, string nombre, string apellido, string segundoApellido, Nullable<short> fK_Programa)
+        {
+            var nR_SeguroSocialParameter = nR_SeguroSocial != null ?
+                new ObjectParameter("NR_SeguroSocial", nR_SeguroSocial) :
+                new ObjectParameter("NR_SeguroSocial", typeof(string));
+    
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("Identificacion", identificacion) :
+                new ObjectParameter("Identificacion", typeof(string));
+    
+            var fE_NacimientoParameter = fE_Nacimiento.HasValue ?
+                new ObjectParameter("FE_Nacimiento", fE_Nacimiento) :
+                new ObjectParameter("FE_Nacimiento", typeof(System.DateTime));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("Apellido", apellido) :
+                new ObjectParameter("Apellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonasRecepcion_Result>("BusquedaSencilladePersonasRecepcion", nR_SeguroSocialParameter, identificacionParameter, fE_NacimientoParameter, nombreParameter, apellidoParameter, segundoApellidoParameter, fK_ProgramaParameter);
         }
     }
 }

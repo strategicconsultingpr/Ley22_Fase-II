@@ -86,7 +86,8 @@ public partial class Entrada : System.Web.UI.Page
             //TxtIdentificacion.Text.Trim() == "" &&
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
-            TxtApellido.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
 
         else
         { 
@@ -95,6 +96,7 @@ public partial class Entrada : System.Web.UI.Page
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
             Session["TxtNombre"] = TxtNombre.Text.Trim();
             Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim(); 
 
 

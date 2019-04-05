@@ -57,6 +57,33 @@ public partial class recaudos_busqueda_usuario {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
+    /// TxtNombre control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtNombre;
+    
+    /// <summary>
+    /// TxtApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtApellido;
+    
+    /// <summary>
+    /// TxtSegundoApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtSegundoApellido;
+    
+    /// <summary>
     /// TxtFechaNacimiento control.
     /// </summary>
     /// <remarks>
@@ -82,24 +109,6 @@ public partial class recaudos_busqueda_usuario {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-    
-    /// <summary>
-    /// TxtNombre control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtNombre;
-    
-    /// <summary>
-    /// TxtApellido control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtApellido;
     
     /// <summary>
     /// label4 control.

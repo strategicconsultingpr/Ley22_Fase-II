@@ -52,6 +52,9 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
 
             if (Session["TxtApellido"].ToString() != "")
                 strParametroBusqueda.Append("Apellido =" + Session["TxtApellido"].ToString());
+
+            if (Session["TxtSegundoApellido"].ToString() != "")
+                strParametroBusqueda.Append("Segundo Apellido =" + Session["TxtSegundoApellido"].ToString());
             //if (Session["TxtNombreyApellido"].ToString() != "")
             //    strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString() );
 
@@ -88,10 +91,11 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //                                         FechaNac,
             //                                         Session["TxtNombreyApellido"].ToString()).ToList ()
             //                                         ;
-
+            
             List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
-                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString()).ToList();
+                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(), Session["TxtSegundoApellido"].ToString(),
+                                                                     idPrograma).ToList();
 
             //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
             //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
@@ -146,7 +150,8 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //TxtIdentificacion.Text.Trim() == "" &&
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
-            TxtApellido.Text.Trim() == ""))
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == ""))
         {
 
 
@@ -155,6 +160,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
             Session["TxtNombre"] = TxtNombre.Text.Trim();
             Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
         }
 

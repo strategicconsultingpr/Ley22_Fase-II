@@ -111,10 +111,18 @@
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
  
-                        <asp:TemplateField HeaderText="Apellido">
+                        <asp:TemplateField HeaderText="Primero Apellido">
 
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkNombre2" runat="server" Text='<%# Bind("AP_Primero") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Pk_Persona") +","+ Eval("Pk_Persona")    %>'></asp:LinkButton>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Segundo Apellido">
+
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkSegundoApellido" runat="server" Text='<%# Bind("AP_Segundo") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Pk_Persona") +","+ Eval("Pk_Persona")    %>'></asp:LinkButton>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -215,6 +223,11 @@
                                     <label for="formGroupExampleInput">Apellido</label>
                                     <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Segundo Apellido</label>
+                                    <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
+                                </div>
                             
                 <!--    <asp:CustomValidator ID="valValidateTextBox" runat="server" ValidateEmptyText="true" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" /> -->
                     <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
@@ -230,8 +243,9 @@
                             var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
                             var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
                             var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
+                             var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
 
-                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "") {
+                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "" && TxtSegundoApellido == "") {
                               //  args.IsValid = false;
                                 
                                document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";

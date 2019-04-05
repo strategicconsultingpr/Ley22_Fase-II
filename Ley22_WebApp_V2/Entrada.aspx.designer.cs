@@ -57,33 +57,6 @@ public partial class Entrada {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
-    /// TxtFechaNacimiento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtFechaNacimiento;
-    
-    /// <summary>
-    /// TxtFechaNacimiento_CalendarExtender control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::AjaxControlToolkit.CalendarExtender TxtFechaNacimiento_CalendarExtender;
-    
-    /// <summary>
-    /// RegularExpressionValidator2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-    
-    /// <summary>
     /// TxtNombre control.
     /// </summary>
     /// <remarks>
@@ -109,6 +82,33 @@ public partial class Entrada {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox TxtSegundoApellido;
+    
+    /// <summary>
+    /// TxtFechaNacimiento control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtFechaNacimiento;
+    
+    /// <summary>
+    /// TxtFechaNacimiento_CalendarExtender control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.CalendarExtender TxtFechaNacimiento_CalendarExtender;
+    
+    /// <summary>
+    /// RegularExpressionValidator2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
     
     /// <summary>
     /// label4 control.

@@ -670,18 +670,61 @@
 
       <script type="text/javascript">
         
-        function sweetAlert(titulo,texto,icono) {
-            swal(
+          function sweetAlert(titulo, texto, icono) {
+              swal({
               title: titulo,
-              text: texto,
-              icon: icono
-            )
+                  text: texto,
+                  icon: icono
+            })
           }
 
           function postalDireccion() {
+              
+              var Check = document.getElementById("<%=ChkPostal.ClientID %>");
+              
               var TxtDireccionLinea1 = document.getElementById("<%=TxtDireccionLinea1.ClientID %>").value;
               var TxtDireccionLinea2 = document.getElementById("<%=TxtDireccionLinea2.ClientID %>").value;
               var DdlPueblo = document.getElementById("<%=DdlPueblo.ClientID %>").value;
+              var TxtCodigoPostal = document.getElementById("<%=TxtCodigoPostal.ClientID %>").value;
+
+              var TxtPostalLinea1 = document.getElementById("<%=TxtPostalLinea1.ClientID %>").value;
+              var TxtPostalLinea2 = document.getElementById("<%=TxtPostalLinea2.ClientID %>").value;
+              var DdlPuebloPostal = document.getElementById("<%=DdlPuebloPostal.ClientID %>").value;
+              var TxtCodigoPostalPostal = document.getElementById("<%=TxtCodigoPostalPostal.ClientID %>").value;
+
+              var validator5 = document.getElementById("<%=RequiredFieldValidator5.ClientID %>");
+              var validator6 = document.getElementById("<%=RequiredFieldValidator6.ClientID %>");
+              var validator7 = document.getElementById("<%=RequiredFieldValidator7.ClientID %>");
+
+              if (Check.checked == true && TxtDireccionLinea1 != "" && DdlPueblo != "0" && TxtCodigoPostal != "") {
+
+                  document.getElementById("<%=TxtPostalLinea1.ClientID %>").value = TxtDireccionLinea1;
+                  document.getElementById("<%=TxtPostalLinea2.ClientID %>").value = TxtDireccionLinea2;
+                  document.getElementById("<%=DdlPuebloPostal.ClientID %>").value = DdlPueblo;
+                  document.getElementById("<%=TxtCodigoPostalPostal.ClientID %>").value = TxtCodigoPostal;
+
+              }
+              else if (Check.checked == true) {
+
+                  document.getElementById("<%=TxtPostalLinea1.ClientID %>").value = "";
+                  document.getElementById("<%=TxtPostalLinea2.ClientID %>").value = "";
+                  document.getElementById("<%=DdlPuebloPostal.ClientID %>").value = "0";
+                  document.getElementById("<%=TxtCodigoPostalPostal.ClientID %>").value = "";
+
+                  ValidatorValidate(validator5);
+                  ValidatorValidate(validator6);
+                  ValidatorValidate(validator7);
+
+                  Check.checked = false;
+              }
+
+              else {
+                  document.getElementById("<%=TxtPostalLinea1.ClientID %>").value = "";
+                  document.getElementById("<%=TxtPostalLinea2.ClientID %>").value = "";
+                  document.getElementById("<%=DdlPuebloPostal.ClientID %>").value = "0";
+                  document.getElementById("<%=TxtCodigoPostalPostal.ClientID %>").value = "";
+              }
+             
           }
     </script>
    

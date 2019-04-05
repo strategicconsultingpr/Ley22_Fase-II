@@ -166,15 +166,6 @@ namespace Ley22_WebApp_V2 {
         protected global::System.Web.UI.WebControls.TextBox TxtExpediente;
         
         /// <summary>
-        /// HyperLink1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
-        
-        /// <summary>
         /// GVListadeEpisodios control.
         /// </summary>
         /// <remarks>
@@ -508,6 +499,15 @@ namespace Ley22_WebApp_V2 {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator14;
         
         /// <summary>
+        /// ChkNoTrabajo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ChkNoTrabajo;
+        
+        /// <summary>
         /// TxtTrabajo control.
         /// </summary>
         /// <remarks>
@@ -542,15 +542,6 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator16;
-        
-        /// <summary>
-        /// ChkNoTrabajo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ChkNoTrabajo;
         
         /// <summary>
         /// DdlDesempleado control.

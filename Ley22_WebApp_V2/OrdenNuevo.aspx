@@ -104,13 +104,13 @@
                         </div>
                         <!-- col -->
 
-                        <div class="col-md-3">
+                       <%-- <div class="col-md-3">
                             <div class="form-group">
                                 <label for="episodio">Episodio</label>
                                 <br />
                                 <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModal"></asp:HyperLink>
                             </div>
-                        </div>
+                        </div>--%>
 
 
                         <!-- The Modal -->
@@ -427,20 +427,26 @@
 
 
                     </div>
+                    <div class="row"><div class="col-md-3"><br /></div></div>
                 </div>
                 <!-- col-9 -->
+                
+
                 <div class="col-md-2 text-right">
                     <strong>Dirección Postal</strong>
                 </div>
                  <div class="col-md-10">
                      <div class="row">
                          <div class="col">
-                             <div class="form-check">
-                                <p>&nbsp;</p>
-                                <label class="form-check-label">
+                             <div class="form-group">
+                               <%-- <p>&nbsp;</p>--%>
+                              
+                                   <h5>
+                               <label class="form-check-label">
                                     <asp:CheckBox ID="ChkPostal" runat="server" class="form-check-input" OnClick="postalDireccion();"/>
-                                    Direccón Postal igual que dirección fisica.
+                                  Direccón Postal igual que dirección fisica. 
                                 </label>
+                                       </h5>                               
                             </div>
                          </div>
                      </div>
@@ -551,11 +557,24 @@
                             </div>
                         </div>
 
+                            <!-- col -->
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <p>&nbsp;</p>
+                                <h5>
+                                <label class="form-check-label">
+                                    <asp:CheckBox ID="ChkNoTrabajo" runat="server" class="form-check-input" OnClick="noTrabajo();"/>
+                                   Participante No Trabaja
+                                </label>
+                                </h5>
+                            </div>
+                        </div>
+
                         <!-- col -->
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="lugar-trabajo">Lugar de trabajo</label>
-                                <asp:TextBox ID="TxtTrabajo" runat="server" CssClass="form-control" placeholder=""></asp:TextBox>
+                                <asp:TextBox ID="TxtTrabajo" runat="server" CssClass="form-control" placeholder="Ej. Assmca"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTrabajo" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -566,25 +585,14 @@
                                 <asp:TextBox ID="TxtOcupacion" runat="server" CssClass="form-control" placeholder="Ej. Maestro"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtOcupacion" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
-                        </div>
-
-                        <!-- col -->
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <p>&nbsp;</p>
-                                <label class="form-check-label">
-                                    <asp:CheckBox ID="ChkNoTrabajo" runat="server" class="form-check-input" />
-                                    No Trabajo
-                                </label>
-                            </div>
-                        </div>
+                        </div>                 
 
                         <!-- col -->
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="desempleado">Motivo de no empleabilidad</label>
-                                <asp:DropDownList ID="DdlDesempleado" runat="server" class="form-control"></asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlDesempleado" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                <asp:DropDownList ID="DdlDesempleado" runat="server" class="form-control" Enabled="false"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlDesempleado" Display="Dynamic" InitialValue="1" Enabled="false"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
@@ -725,6 +733,41 @@
                   document.getElementById("<%=TxtCodigoPostalPostal.ClientID %>").value = "";
               }
              
+          }
+
+          function noTrabajo() {
+              var Check = document.getElementById("<%=ChkNoTrabajo.ClientID %>");
+              
+              var TxtTrabajo = document.getElementById("<%=TxtTrabajo.ClientID %>").value;
+              var TxtOcupacion = document.getElementById("<%=TxtOcupacion.ClientID %>").value;
+              var DdlDesempleado = document.getElementById("<%=DdlDesempleado.ClientID %>").value;
+
+              var validator17 = document.getElementById("<%=RequiredFieldValidator17.ClientID %>");
+
+              if (Check.checked == true) {
+                  document.getElementById("<%=TxtTrabajo.ClientID %>").value = "No Aplica";
+                  document.getElementById("<%=TxtOcupacion.ClientID %>").value = "No Aplica";
+                  document.getElementById("<%=DdlDesempleado.ClientID %>").disabled = false;
+                  document.getElementById("<%=DdlDesempleado.ClientID %>").className = "form-control";
+
+                  document.getElementById("<%=TxtTrabajo.ClientID %>").readOnly = true;
+                  document.getElementById("<%=TxtOcupacion.ClientID %>").readOnly = true;
+
+                  ValidatorEnable(validator17);
+              }
+              else {
+                  document.getElementById("<%=TxtTrabajo.ClientID %>").value = "";
+                  document.getElementById("<%=TxtOcupacion.ClientID %>").value = "";
+                  document.getElementById("<%=DdlDesempleado.ClientID %>").value = "1";
+                  document.getElementById("<%=DdlDesempleado.ClientID %>").className = "";
+                  document.getElementById("<%=DdlDesempleado.ClientID %>").disabled = true;
+
+                  document.getElementById("<%=TxtTrabajo.ClientID %>").readOnly = false;
+                  document.getElementById("<%=TxtOcupacion.ClientID %>").readOnly = false;
+
+                  ValidatorEnable(validator17,false);
+              }
+
           }
     </script>
    

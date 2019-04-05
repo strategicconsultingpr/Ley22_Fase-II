@@ -36,11 +36,26 @@
                     </div>
                 </div> 
                 <div class="row pb-4">
-                    <div class="col-md-2">
+                   <%-- <div class="col-md-2">
                         <strong>Buscar Por</strong><br>
                         <small>Escribe un parámetro para tu búsqueda</small>
-                    </div>
+                    </div>--%>
                     <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6 text-center">
+                            <strong>Buscar Por</strong><br>
+                            <small>Escribe un parámetro para tu búsqueda</small>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-md-6 text-center">
+                            <br />
+                            </div>
+                           
+                        </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -77,6 +92,12 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Apellido</label>
                                     <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Segundo Apellido</label>
+                                    <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
                                 </div>
                             </div>
                         </div>

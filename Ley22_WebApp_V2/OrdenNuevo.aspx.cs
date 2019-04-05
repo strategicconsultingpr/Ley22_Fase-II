@@ -22,6 +22,15 @@ namespace Ley22_WebApp_V2
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+            if(Session["SA_Persona"] == null)
+            {
+                Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+                Session["MensajeError"] = "Por favor seleccione un participante";
+                Response.Redirect("Entrada.aspx", false);
+                return;
+            }
             ExistingUser = (ApplicationUser)Session["User"];
             sa_persona = (Data_SA_Persona)Session["SA_Persona"];
 
@@ -201,7 +210,8 @@ namespace Ley22_WebApp_V2
             DdlDesempleado.DataTextField = "Text";
             DdlDesempleado.DataSource = desempleorazon;
             DdlDesempleado.DataBind();
-            DdlDesempleado.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            
+         //   DdlDesempleado.Items.Insert(0, new ListItem("-Seleccione-", "0"));
         }
 
         protected void BtnCrear_Click(object sender, EventArgs e)

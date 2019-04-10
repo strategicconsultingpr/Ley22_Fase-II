@@ -172,12 +172,12 @@
                         </li>
                         <li class="list-group-item justify-content-between">Episodio          
                             <span>
-                                <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaEpisodios"></asp:HyperLink>
+                                <asp:LinkButton ID="LnkBtnEpisodios" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaEpisodios"></asp:LinkButton>
                             </span>
                         </li>
                         <li class="list-group-item justify-content-between">Casos Criminales         
                             <span>
-                                <asp:HyperLink ID="HyperLink2" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCasos"></asp:HyperLink>
+                                <asp:LinkButton ID="LnkBtnCasos" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCasos"></asp:LinkButton>
                             </span>
                         </li>
                         <li class="list-group-item justify-content-between">Licencia          

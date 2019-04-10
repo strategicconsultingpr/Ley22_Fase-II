@@ -19,5 +19,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public System.DateTime FechadeSolicitud { get; set; }
         public System.DateTime FechaInicial { get; set; }
         public System.DateTime FechaFinal { get; set; }
+        public Nullable<int> FK_Programa { get; set; }
     }
 }

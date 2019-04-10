@@ -415,7 +415,7 @@
                         </span>
                         <br />
  
-                        <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />
+                       <%-- <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />--%>
                         <asp:HyperLink ID="Hyperlink" runat="server" Enable="true" NavigateUrl="~/nuevo-confirmacion.aspx" CssClass="btn btn-link btn-block">Volver al Registro</asp:HyperLink>
                         <asp:HyperLink ID="Hyperlink1" runat="server" Enable="true" NavigateUrl="~/seleccion-proximo-paso.aspx" CssClass="btn btn-link btn-block">Ir a cuenta de Usuario</asp:HyperLink>
                     </div>
@@ -871,6 +871,14 @@
         }
         function EliminarCita() {
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;            
+        }
+        function sweetAlert(titulo,texto,icono) {
+            swal({
+                title: titulo,
+                text: texto,
+                icon: icono
+            }
+            )
         }
 
     </script>

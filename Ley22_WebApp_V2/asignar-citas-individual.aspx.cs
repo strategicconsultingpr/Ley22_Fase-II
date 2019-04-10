@@ -51,7 +51,14 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
             //du = (DataParticipante)Session["DataParticipante"];
             du = (Data_SA_Persona)Session["SA_Persona"];
-            Session["FechaBase"] = new DateTime(2019, 01, 27);
+
+            var dia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            while (dia.DayOfWeek != DayOfWeek.Sunday)
+            {
+                dia = dia.AddDays(-1);
+            }
+            Session["FechaBase"] = new DateTime(dia.Year, dia.Month, dia.Day);
+
             GenerarCalendario();
 
             //using (Ley22Entities mylib = new Ley22Entities())
@@ -70,10 +77,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
             ExistingUser = (ApplicationUser)Session["User"];
             userId = ExistingUser.Id;
-            prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
-
-            Session["FechaBase"] = new DateTime(2019, 02, 24);
-
+            prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];         
+            
             if (userManager.IsInRole(userId, "SuperAdmin"))
             {
                 usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
@@ -157,13 +162,13 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
         // se obtienen ls charlas del calendario para la fecha
         List<ListarCitasCalendario_Result> ListarCharlasCalendario = null;
-        //List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
+        List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
 
         if (DdlTrabajadorSocial.SelectedValue != "")
             using (Ley22Entities mylib = new Ley22Entities())
             {
                 ListarCharlasCalendario = mylib.ListarCitasCalendario(DdlTrabajadorSocial.SelectedValue, FechaBase, FechaBase.AddDays(35)).ToList();
-               // ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial(Convert.ToInt32(DdlTrabajadorSocial.SelectedValue), FechaBase, FechaBase.AddDays(35)).ToList();
+                ListarExcepcionesTrabajadorSocial = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, FechaBase, FechaBase.AddDays(35), Convert.ToInt32(Session["Programa"])).ToList();
             }
         
 
@@ -177,7 +182,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
             if (DdlCentro.SelectedValue.ToString() != "")
-             //   AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
+                AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
 
             if (i.ToString() == "14")
@@ -498,7 +503,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                     return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
                 });
 
-                List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
+                List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35), Convert.ToInt32(Session["Programa"])).ToList();
                 List<ListarExcepcionesTrabajadorSocial_Result> ListaExcepcionesXDia = myResult2.FindAll(delegate (ListarExcepcionesTrabajadorSocial_Result bk)
                 { 
                     return (bk.FechaInicial == Convert.ToDateTime(FechaInicial) || bk.FechaFinal == Convert.ToDateTime(FechaFinal) || (bk.FechaInicial <= Convert.ToDateTime(FechaInicial) && bk.FechaFinal >= Convert.ToDateTime(FechaFinal)));
@@ -506,7 +511,10 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 
                 if (ListaCharlasXDia.Count > 0)
                 {
-                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('YA EXISTE UN CITA PARA ESTE MISMO DIA Y HORA!');", true);
+                    //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('YA EXISTE UN CITA PARA ESTE MISMO DIA Y HORA!');", true);
+                    string mensaje = "El trabajador social "+ DdlTrabajadorSocial.SelectedItem.Text + " tiene una cita para esta misma fecha.";
+                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Exisitente", "sweetAlert('Cita Exisitente','" + mensaje + "','error')", true);
+
                     TxtHoraFinal.Text = "";
                     TxtHoraInicial.Text = "";
                     TxtFecha.Text = "";
@@ -515,7 +523,10 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 else if (ListaExcepcionesXDia.Count > 0)
                 {
-                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('TRABAJADOR SOCIAL NO ESTARA DISPONIBLE A ESTA HORA!');", true);
+                    //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('TRABAJADOR SOCIAL NO ESTARA DISPONIBLE A ESTA HORA!');", true);
+                    string mensaje = "El trabajador social " + DdlTrabajadorSocial.SelectedItem.Text + " no disponible para esta fecha.";
+                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "No Disponible", "sweetAlert('No Disponible','" + mensaje + "','error')", true);
+
                     TxtHoraFinal.Text = "";
                     TxtHoraInicial.Text = "";
                     TxtFecha.Text = "";
@@ -525,6 +536,9 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 else
                 {
                     mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue));
+
+                    string mensaje = "La cita fue creada correctamente.";
+                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);
 
                     int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                     var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
@@ -545,12 +559,16 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         }
         else if(Convert.ToDateTime(FechaInicial) > Convert.ToDateTime(FechaFinal))
         {
-            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);           
+            //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);
+            string mensaje = "Hora inicial insertada es despues de la hora final.";
+            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
             return;
         }
         else if (Convert.ToDateTime(FechaInicial) == Convert.ToDateTime(FechaFinal))
         {
-            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
+            //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
+            string mensaje = "Hora inicial insertada es igual a la hora final.";
+            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
             return;
         }
     }
@@ -606,6 +624,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             mylib.EliminarCitaTrabajadorSocial(Convert.ToInt32(HNroCita.Value));
         }
 
+        textObservacion.InnerText = "";
         verificarCitas();
         GenerarCalendario();
     }
@@ -632,4 +651,14 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         return body;
 
     }
+
+    //public static DateTime GetLastWeekdayOfMonth(this DateTime date, DayOfWeek day)
+    //{
+    //    DateTime lastDayOfMonth = new DateTime(date.Year, date.Month, 1)
+    //        .AddMonths(1).AddDays(-1);
+    //    int wantedDay = (int)day;
+    //    int lastDay = (int)lastDayOfMonth.DayOfWeek;
+    //    return lastDayOfMonth.AddDays(
+    //        lastDay >= wantedDay ? wantedDay - lastDay : wantedDay - lastDay - 7);
+    //}
 }

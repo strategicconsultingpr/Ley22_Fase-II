@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="Ley22Model.Region" Width="1.5" PointX="4.75" PointY="10.75" />
         <EntityTypeShape EntityType="Ley22Model.TipodeCharla" Width="1.5" PointX="10.75" PointY="7.75" />
         <EntityTypeShape EntityType="Ley22Model.TrabajadorSocial" Width="1.5" PointX="8.75" PointY="10.75" />
-        <EntityTypeShape EntityType="Ley22Model.TS_Excepciones" Width="1.5" PointX="11.375" PointY="10.75" />
         <EntityTypeShape EntityType="Ley22Model.Programas_Region_Mapping" Width="1.5" PointX="7" PointY="17.75" />
         <AssociationConnector Association="Ley22Model.FK__Programas__FK_Re__405A880E" />
         <EntityTypeShape EntityType="Ley22Model.CCG_Excepciones" Width="1.5" PointX="0.75" PointY="12.75" />
@@ -33,6 +32,7 @@
         <EntityTypeShape EntityType="Ley22Model.DesempleoRazon" Width="1.5" PointX="15.375" PointY="6.75" />
         <EntityTypeShape EntityType="Ley22Model.CasoCriminal" Width="1.5" PointX="17.625" PointY="15" />
         <AssociationConnector Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" />
+        <EntityTypeShape EntityType="Ley22Model.TS_Excepciones" Width="1.5" PointX="5.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

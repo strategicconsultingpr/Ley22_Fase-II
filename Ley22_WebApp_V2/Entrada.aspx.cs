@@ -97,7 +97,7 @@ public partial class Entrada : System.Web.UI.Page
             Session["TxtNombre"] = TxtNombre.Text.Trim();
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim(); 
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim(); 
 
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

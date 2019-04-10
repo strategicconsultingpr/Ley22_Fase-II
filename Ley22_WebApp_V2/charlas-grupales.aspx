@@ -417,19 +417,19 @@
                     <div class="card-header">
 
               
-                        Orden Judicial
+                        Caso Criminal
                     </div>
                     <div class="card-block">
                         <label for="orden">Número asocialdo a la cita</label>
 
 
-                        <div class="row">
-                            <div class="col-10">
+                        <div class="form-group">
+                           
                                 <asp:DropDownList ID="DdlNumeroOrdenJudicial" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlNumeroOrdenJudicial_Selected"></asp:DropDownList>
-                            </div>
-                            <div class="col-2">
+                           
+                           <%-- <div class="col-2">
                                 <a href="#" data-toggle="modal" data-target="#modal-orden-jucicial" data-whatever="@getbootstrap"><span class="fas  fa-plus-circle fa-lg" data-toggle="tooltip" title="Agregar Orden Judicial"></span></a>
-                            </div>
+                            </div>--%>
                         </div>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlNumeroOrdenJudicial" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -463,7 +463,7 @@
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla" visible="false">Crear Charla</a>
 
                         </div>
-                        <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />
+                      <%--  <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />--%>
                         <asp:HyperLink ID="Hyperlink1" runat="server" Enable="true" NavigateUrl="~/seleccion-proximo-paso.aspx" CssClass="btn btn-link btn-block">Ir a cuenta de Usuario</asp:HyperLink>
                     </div>
                 </div>

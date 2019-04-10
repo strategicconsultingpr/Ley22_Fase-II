@@ -88,11 +88,15 @@ namespace Ley22_WebApp_V2
                         HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
 
                     }
-                    else
+                    else if(c.Id_Participante.ToString() == Id_Participante.ToString())
                     {
                         swEstaenLaCharla = false;
                         HrefRemover = "";
 
+                    }
+                    else
+                    {
+                        HrefRemover = "";
                     }
                     Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
                 }

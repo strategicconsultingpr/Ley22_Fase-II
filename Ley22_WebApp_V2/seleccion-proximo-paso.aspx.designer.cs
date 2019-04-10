@@ -102,22 +102,22 @@ public partial class seleccion_proximo_paso {
     protected global::System.Web.UI.WebControls.Literal LitIUP;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// LnkBtnEpisodios control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.LinkButton LnkBtnEpisodios;
     
     /// <summary>
-    /// HyperLink2 control.
+    /// LnkBtnCasos control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+    protected global::System.Web.UI.WebControls.LinkButton LnkBtnCasos;
     
     /// <summary>
     /// LitLicencia control.

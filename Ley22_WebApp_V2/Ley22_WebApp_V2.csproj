@@ -840,6 +840,9 @@
     <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -913,6 +916,9 @@
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\Tribunal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TS_Excepciones.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
@@ -1159,9 +1165,6 @@
     <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1223,9 +1226,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\TrabajadorSocial.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\TS_Excepciones.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ModelSeps.Context1.cs">

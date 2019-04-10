@@ -98,7 +98,7 @@ namespace Ley22_WebApp_V2
                     DateTime FE_Creacion = Convert.ToDateTime(caso.FechaCreacion.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(FE_Creacion);
 
-                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 1))
+                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 8))
                     {
                         TxtNroCasoCriminal.ReadOnly = true;
                         TxtFechaOrden.ReadOnly = true;
@@ -158,7 +158,7 @@ namespace Ley22_WebApp_V2
 
         void LoadDropDownList()
         {           
-            var tribunales = dsLey22.Tribunals.Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
+            var tribunales = dsLey22.Tribunals.OrderBy(a => a.NB_Tribunal).Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
 
             DdlTribunal.DataValueField = "Value";
             DdlTribunal.DataTextField = "Text";

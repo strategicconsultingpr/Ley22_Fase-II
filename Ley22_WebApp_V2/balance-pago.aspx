@@ -255,7 +255,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FormadePago" HeaderText="Forma de Pago" />
                                 <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque">
-                                    <ItemStyle HorizontalAlign="Right" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FechadelPago" HeaderText="Fecha del Pago" DataFormatString="{0:MM/dd/yyyy hh:mm tt}" />
                                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad Restante (USD)" DataFormatString="{0:0.00}">

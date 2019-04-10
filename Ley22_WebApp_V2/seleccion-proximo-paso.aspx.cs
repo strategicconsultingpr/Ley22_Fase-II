@@ -100,12 +100,12 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             GVListadeEpisodios.DataSource = myresul;
             GVListadeEpisodios.DataBind();
 
-            HyperLink1.Text = myresul.Count().ToString() + " Episodios";
+            LnkBtnEpisodios.Text = myresul.Count().ToString() + " Episodios";
 
             if (myresul.Count > 0)
-                HyperLink1.Enabled = true;
+                LnkBtnEpisodios.Enabled = true;
             else
-                HyperLink1.Enabled = false;
+                LnkBtnEpisodios.Enabled = false;
 
         }
 
@@ -120,12 +120,12 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             GVListaDeCasos.DataSource = myresul;
             GVListaDeCasos.DataBind();
 
-            HyperLink2.Text = myresul.Count().ToString() + " Casos";
+            LnkBtnCasos.Text = myresul.Count().ToString() + " Casos";
 
             if (myresul.Count > 0)
-                HyperLink2.Enabled = true;
+                LnkBtnCasos.Enabled = true;
             else
-                HyperLink2.Enabled = false;
+                LnkBtnCasos.Enabled = false;
 
         }
 

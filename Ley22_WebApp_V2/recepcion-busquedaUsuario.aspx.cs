@@ -253,7 +253,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             };
 
             Session["Id_Participante"] = sa_persona.PK_Persona;
-            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero;
+            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero + " " + sa_persona.AP_Segundo;
             Session["NombreParticipante2"] = 9;
             Session["SA_Persona"] = sa_persona;
             Session["Expediente"] = expediente;

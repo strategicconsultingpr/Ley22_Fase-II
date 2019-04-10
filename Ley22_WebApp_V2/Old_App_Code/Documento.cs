@@ -19,5 +19,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string Archivo { get; set; }
         public Nullable<System.DateTime> FechadeRevision { get; set; }
         public int Activo { get; set; }
+        public Nullable<int> Importante { get; set; }
     }
 }

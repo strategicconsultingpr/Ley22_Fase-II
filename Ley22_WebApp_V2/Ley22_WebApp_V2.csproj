@@ -810,6 +810,9 @@
     <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\Documento.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1148,9 +1151,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Documento.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\FormadePago.cs">

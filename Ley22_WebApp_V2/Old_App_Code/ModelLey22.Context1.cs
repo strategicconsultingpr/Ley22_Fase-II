@@ -29,7 +29,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
         public virtual DbSet<Centro> Centros { get; set; }
         public virtual DbSet<Ciudad> Ciudads { get; set; }
-        public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<FormadePago> FormadePagoes { get; set; }
         public virtual DbSet<MotivoCierre> MotivoCierres { get; set; }
         public virtual DbSet<NivelesdelasCharla> NivelesdelasCharlas { get; set; }
@@ -53,6 +52,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<DesempleoRazon> DesempleoRazons { get; set; }
         public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
         public virtual DbSet<TS_Excepciones> TS_Excepciones { get; set; }
+        public virtual DbSet<Documento> Documentos { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {

@@ -86,17 +86,17 @@ public partial class cargar_documentos : System.Web.UI.Page
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            var list = new List<int>();
-            list.Add(1);
-            list.Add(7);
-            list.Add(10);
-            list.Add(18);
-            list.Add(6);
-            list.Add(8);
+            //var list = new List<int>();
+            //list.Add(1);
+            //list.Add(7);
+            //list.Add(10);
+            //list.Add(18);
+            //list.Add(6);
+            //list.Add(8);
 
             Programa = Convert.ToInt32(Session["Programa"].ToString());
 
-            var DocNecesarios = list.AsQueryable();
+            var DocNecesarios = mylib.Documentos.Where(p => p.Importante == 1).Select(a => a.Id_Documento).ToList();
 
             int Participante = Convert.ToInt32(Session["Id_Participante"]);
 
@@ -108,8 +108,9 @@ public partial class cargar_documentos : System.Web.UI.Page
             if (orden.Count() > 0)
             {
                 var docs = mylib.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Where(a => a.Id_Programa == Programa).Select(p => p.Id_Documento);
+                var docsFaltante = mylib.Documentos.Where(u => !docs.Contains(u.Id_Documento)).Where(a => a.Importante == 1).Select(p => p.Id_Documento).ToList();
 
-                if ((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))
+                if (docsFaltante.Count() < 1)
                 {
                     GridView1.DataSource = null;
                     GridView1.DataBind();

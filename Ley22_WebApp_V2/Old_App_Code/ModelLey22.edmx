@@ -146,6 +146,7 @@
           <Property Name="Archivo" Type="varchar" MaxLength="512" />
           <Property Name="FechadeRevision" Type="datetime" />
           <Property Name="Activo" Type="int" Nullable="false" />
+          <Property Name="Importante" Type="int" />
         </EntityType>
         <EntityType Name="DocumentosPorParticipantes">
           <Key>
@@ -809,7 +810,6 @@
           </FunctionImport>
           <EntitySet Name="Centros" EntityType="Ley22Model.Centro" />
           <EntitySet Name="Ciudads" EntityType="Ley22Model.Ciudad" />
-          <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
           <EntitySet Name="FormadePagoes" EntityType="Ley22Model.FormadePago" />
           <EntitySet Name="MotivoCierres" EntityType="Ley22Model.MotivoCierre" />
           <EntitySet Name="NivelesdelasCharlas" EntityType="Ley22Model.NivelesdelasCharla" />
@@ -1100,6 +1100,7 @@
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -1276,16 +1277,6 @@
           <Property Name="Id_Ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Region" Type="Int32" Nullable="false" />
           <Property Name="Ciudad1" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Documento">
-          <Key>
-            <PropertyRef Name="Id_Documento" />
-          </Key>
-          <Property Name="Id_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Documento1" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
-          <Property Name="Activo" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="FormadePago">
           <Key>
@@ -1830,6 +1821,17 @@
           <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Id_Documento" />
+          </Key>
+          <Property Name="Id_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento1" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+          <Property Name="Importante" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2031,17 +2033,6 @@
                 <ScalarProperty Name="Ciudad1" ColumnName="Ciudad" />
                 <ScalarProperty Name="Id_Region" ColumnName="Id_Region" />
                 <ScalarProperty Name="Id_Ciudad" ColumnName="Id_Ciudad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Documentos">
-            <EntityTypeMapping TypeName="Ley22Model.Documento">
-              <MappingFragment StoreEntitySet="Documentos">
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="Documento1" ColumnName="Documento" />
-                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2643,6 +2634,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Ley22Model.Documento">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="Importante" ColumnName="Importante" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="Documento1" ColumnName="Documento" />
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

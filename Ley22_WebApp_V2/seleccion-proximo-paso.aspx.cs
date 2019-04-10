@@ -80,8 +80,9 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
     {
         var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_CasoCriminal);
         var docs = ley22.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
+        var docsFaltante = ley22.Documentos.Where(u => !docs.Contains(u.Id_Documento)).Where(a => a.Importante == 1).Select(p => p.Id_Documento).ToList();
 
-        if((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))
+        if (docsFaltante.Count() < 1)
         {
             return false;
         }

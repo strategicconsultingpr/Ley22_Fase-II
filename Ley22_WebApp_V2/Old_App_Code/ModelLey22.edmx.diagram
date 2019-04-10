@@ -7,7 +7,6 @@
       <Diagram DiagramId="218b09bdcd244ad3bcb28e04fd31a2a1" Name="Diagram1" >
         <EntityTypeShape EntityType="Ley22Model.Centro" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Ley22Model.Ciudad" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Ley22Model.Documento" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="Ley22Model.FormadePago" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="Ley22Model.MotivoCierre" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="Ley22Model.NivelesdelasCharla" Width="1.5" PointX="8.75" PointY="0.75" />
@@ -33,6 +32,7 @@
         <EntityTypeShape EntityType="Ley22Model.CasoCriminal" Width="1.5" PointX="17.625" PointY="15" />
         <AssociationConnector Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" />
         <EntityTypeShape EntityType="Ley22Model.TS_Excepciones" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Ley22Model.Documento" Width="1.5" PointX="15.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

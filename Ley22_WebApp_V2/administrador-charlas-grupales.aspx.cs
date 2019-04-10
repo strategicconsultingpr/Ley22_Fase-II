@@ -499,14 +499,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
     void AsistioParticipante(int Id_ParticipantePorCharlaGrupal)
     {
         dsLey22.AsistioCharla(Id_ParticipantePorCharlaGrupal);
-        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante cumplió con la charla.');", true);
-        GenerarCalendario();
+        string mensaje = "El participante cumplió con la charla";
+        
+        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','success')", true);
+
+        GenerarCalendario(); 
     }
 
     void NoAsistioParticipante(int Id_ParticipantePorCharlaGrupal)
     {
         dsLey22.NoAsistioCharla(Id_ParticipantePorCharlaGrupal);
-        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('El participante NO cumplió con la charla.');", true);
+        string mensaje = "El participante NO cumplió con la charla";
+
+        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','error')", true);
+        
         GenerarCalendario();
     }
 

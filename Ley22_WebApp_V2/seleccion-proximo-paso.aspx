@@ -336,12 +336,235 @@
                                                 </div>                                             
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
+
+                                        <asp:RoleGroup Roles="Supervisor">
+                                            <ContentTemplate>                                            
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="asignar-citas-individual.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="asignar-citas-individual.aspx">Calendario Citas Trabajador Social</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="charlas-grupales.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="charlas-grupales.aspx">Calendario Citas Charlas</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="balance-pago-solo-saldo.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/recaudos.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Recaudos</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="cierre-caso.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="cierre-caso.aspx">Cerrar Caso</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>                                         
+                                                </ContentTemplate>
+                                            </asp:RoleGroup>
+
+                                        <asp:RoleGroup Roles="Recepcion">
+                                            <ContentTemplate>   
+                                                <div class="col-md-4">
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="asignar-citas-individual.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="asignar-citas-individual.aspx">Calendario Citas Trabajador Social</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="balance-pago-solo-saldo.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/recaudos.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Recaudos</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>                                           
+                                                </ContentTemplate>
+                                            </asp:RoleGroup>
+
+                                        <asp:RoleGroup Roles="TrabajadorSocial">
+                                            <ContentTemplate>                                            
+                                                <div class="col-md-4">
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="asignar-citas-individual.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="asignar-citas-individual.aspx">Calendario Citas Trabajador Social</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="charlas-grupales.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="charlas-grupales.aspx">Calendario Citas Charlas</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="balance-pago-solo-saldo.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/recaudos.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Recaudos</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                                                      
+                                                </ContentTemplate>
+                                            </asp:RoleGroup>
+
+                                        <asp:RoleGroup Roles="CoordinadorCharlas">
+                                            <ContentTemplate>                                            
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="asignar-citas-individual.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="asignar-citas-individual.aspx">Calendario Citas Trabajador Social</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="charlas-grupales.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="charlas-grupales.aspx">Calendario Citas Charlas</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="balance-pago-solo-saldo.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/recaudos.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Recaudos</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>                                                                                
+                                                </ContentTemplate>
+                                            </asp:RoleGroup>
+
                                     </RoleGroups>
                                 </asp:LoginView>
                     <!-- END listado admin -->
 
                      <!-- Listado Supervisor -->
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Supervisor">
                                             <ContentTemplate>                                            
@@ -418,11 +641,11 @@
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
                     <!-- END listado Supervisor -->
 
                      <!-- Listado Recepcion -->
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Recepcion">
                                             <ContentTemplate>   
@@ -460,11 +683,11 @@
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
                     <!-- END listado Recepcion -->
 
                     <!-- Listado Trabajador Social -->
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                   <%-- <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="TrabajadorSocial">
                                             <ContentTemplate>                                            
@@ -520,11 +743,11 @@
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
                     <!-- END listado Trabajador Social -->
 
                     <!-- Listado CoordinadorCharlas -->
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="CoordinadorCharlas">
                                             <ContentTemplate>                                            
@@ -583,7 +806,7 @@
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
                     <!-- END listado CoordinadorCharlas -->
 
 

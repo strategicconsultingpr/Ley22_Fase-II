@@ -71,42 +71,139 @@
     </div>
 <%--SuperAdmin--%>
       <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                    <RoleGroups>
-                                        <asp:RoleGroup Roles="SuperAdmin">
-                                            <ContentTemplate>
-            <div class="col">
-              <nav>
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
-                </li>  
-                  <li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
-                </li>                       
-               <%-- <li class="nav-item">
-                  <a class="nav-link" href="#">Administración</a>
-                </li>--%>
+      <RoleGroups>
+          <asp:RoleGroup Roles="SuperAdmin">
+              <ContentTemplate>
+                    <div class="col">
+                      <nav>
+                      <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                        </li>  
+                          <li class="nav-item">
+                          <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                        </li>                       
+                       <%-- <li class="nav-item">
+                          <a class="nav-link" href="#">Administración</a>
+                        </li>--%>
                    
-                  <li class="nav-item">
-                  <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
-                </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="#">Reportes</a>
-                </li> 
-              </ul>
-            </nav>  
-            </div>
+                          <li class="nav-item">
+                          <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                        </li>
+                          <li class="nav-item">
+                          <a class="nav-link" href="#">Reportes</a>
+                        </li> 
+                      </ul>
+                    </nav>  
+                    </div>
+                </ContentTemplate>
+            </asp:RoleGroup>
 
-                                                 </ContentTemplate>
-                                            </asp:RoleGroup>
-                                    </RoleGroups>
-       </asp:LoginView>
+          <asp:RoleGroup Roles="Supervisor">
+                <ContentTemplate>
+                    <div class="col">
+                      <nav>
+                      <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                        </li>
+                          <li class="nav-item">
+                          <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
+                        </li>
+                          <li class="nav-item">
+                          <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                        </li>
+                
+                        <%--<li class="nav-item">
+                          <a class="nav-link" href="#">Reportes</a>
+                        </li>        
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Administración</a>
+                        </li>--%>
+                   
+                      </ul>
+                    </nav>  
+                    </div>
+                </ContentTemplate>
+          </asp:RoleGroup>
+
+          <asp:RoleGroup Roles="TrabajadorSocial">
+              <ContentTemplate>
+                    <div class="col">
+                      <nav>
+                      <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                        </li>                
+                        <li class="nav-item">
+                          <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                        </li>                                      
+                           <li class="nav-item">
+                          <a class="nav-link" href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a>
+                        </li>
+                      </ul>
+                    </nav>  
+                    </div>
+             </ContentTemplate>
+         </asp:RoleGroup>
+         
+          <asp:RoleGroup Roles="CoordinadorCharlas">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                    </li>                
+                    <li class="nav-item">
+                      <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                    </li>                                                           
+                  </ul>
+                </nav>  
+                </div>
+           </ContentTemplate>
+       </asp:RoleGroup>
+       
+       <asp:RoleGroup Roles="Recepcion">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../entrada.aspx">Recepción y Citas</a>
+                    </li>                                
+                  </ul>
+                </nav>  
+                </div>
+          </ContentTemplate>
+      </asp:RoleGroup>
+
+      <asp:RoleGroup Roles="Recaudador">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                    </li>                                
+                  </ul>
+                </nav>  
+                </div>
+
+          </ContentTemplate>
+      </asp:RoleGroup>
+
+      </RoleGroups>
+      </asp:LoginView>
 
 <%--Supervisor--%>
-      <asp:LoginView runat="server" ViewStateMode="Disabled">
+     <%-- <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Supervisor">
                                             <ContentTemplate>
@@ -131,7 +228,7 @@
                 </li>        
                 <li class="nav-item">
                   <a class="nav-link" href="#">Administración</a>
-                </li>--%>
+                </li>
                    
               </ul>
             </nav>  
@@ -140,99 +237,95 @@
                                                  </ContentTemplate>
                                             </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
 
 <%--TrabajadorSocial--%>
-      <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                    <RoleGroups>
-                                        <asp:RoleGroup Roles="TrabajadorSocial">
-                                            <ContentTemplate>
-            <div class="col">
-              <nav>
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
-                </li>                
-                <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
-                </li>                                      
-                   <li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a>
-                </li>
-              </ul>
-            </nav>  
-            </div>
+<%--      <asp:LoginView runat="server" ViewStateMode="Disabled">
+      <RoleGroups>
+      <asp:RoleGroup Roles="TrabajadorSocial">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                    </li>                
+                    <li class="nav-item">
+                      <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                    </li>                                      
+                       <li class="nav-item">
+                      <a class="nav-link" href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a>
+                    </li>
+                  </ul>
+                </nav>  
+                </div>
 
-                                                 </ContentTemplate>
-                                            </asp:RoleGroup>
-                                    </RoleGroups>
-                                </asp:LoginView>
+           </ContentTemplate>
+       </asp:RoleGroup>
+       </RoleGroups>
+       </asp:LoginView>--%>
 
 <%--CoordinadorCharlas--%>
-      <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                    <RoleGroups>
-                                        <asp:RoleGroup Roles="CoordinadorCharlas">
-                                            <ContentTemplate>
-            <div class="col">
-              <nav>
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
-                </li>                
-                <li class="nav-item">
-                  <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
-                </li>                                      
-                   <%--<li class="nav-item">
-                  <a class="nav-link" href="../trabajor-excepciones.aspx">Trabajor Social</a>
-                </li>--%>
-              </ul>
-            </nav>  
-            </div>
-
-                                                 </ContentTemplate>
-                                            </asp:RoleGroup>
-                                    </RoleGroups>
-                                </asp:LoginView>
+    <%--  <asp:LoginView runat="server" ViewStateMode="Disabled">
+      <RoleGroups>
+      <asp:RoleGroup Roles="CoordinadorCharlas">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                    </li>                
+                    <li class="nav-item">
+                      <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                    </li>                                      
+                     
+                  </ul>
+                </nav>  
+                </div>
+           </ContentTemplate>
+       </asp:RoleGroup>
+       </RoleGroups>
+       </asp:LoginView>--%>
 
 <%--Recepcion--%>
-      <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                    <RoleGroups>
-                                        <asp:RoleGroup Roles="Recepcion">
-                                            <ContentTemplate>
-            <div class="col">
-              <nav>
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="../entrada.aspx">Recepción y Citas</a>
-                </li>                                
-              </ul>
-            </nav>  
-            </div>
-
-                                                 </ContentTemplate>
-                                            </asp:RoleGroup>
-                                    </RoleGroups>
-                                </asp:LoginView>
+     <%-- <asp:LoginView runat="server" ViewStateMode="Disabled">
+      <RoleGroups>
+      <asp:RoleGroup Roles="Recepcion">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../entrada.aspx">Recepción y Citas</a>
+                    </li>                                
+                  </ul>
+                </nav>  
+                </div>
+          </ContentTemplate>
+      </asp:RoleGroup>
+      </RoleGroups>
+      </asp:LoginView>--%>
 
 <%--Recaudador--%>
-      <asp:LoginView runat="server" ViewStateMode="Disabled">
-                                    <RoleGroups>
-                                        <asp:RoleGroup Roles="Recaudador">
-                                            <ContentTemplate>
-            <div class="col">
-              <nav>
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
-                </li>                                
-              </ul>
-            </nav>  
-            </div>
+    <%--  <asp:LoginView runat="server" ViewStateMode="Disabled">
+      <RoleGroups>
+      <asp:RoleGroup Roles="Recaudador">
+          <ContentTemplate>
+                <div class="col">
+                  <nav>
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                    </li>                                
+                  </ul>
+                </nav>  
+                </div>
 
-                                                 </ContentTemplate>
-                                            </asp:RoleGroup>
-                                    </RoleGroups>
-                                </asp:LoginView>
+          </ContentTemplate>
+      </asp:RoleGroup>
+      </RoleGroups>
+      </asp:LoginView>--%>
 
     <div class="col-2">
      
@@ -245,24 +338,33 @@
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">
                                             <ContentTemplate>
-                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
-                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
-                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
-                                                </ContentTemplate>
-                                            </asp:RoleGroup>
+                                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
+                                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
+                                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                            </ContentTemplate>
+                                        </asp:RoleGroup>
+
+                                        <asp:RoleGroup Roles="Supervisor">
+                                            <ContentTemplate>
+                                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
+                                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
+                                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                            </ContentTemplate>
+                                        </asp:RoleGroup>
+
                                     </RoleGroups>
                                 </asp:LoginView>
-                                <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                <%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="Supervisor">
                                             <ContentTemplate>
-                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
-                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
-                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
-                                                </ContentTemplate>
-                                            </asp:RoleGroup>
+                                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
+                                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
+                                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                            </ContentTemplate>
+                                        </asp:RoleGroup>
                                     </RoleGroups>
-                                </asp:LoginView>
+                                </asp:LoginView>--%>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item">
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />

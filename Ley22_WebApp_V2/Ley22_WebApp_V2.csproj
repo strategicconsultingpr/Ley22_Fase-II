@@ -825,6 +825,9 @@
     <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarCargosCasosCriminales_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarCasosCriminalesActivos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -847,6 +850,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarPagosCasosCriminales_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">

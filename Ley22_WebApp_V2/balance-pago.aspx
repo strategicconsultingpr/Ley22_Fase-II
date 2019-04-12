@@ -246,7 +246,25 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                         <asp:Literal runat="server" ID="LitInfo"></asp:Literal>
 
-                        <asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
+                        <div class="row mb-4 bt pt-4" id="divNav" runat="server">
+                              <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                        <nav>
+                          <ul class="nav">
+                              <li class="nav-item">
+                              <a id="pagar" class="nav-link active" href="#" onclick="Pagar()">Realizar Pago</a>
+                            </li>
+                            <li class="nav-item">
+                              <a id="historial" class="nav-link" href="#" onclick="Historial()">Historial de Pagos</a>
+                            </li>                                                 
+                          </ul>
+                         </nav>
+                            </div>
+                            </div>
+
+
+                        <%--<div id="ControlPagos" visible="false">--%>
+                        <%--<asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
                             <Columns>
                                
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
@@ -280,7 +298,52 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 </asp:TemplateField>
                                 
                             </Columns>
-                        </asp:GridView>
+                        </asp:GridView>--%>
+                      <%--</div>--%>
+                        <div id="divPagar">
+                            <div class="row mb-4 pt-4">
+                            <div class="col-md-6">
+                                 <asp:Literal runat="server" ID="LitBalance"></asp:Literal>
+                            </div>
+                            <div class="col" style="text-align: right; width: 100%;">
+                                <asp:Button ID="BtnPagar" runat="server" Text="Realizar Pago" CssClass="btn btn-primary mr-3" data-toggle="modal" data-target="#Pagar-modal" />
+                            </div>
+                                </div>
+                            <br />
+                        <asp:GridView ID="GvCargos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvPagar_RowDataBound">
+                            <Columns>
+                               
+                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Costo (USD)" DataFormatString="{0:0.00}">
+                                    
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FechaRegistro" HeaderText="Fecha de Registro" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="FechaCita" HeaderText="Fecha de Cita" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="FechaCharla" HeaderText="Fecha de Charla" DataFormatString="{0:MM/dd/yyyy}"/>                               
+                            </Columns>
+                        </asp:GridView>                          
+                        </div>
+                           
+                         <asp:GridView ID="GvPagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvHistorial_RowDataBound" style="visibility:hidden">
+                            <Columns>
+                                <asp:BoundField DataField="NumeroRecibo" HeaderText="Número de Recibo" />
+                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Pago(USD)" DataFormatString="{0:0.00}">
+                                    <%--<ItemStyle HorizontalAlign="Center" />--%>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FormadePago" HeaderText="Metodo de Pago" />
+                                <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FechaPago" HeaderText="Fecha de Pago" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Empleado" />    
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Literal ID="LitColocarModal" runat="server"></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>  
 
                     </div>
                     <div class="col-lg-1"></div>
@@ -311,7 +374,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
     </script>
 
 
-    <script>
+    <script type="text/javascript">
         function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
             document.getElementById("<%= IdCP.ClientID %>").value = Valor;
             document.getElementById("NroRecibo").innerHTML = "Recibo #: " + NroRecibo;
@@ -347,6 +410,32 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             
 
         };
+
+        function Historial() {     
+            $(".nav").find(".active").removeClass("active");
+            $("#historial").addClass("active");
+            document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'visible';
+            document.getElementById("divPagar").style.display = 'none';
+        }
+
+        
+
+        function Pagar() {
+            $(".nav").find(".active").removeClass("active");
+            $("#pagar").addClass("active");
+            document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'hidden';
+            document.getElementById("divPagar").style.display = 'inline';
+        }
+
+        function sweetAlert(titulo,texto,icono) {
+            swal(
+                {
+                    title: titulo,
+                    text: texto,
+                    icon: icono
+                }
+            )
+        }
         
 
     </script>

@@ -169,9 +169,12 @@ namespace Ley22_WebApp_V2
                 string HrefAsistio = string.Empty;
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
-                {
+                {   
                     var orden = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_ParticipantePorCharlaGrupal.Equals(c.Id_ParticipantePorCharlaGrupal)).Select(p => p.Id_OrdenJudicial).SingleOrDefault();
-                    var balance = dsLey22.ControldePagos.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Cantidad).Sum();
+                    var cargos = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal == orden).Select(a => a.Cargos).SingleOrDefault();
+                    var pagos = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal == orden).Select(a => a.Pagos).SingleOrDefault();
+
+                    var balance = cargos - pagos;
 
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 

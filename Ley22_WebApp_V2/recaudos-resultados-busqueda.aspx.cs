@@ -78,7 +78,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
                                                                      Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(),
                                                                      Session["TxtSegundoApellido"].ToString(),idPrograma).ToList();
 
-            var Result = Resultado.Where(u => u.Identificacion.Equals("LEY 22")).ToList();
+            var Result = Resultado.Where(u => u.Identificacion.Contains("LEY 22")).ToList();
             var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
             var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();

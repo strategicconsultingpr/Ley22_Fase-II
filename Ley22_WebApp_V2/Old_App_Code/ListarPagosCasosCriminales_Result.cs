@@ -10,21 +10,17 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ControldePago
+    public partial class ListarPagosCasosCriminales_Result
     {
         public int PK_ControldePago { get; set; }
-        public int FK_CasoCriminal { get; set; }
-        public Nullable<int> FK_Calendario { get; set; }
-        public Nullable<int> FK_CharlaGrupal { get; set; }
-        public string FK_Usuario { get; set; }
-        public System.DateTime FechaTransaccion { get; set; }
-        public string TipoTransaccion { get; set; }
-        public int FK_FormadePago { get; set; }
-        public decimal Cantidad { get; set; }
         public string Descripcion { get; set; }
+        public decimal Cantidad { get; set; }
+        public string FormadePago { get; set; }
+        public string NumerodeCheque { get; set; }
+        public System.DateTime FechaPago { get; set; }
+        public string NombreCompleto { get; set; }
         public string NumeroRecibo { get; set; }
-        public Nullable<int> NumerodeCheque { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }

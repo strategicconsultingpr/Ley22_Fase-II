@@ -140,58 +140,66 @@ namespace Ley22_WebApp_V2
             int PK_Persona_out;
 
             System.Data.Entity.Core.Objects.ObjectParameter myOutputParamString = new System.Data.Entity.Core.Objects.ObjectParameter("PK_Persona", typeof(int));
-
-            using (SEPSEntities1 seps = new SEPSEntities1())
+            try
             {
-                short programa = Convert.ToInt16(Session["Programa"]);
-
-                var spc = seps.SPC_PERSONA(
-                    TxtNroSeguroSocial.Text,
-                    programa,
-                    TxtExpediente.Text,
-                    Convert.ToByte(DdlSexo.SelectedValue.ToString()),
-                    TxtPrimerApellido.Text,
-                    TxtSegundoApellido.Text,
-                    TxtPrimerNombre.Text,
-                    TxtSegundoNombre.Text,              
-                    DateTime.Parse(TxtFechaNacimiento.Text),
-                    Convert.ToByte(ChkVeterano.Checked == true ? 1 : 2),
-                    Convert.ToByte(DdlGrupoEtnico.SelectedValue),
-                    Guid.NewGuid(),
-                    myOutputParamString
-                    );
-
-                PK_Persona_out = Convert.ToInt32(myOutputParamString.Value);
-
-                sa_persona = new Data_SA_Persona()
+                using (SEPSEntities1 seps = new SEPSEntities1())
                 {
-                    PK_Persona = PK_Persona_out,
-                    NR_SeguroSocial = TxtNroSeguroSocial.Text,
-                    FK_Sexo = Convert.ToInt32(DdlSexo.SelectedValue),
-                    NB_Primero = TxtPrimerNombre.Text,
-                    NB_Segundo = TxtSegundoNombre.Text,
-                    AP_Primero = TxtPrimerApellido.Text,
-                    AP_Segundo = TxtSegundoApellido.Text,
-                    FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
-                    FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
-                    FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue),
-                    FE_Edicion = DateTime.Now,
-                    TI_Edicion = 'C'
+                    short programa = Convert.ToInt16(Session["Programa"]);
 
-                };
+                    var spc = seps.SPC_PERSONA(
+                        TxtNroSeguroSocial.Text,
+                        programa,
+                        TxtExpediente.Text,
+                        Convert.ToByte(DdlSexo.SelectedValue.ToString()),
+                        TxtPrimerApellido.Text,
+                        TxtSegundoApellido.Text,
+                        TxtPrimerNombre.Text,
+                        TxtSegundoNombre.Text,
+                        DateTime.Parse(TxtFechaNacimiento.Text),
+                        Convert.ToByte(ChkVeterano.Checked == true ? 1 : 2),
+                        Convert.ToByte(DdlGrupoEtnico.SelectedValue),
+                        Guid.NewGuid(),
+                        myOutputParamString
+                        );
 
-                Session["SA_Persona"] = sa_persona;
-                Session["Expediente"] = TxtExpediente.Text;
+                    PK_Persona_out = Convert.ToInt32(myOutputParamString.Value);
 
-                string mensaje = "El participante " + TxtPrimerNombre.Text+ " "+ TxtPrimerApellido.Text + " se añadió correctamente.";
-                
-                ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", "sweetAlert('Participante Registrado','" + mensaje + "','success')", true);
+                    sa_persona = new Data_SA_Persona()
+                    {
+                        PK_Persona = PK_Persona_out,
+                        NR_SeguroSocial = TxtNroSeguroSocial.Text,
+                        FK_Sexo = Convert.ToInt32(DdlSexo.SelectedValue),
+                        NB_Primero = TxtPrimerNombre.Text,
+                        NB_Segundo = TxtSegundoNombre.Text,
+                        AP_Primero = TxtPrimerApellido.Text,
+                        AP_Segundo = TxtSegundoApellido.Text,
+                        FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
+                        FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
+                        FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue),
+                        FE_Edicion = DateTime.Now,
+                        TI_Edicion = 'C'
 
-                Response.Redirect("OrdenNuevo.aspx", false);
+                    };
+
+                    Session["SA_Persona"] = sa_persona;
+                    Session["Expediente"] = TxtExpediente.Text;
+
+                    string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se añadió correctamente.";
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", "sweetAlert('Participante Registrado','" + mensaje + "','success')", true);
+
+                    Response.Redirect("OrdenNuevo.aspx", false);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                string mensaje = ex.Message;
+                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
             }
 
-                
+
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
@@ -256,7 +264,7 @@ namespace Ley22_WebApp_V2
             catch(Exception ex)
             {
                 string mensaje = ex.Message;
-                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
                 
             }
 

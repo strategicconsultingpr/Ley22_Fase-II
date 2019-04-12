@@ -10,7 +10,8 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
 {
     int ContadordeCharlaCitasPorPagar;
     int ContadorCharlasCitasPagadas;
-    decimal TotalPagado, BalanceDebido;
+    decimal TotalPagado, cargos, pagos;
+    Ley22Entities dsLey22 = new Ley22Entities();
     protected void Page_Load(object sender, EventArgs e)
     {
         // valida que se haya buscado el usuario
@@ -50,43 +51,101 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
 
         {
             //GvControldePagos.DataSource = mylib.ListarBalancedePagos(Convert.ToInt32(Session["Id_Participante"]),Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvControldePagos.DataSource = mylib.ListarBalancedePagosCasosCriminales(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvControldePagos.DataBind();
+            if (DdlNumeroOrdenJudicial.SelectedValue == "0")
+            {
+                divNav.Visible = false;
+              
+                LitBalance.Text = "";
+                LitInfo.Text = "";
+            }
+            else
+            {
+                divNav.Visible = true;
+               
+            }
+            GvCargos.DataSource = mylib.ListarCargosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            GvCargos.DataBind();
+
+            GvPagos.DataSource = mylib.ListarPagosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            GvPagos.DataBind();
 
         }
     }
-    protected void GvControldePagos_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void GvHistorial_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+        pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
+
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-             Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto, CantidadAPagar;
-            NroRecibo = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
+
+            Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+            //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
+            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
+            decimal Cantidad;
+            NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+            Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
             Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
             FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
             Fecha = "\"" + "" + "\"";
-            Cantidad = DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString();
+            Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+            //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
             NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
-
-
-            if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
-            {
-                Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
-                 LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
-                ContadorCharlasCitasPagadas += 1;
-                TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
-             }
-            else
-            {
-                 LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
-                ContadordeCharlaCitasPorPagar += 1;
-                TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
-
-            }
+          
 
         }
         if (e.Row.RowType == DataControlRowType.Footer)
-            LitInfo.Text =ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD - " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por saldar." ;
+            // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
+            LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " | Cantidad Pagada: $ " + pagos.ToString();
+    }
+
+    protected void GvPagar_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+        pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());       
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            //Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+            //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
+            //string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
+            //decimal Cantidad, CantidadAPagar;
+            //NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+            //Id_Pago = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
+            //Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
+            //FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
+            //Fecha = "\"" + ""+ "\"";
+            //Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+            //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+            //NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
+
+
+            //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
+            //{
+            //    Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
+            //    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + CantidadAPagar +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+            //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
+            //    ContadorCharlasCitasPagadas += 1;
+            //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+
+            //}
+            //else
+            //{
+            //    ContadordeCharlaCitasPorPagar += 1;
+            //    TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
+            //    BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+            //    LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
+            //    LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
+
+            //}
+
+        }
+        if (e.Row.RowType == DataControlRowType.Footer)
+            // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
+            LitBalance.Text = "Balance: $ " + (cargos - pagos).ToString();
     }
 
     protected void BtnCancelar_Click(Object sender, EventArgs e)

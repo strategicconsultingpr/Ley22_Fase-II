@@ -45,14 +45,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<Calendario> Calendarios { get; set; }
         public virtual DbSet<ParticipantesPorCharla> ParticipantesPorCharlas { get; set; }
         public virtual DbSet<CharlaGrupal> CharlaGrupals { get; set; }
-        public virtual DbSet<ControldePago> ControldePagos { get; set; }
         public virtual DbSet<OrdenesJudiciale> OrdenesJudiciales { get; set; }
         public virtual DbSet<DocumentosPorParticipante> DocumentosPorParticipantes { get; set; }
         public virtual DbSet<Tribunal> Tribunals { get; set; }
         public virtual DbSet<DesempleoRazon> DesempleoRazons { get; set; }
-        public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
         public virtual DbSet<TS_Excepciones> TS_Excepciones { get; set; }
         public virtual DbSet<Documento> Documentos { get; set; }
+        public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
+        public virtual DbSet<ControldePago> ControldePagoes { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -411,7 +411,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesCharlaGrupal_Result>("ListarExcepcionesCharlaGrupal", id_CentroParameter, fechaInicialParameter, fechaFinalParameter);
         }
     
-        public virtual int GuardarCitaTrabajadorSocial(string id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial, Nullable<int> id_Programa)
+        public virtual int GuardarCitaTrabajadorSocial(string id_TrabajadorSocial, Nullable<int> id_Participante, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_OrdenJudicial, Nullable<int> id_Programa, string id_Usuario)
         {
             var id_TrabajadorSocialParameter = id_TrabajadorSocial != null ?
                 new ObjectParameter("Id_TrabajadorSocial", id_TrabajadorSocial) :
@@ -437,7 +437,11 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Programa", id_Programa) :
                 new ObjectParameter("Id_Programa", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter, id_ProgramaParameter);
+            var id_UsuarioParameter = id_Usuario != null ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter, id_ProgramaParameter, id_UsuarioParameter);
         }
     
         public virtual int EliminarExcepcionesTrabajadorSocial(Nullable<int> id_Excepciones)
@@ -694,39 +698,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("NumeroCharla", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCharlaGrupal", id_CharlaGrupalParameter, fechaInicialParameter, fechaFinalParameter, id_TipoCharlaParameter, id_NivelParameter, nrodeParticipantesParameter, id_UsuarioParameter, numeroCharlaParameter);
-        }
-    
-        public virtual int RegistrarPago(Nullable<int> id_ControldePagos, Nullable<decimal> cantidad, Nullable<int> id_FormadePago, Nullable<int> numerodeCheque, Nullable<System.DateTime> fechadelPago, string id_Usuario, string numeroRecibo)
-        {
-            var id_ControldePagosParameter = id_ControldePagos.HasValue ?
-                new ObjectParameter("Id_ControldePagos", id_ControldePagos) :
-                new ObjectParameter("Id_ControldePagos", typeof(int));
-    
-            var cantidadParameter = cantidad.HasValue ?
-                new ObjectParameter("Cantidad", cantidad) :
-                new ObjectParameter("Cantidad", typeof(decimal));
-    
-            var id_FormadePagoParameter = id_FormadePago.HasValue ?
-                new ObjectParameter("Id_FormadePago", id_FormadePago) :
-                new ObjectParameter("Id_FormadePago", typeof(int));
-    
-            var numerodeChequeParameter = numerodeCheque.HasValue ?
-                new ObjectParameter("NumerodeCheque", numerodeCheque) :
-                new ObjectParameter("NumerodeCheque", typeof(int));
-    
-            var fechadelPagoParameter = fechadelPago.HasValue ?
-                new ObjectParameter("FechadelPago", fechadelPago) :
-                new ObjectParameter("FechadelPago", typeof(System.DateTime));
-    
-            var id_UsuarioParameter = id_Usuario != null ?
-                new ObjectParameter("Id_Usuario", id_Usuario) :
-                new ObjectParameter("Id_Usuario", typeof(string));
-    
-            var numeroReciboParameter = numeroRecibo != null ?
-                new ObjectParameter("NumeroRecibo", numeroRecibo) :
-                new ObjectParameter("NumeroRecibo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", id_ControldePagosParameter, cantidadParameter, id_FormadePagoParameter, numerodeChequeParameter, fechadelPagoParameter, id_UsuarioParameter, numeroReciboParameter);
         }
     
         public virtual ObjectResult<ListarBalancedePagos_Result> ListarBalancedePagos(Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial)
@@ -1263,6 +1234,57 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Programa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesTrabajadorSocial_Result>("ListarExcepcionesTrabajadorSocial", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int RegistrarPago(Nullable<int> fK_CasoCriminal, string fK_Usuario, Nullable<System.DateTime> fechaTransaccion, Nullable<int> fK_FormadePago, Nullable<decimal> cantidad, string numeroRecibo, Nullable<int> numerodeCheque)
+        {
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            var fK_UsuarioParameter = fK_Usuario != null ?
+                new ObjectParameter("FK_Usuario", fK_Usuario) :
+                new ObjectParameter("FK_Usuario", typeof(string));
+    
+            var fechaTransaccionParameter = fechaTransaccion.HasValue ?
+                new ObjectParameter("FechaTransaccion", fechaTransaccion) :
+                new ObjectParameter("FechaTransaccion", typeof(System.DateTime));
+    
+            var fK_FormadePagoParameter = fK_FormadePago.HasValue ?
+                new ObjectParameter("FK_FormadePago", fK_FormadePago) :
+                new ObjectParameter("FK_FormadePago", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(decimal));
+    
+            var numeroReciboParameter = numeroRecibo != null ?
+                new ObjectParameter("NumeroRecibo", numeroRecibo) :
+                new ObjectParameter("NumeroRecibo", typeof(string));
+    
+            var numerodeChequeParameter = numerodeCheque.HasValue ?
+                new ObjectParameter("NumerodeCheque", numerodeCheque) :
+                new ObjectParameter("NumerodeCheque", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", fK_CasoCriminalParameter, fK_UsuarioParameter, fechaTransaccionParameter, fK_FormadePagoParameter, cantidadParameter, numeroReciboParameter, numerodeChequeParameter);
+        }
+    
+        public virtual ObjectResult<ListarCargosCasosCriminales_Result> ListarCargosCasosCriminales(Nullable<int> fK_CasoCriminal)
+        {
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCargosCasosCriminales_Result>("ListarCargosCasosCriminales", fK_CasoCriminalParameter);
+        }
+    
+        public virtual ObjectResult<ListarPagosCasosCriminales_Result> ListarPagosCasosCriminales(Nullable<int> fK_CasoCriminal)
+        {
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarPagosCasosCriminales_Result>("ListarPagosCasosCriminales", fK_CasoCriminalParameter);
         }
     }
 }

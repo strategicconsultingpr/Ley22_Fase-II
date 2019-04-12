@@ -535,7 +535,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 else
                 {
-                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue));
+                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue),userId);
 
                     string mensaje = "La cita fue creada correctamente.";
                     ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);

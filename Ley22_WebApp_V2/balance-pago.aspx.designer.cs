@@ -219,11 +219,47 @@ public partial class balance_pago {
     protected global::System.Web.UI.WebControls.Literal LitInfo;
     
     /// <summary>
-    /// GvControldePagos control.
+    /// divNav control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView GvControldePagos;
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNav;
+    
+    /// <summary>
+    /// LitBalance control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Literal LitBalance;
+    
+    /// <summary>
+    /// BtnPagar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnPagar;
+    
+    /// <summary>
+    /// GvCargos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView GvCargos;
+    
+    /// <summary>
+    /// GvPagos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView GvPagos;
 }

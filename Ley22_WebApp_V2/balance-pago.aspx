@@ -165,6 +165,24 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                             </div>
 
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="tipoPago">Tipo de Pago</label>
+                                    <asp:DropDownList ID="DdlDTipoPago" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="0">-Seleccione-</asp:ListItem>
+                                        <asp:ListItem Value="1">Cita Trabajador Social</asp:ListItem>
+                                        <asp:ListItem Value="2">Charlas Socio Educativas</asp:ListItem>
+                                        <asp:ListItem Value="3">Texicologia</asp:ListItem>
+                                        <asp:ListItem Value="4">Certificaciones</asp:ListItem>
+                                        <asp:ListItem></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                </div>
+
+                            </div>
+
                             <div class="col">
 
                                 <label for="fecha-pago">Numero de Recibo</label>

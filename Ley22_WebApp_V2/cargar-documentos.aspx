@@ -125,7 +125,7 @@
     </div>
     <!-- container-fluid -->
 
-    <script>
+    <script type="text/javascript">
 
         
 

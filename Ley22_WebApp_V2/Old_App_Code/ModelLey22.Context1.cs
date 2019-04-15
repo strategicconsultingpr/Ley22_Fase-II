@@ -1236,7 +1236,25 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesTrabajadorSocial_Result>("ListarExcepcionesTrabajadorSocial", id_TrabajadorSocialParameter, fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
         }
     
-        public virtual int RegistrarPago(Nullable<int> fK_CasoCriminal, string fK_Usuario, Nullable<System.DateTime> fechaTransaccion, Nullable<int> fK_FormadePago, Nullable<decimal> cantidad, string numeroRecibo, Nullable<int> numerodeCheque)
+        public virtual ObjectResult<ListarCargosCasosCriminales_Result> ListarCargosCasosCriminales(Nullable<int> fK_CasoCriminal)
+        {
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCargosCasosCriminales_Result>("ListarCargosCasosCriminales", fK_CasoCriminalParameter);
+        }
+    
+        public virtual ObjectResult<ListarPagosCasosCriminales_Result> ListarPagosCasosCriminales(Nullable<int> fK_CasoCriminal)
+        {
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarPagosCasosCriminales_Result>("ListarPagosCasosCriminales", fK_CasoCriminalParameter);
+        }
+    
+        public virtual int RegistrarPago(Nullable<int> fK_CasoCriminal, string fK_Usuario, Nullable<System.DateTime> fechaTransaccion, Nullable<int> fK_FormadePago, Nullable<decimal> cantidad, string numeroRecibo, Nullable<int> numerodeCheque, string descripcion)
         {
             var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
                 new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
@@ -1266,25 +1284,11 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("NumerodeCheque", numerodeCheque) :
                 new ObjectParameter("NumerodeCheque", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", fK_CasoCriminalParameter, fK_UsuarioParameter, fechaTransaccionParameter, fK_FormadePagoParameter, cantidadParameter, numeroReciboParameter, numerodeChequeParameter);
-        }
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
     
-        public virtual ObjectResult<ListarCargosCasosCriminales_Result> ListarCargosCasosCriminales(Nullable<int> fK_CasoCriminal)
-        {
-            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
-                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
-                new ObjectParameter("FK_CasoCriminal", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCargosCasosCriminales_Result>("ListarCargosCasosCriminales", fK_CasoCriminalParameter);
-        }
-    
-        public virtual ObjectResult<ListarPagosCasosCriminales_Result> ListarPagosCasosCriminales(Nullable<int> fK_CasoCriminal)
-        {
-            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
-                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
-                new ObjectParameter("FK_CasoCriminal", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarPagosCasosCriminales_Result>("ListarPagosCasosCriminales", fK_CasoCriminalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarPago", fK_CasoCriminalParameter, fK_UsuarioParameter, fechaTransaccionParameter, fK_FormadePagoParameter, cantidadParameter, numeroReciboParameter, numerodeChequeParameter, descripcionParameter);
         }
     }
 }

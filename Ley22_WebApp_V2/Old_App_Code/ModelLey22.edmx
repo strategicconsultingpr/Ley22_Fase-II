@@ -641,6 +641,7 @@
           <Parameter Name="Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="NumeroRecibo" Type="varchar" Mode="In" />
           <Parameter Name="NumerodeCheque" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
         </Function>
         <Function Name="ResumendeAsistenciasCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
@@ -1100,6 +1101,12 @@
             <End Role="Tribunal" EntitySet="Tribunals" />
             <End Role="CasoCriminal" EntitySet="CasoCriminals" />
           </AssociationSet>
+          <FunctionImport Name="ListarCargosCasosCriminales" ReturnType="Collection(Ley22Model.ListarCargosCasosCriminales_Result)">
+          <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarPagosCasosCriminales" ReturnType="Collection(Ley22Model.ListarPagosCasosCriminales_Result)">
+          <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="RegistrarPago">
             <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
             <Parameter Name="FK_Usuario" Mode="In" Type="String" />
@@ -1108,12 +1115,7 @@
             <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="NumeroRecibo" Mode="In" Type="String" />
             <Parameter Name="NumerodeCheque" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ListarCargosCasosCriminales" ReturnType="Collection(Ley22Model.ListarCargosCasosCriminales_Result)">
-            <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ListarPagosCasosCriminales" ReturnType="Collection(Ley22Model.ListarPagosCasosCriminales_Result)">
-            <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2678,7 +2680,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
           <FunctionImportMapping FunctionImportName="ListarCargosCasosCriminales" FunctionName="Ley22Model.Store.ListarCargosCasosCriminales">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarCargosCasosCriminales_Result">
@@ -2706,6 +2707,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

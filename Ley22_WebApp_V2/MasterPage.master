@@ -94,7 +94,7 @@
                           <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
                         </li>
                           <li class="nav-item">
-                          <a class="nav-link" href="#">Reportes</a>
+                          <a class="nav-link" href="../Reportes.aspx">Reportes</a>
                         </li> 
                       </ul>
                     </nav>  
@@ -120,10 +120,10 @@
                           <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
                         </li>
                 
-                        <%--<li class="nav-item">
-                          <a class="nav-link" href="#">Reportes</a>
-                        </li>        
                         <li class="nav-item">
+                          <a class="nav-link" href="../Reportes.aspx">Reportes</a>
+                        </li>        
+                        <%--<li class="nav-item">
                           <a class="nav-link" href="#">Administración</a>
                         </li>--%>
                    

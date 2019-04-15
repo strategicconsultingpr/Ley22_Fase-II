@@ -362,6 +362,7 @@
     <Content Include="recaudos-busqueda-usuario.aspx" />
     <Content Include="recaudos-resultados-busqueda.aspx" />
     <Content Include="recepcion-busquedaUsuario.aspx" />
+    <Content Include="Reportes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -974,6 +975,13 @@
     </Compile>
     <Compile Include="recepcion-busquedaUsuario.aspx.designer.cs">
       <DependentUpon>recepcion-busquedaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="seleccion-proximo-paso.aspx.cs">
       <DependentUpon>seleccion-proximo-paso.aspx</DependentUpon>

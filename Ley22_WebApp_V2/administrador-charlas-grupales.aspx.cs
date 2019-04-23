@@ -13,6 +13,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
     SEPSEntities1 dsPerfil = new SEPSEntities1();
+    ApplicationDbContext context = new ApplicationDbContext();
     ApplicationUser ExistingUser = new ApplicationUser();
     static string userId = String.Empty;
     Ley22Entities dsLey22 = new Ley22Entities();
@@ -61,6 +62,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
             }
 
+           
             var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
 
             if (usuarios_programas.Count() == 1)
@@ -115,6 +117,64 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 DdlTipodeCharla2.DataBind();
                 DdlTipodeCharla2.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             }
+
+            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
+            {
+                lnkCertificados.Visible = true;
+
+                var Rolsupervisor = context.Roles.SingleOrDefault(m => m.Name == "Supervisor");
+                var IDsupervisores = Rolsupervisor.Users.Select(m => m.UserId).ToList();
+                var supervisores = context.Users.Where(m => IDsupervisores.Contains(m.Id)).Select(r => new ListItem { Value = r.Id.ToString(), Text = r.FirstName + " " + r.LastName }).ToList();
+            
+
+                var RolCoordinador = context.Roles.SingleOrDefault(m => m.Name == "CoordinadorCharlas");
+                var IDcoordinador = RolCoordinador.Users.Select(m => m.UserId).ToList();
+                var coordinadores = context.Users.Where(m => IDcoordinador.Contains(m.Id)).Select(r => new ListItem { Value = r.Id.ToString(), Text = r.FirstName + " " + r.LastName }).ToList();
+
+
+
+                if (supervisores.Count() == 1)
+                {
+                    DdlSupervisor.DataValueField = "Value";
+                    DdlSupervisor.DataTextField = "Text";
+                    DdlSupervisor.DataSource = supervisores;
+                    DdlSupervisor.DataBind();
+                    DdlSupervisor.SelectedValue = supervisores[0].Value;
+
+
+                }
+                else
+                {
+                    DdlSupervisor.DataValueField = "Value";
+                    DdlSupervisor.DataTextField = "Text";
+                    DdlSupervisor.DataSource = supervisores;
+                    DdlSupervisor.DataBind();
+                    DdlSupervisor.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+
+                }
+
+                if (coordinadores.Count() == 1)
+                {
+                    DdlAdiestrador.DataValueField = "Value";
+                    DdlAdiestrador.DataTextField = "Text";
+                    DdlAdiestrador.DataSource = coordinadores;
+                    DdlAdiestrador.DataBind();
+                    DdlAdiestrador.SelectedValue = coordinadores[0].Value;
+
+
+                }
+                else
+                {
+                    DdlAdiestrador.DataValueField = "Value";
+                    DdlAdiestrador.DataTextField = "Text";
+                    DdlAdiestrador.DataSource = coordinadores;
+                    DdlAdiestrador.DataBind();
+                    DdlAdiestrador.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+
+                }
+            }
         }
 
         if (Page.Request.Params["__EVENTTARGET"] == "EliminarParticipante")
@@ -125,11 +185,19 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         else if (Page.Request.Params["__EVENTTARGET"] == "AsistioParticipante")
         {
             AsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            string mensaje = "El participante cumplió con la charla";
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('Cumplió','" + mensaje + "','success')", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "NoCumplio", "openModal()", true);
+            // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             return;
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "NoAsistioParticipante")
         {
             NoAsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            string mensaje = "El participante NO cumplió con la charla";
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('NO cumplió','" + mensaje + "','error')", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "NoCumplio", "openModal()", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             return;
         }
     }
@@ -400,8 +468,13 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         LinkButton btn = (LinkButton)(sender);
         string val = H_Id_CharlaGrupal.Value;
         int Id_CharlaGrupal = Convert.ToInt32(val);
+    }
 
-
+    protected void BtnGenerarCertificados(object sender, EventArgs e)
+    {
+        LinkButton btn = (LinkButton)(sender);
+        string val = H_Id_CharlaGrupal.Value;
+        int Id_CharlaGrupal = Convert.ToInt32(val);
     }
 
     protected void BtnModificarCharla_2(object sender, EventArgs e)
@@ -502,8 +575,9 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         string mensaje = "El participante cumplió con la charla";
         
         ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','success')", true);
-
-        GenerarCalendario(); 
+        
+        GenerarCalendario();
+       
     }
 
     void NoAsistioParticipante(int Id_ParticipantePorCharlaGrupal)
@@ -514,6 +588,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','error')", true);
         
         GenerarCalendario();
+
+        
     }
 
 

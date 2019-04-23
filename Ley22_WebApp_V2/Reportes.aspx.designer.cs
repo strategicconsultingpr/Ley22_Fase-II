@@ -13,6 +13,42 @@ namespace Ley22_WebApp_V2 {
     public partial class Reportes {
         
         /// <summary>
+        /// DivPrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivPrograma;
+        
+        /// <summary>
+        /// DdlPrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlPrograma;
+        
+        /// <summary>
+        /// ValidatorPrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidatorPrograma;
+        
+        /// <summary>
+        /// Div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div;
+        
+        /// <summary>
         /// ReporteSemanal_l control.
         /// </summary>
         /// <remarks>
@@ -20,5 +56,23 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink ReporteSemanal_l;
+        
+        /// <summary>
+        /// DetalleIngresos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink DetalleIngresos;
+        
+        /// <summary>
+        /// ServiciosDiarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ServiciosDiarios;
     }
 }

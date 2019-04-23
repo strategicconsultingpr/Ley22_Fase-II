@@ -13,7 +13,8 @@ using Ley22_WebApp_V2;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 using Syncfusion.HtmlConverter;
-using Syncfusion.Pdf;
+//using Syncfusion.Pdf;
+using SelectPdf;
 
 public partial class balance_pago : System.Web.UI.Page
 {
@@ -89,21 +90,23 @@ public partial class balance_pago : System.Web.UI.Page
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+                var balance = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Cargos - r.Pagos).SingleOrDefault();
 
                 if (email.Count() > 0)
                 {
                     EmailService mail = new EmailService();
-                    string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, IdDesc.Value, TxtNumeroRecibo.Text);
+                    string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, DdlDTipoPago.SelectedItem.Text, TxtNumeroRecibo.Text);
                     mail.SendAsyncCita(email, "Recibo de Pago", body);
                 }
 
                 string Id = Session["Id_Participante"].ToString();
+                string pagoPara = DdlDTipoPago.SelectedItem.Text;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+pagoPara+"/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
                 }
-
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + TxtNumeroRecibo.Text + "_"+ DdlDTipoPago.SelectedItem.Text + ".pdf";
                 // FileStream fs = new FileStream("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value+".pdf",FileMode.Create);
                 // Document document = new Document(iTextSharp.text.PageSize.LETTER, 0, 0, 0, 0);
                 // PdfWriter pw = PdfWriter.GetInstance(document, fs);
@@ -120,41 +123,95 @@ public partial class balance_pago : System.Web.UI.Page
                 // document.Add(new Paragraph(body));
                 //document.Close();
 
-                HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter(HtmlRenderingEngine.WebKit);
-                WebKitConverterSettings webKitSettings = new WebKitConverterSettings();
+                //HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter(HtmlRenderingEngine.WebKit);
+                // WebKitConverterSettings webKitSettings = new WebKitConverterSettings();
 
                 //string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/";
                 string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
 
-                webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
+               // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
-                string bodyPDF = CreateBodyPDF(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, IdDesc.Value, TxtNumeroRecibo.Text);
+                string bodyPDF = CreateBodyPDF(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, balance.ToString(), TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, pagoPara, TxtNumeroRecibo.Text);
+                //string bodyPDF = CreateBodyPDF2(du.NB_Primero);
+                // webKitSettings.SinglePageLayout = Syncfusion.Pdf.HtmlToPdf.SinglePageLayout.None;
 
-                webKitSettings.SinglePageLayout = Syncfusion.Pdf.HtmlToPdf.SinglePageLayout.None;
+                //htmlConverter.ConverterSettings = webKitSettings;
 
-                htmlConverter.ConverterSettings = webKitSettings;
+                // PdfDocument document = htmlConverter.Convert(bodyPDF, baseUrl);
 
-                PdfDocument document = htmlConverter.Convert(bodyPDF, baseUrl);
+                //document.Save("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdCP.Value + ".pdf");
 
-                document.Save("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdCP.Value + ".pdf");
 
-                document.Close(true);
+
+                // document.Close(true);
+
+                
+
+                PdfPageSize pageSize = PdfPageSize.Letter;
+               
+                PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
+
+                int webPageWidth = 850;
+                int webPageHeight = 0;
+
+                HtmlToPdf converter = new HtmlToPdf();
+
+                converter.Options.PdfPageSize = pageSize;
+                converter.Options.PdfPageOrientation = pdfOrientation;
+                converter.Options.WebPageWidth = webPageWidth;
+                converter.Options.WebPageHeight = webPageHeight;
+
+                PdfDocument doc = converter.ConvertHtmlString(bodyPDF,baseUrl);
+
+                doc.Save(PathNameDocumento);
+              
+                doc.Close();
+
+                
+
+
+                
+                // Response.Redirect("/");
+
+               
+
+               // BidGrid(sender, e);
+
+                //Response.Clear();
+                //Response.ClearHeaders();
+                //Response.ClearContent();
+                //Response.ContentType = "application/octet-stream";
+                //Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+                //Response.TransmitFile(PathNameDocumento);
+                //Response.Flush();
 
                 TxtFechaDelPago.Text = "";
                 DdlFormadePago.SelectedValue = "0";
                 TxtCantidad.Text = "";
                 TxtNumeroRecibo.Text = "";
                 TxtNumeroCheque.Text = "";
-
+                DdlDTipoPago.SelectedValue = "0";
             }
+
+            
         }
         catch (Exception ex)
         {
-            string mensaje = ex.Message;
+            TxtFechaDelPago.Text = "";
+            DdlFormadePago.SelectedValue = "0";
+            TxtCantidad.Text = "";
+            TxtNumeroRecibo.Text = "";
+            TxtNumeroCheque.Text = "";
+            DdlDTipoPago.SelectedValue = "0";
+
+            string mensaje = ex.InnerException.Message;
             ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
         }
+       
         BidGrid(sender, e);
+        //Response.Redirect(Request.RawUrl);
+        
     }
 
     protected void DdlFormadePago_SelectedIndexChanged(object sender, EventArgs e)
@@ -330,7 +387,7 @@ public partial class balance_pago : System.Web.UI.Page
         Response.Redirect(prevPage, false);
     }
 
-    private string CreateBody(string FirstName, string LastName, string Fecha, string CantidadPagada, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
+    private string CreateBody(string FirstName, string LastName, string Fecha, string Balance, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
     {
         string body = string.Empty;
 
@@ -340,7 +397,7 @@ public partial class balance_pago : System.Web.UI.Page
         }
         body = body.Replace("{Participante}", FirstName + " " + LastName);
         body = body.Replace("{Fecha}", Fecha);
-        body = body.Replace("{CantidadPagada}", "$" + CantidadPagada);
+        body = body.Replace("{Balance}", "$" + Balance);
         body = body.Replace("{Metodo}", Metodo);
         body = body.Replace("{Programa}", Programa);
         body = body.Replace("{Descripcion}", Descripcion);
@@ -352,7 +409,7 @@ public partial class balance_pago : System.Web.UI.Page
 
     }
 
-    private string CreateBodyPDF(string FirstName, string LastName, string Fecha, string CantidadPagada, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
+    private string CreateBodyPDF(string FirstName, string LastName, string Fecha, string Balance, string Cantidad, string Metodo, string Order, string Programa, string Descripcion, string Recibo)
     {
         string body = string.Empty;
 
@@ -362,7 +419,7 @@ public partial class balance_pago : System.Web.UI.Page
         }
         body = body.Replace("{Participante}", FirstName + " " + LastName);
         body = body.Replace("{Fecha}", Fecha);
-        body = body.Replace("{CantidadPagada}", "$" + CantidadPagada);
+        body = body.Replace("{Balance}", "$" + Balance);
         body = body.Replace("{Metodo}", Metodo);
         body = body.Replace("{Programa}", Programa);
         body = body.Replace("{Descripcion}", Descripcion);
@@ -372,6 +429,20 @@ public partial class balance_pago : System.Web.UI.Page
 
         return body;
 
+    }
+
+    private string CreateBodyPDF2(string Fecha)
+    {
+        string body = string.Empty;
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/Certificado.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{Fecha}", Fecha);
+       
+
+        return body;
     }
 
     protected void BtnPrint_Click(object sender, EventArgs e)
@@ -400,7 +471,7 @@ public partial class balance_pago : System.Web.UI.Page
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
        
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdCP.Value + ".pdf";
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+ IdDesc.Value + "/" + NumRecibo.Value+ "_" + IdDesc.Value + ".pdf";
 
 
         Response.Clear();

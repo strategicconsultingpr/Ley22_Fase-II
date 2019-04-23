@@ -97,11 +97,16 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 DdlCentro.DataBind();
                 DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-              
-            
+
+            var tipo = dsley22.Precios.Where(a => a.Descripcion.Contains("Cita")).Select(r => new ListItem { Value = r.Id_Precio.ToString(), Text = r.Descripcion }).ToList();
+            DdlTipo.DataValueField = "Value";
+            DdlTipo.DataTextField = "Text";
+            DdlTipo.DataSource = tipo;
+            DdlTipo.DataBind();
+            DdlTipo.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
 
-           
+
 
             CargarOrdenesJudiciales();
             verificarCitas();
@@ -535,7 +540,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 else
                 {
-                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue),userId);
+                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue),userId, Convert.ToInt32(DdlTipo.SelectedValue));
 
                     string mensaje = "La cita fue creada correctamente.";
                     ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);

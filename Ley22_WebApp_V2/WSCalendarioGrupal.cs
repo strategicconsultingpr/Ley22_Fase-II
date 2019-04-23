@@ -182,7 +182,7 @@ namespace Ley22_WebApp_V2
                     
                     if(c.Asistio == 0)
                     {
-                        HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
+                        HrefAsistio = "<a href=\"#\"  id=\"asistioID\" onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
                     }
                     else
                     {

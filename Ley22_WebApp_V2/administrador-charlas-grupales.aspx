@@ -74,7 +74,9 @@
                         <div class="col">
                              <a data-dismiss="modal" href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla_2" data-whatever="@getbootstrap" runat="server" id="A1" >Modificar Charla</a>
                             <asp:LinkButton runat="server" ID="BtnEliminarCharla" Text="Eliminar Charla" class="btn btn-primary btn-block" OnClick="BtnEliminarCharla_Click" CausesValidation="false"></asp:LinkButton>
-                             <asp:LinkButton runat="server" ID="BtnGetCharla" Text="" Style="display:none;" OnClick="BtnModificarCharla" />
+                             <%--<asp:LinkButton runat="server" ID="BtnGetCharla" Text="" Style="display:none;" OnClick="BtnModificarCharla" />
+                           --%>
+                            <a visible="false" data-dismiss="modal" href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-certificados" data-whatever="@getbootstrap" runat="server" id="lnkCertificados" >Generar Certificados</a>
                         </div>
                     </div>
                     <div class="row pl-4 pr-4">
@@ -429,6 +431,59 @@
                   <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal" data-target="#modal-crear-charla">Cancelar</button> -->
 
                     <a data-dismiss="modal" href="#" class="btn btn-secondary" data-toggle="modal" data-target="#modal-asistencia" data-whatever="@getbootstrap" runat="server" id="A2">Cancelar</a>
+                           
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Modal Certificados --> 
+
+     <div class="modal fade" id="modal-certificados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalabelCertificados">Generar Certificados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row bb pl-4 pr-4 pb-4 mb-4">
+                        <div class="col">
+                            <div class="form-group">
+
+                                <label for="fecha-charla">Adiestrador Educativo</label>
+                                <div class="input-group">
+                                   
+                                <asp:DropDownList runat="server" ID="DdlAdiestrador" CssClass="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="DdlAdiestrador" InitialValue="0"></asp:RequiredFieldValidator>
+                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="fecha-charla">Supervisor de Programa</label>
+                                <div class="input-group">
+                                    
+                                <asp:DropDownList runat="server" ID="DdlSupervisor" CssClass="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="DdlSupervisor" InitialValue="0"></asp:RequiredFieldValidator>
+                            
+                                </div>
+
+                            </div>
+                        </div>
+
+                      
+                    </div>
+                </div>
+                <div class="modal-footer">
+                     <asp:LinkButton ID="LinkButton1" runat="server" Text="Generar Certificados" CssClass="btn btn-primary mr-3" OnClick="BtnGenerarCertificados" />
+
+                  <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal" data-target="#modal-crear-charla">Cancelar</button> -->
+
+                    <a data-dismiss="modal" href="#" class="btn btn-secondary" data-toggle="modal" data-target="#modal-Info-Charla" data-whatever="@getbootstrap" runat="server" id="A4">Cancelar</a>
                            
                 </div>
             </div>
@@ -894,7 +949,12 @@
 
     </div> 
     <!-- container-fluid -->
-    <script>
+    <script type="text/javascript">
+
+        function openModal() {
+            alert("hola");
+                                $('#modal-Info-Charla').modal({ show: true });
+                            }
 
                             function changeDivContent(Id_CharlaGrupal) {
 
@@ -958,7 +1018,7 @@
                                 document.getElementById("<%=DdlNivelCharlas2.ClientID %>").value = Id_NiveldeCharla;
                                 document.getElementById("<%=DdlNumeroCharla2.ClientID %>").value = NrodeParticipantes;
                                 document.getElementById("<%=TxtMaxCantParticipantes2.ClientID %>").value = NumeroCharla;
-        }
+                            }
 
         function checkDate(sender, args) {
             if (sender._selectedDate.getDate() != new Date().getDate() && sender._selectedDate < new Date()) {
@@ -970,12 +1030,16 @@
         }
 
          function sweetAlert(titulo,texto,icono) {
-            swal({
-                title: titulo,
-                text: texto,
-                icon: icono
-            }
-            )
+             
+             swal({
+                 title: titulo,
+                 text: texto,
+                 icon: icono
+             }
+             );
+
+             
+             $('#modal-Info-Charla').modal({ show: true });
         }
 
     </script>

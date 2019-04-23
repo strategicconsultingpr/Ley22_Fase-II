@@ -470,6 +470,7 @@
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
           <Parameter Name="Id_Programa" Type="int" Mode="In" />
           <Parameter Name="Id_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Precio" Type="int" Mode="In" />
         </Function>
         <Function Name="GuardarDocumentoPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Documento" Type="int" Mode="In" />
@@ -855,15 +856,6 @@
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="USUARIO_PROGRAMA" EntityType="Ley22Model.USUARIO_PROGRAMA" />
-          <FunctionImport Name="GuardarCitaTrabajadorSocial">
-            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Usuario" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="EliminarExcepcionesTrabajadorSocial">
           <Parameter Name="Id_Excepciones" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1116,6 +1108,16 @@
             <Parameter Name="NumeroRecibo" Mode="In" Type="String" />
             <Parameter Name="NumerodeCheque" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GuardarCitaTrabajadorSocial">
+            <Parameter Name="Id_TrabajadorSocial" Mode="In" Type="String" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Id_Precio" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2213,7 +2215,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="EliminarExcepcionesTrabajadorSocial" FunctionName="Ley22Model.Store.EliminarExcepcionesTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="AsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.AsistioCitaTrabajadorSocial" />
           <FunctionImportMapping FunctionImportName="NoAsistioCitaTrabajadorSocial" FunctionName="Ley22Model.Store.NoAsistioCitaTrabajadorSocial" />
@@ -2708,6 +2709,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
+          <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

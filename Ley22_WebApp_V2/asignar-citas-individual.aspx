@@ -52,6 +52,15 @@
                              </div>
 
                         </div>
+                        <div class="row">
+                             <div class="col">Tipo de Cita:</div>
+                            <div class="col">
+                                <asp:DropDownList ID="DdlTipo" runat="server" CssClass="custom-select w-100" ></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlTipo" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        
+
 
 
                         <script type="text/javascript">

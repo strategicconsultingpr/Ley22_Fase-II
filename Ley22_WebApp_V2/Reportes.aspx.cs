@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ley22_WebApp_V2.Models;
+using Ley22_WebApp_V2.Old_App_Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,13 +11,113 @@ namespace Ley22_WebApp_V2
 {
     public partial class Reportes : System.Web.UI.Page
     {
+        ApplicationUser ExistingUser = new ApplicationUser();
+        SEPSEntities1 dsPerfil = new SEPSEntities1();
+        Ley22Entities dsLey22 = new Ley22Entities();
+        static string userId = String.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            System.Configuration.AppSettingsReader configurationAppSettings = new System.Configuration.AppSettingsReader();
-            string URL_ReportingServices = ((string)(configurationAppSettings.GetValue("URL_ReportingServices", typeof(string))));
-            string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
-            this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
-            this.ReporteSemanal_l.NavigateUrl = this.Session["URL_Reports"].ToString() + this.ReporteSemanal_l.NavigateUrl.ToString();
+
+            if (Session["User"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx", false);
+                return;
+            }
+            if (!Page.IsPostBack)
+            {
+
+                Div.Visible = false;
+                ExistingUser = (ApplicationUser)Session["User"];
+                userId = ExistingUser.Id;
+
+                CargarProgramas();
+            }
+
+            
+        }
+
+        protected void CargarProgramas()
+        {
+            var usuarios_programas = new List<string>();
+            var programas_usuario = new List<int>();
+            programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
+            var programas = dsPerfil.SA_PROGRAMA.Where(p => programas_usuario.Contains(p.PK_Programa)).Select(u => new ListItem { Value = u.PK_Programa.ToString(), Text = u.NB_Programa }).ToList();
+
+            if (programas.Count > 1)
+            {
+                DivPrograma.Visible = true;
+                ValidatorPrograma.Enabled = true;
+                DdlPrograma.DataValueField = "Value";
+                DdlPrograma.DataTextField = "Text";
+                DdlPrograma.DataSource = programas;
+                DdlPrograma.DataBind();
+                DdlPrograma.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+            else if (programas.Count == 1)
+            {
+                ValidatorPrograma.Enabled = false;
+                DivPrograma.Visible = false;
+               // Session["Programa"] = programas[0].Value;
+            }
+            else
+            {
+
+            }
+        }
+
+        protected void DdlPrograma_Changed(object sender, EventArgs e)
+        {
+            if (DdlPrograma.SelectedValue != "0")
+            {
+                string programa = "";
+                //  Session["Programa"] = DdlPrograma.SelectedValue;
+
+                this.DetalleIngresos.NavigateUrl = "";
+                this.ServiciosDiarios.NavigateUrl = "";
+
+                Div.Visible = true;
+
+                switch(DdlPrograma.SelectedValue)
+                    {
+                    case "61":
+                        programa = "SanJuan";
+                        break;
+                    case "62":
+                        programa = "Ponce";
+                        break;
+                    case "63":
+                        programa = "Mayaguez";
+                        break;
+                    case "64":
+                        programa = "Arecibo";
+                        break;
+                    case "65":
+                        programa = "Moca";
+                        break;
+                    case "66":
+                        programa = "Guayama";
+                        break;
+                }
+                   
+                System.Configuration.AppSettingsReader configurationAppSettings = new System.Configuration.AppSettingsReader();
+                string URL_ReportingServices = ((string)(configurationAppSettings.GetValue("URL_ReportingServices", typeof(string))));
+                string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
+                this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
+                this.ReporteSemanal_l.NavigateUrl = this.Session["URL_Reports"].ToString() + this.ReporteSemanal_l.NavigateUrl.ToString();
+
+                this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa;
+                this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa;
+
+            }
+            else
+            {
+                Div.Visible = false;
+            }
+
+
         }
     }
+
+    
 }

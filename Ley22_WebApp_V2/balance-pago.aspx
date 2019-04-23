@@ -23,6 +23,7 @@
 
 
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
+    <input id="NumRecibo" name="NumRecibo" type="hidden" runat="server" />
     <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
     
     <!-- Modal -->
@@ -171,10 +172,11 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                     <label for="tipoPago">Tipo de Pago</label>
                                     <asp:DropDownList ID="DdlDTipoPago" runat="server" CssClass="form-control">
                                         <asp:ListItem Value="0">-Seleccione-</asp:ListItem>
-                                        <asp:ListItem Value="1">Cita Trabajador Social</asp:ListItem>
-                                        <asp:ListItem Value="2">Charlas Socio Educativas</asp:ListItem>
-                                        <asp:ListItem Value="3">Texicologia</asp:ListItem>
-                                        <asp:ListItem Value="4">Certificaciones</asp:ListItem>
+                                        <asp:ListItem Value="1">Cita Pre-Sentencia</asp:ListItem>
+                                        <asp:ListItem Value="2">Cita Sentencia</asp:ListItem>
+                                        <asp:ListItem Value="3">Charlas Socio Educativas</asp:ListItem>
+                                        <asp:ListItem Value="4">Toxicologia</asp:ListItem>
+                                        <asp:ListItem Value="5">Certificaciones</asp:ListItem>
                                         <asp:ListItem></asp:ListItem>
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -324,7 +326,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                  <asp:Literal runat="server" ID="LitBalance"></asp:Literal>
                             </div>
                             <div class="col" style="text-align: right; width: 100%;">
-                                <asp:Button ID="BtnPagar" runat="server" Text="Realizar Pago" CssClass="btn btn-primary mr-3" data-toggle="modal" data-target="#Pagar-modal" />
+                                <asp:Button ID="BtnPagar" runat="server" Text="Realizar Pago" CssClass="btn btn-primary mr-3" data-toggle="modal" data-target="#Pagar-modal" CausesValidation="false" OnClientClick="return false"/>
                             </div>
                                 </div>
                             <br />
@@ -393,8 +395,14 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
 
     <script type="text/javascript">
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
+
         function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
             document.getElementById("<%= IdCP.ClientID %>").value = Valor;
+            document.getElementById("<%= NumRecibo.ClientID %>").value = NroRecibo;
+            document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
             document.getElementById("NroRecibo").innerHTML = "Recibo #: " + NroRecibo;
             document.getElementById("Descripcion").innerHTML = "Descripción: " + Descripcion;
 

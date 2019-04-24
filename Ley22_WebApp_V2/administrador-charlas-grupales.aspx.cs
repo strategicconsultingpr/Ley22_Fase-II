@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -8,6 +10,7 @@ using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SelectPdf;
 
 public partial class administrador_charlas_grupales : System.Web.UI.Page
 {
@@ -475,6 +478,87 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         LinkButton btn = (LinkButton)(sender);
         string val = H_Id_CharlaGrupal.Value;
         int Id_CharlaGrupal = Convert.ToInt32(val);
+
+        var CasosParticipantes = dsLey22.ParticipantesPorCharlas.Where(r => r.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(p => p.Id_OrdenJudicial);
+        var Casos = dsLey22.CasoCriminals.Where(r => CasosParticipantes.Contains(r.Id_CasoCriminal)).ToList();
+
+        foreach (var item in Casos)
+        {
+            var asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
+            decimal balance = Convert.ToDecimal(item.Cargos) - Convert.ToDecimal(item.Pagos);
+
+            if(asistencias == 1 && balance.Equals(balance))
+            {
+                string Id = item.Id_Participante.ToString();
+                string Nombre = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.NB_Primero).SingleOrDefault();
+                string Apellido = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.AP_Primero).SingleOrDefault();
+                string fecha = DateTime.Now.ToShortDateString();
+                int Programa = Convert.ToInt32(DdlCentro.SelectedValue.ToString());
+                string tribunal = dsLey22.Tribunals.Where(r => r.Id_Tribunal.Equals(item.FK_Tribunal)).Select(a => a.NB_Tribunal).SingleOrDefault();
+                var charlas = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Where(f => f.Asistio.Equals(1)).Select(a => a.Id_CharlaGrupal);
+
+                var fechaInical = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Min();
+                var fechaFinal = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Max();
+
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                {
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                }
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
+
+                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+
+                // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
+
+                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(),DdlAdiestrador.SelectedItem.Text,DdlSupervisor.SelectedItem.Text);
+
+                PdfPageSize pageSize = PdfPageSize.Letter;
+
+                PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
+
+                int webPageWidth = 850;
+                int webPageHeight = 0;
+
+                HtmlToPdf converter = new HtmlToPdf();
+
+                converter.Options.PdfPageSize = pageSize;
+                converter.Options.PdfPageOrientation = pdfOrientation;
+                converter.Options.WebPageWidth = webPageWidth;
+                converter.Options.WebPageHeight = webPageHeight;
+
+                PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
+
+                doc.Save(PathNameDocumento);
+
+                doc.Close();
+
+                //HttpWebRequest req = HttpWebRequest.Create(Server.MapPath("~/administrador-charlas-grupales.aspx")) as HttpWebRequest;
+
+                //downloadfiles(PathNameDocumento);
+                //Response.Clear();
+                //Response.ClearHeaders();
+                //Response.ClearContent();
+                //Response.ContentType = "application/octet-stream";
+                //Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+                //Response.TransmitFile(PathNameDocumento);
+                //Response.Flush();
+            }
+
+        }
+
+    }
+
+    private void downloadfiles(string filename)
+    {
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ClearContent();
+        Response.Clear();
+        Response.ContentType = "application/octet-stream";
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
+        Response.TransmitFile(filename);
+
+        Response.Flush();
+
     }
 
     protected void BtnModificarCharla_2(object sender, EventArgs e)
@@ -592,5 +676,31 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         
     }
 
+    private string CreateBodyPDF(string Fecha, string Juez, string Caso, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)
+    {
+        string body = string.Empty;
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/Certificado.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{Fecha}", Fecha);
+        body = body.Replace("{Juez}",Juez);
+        body = body.Replace("{CasoCriminal}", Caso);
+        body = body.Replace("{RegionPrograma}", RegionPrograma);
+        body = body.Replace("{NombreParticipante}", Nombre + " " + Apellido);
+        body = body.Replace("{FechaSentencia}", FechaSentencia);
+        body = body.Replace("{NombreTribunal}", NombreTribunal);
+        body = body.Replace("{FechaInicio}", FechaInicial);
+        body = body.Replace("{FechaFinal}", FechaFinal);
+        body = body.Replace("{FechaHoy}", DateTime.Now.ToShortDateString());
+        body = body.Replace("{NombreAdiestrador}", NombreAdiestrador);
+        body = body.Replace("{NombreSupervisor}", NombreSupervisor);
+
+       
+
+        return body;
+
+    }
 
 }

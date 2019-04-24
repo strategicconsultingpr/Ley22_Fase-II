@@ -184,22 +184,29 @@ namespace Ley22_WebApp_V2
                     if(c.Asistio == 0)
                     {
                         HrefAsistio = "<a href=\"#\"  id=\"asistioID\" onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
-                        
+                        if (balance.Equals(Convert.ToDecimal(0.00)))
+                        {
+                           HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Balance $0.00</a></div>";
+                        }
+                        else 
+                        {
+                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Tiene Balance</a></div>";
+                        }
                     }
                     else
                     {
-                        if(balance.Equals(0.00) && status == 5)
+                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
                         {
                             
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio </a>";
                             HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Balance $0.00</a></div>";
                         }
-                        else if(balance.Equals(0.00) && status < 5)
+                        else if(balance.Equals(Convert.ToDecimal(0.00)) && status < 5)
                         {
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Balance $0.00</a></div>";
                         }
-                        else if (!balance.Equals(0.00) && status == 5)
+                        else if (!balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
                         {
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Tiene Balance</a></div>";

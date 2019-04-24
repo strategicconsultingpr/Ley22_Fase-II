@@ -30,6 +30,33 @@ public partial class administrador_charlas_grupales {
     protected global::System.Web.UI.WebControls.HiddenField H_Id_CharlaGrupal;
     
     /// <summary>
+    /// H_Id_Participante control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField H_Id_Participante;
+    
+    /// <summary>
+    /// H_Id_CasoCriminal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField H_Id_CasoCriminal;
+    
+    /// <summary>
+    /// BtnPrint control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnPrint;
+    
+    /// <summary>
     /// HNroCita control.
     /// </summary>
     /// <remarks>

@@ -168,6 +168,7 @@ namespace Ley22_WebApp_V2
                 string HreAdicionar = string.Empty;
                 string HrefAsistio = string.Empty;
                 string HrefEstatus = string.Empty;
+                string HrefPrint = string.Empty;
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {   
@@ -175,55 +176,68 @@ namespace Ley22_WebApp_V2
                     var cargos = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal == orden).Select(a => a.Cargos).SingleOrDefault();
                     var pagos = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal == orden).Select(a => a.Pagos).SingleOrDefault();
 
+                    var activa = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal == orden).Select(a => a.Activa).SingleOrDefault();
+
                     var balance = cargos - pagos;
 
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
-                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','" + c.Id_Participante+"')\" >Eliminar</a>";
+                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','" + c.Id_Participante+ "')\" >Eliminar</a>";
                     
                     if(c.Asistio == 0)
                     {
-                        HrefAsistio = "<a href=\"#\"  id=\"asistioID\" onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
-                        if (balance.Equals(Convert.ToDecimal(0.00)))
-                        {
-                           HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Balance $0.00</a></div>";
-                        }
-                        else 
-                        {
-                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Tiene Balance</a></div>";
-                        }
+                        HrefAsistio = "<a href=\"#\"  id=\"asistioID\" onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #FF5733\">Asistio</a>";
+                        //if (balance.Equals(Convert.ToDecimal(0.00)))
+                        //{
+                        //   HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-6\"><a>$0.00</a></div></div></div>";
+                        //}
+                        //else 
+                        //{
+                            HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
+                      //  }
                     }
                     else
                     {
-                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
+                        if((balance.Equals(Convert.ToDecimal(0.00)) || !balance.Equals(Convert.ToDecimal(0.00))) && status == 1)
                         {
                             
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio </a>";
-                            HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Balance $0.00</a></div>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio </a>";
+                            if (activa == 1)
+                            {
+                                HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")'<span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                            }
+                            else
+                            {
+                                HrefPrint = "";
+                            }
+                                HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
+                            
                         }
                         else if(balance.Equals(Convert.ToDecimal(0.00)) && status < 5)
                         {
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
-                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Balance $0.00</a></div>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$0.00</a></div></div></div>";
                         }
                         else if (!balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
                         {
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
-                            HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Tiene Balance</a></div>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance+"</a></div></div></div>";
                         }
                         else
                         {
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
-                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Tiene Balance</a></div>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
                         }
 
                     }
                     
-                    Parti += "<div class=\"col-md-4\"> <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> </div> <div class=\"col-md-4\">" + HrefRemover + "  -  " + HrefAsistio +"</div> "+ HrefEstatus;
+                    Parti += "<div class=\"col-md-4\">" + HrefPrint+ "<label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> </div> <div class=\"col-md-4\" style=\"text-align:center\">" + HrefRemover + "  -  " + HrefAsistio +"</div> "+ HrefEstatus;
+                    HrefPrint = "";
                 }
 
                 
                 HreAdicionar = "";
+                
 
                 mydata.Participantes = Parti;
                 mydata.AdcionarParticipante = HreAdicionar;

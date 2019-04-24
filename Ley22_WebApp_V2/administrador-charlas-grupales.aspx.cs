@@ -481,7 +481,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         var CasosParticipantes = dsLey22.ParticipantesPorCharlas.Where(r => r.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(p => p.Id_OrdenJudicial);
         var Casos = dsLey22.CasoCriminals.Where(r => CasosParticipantes.Contains(r.Id_CasoCriminal)).ToList();
-
+        string mensaje = string.Empty;
         foreach (var item in Casos)
         {
             var asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
@@ -500,65 +500,90 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 var fechaInical = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Min();
                 var fechaFinal = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Max();
 
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
-                {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
-                }
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+                if (!File.Exists(PathNameDocumento))
+                {
+                    if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                    {
+                        Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                    }
 
-                // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
+                    string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
 
-                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(),DdlAdiestrador.SelectedItem.Text,DdlSupervisor.SelectedItem.Text);
+                    // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
-                PdfPageSize pageSize = PdfPageSize.Letter;
+                    string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
 
-                PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
+                    PdfPageSize pageSize = PdfPageSize.Letter;
 
-                int webPageWidth = 850;
-                int webPageHeight = 0;
+                    PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
 
-                HtmlToPdf converter = new HtmlToPdf();
+                    int webPageWidth = 850;
+                    int webPageHeight = 0;
 
-                converter.Options.PdfPageSize = pageSize;
-                converter.Options.PdfPageOrientation = pdfOrientation;
-                converter.Options.WebPageWidth = webPageWidth;
-                converter.Options.WebPageHeight = webPageHeight;
+                    HtmlToPdf converter = new HtmlToPdf();
 
-                PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
+                    converter.Options.PdfPageSize = pageSize;
+                    converter.Options.PdfPageOrientation = pdfOrientation;
+                    converter.Options.WebPageWidth = webPageWidth;
+                    converter.Options.WebPageHeight = webPageHeight;
 
-                doc.Save(PathNameDocumento);
+                    PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
 
-                doc.Close();
+                    doc.Save(PathNameDocumento);
 
-                //HttpWebRequest req = HttpWebRequest.Create(Server.MapPath("~/administrador-charlas-grupales.aspx")) as HttpWebRequest;
+                    doc.Close();
 
-                //downloadfiles(PathNameDocumento);
-                //Response.Clear();
-                //Response.ClearHeaders();
-                //Response.ClearContent();
-                //Response.ContentType = "application/octet-stream";
-                //Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
-                //Response.TransmitFile(PathNameDocumento);
-                //Response.Flush();
+                    mensaje += "Certificado para "+Nombre + " " + Apellido + " fue generado. <br/>";
+                    
+                }
+               
+                
             }
 
         }
 
+        if(mensaje != string.Empty)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Certificado", "sweetAlert('Certificado','" + mensaje + "','success')", true);
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Certificado", "sweetAlert('Certificado','No se generó ningún certificado para este grupo','error')", true);
+        }
+
     }
 
-    private void downloadfiles(string filename)
+    protected void downloadfiles(object sender, EventArgs e)
     {
-        Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Response.ClearContent();
-        Response.Clear();
-        Response.ContentType = "application/octet-stream";
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
-        Response.TransmitFile(filename);
+       
+        string participante = H_Id_Participante.Value;
+        int Id = Convert.ToInt32(participante);
 
-        Response.Flush();
+        string caso = H_Id_CasoCriminal.Value;
+        int Id_Caso = Convert.ToInt32(caso);
 
+        int Programa = Convert.ToInt32(DdlCentro.SelectedValue.ToString());
+
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_Caso + "/Certificaciones/Certificado_" + Id_Caso + ".pdf";
+
+        if (File.Exists(PathNameDocumento))
+        {
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+            Response.TransmitFile(PathNameDocumento);
+
+            Response.End();
+        }
+        else
+        {
+            string mensaje = "El archivo seleccionado no existe";
+            ScriptManager.RegisterClientScriptBlock(BtnPrint, BtnPrint.GetType(), "No Existe Archivo", "sweetAlert('Error','" + mensaje + "','error')", true);
+        }
     }
 
     protected void BtnModificarCharla_2(object sender, EventArgs e)

@@ -6,6 +6,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <input id="Id_CharlaGrupal" name="Id_CharlaGrupal" type="hidden" runat="server" />
             <asp:HiddenField ID="H_Id_CharlaGrupal" runat="server" />
+    <asp:HiddenField ID="H_Id_Participante" runat="server" />
+    <asp:HiddenField ID="H_Id_CasoCriminal" runat="server" />
+    <div style="display:none"><asp:Button runat="server" ID="BtnPrint" Text="" OnClick="downloadfiles" CausesValidation="false"/></div>
+    
 
     <!-- Modal Crear Excepcion -->
      
@@ -87,9 +91,18 @@
                             <p><strong>Asistencia</strong></p>
                         </div>
                         <div class="col-md-4" style="text-align:center">
-                            <p><strong>Estatus</strong></p>
+                            <div class="row">
+                            <div class="col-md-4">
+                            <strong>Charlas</strong>
+                            </div>
+                            <div class="col-md-2">
+                            <strong>|</strong>
+                            </div>   
+                            <div class="col-md-4">
+                            <strong>Balance</strong>
+                            </div>
+                            </div>
                         </div>
-                        
                                         
                     </div>
                     <div class="row" id="Participantes">
@@ -1038,13 +1051,19 @@
              
              swal({
                  title: titulo,
-                 text: texto,
+                 html: texto,
                  icon: icono
              }
              );
 
              
              $('#modal-Info-Charla').modal({ show: true });
+        }
+
+        function imprimirCertificado(IdParticipante, IdCasoCriminal) {
+            document.getElementById("<%=H_Id_Participante.ClientID %>").value = IdParticipante;
+            document.getElementById("<%=H_Id_CasoCriminal.ClientID %>").value = IdCasoCriminal;
+            document.getElementById("<%=BtnPrint.ClientID %>").click();
         }
 
     </script>

@@ -79,16 +79,21 @@
                             <a visible="false" data-dismiss="modal" href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-certificados" data-whatever="@getbootstrap" runat="server" id="lnkCertificados" >Generar Certificados</a>
                         </div>
                     </div>
-                    <div class="row pl-4 pr-4">
-                        <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4" style="text-align:center">
                             <p><strong>Participantes</strong></p>
-                            <div id="Participantes"></div>
-
                         </div>
-
-                        <div class="col-md-6">
-                             <div id="AdcionarParticipante"></div>
-                        </div>                       
+                        <div class="col-md-4" style="text-align:center">
+                            <p><strong>Asistencia</strong></p>
+                        </div>
+                        <div class="col-md-4" style="text-align:center">
+                            <p><strong>Estatus</strong></p>
+                        </div>
+                        
+                                        
+                    </div>
+                    <div class="row" id="Participantes">
+                         
                     </div>
 
                 </div>

@@ -167,6 +167,7 @@ namespace Ley22_WebApp_V2
                 string HrefRemover = string.Empty;
                 string HreAdicionar = string.Empty;
                 string HrefAsistio = string.Empty;
+                string HrefEstatus = string.Empty;
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {   
@@ -178,27 +179,40 @@ namespace Ley22_WebApp_V2
 
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
-                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','"+ c.Id_Participante+"')\" >Eliminar</a>";
+                    HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante','" + c.Id_Participante+"')\" >Eliminar</a>";
                     
                     if(c.Asistio == 0)
                     {
                         HrefAsistio = "<a href=\"#\"  id=\"asistioID\" onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >Asistio</a>";
+                        
                     }
                     else
                     {
                         if(balance.Equals(0.00) && status == 5)
                         {
                             
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio  <span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio </a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Balance $0.00</a></div>";
+                        }
+                        else if(balance.Equals(0.00) && status < 5)
+                        {
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Balance $0.00</a></div>";
+                        }
+                        else if (!balance.Equals(0.00) && status == 5)
+                        {
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><a> Completo Charlas - Tiene Balance</a></div>";
                         }
                         else
                         {
-                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio  <span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                            HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" >No Asistio</a>";
+                            HrefEstatus = "<div class=\"col-md-4\"><a> Debe Charlas - Tiene Balance</a></div>";
                         }
-                        
+
                     }
                     
-                    Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "  -  " + HrefAsistio +"<br> ";
+                    Parti += "<div class=\"col-md-4\"> <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> </div> <div class=\"col-md-4\">" + HrefRemover + "  -  " + HrefAsistio +"</div> "+ HrefEstatus;
                 }
 
                 

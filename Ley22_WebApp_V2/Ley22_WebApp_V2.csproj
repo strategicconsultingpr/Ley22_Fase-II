@@ -235,6 +235,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Certificado.html" />
+    <Content Include="Certificados_Participante.aspx" />
     <Content Include="Dashboard-Usuarios.aspx" />
     <Content Include="DocumentosPorParticipantes\61\649373\1-Ley22-ToDo.txt" />
     <Content Include="EmailCitaParticipante.html" />
@@ -696,6 +697,13 @@
     </Compile>
     <Compile Include="cargar-documentos.aspx.designer.cs">
       <DependentUpon>cargar-documentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Certificados_Participante.aspx.cs">
+      <DependentUpon>Certificados_Participante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Certificados_Participante.aspx.designer.cs">
+      <DependentUpon>Certificados_Participante.aspx</DependentUpon>
     </Compile>
     <Compile Include="charlas-grupales.aspx.cs">
       <DependentUpon>charlas-grupales.aspx</DependentUpon>

@@ -33,9 +33,6 @@
 
                     </asp:GridView>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -55,7 +52,6 @@
                 <div class="modal-body">
                     <asp:GridView ID="GVListaDeCasos" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False">
                         <Columns>
-
                             <asp:TemplateField HeaderText="Casos">
                                 <ItemTemplate>
                                    <asp:LinkButton ItemStyle-HorizontalAlign="Right" ID="lnkCaso" runat="server" Text='<%# Bind("NumeroCasoCriminal") %>'  OnClick="lnkCasoCriminal_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_CasoCriminal") %>'></asp:LinkButton>
@@ -67,7 +63,6 @@
                             <asp:BoundField DataField="DE_Programa" HeaderText="Programa" HeaderStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="Estatus" HeaderText="Estatus" HeaderStyle-HorizontalAlign="Center" />
                         </Columns>
-
                     </asp:GridView>
                 </div>
             </div>
@@ -305,13 +300,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="certificados.aspx">
+                                                                <a href="Certificados_Participante.aspx">
                                                                     <span class="fa-stack fa-3x">
                                                                         <img src="../images/cerrar-caso.png" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="certificados.aspx">Certificados</a></h4>
+                                                            <h4 class="card-title"><a href="Certificados_Participante.aspx">Certificados</a></h4>
                                                         </div>
                                                     </div>
 
@@ -417,16 +412,15 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="certificados.aspx">
+                                                                <a href="Certificados_Participante.aspx">
                                                                     <span class="fa-stack fa-3x">
                                                                         <img src="../images/cerrar-caso.png" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="certificados.aspx">Certificados</a></h4>
+                                                            <h4 class="card-title"><a href="Certificados_Participante.aspx">Certificados</a></h4>
                                                         </div>
                                                     </div>
-
                                                 </div>   
 
                                                 <!-- col-4 -->

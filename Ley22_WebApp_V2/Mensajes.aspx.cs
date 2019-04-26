@@ -18,6 +18,7 @@ public partial class Mensajes : System.Web.UI.Page
         {
 
             LitMensaje.Text = Session["MensajeError"].ToString();
+            Redirect.Attributes["href"] = Session["Redirect"].ToString();
             int TipodeAlerta = (int)Session["TipodeAlerta"];
             string TipoAlertaCss=string.Empty;
             switch (TipodeAlerta)

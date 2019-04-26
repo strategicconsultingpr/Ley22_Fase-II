@@ -45,6 +45,7 @@ public partial class balance_pago : System.Web.UI.Page
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
             Response.Redirect("Mensajes.aspx", false);
             return;
         }

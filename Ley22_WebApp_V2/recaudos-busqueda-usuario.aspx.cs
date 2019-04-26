@@ -19,7 +19,10 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
     {
         if (Session["User"] == null)
         {
-            Response.Redirect("~/Account/Login.aspx", false);
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
         if (!Page.IsPostBack)

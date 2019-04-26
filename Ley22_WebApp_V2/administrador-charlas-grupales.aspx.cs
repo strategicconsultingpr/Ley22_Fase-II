@@ -27,7 +27,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor ingrese al sistema";
-            Response.Redirect("Account/Login.aspx", false);
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
         
@@ -36,9 +37,10 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         {
             if (Session["User"] == null)
             {
-                Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+                Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
                 Session["MensajeError"] = "Por favor ingrese al sistema";
-                Response.Redirect("Account/Login.aspx", false);
+                Session["Redirect"] = "Account/Login.aspx";
+                Response.Redirect("Mensajes.aspx", false);
                 return;
             }
             ApplicationDbContext context = new ApplicationDbContext();
@@ -314,7 +316,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
     void AsignatCharlaPordia(int i, DateTime Fecha, List<Literal> LitContCelda, List<ListarCharlasCalendario_Result> ListarCharlasCalendario)
     {
-
+        ExistingUser = (ApplicationUser)Session["User"];
+        userId = ExistingUser.Id;
 
         try
         {
@@ -338,27 +341,27 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                     //{
                         if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
                         {
-                            LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','"+ resultCharla[0].Id_TipoCharla.ToString() + "','"+ resultCharla[0].Id_NiveldeCharla.ToString() + "','"+ resultCharla[0].NrodeParticipantes.ToString() + "','"+ resultCharla[0].NumeroCharla.ToString() + "')\"   data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','"+userId+"'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','"+ resultCharla[0].Id_TipoCharla.ToString() + "','"+ resultCharla[0].Id_NiveldeCharla.ToString() + "','"+ resultCharla[0].NrodeParticipantes.ToString() + "','"+ resultCharla[0].NumeroCharla.ToString() + "')\"   data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if(diaActual.NumeroCharla == 1)
                         {
-                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 2)
                         {
-                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 3)
                         {
-                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 4)
                         {
-                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 5)
                         {
-                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                     //}
                     //else

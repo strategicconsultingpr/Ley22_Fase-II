@@ -28,7 +28,16 @@ namespace Ley22_WebApp_V2
             {
                 Session["TipodeAlerta"] = ConstTipoAlerta.Info;
                 Session["MensajeError"] = "Por favor seleccione un participante";
-                Response.Redirect("Entrada.aspx", false);
+                Session["Redirect"] = "Entrada.aspx";
+                Response.Redirect("Mensajes.aspx", false);
+                return;
+            }
+            if (Session["User"] == null)
+            {
+                Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+                Session["MensajeError"] = "Por favor ingrese al sistema";
+                Session["Redirect"] = "Account/Login.aspx";
+                Response.Redirect("Mensajes.aspx", false);
                 return;
             }
             ExistingUser = (ApplicationUser)Session["User"];

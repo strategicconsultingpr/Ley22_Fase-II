@@ -17,13 +17,13 @@ public partial class Entrada : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        /* Session["Id_Participante"] = null;
-         Session["Id_Participante"] = null;
-         Session["NombreParticipante"] = null;
-         Session["DataParticipante"] = null;  */
+        
         if (Session["User"] == null)
         {
-            Response.Redirect("~/Account/Login.aspx", false);
+            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
         if (!Page.IsPostBack)

@@ -25,9 +25,10 @@ public partial class trabajor_excepciones : System.Web.UI.Page
         //ClientScript.RegisterOnSubmitStatement(this.GetType(), "confirm", "return confirm('" + alerta + "');");
         if (Session["User"] == null)
         {
-            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
             Session["MensajeError"] = "Por favor ingrese al sistema";
-            Response.Redirect("Account/Login.aspx", false);
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
 

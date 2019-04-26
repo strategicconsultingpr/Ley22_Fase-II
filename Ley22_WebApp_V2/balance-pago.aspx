@@ -80,9 +80,10 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         
                     </ul>
 
-                    <p class="ml-3">
-                        P.O Box 600000. Bayamon PR 8989999. Contactos 999999999
-              www.assmca.pr.gov ACUSE
+                    <p class="ml-3" style="text-align:center">
+                        Carr.  No. 2 Km 8.2, Bo. Juan Sánchez, Bayamón, PR 00960 <br />	PO BOX 607087 Bayamón, PR  00960-7087 <br />
+                        Contacto: (787) 763-7575	Línea PAS: 1-800-981-0023	www.assmca.pr.gov
+
                     </p>
 
                 </div>
@@ -160,7 +161,8 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                             <div class="col">
 
                                 <label for="fecha-pago">Cantidad</label>
-                                <asp:TextBox ID="TxtCantidad" runat="server" class="form-control" placeholder="Ej. 200" MaxLength="10"></asp:TextBox>
+                                <asp:TextBox ID="TxtCantidad" runat="server" class="form-control" placeholder="Ej. 100.00" MaxLength="10"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="TxtCantidad" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtCantidad" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
 
@@ -209,7 +211,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
+                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="return confirm('Los datos del pago estan correctos?');" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>

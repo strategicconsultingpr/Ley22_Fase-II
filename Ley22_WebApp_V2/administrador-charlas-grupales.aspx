@@ -974,7 +974,7 @@
                                 $('#modal-Info-Charla').modal({ show: true });
                             }
 
-                            function changeDivContent(Id_CharlaGrupal) {
+                            function changeDivContent(Id_CharlaGrupal, userId) {
 
                                
 
@@ -985,7 +985,7 @@
                           //var Id_Participante = <%=Session["Id_Participante"].ToString()%>; 
                          //  var NombreParticipante = '<%=Session["NombreParticipante"].ToString()%>';
 
-                           var ajax_data = '{Id_CharlaGrupal:"'  + Id_CharlaGrupal + '" }'
+                           var ajax_data = '{Id_CharlaGrupal:"'  + Id_CharlaGrupal + '", userId:"' + userId + '"}'
 
 
                            $.ajax({

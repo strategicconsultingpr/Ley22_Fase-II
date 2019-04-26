@@ -6,6 +6,10 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Globalization;
 using Ley22_WebApp_V2.Old_App_Code;
+using Ley22_WebApp_V2.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace Ley22_WebApp_V2
 {
     public class DataCharla
@@ -39,6 +43,8 @@ namespace Ley22_WebApp_V2
     public class WSCalendarioGrupal : System.Web.Services.WebService
     {
         Ley22Entities dsLey22 = new Ley22Entities();
+        ApplicationDbContext context = new ApplicationDbContext();
+        ApplicationUser ExistingUser = new ApplicationUser();
 
         public WSCalendarioGrupal()
         {
@@ -137,7 +143,7 @@ namespace Ley22_WebApp_V2
 
 
         [WebMethod]
-        public DataCharla BindModalParticipantes(int Id_CharlaGrupal)
+        public DataCharla BindModalParticipantes(int Id_CharlaGrupal, string userId)
         //  public DataCharla BindModalAsistencia()
 
         {
@@ -148,6 +154,12 @@ namespace Ley22_WebApp_V2
             DataCharla mydata = new DataCharla();
 
             CultureInfo ci = new CultureInfo("en-US");
+
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+           
+
             using (Ley22Entities mylib = new Ley22Entities())
 
             {
@@ -198,11 +210,11 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
+                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 1)
                         {
                            
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio </a>";
-                            if (activa == 1)
+                            if (activa == 1 && (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor")))
                             {
                                 HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")'<span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
                             }

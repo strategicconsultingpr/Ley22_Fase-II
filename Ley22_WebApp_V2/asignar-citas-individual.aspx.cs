@@ -40,6 +40,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
             Response.Redirect("Mensajes.aspx", false);
             return;
         }

@@ -19,6 +19,14 @@ namespace Ley22_WebApp_V2
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["User"] == null)
+            {
+                Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+                Session["MensajeError"] = "Por favor ingrese al sistema";
+                Session["Redirect"] = "Account/Login.aspx";
+                Response.Redirect("Mensajes.aspx", false);
+                return;
+            }
             ExistingUser = (ApplicationUser)Session["User"];
 
             if (!Page.IsPostBack)

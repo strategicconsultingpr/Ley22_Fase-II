@@ -16,10 +16,19 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["User"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
         if (Session["SA_Persona"] == null)
         {
-            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
             Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
             Response.Redirect("Mensajes.aspx", false);
             return;
         }

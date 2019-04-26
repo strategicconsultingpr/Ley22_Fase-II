@@ -14,19 +14,20 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
     Ley22Entities dsLey22 = new Ley22Entities();
     protected void Page_Load(object sender, EventArgs e)
     {
-        // valida que se haya buscado el usuario
-        // -----------------------------------------------------------------------------
-        //if (Session["DataParticipante"] == null)
-        //{
-        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
-        //    Session["MensajeError"] = "Por favor seleccione el participante";
-        //    Response.Redirect("Mensajes.aspx", false);
-        //    return;
-        //}
+        if (Request.UrlReferrer == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
+
         if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
             Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
             Response.Redirect("Mensajes.aspx", false);
             return;
         }

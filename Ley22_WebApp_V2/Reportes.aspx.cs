@@ -21,9 +21,13 @@ namespace Ley22_WebApp_V2
 
             if (Session["User"] == null)
             {
-                Response.Redirect("~/Account/Login.aspx", false);
+                Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+                Session["MensajeError"] = "Por favor ingrese al sistema";
+                Session["Redirect"] = "Account/Login.aspx";
+                Response.Redirect("Mensajes.aspx", false);
                 return;
             }
+
             if (!Page.IsPostBack)
             {
 

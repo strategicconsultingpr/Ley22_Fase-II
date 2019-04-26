@@ -93,15 +93,6 @@ public partial class recaudos_resultados_busqueda {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
-    /// TxtIdentificacion control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtIdentificacion;
-    
-    /// <summary>
     /// TxtFechaNacimiento control.
     /// </summary>
     /// <remarks>
@@ -129,13 +120,31 @@ public partial class recaudos_resultados_busqueda {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
     
     /// <summary>
-    /// TxtNombreyApellido control.
+    /// TxtNombre control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtNombreyApellido;
+    protected global::System.Web.UI.WebControls.TextBox TxtNombre;
+    
+    /// <summary>
+    /// TxtApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtApellido;
+    
+    /// <summary>
+    /// TxtSegundoApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtSegundoApellido;
     
     /// <summary>
     /// valValidateTextBox control.

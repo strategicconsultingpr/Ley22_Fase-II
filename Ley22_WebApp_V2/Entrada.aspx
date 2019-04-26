@@ -32,19 +32,33 @@
                                     </label>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div> 
                 <div class="row pb-4">
-                    <div class="col-md-2">
+                
+                   <%-- <div class="col-md-2">
                         <strong>Buscar Por</strong><br>
                         <small>Escribe un parámetro para tu búsqueda</small>
-                    </div>
-                    <div class="col-md-10">
+                    </div>--%>
+                    <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3"></div>
+                            <div class="col-sm-6 text-center">
+                            <strong>Buscar Por</strong><br>
+                            <small>Escribe un parámetro para tu búsqueda</small>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-md-6 text-center">
+                            <br />
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 offset-sm-1">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Seguro Social</label>
 
@@ -53,13 +67,32 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <%--<div class="col-md-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Identificación</label>
                                     <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control" placeholder="Ej. 22222"></asp:TextBox>
                                 </div>
+                            </div>--%>
+                           
+                            <div class="col-xs-10">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <asp:TextBox ID="TxtNombre" runat="server" class="form-control" placeholder="Ej. Luis"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="col-md-3">
+                             <div class="col-xs-10">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Apellido</label>
+                                    <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Segundo Apellido</label>
+                                    <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
+                                </div>
+                            </div>
+                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Fecha de Nacimiento</label>
                                     <asp:TextBox ID="TxtFechaNacimiento" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" MaxLength="10" ValidationGroup="ValGroup1"></asp:TextBox>
@@ -67,12 +100,6 @@
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaNacimiento" ForeColor="Red" Display="Dynamic" ValidationGroup="ValGroup1"></asp:RegularExpressionValidator>
 
 
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Nombre y Apellido</label>
-                                    <asp:TextBox ID="TxtNombreyApellido" runat="server" class="form-control" placeholder="Ej. John Doe"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -121,8 +148,12 @@
                 </div>--%>
 
                 <div class="row">
-                    <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
-                    <div class="col-md-10 offset-md-2">
+                    <div style="margin-left: auto; margin-right: auto; text-align:center">
+                        <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
+                    </div>
+                    
+                    
+                    <div class="col-md-10 offset-md-1">
 
                      
 
@@ -133,9 +164,11 @@
 
                             function CheckTextBoxes(sender, args) {
                                 var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
-                                var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
+                                //var TxtIdentificacion = document.getElementById("TxtIdentificacion.ClientID %>").value;
                                 var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
-                                var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                                var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
+                                var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
+                                var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
                                 var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
                                 //
 <%--                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
@@ -144,18 +177,22 @@
                             var TxtEpisodio = document.getElementById("<%=TxtEpisodio.ClientID %>").value;--%>
 
                                 if (TxtNroSeguroSocial == "" &&
-                                    TxtIdentificacion == "" &&
+                                    //TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == "" && DdlPrograma != "0")
+                                    TxtNombre == "" &&
+                                    TxtApellido == "" &&
+                                    TxtSegundoApellido == "" && DdlPrograma != "0")
                                 {
                                     
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda";                             
                                     return false;  
                                 }
                                 else if(TxtNroSeguroSocial == "" &&
-                                    TxtIdentificacion == "" &&
+                                    //TxtIdentificacion == "" &&
                                     TxtFechaNacimiento == "" &&
-                                    TxtNombreyApellido == "" && DdlPrograma == "0")
+                                    TxtNombre == "" &&
+                                    TxtApellido == "" &&
+                                    TxtSegundoApellido == "" && DdlPrograma == "0")
                                 {
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda y seleccione un programa";                             
                                     return false;

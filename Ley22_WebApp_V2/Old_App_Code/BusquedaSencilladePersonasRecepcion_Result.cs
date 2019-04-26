@@ -13,16 +13,16 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
     public partial class BusquedaSencilladePersonasRecepcion_Result
     {
-        public int PK_Persona { get; set; }
+        public Nullable<int> PK_Persona { get; set; }
         public string NR_SeguroSocial { get; set; }
-        public byte FK_Sexo { get; set; }
+        public Nullable<byte> FK_Sexo { get; set; }
         public string AP_Primero { get; set; }
         public string AP_Segundo { get; set; }
         public string NB_Primero { get; set; }
         public string NB_Segundo { get; set; }
-        public System.DateTime FE_Nacimiento { get; set; }
-        public byte FK_Veterano { get; set; }
-        public byte FK_GrupoEtnico { get; set; }
+        public Nullable<System.DateTime> FE_Nacimiento { get; set; }
+        public Nullable<byte> FK_Veterano { get; set; }
+        public Nullable<byte> FK_GrupoEtnico { get; set; }
         public string Identificacion { get; set; }
     }
 }

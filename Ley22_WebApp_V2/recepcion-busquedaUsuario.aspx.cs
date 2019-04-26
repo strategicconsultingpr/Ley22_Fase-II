@@ -10,6 +10,8 @@ using System.Data.Sql;
 using Ley22_WebApp_V2.Old_App_Code;
 public partial class recepcion_busquedaUsuario : System.Web.UI.Page
 {
+    SEPSEntities1 dsPerfil = new SEPSEntities1();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -18,6 +20,16 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Response.Redirect("Entrada.aspx",false);
             return;
         }
+
+        if (Session["SA_Persona"] != null)
+        {
+            Session["Id_Participante"] = null;
+            Session["NombreParticipante"] = null;
+            Session["NombreParticipante2"] = null;
+            Session["SA_Persona"] = null;
+            Session["Expediente"] = null;
+        }
+            
 
             if (!Page.IsPostBack)
         {
@@ -29,14 +41,22 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             if (Session["TxtNroSeguroSocial"].ToString() != "")
                 strParametroBusqueda.Append( "Número de seguro social =" + Session["TxtNroSeguroSocial"].ToString() + ", ");
 
-            if (Session["TxtIdentificacion"].ToString() != "")
-                strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
+            //if (Session["TxtIdentificacion"].ToString() != "")
+            //    strParametroBusqueda.Append("Identificación=" + Session["TxtIdentificacion"].ToString() + ",  ");
 
             if (Session["TxtFechaNacimiento"].ToString() != "")
                 strParametroBusqueda.Append("Fecha de nacimiento =" + Session["TxtFechaNacimiento"].ToString() + ", ");
 
-            if (Session["TxtNombreyApellido"].ToString() != "")
-                strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString() );
+            if (Session["TxtNombre"].ToString() != "")
+                strParametroBusqueda.Append("Nombre =" + Session["TxtNombre"].ToString());
+
+            if (Session["TxtApellido"].ToString() != "")
+                strParametroBusqueda.Append("Apellido =" + Session["TxtApellido"].ToString());
+
+            if (Session["TxtSegundoApellido"].ToString() != "")
+                strParametroBusqueda.Append("Segundo Apellido =" + Session["TxtSegundoApellido"].ToString());
+            //if (Session["TxtNombreyApellido"].ToString() != "")
+            //    strParametroBusqueda.Append("Nombre y Apellido =" + Session["TxtNombreyApellido"].ToString() );
 
             LitParametrodeBusqueda.Text = strParametroBusqueda.ToString() ;
 
@@ -46,9 +66,9 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //
 
             TxtNroSeguroSocial.Attributes["placeholder"] = "Ej. 999-99-9999";
-            TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
+            //TxtIdentificacion.Attributes["placeholder"] = "Ej. 22222";
             TxtFechaNacimiento.Attributes["placeholder"] = "Ej. mm/dd/yyyy";
-            TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
+           // TxtNombreyApellido.Attributes["placeholder"] = "Ej. John Doe";
         }
 
     }
@@ -56,6 +76,8 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
     int  BindGridView( int pagina)
     {
         DateTime FechaNac;
+        short idPrograma = Convert.ToInt16(Session["Programa"]);
+
         if (Session["TxtFechaNacimiento"].ToString() == "")
             FechaNac = Convert.ToDateTime("01-01-1900");
         else
@@ -69,14 +91,16 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //                                         FechaNac,
             //                                         Session["TxtNombreyApellido"].ToString()).ToList ()
             //                                         ;
-
+            
             List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
-                                                                     Session["TxtNombreyApellido"].ToString()).ToList();
-                                                     
+                                                                     Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(), Session["TxtSegundoApellido"].ToString(),
+                                                                     idPrograma).ToList();
 
+            //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+            //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
             LitCantidadUsuarios.Text = Resul.Count.ToString();
- 
+                  
             GridView1.PageIndex = pagina - 1; 
             GridView1.DataSource = Resul;
             GridView1.DataBind();
@@ -123,16 +147,21 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
            Session["txtDocumentos"] = RBLDocumentos.SelectedItem.Text;
            */
         if (!(TxtNroSeguroSocial.Text.Trim() == "" &&
-            TxtIdentificacion.Text.Trim() == "" &&
+            //TxtIdentificacion.Text.Trim() == "" &&
             TxtFechaNacimiento.Text.Trim() == "" &&
-            TxtNombreyApellido.Text.Trim() == ""))
+            TxtNombre.Text.Trim() == "" &&
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == ""))
         {
 
 
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();
-            Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
+            //Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombreyApellido.Text.Trim();
+            Session["TxtNombre"] = TxtNombre.Text.Trim();
+            Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
         }
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);
@@ -224,7 +253,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             };
 
             Session["Id_Participante"] = sa_persona.PK_Persona;
-            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero;
+            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero + " " + sa_persona.AP_Segundo;
             Session["NombreParticipante2"] = 9;
             Session["SA_Persona"] = sa_persona;
             Session["Expediente"] = expediente;

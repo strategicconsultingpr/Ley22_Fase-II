@@ -55,64 +55,42 @@
 
 
                         <script type="text/javascript">
-                            var $ele = $('input[name="<%=TxtHoraInicial.UniqueID %>"]');
-                                $ele.ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined /*function (selectedTime) {
-
-
-                                        var re = /([0-9]{1,2}).*:.*([0-9]{2}).*(PM|AM)/i;
-                                        var match = re.exec(selectedTime);
-                                        alert(re.exec(selectedTime));
-                                      //  alert(String(match[3]));
+                             $(document).ready(function () {
+                                            $('input[name="<%=TxtHoraInicial.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined,
+                                                    defaultHr: '10',         
+                                                    defaultMin: '00',
+                                                    defaultAmPm: 'AM'
+                                                });
+                                        });
                                         
-
-                                            var hr = parseInt(match[1]),
-                                                min = parseInt(match[2]),
-                                                tm = String(match[3]).toLowerCase()
-
-                                            if (tm === "am" && hr < 9) {
-
-                                                alert("Error: Time is prior to 9AM");
-                                                $ele.val("");
-                                                return;
-
-                                            } else if (tm === "pm" && (hr > 5 || (hr === 5 && min !== 0))) {
-
-                                                alert("Error: Time is after 5PM");
-                                                $ele.val("");
-                                                return;
-
-                                            }
-
-                                        
-
-                                    } */
-
-                                    
-                                });
+                                        $(document).ready(function () {
+                                            $('input[name="<%=TxtHoraFinal.UniqueID %>"]')
+                                                .ptTimeSelect({
+                                                    containerClass: undefined,
+                                                    containerWidth: undefined,
+                                                    hoursLabel: 'Hora',
+                                                    minutesLabel: 'Minutos',
+                                                    setButtonLabel: 'Seleccionar',
+                                                    popupImage: undefined,
+                                                    onFocusDisplay: true,
+                                                    zIndex: 10000,
+                                                    onBeforeShow: undefined,
+                                                    onClose: undefined
+                                                });
+                                        });
  
-                            $('input[name="<%=TxtHoraFinal.UniqueID %>"]')
-                                .ptTimeSelect({
-                                    containerClass: undefined,
-                                    containerWidth: undefined,
-                                    hoursLabel: 'Hora',
-                                    minutesLabel: 'Minutos',
-                                    setButtonLabel: 'Seleccionar',
-                                    popupImage: undefined,
-                                    onFocusDisplay: true,
-                                    zIndex: 10000,
-                                    onBeforeShow: undefined,
-                                    onClose: undefined
-                                });
+                            
 
                             function checkDate(sender, args) {
                                 if (sender._selectedDate.getDate() != new Date().getDate() && sender._selectedDate < new Date()) {
@@ -850,7 +828,15 @@
         function EliminarCita() {
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;            
         }
-      
+
+      function sweetAlert(titulo,texto,icono) {
+            swal({
+                title: titulo,
+                text: texto,
+                icon: icono
+            }
+            )
+        }
 
     </script>
 

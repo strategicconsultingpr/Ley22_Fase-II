@@ -111,6 +111,9 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=18.4.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>packages\Select.HtmlToPdf.18.4.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="SendGrid, Version=9.10.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>packages\Sendgrid.9.10.0\lib\net452\SendGrid.dll</HintPath>
     </Reference>
@@ -231,6 +234,8 @@
     <Content Include="bin\itextsharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Certificado.html" />
+    <Content Include="Certificados_Participante.aspx" />
     <Content Include="Dashboard-Usuarios.aspx" />
     <Content Include="DocumentosPorParticipantes\61\649373\1-Ley22-ToDo.txt" />
     <Content Include="EmailCitaParticipante.html" />
@@ -362,6 +367,7 @@
     <Content Include="recaudos-busqueda-usuario.aspx" />
     <Content Include="recaudos-resultados-busqueda.aspx" />
     <Content Include="recepcion-busquedaUsuario.aspx" />
+    <Content Include="Reportes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -389,6 +395,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\UIFlujoPerfil.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -691,6 +698,13 @@
     <Compile Include="cargar-documentos.aspx.designer.cs">
       <DependentUpon>cargar-documentos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Certificados_Participante.aspx.cs">
+      <DependentUpon>Certificados_Participante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Certificados_Participante.aspx.designer.cs">
+      <DependentUpon>Certificados_Participante.aspx</DependentUpon>
+    </Compile>
     <Compile Include="charlas-grupales.aspx.cs">
       <DependentUpon>charlas-grupales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -797,6 +811,9 @@
     <Compile Include="Old_App_Code\CharlaGrupal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ConsultarCasosXPersona_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -804,6 +821,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\DetalleCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Documento.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
@@ -816,6 +836,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarBalancedePagos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarCargosCasosCriminales_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarCasosCriminalesActivos_Result.cs">
@@ -836,7 +859,13 @@
     <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarPagosCasosCriminales_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
@@ -911,6 +940,9 @@
     <Compile Include="Old_App_Code\Tribunal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\TS_Excepciones.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\USUARIO_PROGRAMA.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -955,6 +987,13 @@
     </Compile>
     <Compile Include="recepcion-busquedaUsuario.aspx.designer.cs">
       <DependentUpon>recepcion-busquedaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="seleccion-proximo-paso.aspx.cs">
       <DependentUpon>seleccion-proximo-paso.aspx</DependentUpon>
@@ -1140,9 +1179,6 @@
     <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
-    <Compile Include="Old_App_Code\Documento.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
     <Compile Include="Old_App_Code\FormadePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -1153,9 +1189,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
@@ -1219,9 +1252,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\TrabajadorSocial.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\TS_Excepciones.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ModelSeps.Context1.cs">

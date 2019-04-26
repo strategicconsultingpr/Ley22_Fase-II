@@ -21,6 +21,15 @@ public partial class seleccion_proximo_paso {
     protected global::System.Web.UI.WebControls.GridView GVListadeEpisodios;
     
     /// <summary>
+    /// GVListaDeCasos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView GVListaDeCasos;
+    
+    /// <summary>
     /// GVListadeCitas control.
     /// </summary>
     /// <remarks>
@@ -57,13 +66,13 @@ public partial class seleccion_proximo_paso {
     protected global::System.Web.UI.WebControls.Literal Literal1;
     
     /// <summary>
-    /// WUCUsuario control.
+    /// NombreParticipante control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::WUC_WUCUsuario WUCUsuario;
+    protected global::System.Web.UI.WebControls.Literal NombreParticipante;
     
     /// <summary>
     /// NombrePrograma control.
@@ -93,13 +102,22 @@ public partial class seleccion_proximo_paso {
     protected global::System.Web.UI.WebControls.Literal LitIUP;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// LnkBtnEpisodios control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.LinkButton LnkBtnEpisodios;
+    
+    /// <summary>
+    /// LnkBtnCasos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton LnkBtnCasos;
     
     /// <summary>
     /// LitLicencia control.

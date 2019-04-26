@@ -57,13 +57,31 @@ public partial class Entrada {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
-    /// TxtIdentificacion control.
+    /// TxtNombre control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtIdentificacion;
+    protected global::System.Web.UI.WebControls.TextBox TxtNombre;
+    
+    /// <summary>
+    /// TxtApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtApellido;
+    
+    /// <summary>
+    /// TxtSegundoApellido control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtSegundoApellido;
     
     /// <summary>
     /// TxtFechaNacimiento control.
@@ -91,15 +109,6 @@ public partial class Entrada {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-    
-    /// <summary>
-    /// TxtNombreyApellido control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtNombreyApellido;
     
     /// <summary>
     /// label4 control.

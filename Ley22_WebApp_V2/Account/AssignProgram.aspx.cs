@@ -174,10 +174,12 @@ namespace Ley22_WebApp_V2.Account
                 dsLey22.SaveChanges();
 
                 string mensaje = "El programa "+DdlProgramA.SelectedItem.Text+ " se añadió al usuario con email "+ExistingUser.Email+" correctamente.";
-                string script = "window.onload = function(){ alert('";
-                script += mensaje;
-                script += "')};";
-                ClientScript.RegisterStartupScript(this.GetType(), "Programa Registrado", script, true);
+                //string script = "window.onload = function(){ alert('";
+                //script += mensaje;
+                //script += "')};";
+                //ClientScript.RegisterStartupScript(this.GetType(), "Programa Registrado", script, true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Programa Registrado", "sweetAlert('Programa Añadido','"+mensaje+"','success')", true);
+                DdlEmailA.SelectedValue = "0";
 
                 int TotalReg = BindGridView(1);
                 this.FillJumpToList(TotalReg);
@@ -210,10 +212,13 @@ namespace Ley22_WebApp_V2.Account
                 dsLey22.SaveChanges();
 
                 string mensaje = "El programa " + DdlProgramD.SelectedItem.Text + " se removió del usuario con email " + ExistingUser.Email + " correctamente.";
-                string script = "window.onload = function(){ alert('";
-                script += mensaje;
-                script += "')};";
-                ClientScript.RegisterStartupScript(this.GetType(), "Programa Removido", script, true);
+                //string script = "window.onload = function(){ alert('";
+                //script += mensaje;
+                //script += "')};";
+                //ClientScript.RegisterStartupScript(this.GetType(), "Programa Removido", script, true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Programa Removido", "sweetAlert('Programa Removido','" + mensaje + "','success')", true);
+
+                DdlEmailD.SelectedValue = "0";
 
                 int TotalReg = BindGridView(1);
                 this.FillJumpToList(TotalReg);

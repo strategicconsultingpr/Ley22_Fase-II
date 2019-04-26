@@ -60,6 +60,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public DateTime FE_Nacimiento;
         public int FK_Veterano;
         public int FK_GrupoEtnico;
+        public DateTime FE_Edicion;
+        public char TI_Edicion;
 
     }
 }

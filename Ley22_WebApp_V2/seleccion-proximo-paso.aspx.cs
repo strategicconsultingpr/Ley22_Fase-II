@@ -16,10 +16,19 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["User"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
         if (Session["SA_Persona"] == null)
         {
-            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
             Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
             Response.Redirect("Mensajes.aspx", false);
             return;
         }
@@ -33,6 +42,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             LitIUP.Text = du.PK_Persona.ToString();
             LitLicencia.Text = "12345";
             Programa = Convert.ToInt32(Session["Programa"].ToString());
+            NombreParticipante.Text = Session["NombreParticipante"].ToString();
             NombrePrograma.Text = Session["NombrePrograma"].ToString();
             LitExpediente.Text = Session["Expediente"].ToString();
             
@@ -54,6 +64,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
                 LitEstatus.Text = "Cerrado bajo este programa";
             }
             verificarEpisodiosAnteriores(du.PK_Persona);
+            verificarCasosAnteriores(du.PK_Persona);
             ConsultarCharlasPorParticipante(du.PK_Persona);
             verificarCitas(du.PK_Persona);
         }
@@ -78,8 +89,9 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
     {
         var orden = ley22.CasoCriminals.Where(u => u.Id_Participante.Equals(this.du.PK_Persona)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_CasoCriminal);
         var docs = ley22.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
+        var docsFaltante = ley22.Documentos.Where(u => !docs.Contains(u.Id_Documento)).Where(a => a.Importante == 1).Select(p => p.Id_Documento).ToList();
 
-        if((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))
+        if (docsFaltante.Count() < 1)
         {
             return false;
         }
@@ -98,12 +110,32 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             GVListadeEpisodios.DataSource = myresul;
             GVListadeEpisodios.DataBind();
 
-            HyperLink1.Text = myresul.Count().ToString() + " Episodios";
+            LnkBtnEpisodios.Text = myresul.Count().ToString() + " Episodios";
 
             if (myresul.Count > 0)
-                HyperLink1.Enabled = true;
+                LnkBtnEpisodios.Enabled = true;
             else
-                HyperLink1.Enabled = false;
+                LnkBtnEpisodios.Enabled = false;
+
+        }
+
+    }
+
+    void verificarCasosAnteriores(int Pk_Persona)
+    {
+        using (Ley22Entities mylib = new Ley22Entities())
+        {
+            List<ConsultarCasosXPersona_Result> myresul = mylib.ConsultarCasosXPersona(Pk_Persona).ToList();
+
+            GVListaDeCasos.DataSource = myresul;
+            GVListaDeCasos.DataBind();
+
+            LnkBtnCasos.Text = myresul.Count().ToString() + " Casos";
+
+            if (myresul.Count > 0)
+                LnkBtnCasos.Enabled = true;
+            else
+                LnkBtnCasos.Enabled = false;
 
         }
 
@@ -160,6 +192,18 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
         //ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup('" + title + "', '" + episodio_num + "');", true);
         //ScriptManager.RegisterStartupScript(this, this.GetType(), "MyPopup", "$('#MyPopup').modal();", true);
         Response.Redirect("listado_perfiles.aspx?pk_episodio=" + episodio, false);
+    }
+
+    protected void lnkCasoCriminal_Click(object sender, EventArgs e)
+    {
+        LinkButton btn = (LinkButton)(sender);
+        string caso = btn.CommandArgument;
+        int caso_num = Convert.ToInt32(caso);
+
+        //string title = "Episodio = ";
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup('" + title + "', '" + episodio_num + "');", true);
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "MyPopup", "$('#MyPopup').modal();", true);
+        Response.Redirect("OrdenNuevo.aspx?id_caso=" + caso_num, false);
     }
 
 }

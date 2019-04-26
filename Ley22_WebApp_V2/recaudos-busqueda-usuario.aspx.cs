@@ -19,7 +19,10 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
     {
         if (Session["User"] == null)
         {
-            Response.Redirect("~/Account/Login.aspx", false);
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
         if (!Page.IsPostBack)
@@ -39,16 +42,21 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
          Session["txtDocumentos"] = RBLDocumentos.SelectedItem.Text;
          */
         if ((TxtNroSeguroSocial.Text.Trim() == "" &&
-           TxtIdentificacion.Text.Trim() == "" &&
+           //TxtIdentificacion.Text.Trim() == "" &&
            TxtFechaNacimiento.Text.Trim() == "" &&
-           TxtNombreyApellido.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
+           TxtNombre.Text.Trim() == "" &&
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
 
         else
         {
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();
-            Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
+            Session["TxtIdentificacion"] = "";// TxtIdentificacion.Text.Trim();
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombreyApellido.Text.Trim();
+            Session["TxtNombre"] = TxtNombre.Text.Trim();
+            Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim();
 
 
             Response.Redirect("recaudos-resultados-busqueda.aspx", false);

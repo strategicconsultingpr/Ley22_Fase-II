@@ -10,15 +10,14 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TS_Excepciones
+    public partial class ListarCargosCasosCriminales_Result
     {
-        public int Id_Excepciones { get; set; }
-        public string Id_TrabajadorSocial { get; set; }
-        public System.DateTime FechadeSolicitud { get; set; }
-        public System.DateTime FechaInicial { get; set; }
-        public System.DateTime FechaFinal { get; set; }
-        public Nullable<int> FK_Programa { get; set; }
+        public int PK_ControldePago { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Cantidad { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public string FechaCita { get; set; }
+        public string FechaCharla { get; set; }
     }
 }

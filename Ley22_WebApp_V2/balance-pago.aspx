@@ -23,7 +23,9 @@
 
 
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
+    <input id="NumRecibo" name="NumRecibo" type="hidden" runat="server" />
     <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
+    
     <!-- Modal -->
     <div class="modal fade" id="imprimir-recibo-modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document" runat="server" id="panelPDF">
@@ -55,7 +57,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         </div>
                     </div>
 
-
+                    
                     <ul class="list-unstyled ml-3">
                         <li><strong>
                             <div id="NroRecibo"></div>
@@ -75,17 +77,18 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         <li><strong>
                             <div id="NombreCompleto"></div>
                         </strong></li>
-
+                        
                     </ul>
 
-                    <p class="ml-3">
-                        P.O Box 600000. Bayamon PR 8989999. Contactos 999999999
-              www.assmca.pr.gov ACUSE
+                    <p class="ml-3" style="text-align:center">
+                        Carr.  No. 2 Km 8.2, Bo. Juan Sánchez, Bayamón, PR 00960 <br />	PO BOX 607087 Bayamón, PR  00960-7087 <br />
+                        Contacto: (787) 763-7575	Línea PAS: 1-800-981-0023	www.assmca.pr.gov
+
                     </p>
 
                 </div>
                 <div class="modal-footer">
-                    <asp:Button type="button" runat="server" class="btn btn-primary mr-3" Text="Imprimir"/>
+                    <asp:Button type="button" runat="server" class="btn btn-primary mr-3" OnClick="BtnPrint_Click" Text="Imprimir" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -158,9 +161,29 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                             <div class="col">
 
                                 <label for="fecha-pago">Cantidad</label>
-                                <asp:TextBox ID="TxtCantidad" runat="server" class="form-control" placeholder="Ej. 200" MaxLength="10"></asp:TextBox>
+                                <asp:TextBox ID="TxtCantidad" runat="server" class="form-control" placeholder="Ej. 100.00" MaxLength="10"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="TxtCantidad" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtCantidad" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="tipoPago">Tipo de Pago</label>
+                                    <asp:DropDownList ID="DdlDTipoPago" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="0">-Seleccione-</asp:ListItem>
+                                        <asp:ListItem Value="1">Cita Pre-Sentencia</asp:ListItem>
+                                        <asp:ListItem Value="2">Cita Sentencia</asp:ListItem>
+                                        <asp:ListItem Value="3">Charlas Socio Educativas</asp:ListItem>
+                                        <asp:ListItem Value="4">Toxicologia</asp:ListItem>
+                                        <asp:ListItem Value="5">Certificaciones</asp:ListItem>
+                                        <asp:ListItem></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                </div>
 
                             </div>
 
@@ -188,7 +211,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
+                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="return confirm('Los datos del pago estan correctos?');" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -219,7 +242,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                             </div>
                            
                                 <div class="col-md-3">
-                                    <strong><label for="orden">Orden Judicial</label></strong> 
+                                    <strong><label for="orden">Numero Caso Criminal</label></strong> 
 
 
                                           <div class="row">
@@ -245,7 +268,25 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                         <asp:Literal runat="server" ID="LitInfo"></asp:Literal>
 
-                        <asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
+                        <div class="row mb-4 bt pt-4" id="divNav" runat="server">
+                              <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                        <nav>
+                          <ul class="nav">
+                              <li class="nav-item">
+                              <a id="pagar" class="nav-link active" href="#" onclick="Pagar()">Realizar Pago</a>
+                            </li>
+                            <li class="nav-item">
+                              <a id="historial" class="nav-link" href="#" onclick="Historial()">Historial de Pagos</a>
+                            </li>                                                 
+                          </ul>
+                         </nav>
+                            </div>
+                            </div>
+
+
+                        <%--<div id="ControlPagos" visible="false">--%>
+                        <%--<asp:GridView ID="GvControldePagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_ControldePagos" GridLines="None" CellSpacing="-1" OnRowDataBound="GvControldePagos_RowDataBound">
                             <Columns>
                                
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
@@ -254,7 +295,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FormadePago" HeaderText="Forma de Pago" />
                                 <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque">
-                                    <ItemStyle HorizontalAlign="Right" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="FechadelPago" HeaderText="Fecha del Pago" DataFormatString="{0:MM/dd/yyyy hh:mm tt}" />
                                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad Restante (USD)" DataFormatString="{0:0.00}">
@@ -279,7 +320,52 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 </asp:TemplateField>
                                 
                             </Columns>
-                        </asp:GridView>
+                        </asp:GridView>--%>
+                      <%--</div>--%>
+                        <div id="divPagar">
+                            <div class="row mb-4 pt-4">
+                            <div class="col-md-6">
+                                 <asp:Literal runat="server" ID="LitBalance"></asp:Literal>
+                            </div>
+                            <div class="col" style="text-align: right; width: 100%;">
+                                <asp:Button ID="BtnPagar" runat="server" Text="Realizar Pago" CssClass="btn btn-primary mr-3" data-toggle="modal" data-target="#Pagar-modal" CausesValidation="false" OnClientClick="return false"/>
+                            </div>
+                                </div>
+                            <br />
+                        <asp:GridView ID="GvCargos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvPagar_RowDataBound">
+                            <Columns>
+                               
+                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Costo (USD)" DataFormatString="{0:0.00}">
+                                    
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FechaRegistro" HeaderText="Fecha de Registro" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="FechaCita" HeaderText="Fecha de Cita" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="FechaCharla" HeaderText="Fecha de Charla" DataFormatString="{0:MM/dd/yyyy}"/>                               
+                            </Columns>
+                        </asp:GridView>                          
+                        </div>
+                           
+                         <asp:GridView ID="GvPagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvHistorial_RowDataBound" style="visibility:hidden">
+                            <Columns>
+                                <asp:BoundField DataField="NumeroRecibo" HeaderText="Número de Recibo" />
+                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Pago(USD)" DataFormatString="{0:0.00}">
+                                    <%--<ItemStyle HorizontalAlign="Center" />--%>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FormadePago" HeaderText="Metodo de Pago" />
+                                <asp:BoundField DataField="NumerodeCheque" HeaderText="Número de Cheque">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="FechaPago" HeaderText="Fecha de Pago" DataFormatString="{0:MM/dd/yyyy}"/>
+                                <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Empleado" />    
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Literal ID="LitColocarModal" runat="server"></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>  
 
                     </div>
                     <div class="col-lg-1"></div>
@@ -310,8 +396,15 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
     </script>
 
 
-    <script>
-        function changeDivContent(NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
+    <script type="text/javascript">
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
+
+        function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
+            document.getElementById("<%= IdCP.ClientID %>").value = Valor;
+            document.getElementById("<%= NumRecibo.ClientID %>").value = NroRecibo;
+            document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
             document.getElementById("NroRecibo").innerHTML = "Recibo #: " + NroRecibo;
             document.getElementById("Descripcion").innerHTML = "Descripción: " + Descripcion;
 
@@ -345,6 +438,32 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             
 
         };
+
+        function Historial() {     
+            $(".nav").find(".active").removeClass("active");
+            $("#historial").addClass("active");
+            document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'visible';
+            document.getElementById("divPagar").style.display = 'none';
+        }
+
+        
+
+        function Pagar() {
+            $(".nav").find(".active").removeClass("active");
+            $("#pagar").addClass("active");
+            document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'hidden';
+            document.getElementById("divPagar").style.display = 'inline';
+        }
+
+        function sweetAlert(titulo,texto,icono) {
+            swal(
+                {
+                    title: titulo,
+                    text: texto,
+                    icon: icono
+                }
+            )
+        }
         
 
     </script>

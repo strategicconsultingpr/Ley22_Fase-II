@@ -10,15 +10,13 @@
 namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TS_Excepciones
+    public partial class ConsultarCasosXPersona_Result
     {
-        public int Id_Excepciones { get; set; }
-        public string Id_TrabajadorSocial { get; set; }
-        public System.DateTime FechadeSolicitud { get; set; }
-        public System.DateTime FechaInicial { get; set; }
-        public System.DateTime FechaFinal { get; set; }
-        public Nullable<int> FK_Programa { get; set; }
+        public int Id_CasoCriminal { get; set; }
+        public string NumeroCasoCriminal { get; set; }
+        public Nullable<System.DateTime> FechaSentencia { get; set; }
+        public string DE_Programa { get; set; }
+        public string Estatus { get; set; }
     }
 }

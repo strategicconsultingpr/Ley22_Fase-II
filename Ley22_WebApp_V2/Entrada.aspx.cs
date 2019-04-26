@@ -17,13 +17,13 @@ public partial class Entrada : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        /* Session["Id_Participante"] = null;
-         Session["Id_Participante"] = null;
-         Session["NombreParticipante"] = null;
-         Session["DataParticipante"] = null;  */
+        
         if (Session["User"] == null)
         {
-            Response.Redirect("~/Account/Login.aspx", false);
+            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
             return;
         }
         if (!Page.IsPostBack)
@@ -83,16 +83,21 @@ public partial class Entrada : System.Web.UI.Page
         //  Session["txtDocumentos"] = RBLDocumentos.SelectedItem.Text;
        
         if ((TxtNroSeguroSocial.Text.Trim() == "" &&
-            TxtIdentificacion.Text.Trim() == "" &&
+            //TxtIdentificacion.Text.Trim() == "" &&
             TxtFechaNacimiento.Text.Trim() == "" &&
-            TxtNombreyApellido.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
+            TxtNombre.Text.Trim() == "" &&
+            TxtApellido.Text.Trim() == "" &&
+            TxtSegundoApellido.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
 
         else
         { 
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();
-            Session["TxtIdentificacion"] = TxtIdentificacion.Text.Trim();
+            Session["TxtIdentificacion"] = "";//TxtIdentificacion.Text.Trim();
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombreyApellido.Text.Trim();
+            Session["TxtNombre"] = TxtNombre.Text.Trim();
+            Session["TxtApellido"] = TxtApellido.Text.Trim();
+            Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim(); 
 
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

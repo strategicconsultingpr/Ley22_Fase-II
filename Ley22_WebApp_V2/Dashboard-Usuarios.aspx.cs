@@ -22,12 +22,13 @@ namespace Ley22_WebApp_V2
                 {
                     Session["TipodeAlerta"] = ConstTipoAlerta.Info;
                     Session["MensajeError"] = "Por favor ingrese al sistema";
-                    Response.Redirect("Account/Login.aspx", false);
+                    Session["Redirect"] = "Account/Login.aspx";
+                    Response.Redirect("Mensajes.aspx", false);
                     return;
                 }
 
                 ExistingUser = (ApplicationUser)Session["User"];
-                LitNombre.Text = ExistingUser.Email;
+                LitNombre.Text = ExistingUser.FirstName + " " + ExistingUser.LastName;
                 LitEmail.Text = ExistingUser.Email;
                 LitPrimerNombre.Text = ExistingUser.FirstName;
                 LitPrimerApellido.Text = ExistingUser.LastName;

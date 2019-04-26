@@ -92,31 +92,39 @@
                     <asp:Literal ID="LitParametrodeBusqueda" runat="server"></asp:Literal>
                 </div>
 
-                <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False" PagerSettings-Visible="false" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting" GridLines="None" CellSpacing="-1" DataKeyNames="Id_Participante,PK_Persona">
+                <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False" PagerSettings-Visible="false" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting" GridLines="None" CellSpacing="-1" DataKeyNames="PK_Persona">
                     <Columns>
                         <asp:BoundField DataField="Identificacion" HeaderText="Identificacion" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
-                        <asp:BoundField DataField="Pasaporte" HeaderText="Pasaporte" HeaderStyle-HorizontalAlign="Center">
+                        <%--<asp:BoundField DataField="Pasaporte" HeaderText="Pasaporte" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
                         <asp:BoundField DataField="Licencia" HeaderText="Licencia" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
  
                         <asp:TemplateField HeaderText="Nombre">
 
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkNombre1" runat="server" Text='<%# Bind("NB_Primero") %>'  OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_Participante") +","+ Eval("Pk_Persona") %>'></asp:LinkButton>
+                                <asp:LinkButton ID="lnkNombre1" runat="server" Text='<%# Bind("NB_Primero") %>'  OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("PK_Persona") +","+ Eval("PK_Persona") %>'></asp:LinkButton>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
 
-                        <asp:TemplateField HeaderText="Apellido">
+                        <asp:TemplateField HeaderText="Primer Apellido">
 
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkNombre2" runat="server" Text='<%# Bind("AP_Primero") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Id_Participante") +","+ Eval("Pk_Persona") %>'></asp:LinkButton>
+                                <asp:LinkButton ID="lnkNombre2" runat="server" Text='<%# Bind("AP_Primero") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("PK_Persona") +","+ Eval("PK_Persona") %>'></asp:LinkButton>
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                         <asp:TemplateField HeaderText="Segundo Apellido">
+
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkSegundoApellido" runat="server" Text='<%# Bind("AP_Segundo") %>' OnClick="lnkNombre_Click" CausesValidation="false" CommandArgument='<%# Eval("Pk_Persona") +","+ Eval("Pk_Persona")    %>'></asp:LinkButton>
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -124,9 +132,9 @@
                         <asp:BoundField DataField="FE_Nacimiento" HeaderText="Fecha de Nacimiento" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Nacimiento" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                         </asp:BoundField>
-                        <asp:BoundField DataField="FE_Edicion" HeaderText="Fecha Registro" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Edicion" HeaderStyle-HorizontalAlign="Center">
+                       <%-- <asp:BoundField DataField="FE_Edicion" HeaderText="Fecha Registro" DataFormatString="{0:MM/dd/yyyy}" SortExpression="FE_Edicion" HeaderStyle-HorizontalAlign="Center">
                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
                     </Columns>
                     <EmptyDataTemplate>
                         <div class="card-block">
@@ -193,10 +201,10 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="formGroupExampleInput">Identificación</label>
                         <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Fecha de Nacimiento</label>
@@ -206,9 +214,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Nombre y Apellido</label>
-                        <asp:TextBox ID="TxtNombreyApellido" runat="server" class="form-control"></asp:TextBox>
-                    </div>
+                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <asp:TextBox ID="TxtNombre" runat="server" class="form-control" placeholder="Ej. Luis"></asp:TextBox>
+                                </div>
+                           
+                             
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Apellido</label>
+                                    <asp:TextBox ID="TxtApellido" runat="server" class="form-control" placeholder="Ej. Lopez"></asp:TextBox>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Segundo Apellido</label>
+                                    <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
+                                </div>
                 <!--    <asp:CustomValidator ID="valValidateTextBox" runat="server" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" />
 
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -220,11 +239,12 @@
 
                         function CheckTextBoxes(sender, args) {
                             var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
-                            var TxtIdentificacion = document.getElementById("<%=TxtIdentificacion.ClientID %>").value;
                             var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
-                            var TxtNombreyApellido = document.getElementById("<%=TxtNombreyApellido.ClientID %>").value;
+                            var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
+                            var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
+                            var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
 
-                            if (TxtNroSeguroSocial == "" && TxtIdentificacion == "" && TxtFechaNacimiento == "" && TxtNombreyApellido == "") {
+                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "" && TxtSegundoApellido == "") {
                                // args.IsValid = false;
                                 document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";
                                 return false;

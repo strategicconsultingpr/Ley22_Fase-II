@@ -67,17 +67,25 @@ namespace Ley22_WebApp_V2.Account
                     dsLey22.SaveChanges();
 
                     string mensaje = "El registro del usuario fué correcto. Se envió un email de confirmación al nuevo usuario.";
-                    string script = "window.onload = function(){ alert('";
-                    script += mensaje;
-                    script += "')};";
-                    ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+                    //string script = "window.onload = function(){ alert('";
+                    //script += mensaje;
+                    //script += "')};";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", script, true);
+                    
 
                     string code = manager.GenerateEmailConfirmationToken(user.Id);
                     string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                     string body = CreateBody(callbackUrl);
                     manager.SendEmail(user.Id, "Confirmacion de su cuenta", body);
 
-                    
+                    FirstNameInput.Text = "";
+                    LastNameInput.Text = "";
+                    EmailInput.Text = "";
+                    DdlRol.SelectedValue = "0";
+                    DdlPrograma.SelectedIndex = 0;
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Usuario Registrado", "sweetAlert('Usuario Registrado','" + mensaje + "','success')", true);
+                
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                 {
@@ -102,7 +110,7 @@ namespace Ley22_WebApp_V2.Account
 
                 // signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                Response.Redirect("Register.aspx", false);
+             //   Response.Redirect("Register.aspx", false);
             }
             else
             {
@@ -133,7 +141,7 @@ namespace Ley22_WebApp_V2.Account
             var usuarios_programas = new List<int>();
             List<ListItem> roles;
 
-            if (userManager.IsInRole(userId, "Director"))
+            if (userManager.IsInRole(userId, "Supervisor"))
             {
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
 

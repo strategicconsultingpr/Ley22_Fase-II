@@ -26,6 +26,7 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string Telefono { get; set; }
         public int FK_Categoria { get; set; }
         public int FK_Region { get; set; }
+        public string PO_BOX { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CasoCriminal> CasoCriminals { get; set; }

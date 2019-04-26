@@ -10,7 +10,7 @@
 
         <div class="card">
             <div class="card-header">
-                Recepción de Documentos. Usuario:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                Recepción de Documentos - Participante:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
  
             </div>
             <div class="card-menu-mensaje" id="DivDocumentos" runat="server">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-lg-1"></div>
                     <div class="col">
-                        Orden Judicial                   
+                        Caso Criminal                   
                     </div>
                     <div class="col">
                         Tipo de documento                   
@@ -73,8 +73,9 @@
                         <asp:Button ID="BtnSubirDocumento" runat="server" Text="SUBIR DOCUMENTO" OnClick="BtnSubirDocumento_Click" CssClass="btn btn-primary mr-3" />                       
                     </div>
                     <div class="col">
-                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false" />
+                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg"  OnClick="BtnCancelar_Click" CausesValidation="false" />
                     </div>
+                    
                     <div class="col-lg-1"></div>
                 </div>
 
@@ -94,14 +95,14 @@
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server"  data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEliminar" OnClick="lnkEliminar_Click" runat="server" data-toggle="tooltip" title="Eliminiar" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClick="lnkEliminar_Click" OnClientClick="return confirm('Seguro de querer borrar el documento?');" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -124,7 +125,67 @@
     </div>
     <!-- container-fluid -->
 
+    <script type="text/javascript">
 
+        
+
+        function alertaAsistio(sender) {
+            
+          swal({
+             title: "Are you sure?",
+                text: "You will not be able to recover this imaginary   file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then((willDelete) => {
+              if (willDelete) {
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                  });
+                  return true;
+              } else {
+                  swal("Your imaginary file is safe!");
+                  return false;
+              }
+            });
+            //return confirm("¿Está seguro que el participante SI asistió?");   
+
+       
+
+            //swal({
+            //    title: "Are you sure?",
+            //    text: "You will not be able to recover this imaginary   file!",
+            //    type: "warning",
+            //    showCancelButton: true,
+            //    confirmButtonColor: "#DD6B55",
+            //    confirmButtonText: "Yes, delete it!",
+            //    cancelButtonText: "No, cancel plx!",
+            //    closeOnConfirm: false,
+            //    closeOnCancel: false
+            //},
+            //    function (isConfirm) {
+            //        if (isConfirm) {
+            //            swal({ title: "Deleted!", text: "Your imaginary file has been deleted.", type: "success", confirmButtonText: "OK!", closeOnConfirm: false },
+            //                function () {
+            //                    // RESUME THE DEFAULT LINK ACTION
+            //                    // window.location.href = defaultAction;
+            //                    return true;
+            //                });
+            //        } else {
+            //            swal("Cancelled", "Your imaginary file is safe :)", "error");
+            //            return false;
+            //        }
+            //    });
+        }
+
+       
+      
+
+    </script>
 
 </asp:Content>
 

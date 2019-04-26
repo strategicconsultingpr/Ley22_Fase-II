@@ -84,6 +84,24 @@ public partial class asignar_citas_individual {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
     
     /// <summary>
+    /// DdlTipo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList DdlTipo;
+    
+    /// <summary>
+    /// RequiredFieldValidator5 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+    
+    /// <summary>
     /// btnAsignarCita control.
     /// </summary>
     /// <remarks>
@@ -271,15 +289,6 @@ public partial class asignar_citas_individual {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.HyperLink HLCitas;
-    
-    /// <summary>
-    /// BtnDocumentos control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button BtnDocumentos;
     
     /// <summary>
     /// Hyperlink control.

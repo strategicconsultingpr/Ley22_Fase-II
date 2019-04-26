@@ -71,5 +71,17 @@
     </div>
   </div>
 </div>
-
+    <script type="text/javascript">
+       
+        function sweetAlert(titulo,texto,icono) {
+            swal(
+              title: titulo,
+              text: texto,
+              icon: icono
+            )            
+            window.location.href = 'Register.aspx';
+            //this.form.reset();
+         
+        }
+    </script>
 </asp:Content>

@@ -52,6 +52,15 @@
                              </div>
 
                         </div>
+                        <div class="row">
+                             <div class="col">Tipo de Cita:</div>
+                            <div class="col">
+                                <asp:DropDownList ID="DdlTipo" runat="server" CssClass="custom-select w-100" ></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlTipo" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        
+
 
 
                         <script type="text/javascript">
@@ -347,19 +356,19 @@
             <div class="col-md-3">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Orden Judicial
+                        Caso Criminal
                     </div>
                     <div class="card-block">
                         <label for="orden">Número asocialdo a la cita</label>
 
 
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col">
                                 <asp:DropDownList ID="DdlNumeroOrdenJudicial" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlNumeroOrdenJudicial_Selected"></asp:DropDownList>
                             </div>
-                            <div class="col-2">
+                            <%--<div class="col-2">
                                 <a href="#" data-toggle="modal" data-target="#modal-orden-jucicial" data-whatever="@getbootstrap"><span class="fas  fa-plus-circle fa-lg" data-toggle="tooltip" title="Agregar Orden Judicial"></span></a>
-                            </div>
+                            </div>--%>
                         </div>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlNumeroOrdenJudicial" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -415,7 +424,7 @@
                         </span>
                         <br />
  
-                        <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />
+                       <%-- <asp:Button ID="BtnDocumentos" runat="server" Text="Lista de Documentos" CssClass="btn btn-primary btn-block" OnClick="BtnDocumentos_Click" CausesValidation="false" />--%>
                         <asp:HyperLink ID="Hyperlink" runat="server" Enable="true" NavigateUrl="~/nuevo-confirmacion.aspx" CssClass="btn btn-link btn-block">Volver al Registro</asp:HyperLink>
                         <asp:HyperLink ID="Hyperlink1" runat="server" Enable="true" NavigateUrl="~/seleccion-proximo-paso.aspx" CssClass="btn btn-link btn-block">Ir a cuenta de Usuario</asp:HyperLink>
                     </div>
@@ -871,6 +880,14 @@
         }
         function EliminarCita() {
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;            
+        }
+        function sweetAlert(titulo,texto,icono) {
+            swal({
+                title: titulo,
+                text: texto,
+                icon: icono
+            }
+            )
         }
 
     </script>

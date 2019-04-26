@@ -298,6 +298,25 @@
                                                     </div>
 
                                                 </div>
+                                                 <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="certificados.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="certificados.aspx">Certificados</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>     
+
                                                 <!-- col-4 -->
 
                                                 <div class="col-md-4">
@@ -391,6 +410,25 @@
                                                     </div>
 
                                                 </div>
+                                                 <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="certificados.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="certificados.aspx">Certificados</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div>   
+
                                                 <!-- col-4 -->
 
                                                 <div class="col-md-4">

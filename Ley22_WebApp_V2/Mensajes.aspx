@@ -15,7 +15,7 @@
                     <asp:Literal ID="LitMensaje" runat="server"></asp:Literal>
                 </div>
  
-                 <a href="Default.aspx" class="btn btn-primary mr-3">Continuar</a>
+                 <a href="Dashboard-Usuarios.aspx" class="btn btn-primary mr-3">Continuar</a>
             </div>
             <!-- container-fluid -->
         </div>

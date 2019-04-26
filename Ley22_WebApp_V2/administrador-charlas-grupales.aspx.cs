@@ -479,6 +479,9 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         string val = H_Id_CharlaGrupal.Value;
         int Id_CharlaGrupal = Convert.ToInt32(val);
 
+        ExistingUser = (ApplicationUser)Session["User"];
+        userId = ExistingUser.Id;
+
         var CasosParticipantes = dsLey22.ParticipantesPorCharlas.Where(r => r.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(p => p.Id_OrdenJudicial);
         var Casos = dsLey22.CasoCriminals.Where(r => CasosParticipantes.Contains(r.Id_CasoCriminal)).ToList();
         string mensaje = string.Empty;
@@ -487,7 +490,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             var asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
             decimal balance = Convert.ToDecimal(item.Cargos) - Convert.ToDecimal(item.Pagos);
 
-            if(asistencias == 1 && balance.Equals(balance))
+            if(asistencias == 5 && balance.Equals(0.00))
             {
                 string Id = item.Id_Participante.ToString();
                 string Nombre = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.NB_Primero).SingleOrDefault();
@@ -536,6 +539,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                     doc.Close();
 
                     mensaje += "Certificado para "+Nombre + " " + Apellido + " fue generado. <br/>";
+
+                    dsLey22.CerrarCasoCriminal(item.Id_CasoCriminal, 1, "El participante completo las charlas y no tiene balance de deuda", "Certificado_" + item.Id_CasoCriminal + ".pdf", userId);
                     
                 }
                

@@ -198,7 +198,7 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        if((balance.Equals(Convert.ToDecimal(0.00)) || !balance.Equals(Convert.ToDecimal(0.00))) && status == 1)
+                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
                         {
                             
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio </a>";

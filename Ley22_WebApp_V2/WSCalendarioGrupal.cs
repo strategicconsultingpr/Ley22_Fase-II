@@ -216,7 +216,7 @@ namespace Ley22_WebApp_V2
                             HrefAsistio = "<a href=\"#\"   onclick=\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\" style=\"color: #0bbd0d\">No Asistio </a>";
                             if (activa == 1 && (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor")))
                             {
-                                HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")'<span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                                HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")' </a> <img src=\"../images/print.png\" alt=\"ASSMCA\">";
                             }
                             else
                             {

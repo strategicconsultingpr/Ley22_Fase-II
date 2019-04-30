@@ -38,11 +38,6 @@
             <th style="width:50px;">Doc.</th>
         </tr>
         <tr>
-            <td>Resumen por Concepto</td>
-            <td>Reporte el cual genera un resumen de los cobros divididos por conceptos, d</td>
-            <td><asp:HyperLink ID="ReporteSemanal_l" runat="server" NavigateUrl="ReporteSemanal_l" Text="ver..."/></td>
-        </tr>
-        <tr>
             <td>Detalle de Ingresos</td>
             <td>Reporte el cual genera los ingresos por transaccion en detalle.</td>
             <td><asp:HyperLink ID="DetalleIngresos" runat="server" NavigateUrl="DetalleIngresos_" Text="ver..."/></td>

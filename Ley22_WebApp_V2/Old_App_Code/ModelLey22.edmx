@@ -567,6 +567,11 @@
           <Parameter Name="FechaFinal" Type="date" Mode="In" />
           <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
+        <Function Name="ListarExcepcionesTrabajadorSocialAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicial" Type="date" Mode="In" />
+          <Parameter Name="FechaFinal" Type="date" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarMotivosCierre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarOrdenesJudicialesActivas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
@@ -743,9 +748,6 @@
             <Parameter Name="ComentarioCierre" Mode="In" Type="String" />
             <Parameter Name="DocumentoAprobacion" Mode="In" Type="String" />
             <Parameter Name="Id_UsuarioCierre" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ConsultarCharlasPorParticipante" ReturnType="Collection(Ley22Model.ConsultarCharlasPorParticipante_Result)">
-          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ConsultarEpisodiosXPersona" ReturnType="Collection(Ley22Model.ConsultarEpisodiosXPersona_Result)">
           <Parameter Name="Pk_Persona" Mode="In" Type="Int32" />
@@ -1119,6 +1121,14 @@
             <Parameter Name="Id_Usuario" Mode="In" Type="String" />
             <Parameter Name="Id_Precio" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarCharlasPorParticipante" ReturnType="Collection(Ley22Model.ConsultarCharlasPorParticipante_Result)">
+          <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarExcepcionesTrabajadorSocialAdmin" ReturnType="Collection(Ley22Model.ListarExcepcionesTrabajadorSocialAdmin_Result)">
+            <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -1158,15 +1168,6 @@
           <Property Type="String" Name="Telefono1" Nullable="true" />
           <Property Type="String" Name="Telefono2" Nullable="true" />
           <Property Type="DateTime" Name="FE_Edicion" Nullable="false" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="ConsultarCharlasPorParticipante_Result">
-          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
-          <Property Type="String" Name="FechaHora" Nullable="true" MaxLength="24" />
-          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="64" />
-          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Asistio" Nullable="false" />
-          <Property Type="String" Name="AsistioTexto" Nullable="false" MaxLength="2" />
         </ComplexType>
         <ComplexType Name="ConsultarEpisodiosXPersona_Result">
           <Property Type="Int32" Name="PK_Episodio" Nullable="false" />
@@ -1869,6 +1870,24 @@
           <Property Type="String" Name="NumeroRecibo" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="NombreUsuario" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ConsultarCharlasPorParticipante_Result">
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="String" Name="FechaHora" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
+          <Property Type="String" Name="AsistioTexto" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="NumeroCharla" Nullable="true" />
+          <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="ListarExcepcionesTrabajadorSocialAdmin_Result">
+          <Property Type="Int32" Name="Id_Excepciones" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+          <Property Type="String" Name="NombreCompleto" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1897,19 +1916,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CerrarordenJudicial" FunctionName="Ley22Model.Store.CerrarordenJudicial" />
-          <FunctionImportMapping FunctionImportName="ConsultarCharlasPorParticipante" FunctionName="Ley22Model.Store.ConsultarCharlasPorParticipante">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ConsultarCharlasPorParticipante_Result">
-                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
-                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
-                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
-                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
-                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
-                <ScalarProperty Name="AsistioTexto" ColumnName="AsistioTexto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ConsultarEpisodiosXPersona" FunctionName="Ley22Model.Store.ConsultarEpisodiosXPersona">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ConsultarEpisodiosXPersona_Result">
@@ -2710,6 +2716,32 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
           <FunctionImportMapping FunctionImportName="GuardarCitaTrabajadorSocial" FunctionName="Ley22Model.Store.GuardarCitaTrabajadorSocial" />
+          <FunctionImportMapping FunctionImportName="ConsultarCharlasPorParticipante" FunctionName="Ley22Model.Store.ConsultarCharlasPorParticipante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ConsultarCharlasPorParticipante_Result">
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="AsistioTexto" ColumnName="AsistioTexto" />
+                <ScalarProperty Name="NumeroCharla" ColumnName="NumeroCharla" />
+                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarExcepcionesTrabajadorSocialAdmin" FunctionName="Ley22Model.Store.ListarExcepcionesTrabajadorSocialAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarExcepcionesTrabajadorSocialAdmin_Result">
+                <ScalarProperty Name="Id_Excepciones" ColumnName="Id_Excepciones" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

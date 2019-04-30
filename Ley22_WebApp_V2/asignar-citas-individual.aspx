@@ -462,6 +462,8 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='PARTICIPANTE ASISTIO'><span class="bloque-leyenda asistio"></span></a>
                          &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
                         No Asistio (Cerrado)
+                        &nbsp; <span class="bloque-leyenda grupo3"></span>
+                        Horario No Disponible
      
                     </div>
 

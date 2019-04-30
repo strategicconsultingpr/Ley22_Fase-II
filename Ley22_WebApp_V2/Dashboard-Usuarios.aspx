@@ -25,8 +25,9 @@
                             <span><asp:Literal ID="LitEmail" runat="server"></asp:Literal></span>
                         </li>                                               
                     </ul>
-
-                 <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>
+ 
+                 <%--<a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>--%>
+                 <asp:LoginStatus runat="server" class="btn btn-secondary btn-block mb-4" LogoutAction="Redirect" LogoutText="Salir del Dashboard" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
                 </div>
 
 <%--SuperAdmin Dashboard--%>
@@ -106,6 +107,22 @@
                             </div>
 
                         </div>
+
+                                                    <div class="col-md-4">
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="../Reportes.aspx">
+                                            <span class="fa-stack fa-3x">
+                                               
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../Reportes.aspx">Reportes</a></h4>
+                                </div>
+                            </div>
+                        </div>
                                      
               <%--  </div>
             </div>--%>
@@ -175,6 +192,22 @@
                                 </div>
                             </div>
 
+                        </div>
+
+                                                    <div class="col-md-4">
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="../Reportes.aspx">
+                                            <span class="fa-stack fa-3x">
+                                               
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../Reportes.aspx">Reportes</a></h4>
+                                </div>
+                            </div>
                         </div>
                                      
               <%--  </div>
@@ -458,6 +491,87 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- col-4 -->
+
+                                    
+                        
+                                                 </ContentTemplate>
+                                            </asp:RoleGroup>
+                                    </RoleGroups>
+                                </asp:LoginView>
+
+                <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                    <RoleGroups>
+                                        <asp:RoleGroup Roles="Recaudador">
+                                            <ContentTemplate>
+            
+              
+               
+                        <div class="col-md-4">
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="../recaudos-busqueda-usuario.aspx">
+                                            <span class="fa-stack fa-3x">
+                                               
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../recaudos-busqueda-usuario.aspx">Recaudos</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- col-4 -->
+
+                        <div class="col-md-4">
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="../Reportes.aspx">
+                                            <span class="fa-stack fa-3x">
+                                               
+                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../Reportes.aspx">Reportes</a></h4>
+                                </div>
+                            </div>
+                        </div>
+
+                                    
+                        
+                                                 </ContentTemplate>
+                                            </asp:RoleGroup>
+                                    </RoleGroups>
+                                </asp:LoginView>
+
+                     <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                    <RoleGroups>
+                                        <asp:RoleGroup Roles="Recepcion">
+                                            <ContentTemplate>
+            
+              
+               
+                         <div class="col-md-4">
+
+                            <div class="card text-center mb-3 card-menu">
+                                <div class="card-block">
+                                    <p class="mt-4">
+                                        <a href="../Entrada.aspx">
+                                            <span class="fa-stack fa-3x">
+                                               <%-- <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
+                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>--%>
+                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <h4 class="card-title"><a href="../Entrada.aspx">Buscar Participante</a></h4>
+                                </div>
+                            </div>
+
+                        </div> 
                         <!-- col-4 -->
 
                                     

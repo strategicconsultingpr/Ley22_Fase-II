@@ -46,7 +46,7 @@ namespace Ley22_WebApp_V2
             var usuarios_programas = new List<string>();
             var programas_usuario = new List<int>();
             programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
-            var programas = dsPerfil.SA_PROGRAMA.Where(p => programas_usuario.Contains(p.PK_Programa)).Select(u => new ListItem { Value = u.PK_Programa.ToString(), Text = u.NB_Programa }).ToList();
+            var programas = dsPerfil.SA_PROGRAMA.Where(p => programas_usuario.Contains(p.PK_Programa)).Select(u => new ListItem { Value = u.PK_Programa.ToString(), Text = u.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
             if (programas.Count > 1)
             {
@@ -108,8 +108,7 @@ namespace Ley22_WebApp_V2
                 string URL_ReportingServices = ((string)(configurationAppSettings.GetValue("URL_ReportingServices", typeof(string))));
                 string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
                 this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
-                this.ReporteSemanal_l.NavigateUrl = this.Session["URL_Reports"].ToString() + this.ReporteSemanal_l.NavigateUrl.ToString();
-
+                
                 this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa;
                 this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa;
 

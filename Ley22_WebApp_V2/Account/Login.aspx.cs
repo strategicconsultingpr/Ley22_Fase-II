@@ -68,17 +68,9 @@ namespace Ley22_WebApp_V2.Account
                                     Session["NombreParticipante"] = "";
                                     if (ExistingUser.PasswordChanged)
                                     {
-                                        if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas"))
+                                        if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas") || userManager.IsInRole(ExistingUser.Id, "Recepcion") || userManager.IsInRole(ExistingUser.Id, "Recaudador"))
                                         {
                                             Response.Redirect("~/Dashboard-Usuarios");
-                                        }
-                                        else if (userManager.IsInRole(ExistingUser.Id, "Recepcion"))
-                                        {
-                                            Response.Redirect("~/Entrada");
-                                        }
-                                        else if (userManager.IsInRole(ExistingUser.Id, "Recaudador"))
-                                        {
-                                            Response.Redirect("~/recaudos-busqueda-usuario");
                                         }
                                         else
                                         {
@@ -113,6 +105,11 @@ namespace Ley22_WebApp_V2.Account
                                 break;
                         }
                     }
+                }
+                else
+                {
+                    FailureText.Text = "El correo electronico utilizado no existe.";
+                    ErrorMessage.Visible = true;
                 }
             }
         }

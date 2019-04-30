@@ -167,7 +167,7 @@
 
                                 <label for="fecha-charla">Fecha</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-calendar-alt"></span></div>
+                                    <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaCrearCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla"  ></asp:TextBox>
 
                                     <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaCrearCharla" OnClientDateSelectionChanged="checkDate" />
@@ -181,7 +181,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Inicial</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-clock"></span></div>
+                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
 
                                     <asp:TextBox ID="TxtInicialCrearCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtInicialCrearCharla" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
@@ -196,7 +196,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Final</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-clock"></span></div>
+                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFinalCrearCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtFinalCrearCharla" ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalCrearCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
@@ -321,7 +321,7 @@
 
                                 <label for="fecha-charla">Fecha</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-calendar-alt"></span></div>
+                                    <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaModCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla2"  ></asp:TextBox>
 
                                     <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" OnClientDateSelectionChanged="checkDate" />
@@ -335,7 +335,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Inicial</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-clock"></span></div>
+                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
 
                                     <asp:TextBox ID="TxtIncialModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtIncialModCharla" ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
@@ -350,7 +350,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Final</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="far fa-clock"></span></div>
+                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFinalModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtFinalModCharla" ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalModCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>

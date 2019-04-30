@@ -180,12 +180,22 @@
 
     <script type="text/javascript">
         
-        function sweetAlert(titulo,texto,icono) {
-            swal(
-              title: titulo,
-              text: texto,
-              icon: icono
-            )
+        function sweetAlertRef(titulo, texto, icono, ref) {
+           
+            swal({
+                    title: titulo,
+                    text: texto,
+                    icon: icono
+            }).then((value) => { window.location.href=ref; });   
+        }
+
+        function sweetAlert(titulo, texto, icono) {
+           
+            swal({
+                    title: titulo,
+                    text: texto,
+                    icon: icono
+            })  
         }
     </script>
    

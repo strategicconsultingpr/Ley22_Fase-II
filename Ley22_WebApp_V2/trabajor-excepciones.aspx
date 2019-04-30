@@ -252,6 +252,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Excepcion Admin-->
+
+    <div class="modal fade" id="excepciones-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Detalle de la Excepcion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+ 
+                    <div id="NombreTS"></div>
+                    <br /> 
+                    <div id="Fecha3"></div>
+                    <br />
+                    <div id="Horas3"></div>
+                    <br />                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal Orden Judical -->
     <!--
     
@@ -373,7 +400,7 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
-                        Calendario Excepciones Trabajador Social : <asp:Literal ID="LitNombre" runat="server"></asp:Literal>
+                        Calendario de Citas: <asp:Literal ID="LitNombre" runat="server"></asp:Literal>
                      <!--   <uc1:WUCUsuario runat="server" ID="WUCUsuario" /> -->
                     </div>
                     <div class="card-block calendario-opciones">
@@ -399,6 +426,8 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='PARTICIPANTE ASISTIO'><span class="bloque-leyenda asistio"></span></a>
                          &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
                         No Asistio (Cerrado)
+                        &nbsp; <span class="bloque-leyenda grupo3"></span>
+                        Horario No Disponible
      
                     </div>
                     <div>
@@ -815,6 +844,13 @@
 
             document.getElementById("<%= HNroExcepcion.ClientID %>").value = NumerodeExcepcion;
 
+        }
+
+        function excepcionInfo(Fecha, Horas, Nombre) {
+
+            document.getElementById("NombreTS").innerHTML = "<b>Trabajador Social:</b> " + Nombre;
+            document.getElementById("Fecha3").innerHTML = "<b>Excepcion para el día:</b> " + Fecha;
+            document.getElementById("Horas3").innerHTML = "<b>Hora:</b> " + Horas;
         }
 
         function alertaAsistio() {

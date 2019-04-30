@@ -118,7 +118,8 @@
                 <div class="modal-body">
                     <asp:GridView ID="GVResumenCharlas" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False">
                         <Columns>
-                            <asp:BoundField DataField="Id_CharlaGrupal" HeaderText="Nro. Charla" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="NumeroCasoCriminal" HeaderText="Caso Criminal" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="NumeroCharla" HeaderText="Nro. Charla" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="FechaHora" HeaderText="Fecha" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
                              <asp:BoundField DataField="NombreDelCentro" HeaderText="Centro" HeaderStyle-HorizontalAlign="Center" />
                              <asp:BoundField DataField="TipodeCharla" HeaderText="Tipo de Charla" HeaderStyle-HorizontalAlign="Center" />
@@ -189,12 +190,12 @@
                     <ul class="list-group mb-4 pb-4 slim">
                         <li class="list-group-item justify-content-between">
                             <span>
-                                <asp:HyperLink ID="HLCitas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCitas"></asp:HyperLink>
+                                <asp:LinkButton ID="HLnkCitas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCitas"></asp:LinkButton>
                             </span>
                         </li>
                         <li class="list-group-item justify-content-between">
                             <span>
-                                <asp:HyperLink ID="HlCharlas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCharlas"></asp:HyperLink>
+                                <asp:LinkButton ID="HLnkCharlas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCharlas"></asp:LinkButton>
                             </span>
                         </li>
                     </ul>
@@ -293,24 +294,7 @@
                                                     </div>
 
                                                 </div>
-                                                 <!-- col-4 -->
-
-                                                <div class="col-md-4">
-
-                                                    <div class="card  text-center mb-3 card-menu">
-                                                        <div class="card-block">
-                                                            <p class="mt-4">
-                                                                <a href="Certificados_Participante.aspx">
-                                                                    <span class="fa-stack fa-3x">
-                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
-                                                                    </span>
-                                                                </a>
-                                                            </p>
-                                                            <h4 class="card-title"><a href="Certificados_Participante.aspx">Certificados</a></h4>
-                                                        </div>
-                                                    </div>
-
-                                                </div>     
+                                                    
 
                                                 <!-- col-4 -->
 
@@ -330,6 +314,26 @@
                                                     </div>
 
                                                 </div>
+
+                                                 <!-- col-4 -->
+
+                                                <div class="col-md-4">
+
+                                                    <div class="card  text-center mb-3 card-menu">
+                                                        <div class="card-block">
+                                                            <p class="mt-4">
+                                                                <a href="Certificados_Participante.aspx">
+                                                                    <span class="fa-stack fa-3x">
+                                                                        <img src="../images/certificate_icon_blue.png" alt="ASSMCA">
+                                                                    </span>
+                                                                </a>
+                                                            </p>
+                                                            <h4 class="card-title"><a href="Certificados_Participante.aspx">Certificados</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                </div> 
+
                                                 <!-- col-4 -->
 
                                                 <div class="col-md-4">
@@ -414,7 +418,7 @@
                                                             <p class="mt-4">
                                                                 <a href="Certificados_Participante.aspx">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
+                                                                        <img src="../images/certificate_icon_blue.png" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>

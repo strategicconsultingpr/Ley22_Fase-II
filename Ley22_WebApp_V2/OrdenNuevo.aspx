@@ -270,9 +270,9 @@
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ej. assmca@assmca.com"></asp:TextBox>
+                                <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Ej. participante@outlook.com"></asp:TextBox>
                                <!-- <asp:RequiredFieldValidator ID="RequiredFieldValidator122" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtEmail" Display="Dynamic"></asp:RequiredFieldValidator> -->
-                               <!-- <asp:RegularExpressionValidator ID="RegularExpressionValidator77" runat="server" ErrorMessage="* El correo no se válido " ControlToValidate="TxtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator> -->
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator77" runat="server" ErrorMessage="* El correo no se válido " ControlToValidate="TxtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator> 
                             </div>
 
                         </div>

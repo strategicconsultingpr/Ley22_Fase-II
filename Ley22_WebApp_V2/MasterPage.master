@@ -191,7 +191,10 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
-                    </li>                                
+                    </li> 
+                    <li class="nav-item">
+                      <a class="nav-link" href="../Reportes.aspx">Reportes</a>
+                    </li>
                   </ul>
                 </nav>  
                 </div>

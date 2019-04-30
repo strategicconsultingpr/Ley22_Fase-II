@@ -85,10 +85,11 @@ namespace Ley22_WebApp_V2
                 string HrefRemover = string.Empty;
                 string HreAdicionar = string.Empty;
                 bool swEstaenLaCharla = false;
+                int num = 1;
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
-
-                    if (c.Id_Participante.ToString() == Id_Participante.ToString() && asistio.FechaFinal > DateTime.Today)
+                    //&& asistio.FechaFinal > DateTime.Today
+                    if (c.Id_Participante.ToString() == Id_Participante.ToString())
                     {
                         swEstaenLaCharla = true;
                         HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
@@ -104,10 +105,11 @@ namespace Ley22_WebApp_V2
                     {
                         HrefRemover = "";
                     }
-                    Parti += " <label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
+                    Parti += " <label class=\"form-check-label\">"+ num + ". " + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
+                    num++;
                 }
-
-                if (swEstaenLaCharla == false && asistio.FechaFinal > DateTime.Today)
+                //&& asistio.FechaFinal > DateTime.Today
+                if (swEstaenLaCharla == false)
                     HreAdicionar = NombreParticipante + " <a href=\"#\" class=\"btn btn-secondary\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" >Añadir Particpante</A>";
                 else
                     HreAdicionar = "";

@@ -11,17 +11,11 @@ namespace Ley22_WebApp_V2.Old_App_Code
 {
     using System;
     
-    public partial class ConsultarCharlasPorParticipante_Result
+    public partial class ListarExcepcionesTrabajadorSocialAdmin_Result
     {
+        public int Id_Excepciones { get; set; }
+        public System.DateTime FechaInicial { get; set; }
         public System.DateTime FechaFinal { get; set; }
-        public int Id_CharlaGrupal { get; set; }
-        public string FechaHora { get; set; }
-        public string NombreDelCentro { get; set; }
-        public string TipodeCharla { get; set; }
-        public string Nivel { get; set; }
-        public int Asistio { get; set; }
-        public string AsistioTexto { get; set; }
-        public Nullable<int> NumeroCharla { get; set; }
-        public string NumeroCasoCriminal { get; set; }
+        public string NombreCompleto { get; set; }
     }
 }

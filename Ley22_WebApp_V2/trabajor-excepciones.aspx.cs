@@ -51,17 +51,25 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
             if (userManager.IsInRole(userId, "SuperAdmin"))
             {
-                 usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short,int>(i => i).ToList();
-                
+                 usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short,int>(i => i).ToList();                
             }
             else
             {
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
             }
+
+            if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
+            {
+                DivBtnModalAsignarCita.Visible = false;
+            }
+            else
+            {
+                DivBtnModalAsignarCita.Visible = true;
+            }
             
 
 
-            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+            var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
             if (usuarios_programas.Count() == 1)
             {
                 DdlCentro.DataValueField = "Value";
@@ -80,7 +88,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
                 DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             }
 
-            LitNombre.Text = ExistingUser.Email;
+            LitNombre.Text = ExistingUser.FirstName + " " + ExistingUser.LastName;
             GenerarCalendario();
         }
     }
@@ -138,6 +146,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
         List<ListarExcepcionesTrabajadorSocial_Result> ListarExcepcionesTrabajadorSocial = null;
 
         List<ListarCitasCalendarioAdministrador_Result> ListarCitasCalendarioAdministrador = null;
+        List<ListarExcepcionesTrabajadorSocialAdmin_Result> ListarExcepcionesTrabajadorSocialAdmin = null;
 
         // if (DdlTrabajadorSocial.SelectedValue != "")
         using (Ley22Entities mylib = new Ley22Entities())
@@ -146,6 +155,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
             if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
             {
                 ListarCitasCalendarioAdministrador = mylib.ListarCitasCalendarioAdministrador(FechaBase, FechaBase.AddDays(35), Convert.ToInt32(DdlCentro.SelectedValue)).ToList();
+                ListarExcepcionesTrabajadorSocialAdmin = mylib.ListarExcepcionesTrabajadorSocialAdmin(FechaBase, FechaBase.AddDays(35), Convert.ToInt32(DdlCentro.SelectedValue)).ToList();
             }
             else
             {
@@ -164,13 +174,15 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
            // if (DdlCentro.SelectedValue.ToString() != "")               
-                AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
+               
             if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
             {
+                AsignarExcepcionesPorDiaAdmin(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocialAdmin);
                 AsignatCitasPordiaAdministrador(i, fecha, LitContCelda, ListarCitasCalendarioAdministrador);
             }
             else
             {
+                AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
             }
                       
@@ -210,20 +222,21 @@ public partial class trabajor_excepciones : System.Web.UI.Page
             foreach (ListarCitasCalendarioUsuario_Result element in ListaCharlasXDia)
             {
                 var asistio = dsLey22.Calendarios.Where(u => u.Id_Calendario.Equals(element.Id_Calendario)).Single();
-                
-                
+
+                var a = userManager.FindById(asistio.Id_TrabajadorSocial);
+                var TS = a.FirstName + " " + a.LastName;
 
                 if (asistio.Asistio == 1)
                 {
-                    LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContentAsistio('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString()+ "', '" + element.NB_Programa + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asistio-cita" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                    LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContentAsistio('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString()+ "', '" + element.NB_Programa + "', '" + TS + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asistio-cita" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                 }
                 else if (asistio.FechaFinal < DateTime.Today && asistio.Asistio == 0)
                 {
-                    LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                    LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "', '" + TS + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                 }
                 else
                 {
-                    LitContCelda[i].Text += "<div class=\"" + "item proceso\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() +  "', '" + element.NB_Programa +"')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                    LitContCelda[i].Text += "<div class=\"" + "item proceso\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() +  "', '" + element.NB_Programa + "', '" + TS + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                 }
             }
             
@@ -251,9 +264,8 @@ public partial class trabajor_excepciones : System.Web.UI.Page
             {
                 var asistio = dsLey22.Calendarios.Where(u => u.Id_Calendario.Equals(element.Id_Calendario)).Single();
 
-                // var TS = userManager.GetEmail(asistio.Id_TrabajadorSocial);
-                ExistingUser = (ApplicationUser)Session["User"];
-                var TS = ExistingUser.FirstName + " " + ExistingUser.LastName;
+                var a = userManager.FindById(asistio.Id_TrabajadorSocial);
+                var TS = a.FirstName + " " + a.LastName;
 
                 if (asistio.Asistio == 1)
                 {
@@ -288,9 +300,37 @@ public partial class trabajor_excepciones : System.Web.UI.Page
 
             LitContCelda[i].Text = "";
 
+
+
             foreach (ListarExcepcionesTrabajadorSocial_Result element in ListaExcepcionesXDia)
             {
-                LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent2('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + "', '" + element.Id_Excepciones.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-excepcion-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("HH:mm") + "-" + element.FechaFinal.ToString("HH:mm") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                LitContCelda[i].Text += "<div class=\"" + "item tercera\"" + "><a onClick=\"changeDivContent2('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "', '" + element.Id_Excepciones.ToString() + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-excepcion-confirmacion" + "\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+            }
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    void AsignarExcepcionesPorDiaAdmin(int i, DateTime Fecha, List<Literal> LitContCelda, List<ListarExcepcionesTrabajadorSocialAdmin_Result> ListarExcepcionesTrabajadorSocial)
+    {
+        List<ListarExcepcionesTrabajadorSocialAdmin_Result> ListaExcepcionesXDia = null;
+        try
+        {
+            ListaExcepcionesXDia = ListarExcepcionesTrabajadorSocial.FindAll(delegate (ListarExcepcionesTrabajadorSocialAdmin_Result bk)
+            {
+                return bk.FechaInicial.ToString("dd/MM/yyyy") == Fecha.ToString("dd/MM/yyyy");
+            });
+
+            LitContCelda[i].Text = "";
+
+
+
+            foreach (ListarExcepcionesTrabajadorSocialAdmin_Result element in ListaExcepcionesXDia)
+            {
+                LitContCelda[i].Text += "<div class=\"" + "item tercera\"" + "><a onClick=\"excepcionInfo('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "', '" + element.NombreCompleto + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#excepciones-info" + "\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
             }
 
         }

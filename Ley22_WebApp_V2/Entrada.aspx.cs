@@ -36,7 +36,7 @@ public partial class Entrada : System.Web.UI.Page
             var usuarios_programas = new List<string>();
             var programas_usuario = new List<int>();
             programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
-            var programas = dsPerfil.SA_PROGRAMA.Where(p => programas_usuario.Contains(p.PK_Programa)).Select(u => new ListItem { Value = u.PK_Programa.ToString(), Text = u.NB_Programa }).ToList();
+            var programas = dsPerfil.SA_PROGRAMA.Where(p => programas_usuario.Contains(p.PK_Programa)).Select(u => new ListItem { Value = u.PK_Programa.ToString(), Text = u.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
             if(programas.Count > 1)
             {

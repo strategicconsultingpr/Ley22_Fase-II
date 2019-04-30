@@ -159,13 +159,13 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
              // totales por citas
             int TotaldeCitas = myresul.Count();
             int TotalAsistencias = ListaCitasXDia.Count();
-            HLCitas.Text = TotaldeCitas.ToString() + " Citas: " + TotalAsistencias.ToString () + " Asistencias, "+ (TotaldeCitas - TotalAsistencias).ToString() + " Inasistencias.";
+            HLnkCitas.Text = TotaldeCitas.ToString() + " Citas: " + TotalAsistencias.ToString () + " Asistencias, "+ (TotaldeCitas - TotalAsistencias).ToString() + " Inasistencias.";
             LitResumenCitas.Text = TotaldeCitas.ToString() + " Citas: " + TotalAsistencias.ToString() + " Asistencias, " + (TotaldeCitas - TotalAsistencias).ToString() + " Inasistencias.";
             // totales por charls
 
             List <ResumendeAsistenciasCharlas_Result>  myresul2 = mylib.ResumendeAsistenciasCharlas(Pk_Persona).ToList();
 
-            HlCharlas.Text = myresul2[0].TotalAsistencias .ToString() + " Charlas : " + myresul2[0].TotalAsistencias.ToString() + " Asistencias, " + myresul2[0].TotalInasistencias.ToString() + " Inasistencias.";
+            HLnkCharlas.Text = myresul2[0].TotalAsistencias .ToString() + " Charlas : " + myresul2[0].TotalAsistencias.ToString() + " Asistencias, " + myresul2[0].TotalInasistencias.ToString() + " Inasistencias.";
 
 
         }

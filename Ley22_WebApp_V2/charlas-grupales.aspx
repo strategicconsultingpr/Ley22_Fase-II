@@ -8,7 +8,7 @@
             <asp:HiddenField ID="H_Id_CharlaGrupal" runat="server" />
             
 
-    <!-- Modal -->
+    <!-- Modal Crear Charla-->
     <div class="modal fade" id="modal-crear-charla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -324,7 +324,7 @@
                     </div>
                     <div class="row pl-4 pr-4">
                         <div class="col-md-6">
-                            <p><strong>Asistentes</strong></p>
+                            <p><strong>Lista Participantes</strong></p>
                             <div id="Participantes"></div>
 
                         </div>
@@ -886,11 +886,10 @@
     </div>
                <script type="text/javascript">
 
-                  <%-- function region()
-                   {
-                       document.getElementById('<%=DdlRegion.ClientID%>')
-                       
-                   }--%>
+                 if ( window.history.replaceState ) {
+                       window.history.replaceState( null, null, window.location.href );
+                   }
+
                    function changeDivContent4(Id_CharlaGrupal) {
                        $.ajax({
                            type: "POST",

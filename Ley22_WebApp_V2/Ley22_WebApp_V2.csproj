@@ -814,6 +814,9 @@
     <Compile Include="Old_App_Code\ConsultarCasosXPersona_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ConsultarCharlasPorParticipante_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
@@ -857,6 +860,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocialAdmin_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
@@ -1171,9 +1177,6 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\Ciudad.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ConsultarCharlasPorParticipante_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">

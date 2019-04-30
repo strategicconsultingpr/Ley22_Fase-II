@@ -88,15 +88,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CerrarordenJudicial", id_OrdenJudicialParameter, id_MotivoCierreParameter, comentarioCierreParameter, documentoAprobacionParameter, id_UsuarioCierreParameter);
         }
     
-        public virtual ObjectResult<ConsultarCharlasPorParticipante_Result> ConsultarCharlasPorParticipante(Nullable<int> id_Participante)
-        {
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCharlasPorParticipante_Result>("ConsultarCharlasPorParticipante", id_ParticipanteParameter);
-        }
-    
         public virtual ObjectResult<ConsultarEpisodiosXPersona_Result> ConsultarEpisodiosXPersona(Nullable<int> pk_Persona)
         {
             var pk_PersonaParameter = pk_Persona.HasValue ?
@@ -1293,6 +1284,32 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Precio", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCitaTrabajadorSocial", id_TrabajadorSocialParameter, id_ParticipanteParameter, fechaInicialParameter, fechaFinalParameter, id_OrdenJudicialParameter, id_ProgramaParameter, id_UsuarioParameter, id_PrecioParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarCharlasPorParticipante_Result> ConsultarCharlasPorParticipante(Nullable<int> id_Participante)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCharlasPorParticipante_Result>("ConsultarCharlasPorParticipante", id_ParticipanteParameter);
+        }
+    
+        public virtual ObjectResult<ListarExcepcionesTrabajadorSocialAdmin_Result> ListarExcepcionesTrabajadorSocialAdmin(Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal, Nullable<int> id_Programa)
+        {
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("fechaInicial", fechaInicial) :
+                new ObjectParameter("fechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesTrabajadorSocialAdmin_Result>("ListarExcepcionesTrabajadorSocialAdmin", fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
         }
     }
 }

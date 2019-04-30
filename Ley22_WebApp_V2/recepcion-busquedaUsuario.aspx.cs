@@ -229,7 +229,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //    idParticipante = Pk_Persona;
             //}
             short idPrograma = Convert.ToInt16(Session["Programa"]);
-            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa).Single();
+            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
 
             expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(idParticipante)).Select(u => u.NR_Expediente).SingleOrDefault();
 
@@ -248,7 +248,9 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
                 AP_Segundo = sa_personas.AP_Segundo,
                 FE_Nacimiento = Convert.ToDateTime(sa_personas.FE_Nacimiento),
                 FK_Veterano = Convert.ToInt32(sa_personas.FK_Veterano),
-                FK_GrupoEtnico = Convert.ToInt32(sa_personas.FK_GrupoEtnico)
+                FK_GrupoEtnico = Convert.ToInt32(sa_personas.FK_GrupoEtnico),
+                FE_Edicion = Convert.ToDateTime(sa_personas.FE_Edicion),
+                TI_Edicion = Convert.ToChar(sa_personas.TI_Edicion)
 
             };
 

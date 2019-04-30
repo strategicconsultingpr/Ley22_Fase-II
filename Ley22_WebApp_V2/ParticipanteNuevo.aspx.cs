@@ -48,11 +48,19 @@ namespace Ley22_WebApp_V2
                     //Seleccion de datos del participante
                     Data_SA_Persona sa_persona = (Data_SA_Persona)Session["SA_Persona"];
                     string ssn = sa_persona.NR_SeguroSocial;
-                    string asterisk = new string('*', ssn.Length - 4);
-                    string last = ssn.Substring(ssn.Length - 4);
+                    if(!(ssn.Contains(" ") || ssn.Contains("*") || ssn.Contains("S")))
+                    {
+                      string asterisk = new string('*', ssn.Length - 4);
+                      string last = ssn.Substring(ssn.Length - 4);
+                      TxtNroSeguroSocial.Text = asterisk + last;
+                    }
+                    else
+                    {
+                      TxtNroSeguroSocial.Text = ssn;
+                    }
 
                     TxtIUP.Text = sa_persona.PK_Persona.ToString();
-                    TxtNroSeguroSocial.Text = asterisk + last;
+                    
                     DdlSexo.SelectedValue = sa_persona.FK_Sexo.ToString();
                     TxtPrimerNombre.Text = sa_persona.NB_Primero;
                     TxtSegundoNombre.Text = sa_persona.NB_Segundo;
@@ -64,6 +72,8 @@ namespace Ley22_WebApp_V2
 
                     //Bloqueo de campos para poder modificarlos
                     TxtNroSeguroSocial.ReadOnly = true;
+                    RegularExpressionValidator1.EnableClientScript = false; //Se elimina validacion de tipo de entrada, ya que participantes antiguos contienen caracteres
+                    
                     DdlSexo.Enabled = false;
                     TxtPrimerNombre.ReadOnly = true;
                     TxtSegundoNombre.ReadOnly = true;
@@ -86,17 +96,19 @@ namespace Ley22_WebApp_V2
                         Char TI = sa_persona.TI_Edicion;
 
                         //Si el usuario tiene acceso a modificacion de participante
-                        if ((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || (ts.Days < 3 && TI == 'C')))
+                        if ((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || (ts.Days < 8 && TI == 'C')))
                         {
-                            if(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor"))
+                            if((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")) && (ts.Days < 8))
                             {
                                 TxtNroSeguroSocial.Text = ssn;
                                 TxtNroSeguroSocial.ReadOnly = false;
+                                RegularExpressionValidator1.EnableClientScript = true;
                             }
-                            else if((ts.Days < 2 && TI == 'C'))
+                            else if((ts.Days < 8 && TI == 'C'))
                             {
                                 TxtNroSeguroSocial.Text = ssn;
                                 TxtNroSeguroSocial.ReadOnly = false;
+                                RegularExpressionValidator1.EnableClientScript = true;
                             }
                             
                             DdlSexo.Enabled = true;
@@ -194,9 +206,9 @@ namespace Ley22_WebApp_V2
 
                     string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se añadió correctamente.";
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Participante Registrado", "sweetAlert('Participante Registrado','" + mensaje + "','success')", true);
-
-                    Response.Redirect("OrdenNuevo.aspx", false);
+                    
+                    ClientScript.RegisterStartupScript(this.GetType(), "ParticipanteRegistrado", "sweetAlertRef('Participante Registrado','" + mensaje + "','success','OrdenNuevo.aspx');", true);
+                   // Response.Redirect("OrdenNuevo.aspx", false);
 
                 }
             }
@@ -223,8 +235,8 @@ namespace Ley22_WebApp_V2
                     var sa_personas = seps.SPU_PERSONA(
                         Convert.ToInt32(TxtIUP.Text),
                         programa,
-                        TxtNroSeguroSocial.Text,
                         TxtExpediente.Text,
+                        TxtNroSeguroSocial.Text,
                         Convert.ToByte(DdlSexo.SelectedValue.ToString()),
                         TxtPrimerApellido.Text,
                         TxtSegundoApellido.Text,
@@ -247,7 +259,9 @@ namespace Ley22_WebApp_V2
                         AP_Segundo = TxtSegundoApellido.Text,
                         FE_Nacimiento = Convert.ToDateTime(TxtFechaNacimiento.Text),
                         FK_Veterano = Convert.ToInt32(ChkVeterano.Checked),
-                        FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue)
+                        FK_GrupoEtnico = Convert.ToInt32(DdlGrupoEtnico.SelectedValue),
+                        FE_Edicion = DateTime.Now,
+                        TI_Edicion = 'U'
 
                     };
                 }
@@ -257,16 +271,19 @@ namespace Ley22_WebApp_V2
 
                 string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se actualizo correctamente.";
 
-                ClientScript.RegisterStartupScript(this.GetType(), "Participante Actualizado", "sweetAlert('Participante Actualizado','" + mensaje + "','success')", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Participante Actualizado", "sweetAlert('Participante Actualizado','" + mensaje + "','success')", true);
 
-                var casos = dsLey22.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(sa_persona.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.Id_Programa == programa);
+                var casos = dsLey22.CasoCriminals.Where(u => u.Id_Participante.Equals(sa_persona.PK_Persona)).Where(a => a.Activa.Equals(1)).Where(p => p.FK_Programa == programa);
                 if (casos.Count() > 0)
                 {
-                    Response.Redirect("seleccion-proximo-paso.aspx", false);
+                    ClientScript.RegisterStartupScript(this.GetType(), "Participante Actualizado", "sweetAlertRef('Participante Actualizado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
+                   // Response.Redirect("seleccion-proximo-paso.aspx", false);
                 }
                 else
                 {
-                    Response.Redirect("OrdenNuevo.aspx", false);
+                    mensaje += " Este participante NO contiene algun caso abierto, favor agregar caso.";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Participante Actualizado", "sweetAlertRef('Participante Actualizado','" + mensaje + "','success','OrdenNuevo.aspx');", true);
+                   // Response.Redirect("OrdenNuevo.aspx", false);
                 }
             }
             catch(Exception ex)
@@ -277,11 +294,6 @@ namespace Ley22_WebApp_V2
             }
 
                 
-
-            
-
-            
-
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

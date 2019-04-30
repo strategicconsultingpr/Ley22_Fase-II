@@ -76,7 +76,7 @@
               <ContentTemplate>
                     <div class="col">
                       <nav>
-                      <ul class="nav">
+                      <ul class="nav" id="nav">
                         <li class="nav-item">
                           <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                         </li>  
@@ -108,20 +108,20 @@
                       <nav>
                       <ul class="nav">
                         <li class="nav-item">
-                          <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                          <a id="recepcion" class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                         </li>
                           <li class="nav-item">
-                          <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
+                          <a id="citas" class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
                         </li>
                           <li class="nav-item">
-                          <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                          <a id="charlas" class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                          <a id="recaudos" class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
                         </li>
                 
                         <li class="nav-item">
-                          <a class="nav-link" href="../Reportes.aspx">Reportes</a>
+                          <a id="reportes" class="nav-link" href="../Reportes.aspx">Reportes</a>
                         </li>        
                         <%--<li class="nav-item">
                           <a class="nav-link" href="#">Administración</a>
@@ -435,7 +435,31 @@
         
          <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
-     
+      <script type="text/javascript">
+          var str = "../" + location.href.toLowerCase().split("/").pop() + ".aspx";
+          var second = location.href.toLowerCase().split("/");
+         // alert(second[second.length - 1]);
+          $(".nav").find(".active").removeClass("active");
+         
+           //str.includes
+          $(".nav li a").each(function () {
+              //var a = $(this).attr("href").toLowerCase();
+              //alert(str + " - " + $(this).attr("href").toLowerCase());
+
+             
+              //alert("IF - "+str.endsWith($(this).attr("href").toLowerCase()));
+              if (str.endsWith($(this).attr("href").toLowerCase())) {
+           
+            //$("nav-link.active").removeClass("active");
+            $(this).addClass("active");
+            }
+    });
+    //$("nav-link.active").parents().each(function(){
+    //    if ($(this).is("a")){
+    //        $(this).addClass("active");
+    //    }
+    //});
+          </script>
  
 </div><!-- container-fluid -->
 </form>

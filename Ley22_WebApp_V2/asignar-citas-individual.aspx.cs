@@ -446,8 +446,14 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
     protected void BtnHoy_Click(object sender, EventArgs e)
     {
- 
 
+        var dia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        while (dia.DayOfWeek != DayOfWeek.Sunday)
+        {
+            dia = dia.AddDays(-1);
+        }
+        Session["FechaBase"] = new DateTime(dia.Year, dia.Month, dia.Day);
+        GenerarCalendario();
     }
 
     protected void BtnLeft_Click(object sender, EventArgs e)

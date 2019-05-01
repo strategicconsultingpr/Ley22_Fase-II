@@ -232,7 +232,6 @@ public partial class cargar_documentos : System.Web.UI.Page
             DdlDocumento.DataSource = mylib.ListarTipodeDocumentosPorParticipanteOrdenJudicial(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             DdlDocumento.DataBind();
             DdlDocumento.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
         }
     }
 

@@ -95,7 +95,7 @@
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" title="Imprimir" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>

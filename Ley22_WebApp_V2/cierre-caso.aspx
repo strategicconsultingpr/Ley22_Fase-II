@@ -28,9 +28,9 @@
                             <div class="col-md-3">
 
                                 <div class="form-group">
-                                    <label for="sexo">Orden Judicial</label>
-                                    <asp:DropDownList ID="DdlNumeroOrdenJudicial" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ControlToValidate="DdlNumeroOrdenJudicial" InitialValue="0" ID="RequiredFieldValidator1" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="*Requerido"></asp:RequiredFieldValidator>
+                                    <label for="caso">Numero de Caso Criminal</label>
+                                    <asp:DropDownList ID="DdlCasoCriminal" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlCasoCriminal_Selected"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ControlToValidate="DdlCasoCriminal" InitialValue="0" ID="RequiredFieldValidator1" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="*Requerido"></asp:RequiredFieldValidator>
 
                                 </div>
 
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="sexo">Motivo de Cierre</label>
                                     <asp:DropDownList ID="DdlMotivoCierre" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ControlToValidate="DdlMotivoCierre" InitialValue="0" ID="RequiredFieldValidator2" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="*Requerido"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="DdlMotivoCierre" InitialValue="0" ID="RequiredFieldValidator2" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="*Requerido" Enabled="false"></asp:RequiredFieldValidator>
                                 </div>
 
                             </div>
@@ -69,7 +69,7 @@
 
                                 <div class="form-group">
                                     <label for="adjuntar-documento-aprobacion">Adjuntar Documento de Aprobación</label>
-                                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-file" aria-describedby="fileHelp" />
+                                    <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-file" aria-describedby="fileHelp" Enabled="false"/>
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@
 
                                 <div class="form-group">
                                     <label for="comentarios">Comentarios</label>
-                                    <asp:TextBox ID="TxtCometarios" runat="server" class="form-control" TextMode="MultiLine" placeholder="Ingrese aquí el motivo del cierre" MaxLength="4096"></asp:TextBox>
+                                    <asp:TextBox ID="TxtCometarios" runat="server" class="form-control" TextMode="MultiLine" placeholder="Ingrese aquí el motivo del cierre" MaxLength="4096" Enabled="false"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtCometarios"  ID="RequiredFieldValidator3" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="*Requerido"></asp:RequiredFieldValidator>
 
                                         </div>

@@ -50,9 +50,9 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<Tribunal> Tribunals { get; set; }
         public virtual DbSet<DesempleoRazon> DesempleoRazons { get; set; }
         public virtual DbSet<TS_Excepciones> TS_Excepciones { get; set; }
-        public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
         public virtual DbSet<ControldePago> ControldePagoes { get; set; }
+        public virtual DbSet<Documento> Documentos { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -1310,6 +1310,27 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_Programa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarExcepcionesTrabajadorSocialAdmin_Result>("ListarExcepcionesTrabajadorSocialAdmin", fechaInicialParameter, fechaFinalParameter, id_ProgramaParameter);
+        }
+    
+        public virtual int GuardarDocumento(string documento, string archivo, Nullable<int> importante, Nullable<int> recurrente)
+        {
+            var documentoParameter = documento != null ?
+                new ObjectParameter("Documento", documento) :
+                new ObjectParameter("Documento", typeof(string));
+    
+            var archivoParameter = archivo != null ?
+                new ObjectParameter("Archivo", archivo) :
+                new ObjectParameter("Archivo", typeof(string));
+    
+            var importanteParameter = importante.HasValue ?
+                new ObjectParameter("Importante", importante) :
+                new ObjectParameter("Importante", typeof(int));
+    
+            var recurrenteParameter = recurrente.HasValue ?
+                new ObjectParameter("Recurrente", recurrente) :
+                new ObjectParameter("Recurrente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarDocumento", documentoParameter, archivoParameter, importanteParameter, recurrenteParameter);
         }
     }
 }

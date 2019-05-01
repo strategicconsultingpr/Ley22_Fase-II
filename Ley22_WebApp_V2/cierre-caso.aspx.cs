@@ -41,20 +41,31 @@ public partial class cierre_caso : System.Web.UI.Page
             }
         }
     void BindOrdenJudicial()
+    {
+        try
         {
-        using( Ley22Entities mylib = new Ley22Entities() )
+
+
+            using (Ley22Entities mylib = new Ley22Entities())
             {
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
-            DdlNumeroOrdenJudicial.DataBind();
-            DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+                DdlCasoCriminal.DataTextField = "NumeroCasoCriminal";
+                DdlCasoCriminal.DataValueField = "Id_CasoCriminal";
+                DdlCasoCriminal.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+                DdlCasoCriminal.DataBind();
+                DdlCasoCriminal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
             }
         }
-    void BindMotivoCierra()
+        catch (Exception ex)
         {
-        using( Ley22Entities mylib = new Ley22Entities() )
+            Response.Write("<script language=javascript>alert('"+ex.Message+"');</script>");
+        }
+    }
+    void BindMotivoCierra()
+    {
+        try
+        {
+            using ( Ley22Entities mylib = new Ley22Entities() )
             {
             DdlMotivoCierre.DataTextField = "MotivoCierre";
             DdlMotivoCierre.DataValueField = "Id_MotivoCierre";
@@ -63,6 +74,33 @@ public partial class cierre_caso : System.Web.UI.Page
             DdlMotivoCierre.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             }
         }
+        catch (Exception ex)
+        {
+            Response.Write("<script language=javascript>alert('" + ex.Message + "');</script>");
+        }
+    }
+
+    protected void DdlCasoCriminal_Selected(object sender, EventArgs e)
+    {
+        if (DdlCasoCriminal.SelectedValue == "0")
+        {
+
+            
+            DdlMotivoCierre.Enabled = false;
+            FileUpload1.Enabled = false;
+            TxtCometarios.Enabled = false;
+
+            DdlMotivoCierre.SelectedIndex = 0;
+            TxtCometarios.Text = "";        
+        }
+        else
+        {
+            DdlMotivoCierre.Enabled = true;
+            FileUpload1.Enabled = true;
+            TxtCometarios.Enabled = true;
+        }       
+    }
+
     protected void BtnGuardar_Click(object sender, EventArgs e)
         {
 
@@ -71,9 +109,9 @@ public partial class cierre_caso : System.Web.UI.Page
             try
                 {
                 string filename = Path.GetFileName(FileUpload1.FileName);
-                FileUpload1.SaveAs(Server.MapPath("~/UploadSoporteCierreCaso/") + DdlNumeroOrdenJudicial.SelectedValue+"-"+filename);
+                FileUpload1.SaveAs(Server.MapPath("~/UploadSoporteCierreCaso/") + DdlCasoCriminal.SelectedValue+"-"+filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
-                ActualizarCierreOrden(DdlNumeroOrdenJudicial.SelectedValue + "-" + filename);
+                ActualizarCierreOrden(DdlCasoCriminal.SelectedValue + "-" + filename);
                 }
             catch( Exception ex )
                 {
@@ -91,7 +129,7 @@ public partial class cierre_caso : System.Web.UI.Page
         using ( Ley22Entities mylib = new Ley22Entities() )
             {
 
-            mylib.CerrarCasoCriminal(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),
+            mylib.CerrarCasoCriminal(Convert.ToInt32(DdlCasoCriminal.SelectedValue),
                 Convert.ToInt32(DdlMotivoCierre.SelectedValue),
                 TxtCometarios.Text,
                 FileName,

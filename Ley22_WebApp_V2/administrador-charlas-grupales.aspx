@@ -545,6 +545,8 @@
                                 <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla">Crear Charla</a>
                                 </div>
                             </div>
+                            <br />
+                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver al Dashboard</a>
                         </div>
                     </div>
                 </div>

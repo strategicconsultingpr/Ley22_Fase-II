@@ -244,6 +244,10 @@
     <Content Include="EmailReciboPago.html" />
     <Content Include="EmailReciboPago_PDF.html" />
     <Content Include="images\64951510234941531.png" />
+    <Content Include="images\calendar_icon.png" />
+    <Content Include="images\certificate_icon.png" />
+    <Content Include="images\certificate_icon_blue.png" />
+    <Content Include="images\clock_icon.png" />
     <Content Include="images\derecha.png" />
     <Content Include="images\facebook-circle-colored.png" />
     <Content Include="images\inbox-rojo.png" />
@@ -251,6 +255,7 @@
     <Content Include="images\izquierda.png" />
     <Content Include="images\logo_1.jpg" />
     <Content Include="images\logo_2.png" />
+    <Content Include="images\Logo_assmca_footer.png" />
     <Content Include="images\twitter-circle-colored.png" />
     <Content Include="images\vk-circle-colored.png" />
     <Content Include="images\youtube-circle-colored.png" />
@@ -799,7 +804,13 @@
     <Compile Include="nuevo-usuario.aspx.designer.cs">
       <DependentUpon>nuevo-usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\BuscarSEPSPersonaXNroSeguroSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\BusquedaSencilladePersonasRecepcion_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\BusquedaSencilladePersonas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\Calendario.cs">
@@ -808,13 +819,25 @@
     <Compile Include="Old_App_Code\CasoCriminal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\CCG_Excepciones.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Centro.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\CharlaGrupal.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Ciudad.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ConsultarCasosXPersona_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ConsultarCharlasPorParticipante_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ControldePago.cs">
@@ -830,6 +853,9 @@
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\DocumentosPorParticipante.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\FormadePago.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\InfoCharlaGrupal_Result.cs">
@@ -856,16 +882,28 @@
     <Compile Include="Old_App_Code\ListarCitasCalendarioUsuario_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarCitasCalendario_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarDocumentosActivos_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarDocumentosRecibidosCasoCriminal_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarDocumentosRecibidos_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocialAdmin_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarExcepcionesTrabajadorSocial_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ListarOrdenesJudicialesActivas_Result.cs">
@@ -890,7 +928,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelSeps.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\MotivoCierre.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\NivelesdelasCharla.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\OrdenesJudiciale.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Participante.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ParticipantesPorCharla.cs">
@@ -900,6 +947,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\PERMISO.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Precio.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Programas_Region_Mapping.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Region.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\ResumendeAsistenciasCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\SA_LKP_CATEGORIAS_CENTROS_PRIVADOS.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
@@ -942,6 +1004,42 @@
     </Compile>
     <Compile Include="Old_App_Code\SA_Ref_RazonTH.cs">
       <DependentUpon>Perfiles_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\SA_USUARIO_PERMISO_Mapping.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_Ciudad_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_NivelesdelasCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_Regiones_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READALL_TipodeCharlas_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\Sp_Read_CalendariobyId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_CentrobyRegion_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_ParticipantesxId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_SA_PERSONAxId_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\sp_READ_TrabajadorSocialbyCentro_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TipodeCharla.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_App_Code\TrabajadorSocial.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\Tribunal.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
@@ -1163,99 +1261,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelLey22.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\BuscarSEPSPersonaXNroSeguroSocial_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\BusquedaSencilladePersonas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\CCG_Excepciones.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Centro.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Ciudad.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ConsultarEpisodiosXPersona_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\FormadePago.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarCitasCalendario_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarDocumentosActivos_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarExcepcionesCharlaGrupal_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ListarMotivosCierre_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\MotivoCierre.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\NivelesdelasCharla.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Participante.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\PERMISO.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Precio.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Programas_Region_Mapping.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Region.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\ResumendeAsistenciasCharlas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\SA_USUARIO_PERMISO_Mapping.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READALL_Ciudad_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READALL_NivelesdelasCharlas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READALL_Regiones_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READALL_TipodeCharlas_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\Sp_Read_CalendariobyId_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READ_CentrobyRegion_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READ_ParticipantesxId_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READ_SA_PERSONAxId_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\sp_READ_TrabajadorSocialbyCentro_Result.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\TipodeCharla.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Old_App_Code\TrabajadorSocial.cs">
-      <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
     <Compile Include="Old_App_Code\ModelSeps.Context1.cs">
       <AutoGen>True</AutoGen>

@@ -147,6 +147,7 @@
           <Property Name="FechadeRevision" Type="datetime" />
           <Property Name="Activo" Type="int" Nullable="false" />
           <Property Name="Importante" Type="int" />
+          <Property Name="Recurrente" Type="int" />
         </EntityType>
         <EntityType Name="DocumentosPorParticipantes">
           <Key>
@@ -471,6 +472,12 @@
           <Parameter Name="Id_Programa" Type="int" Mode="In" />
           <Parameter Name="Id_Usuario" Type="varchar" Mode="In" />
           <Parameter Name="Id_Precio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Documento" Type="varchar" Mode="In" />
+          <Parameter Name="Archivo" Type="varchar" Mode="In" />
+          <Parameter Name="Importante" Type="int" Mode="In" />
+          <Parameter Name="Recurrente" Type="int" Mode="In" />
         </Function>
         <Function Name="GuardarDocumentoPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Documento" Type="int" Mode="In" />
@@ -1088,7 +1095,6 @@
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
           <EntitySet Name="CasoCriminals" EntityType="Ley22Model.CasoCriminal" />
           <EntitySet Name="ControldePagoes" EntityType="Ley22Model.ControldePago" />
           <AssociationSet Name="FK_Tribunal_Tribunal_Id_Tribunal" Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal">
@@ -1128,6 +1134,13 @@
             <Parameter Name="fechaInicial" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Documentos" EntityType="Ley22Model.Documento" />
+          <FunctionImport Name="GuardarDocumento">
+            <Parameter Name="Documento" Mode="In" Type="String" />
+            <Parameter Name="Archivo" Mode="In" Type="String" />
+            <Parameter Name="Importante" Mode="In" Type="Int32" />
+            <Parameter Name="Recurrente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1759,17 +1772,6 @@
           <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
         </ComplexType>
-        <EntityType Name="Documento">
-          <Key>
-            <PropertyRef Name="Id_Documento" />
-          </Key>
-          <Property Name="Id_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Documento1" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
-          <Property Name="Activo" Type="Int32" Nullable="false" />
-          <Property Name="Importante" Type="Int32" />
-        </EntityType>
         <EntityType Name="CasoCriminal">
           <Key>
             <PropertyRef Name="Id_CasoCriminal" />
@@ -1888,6 +1890,18 @@
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
           <Property Type="String" Name="NombreCompleto" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="Id_Documento" />
+          </Key>
+          <Property Name="Id_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento1" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="FechadeRevision" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Int32" Nullable="false" />
+          <Property Name="Importante" Type="Int32" />
+          <Property Name="Recurrente" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2607,18 +2621,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Documentos">
-            <EntityTypeMapping TypeName="Ley22Model.Documento">
-              <MappingFragment StoreEntitySet="Documentos">
-                <ScalarProperty Name="Importante" ColumnName="Importante" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="Documento1" ColumnName="Documento" />
-                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CasoCriminals">
             <EntityTypeMapping TypeName="Ley22Model.CasoCriminal">
               <MappingFragment StoreEntitySet="CasoCriminal">
@@ -2742,6 +2744,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Ley22Model.Documento">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="Recurrente" ColumnName="Recurrente" />
+                <ScalarProperty Name="Importante" ColumnName="Importante" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechadeRevision" ColumnName="FechadeRevision" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="Documento1" ColumnName="Documento" />
+                <ScalarProperty Name="Id_Documento" ColumnName="Id_Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarDocumento" FunctionName="Ley22Model.Store.GuardarDocumento" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

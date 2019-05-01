@@ -438,7 +438,7 @@
       <script type="text/javascript">
           var str = "../" + location.href.toLowerCase().split("/").pop() + ".aspx";
           var second = location.href.toLowerCase().split("/");
-         // alert(second[second.length - 1]);
+         // alert(second[second.length - 2]);
           $(".nav").find(".active").removeClass("active");
          
            //str.includes

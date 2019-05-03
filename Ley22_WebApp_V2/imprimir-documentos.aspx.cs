@@ -14,33 +14,59 @@ public partial class imprimir_documentos : System.Web.UI.Page
 {
     static string prevPage = String.Empty;
     ApplicationUser ExistingUser = new ApplicationUser();
+    ApplicationDbContext context;
+    UserManager<ApplicationUser> userManager;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Request.UrlReferrer == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Info;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
+
         ExistingUser = (ApplicationUser)Session["User"];
         if (!Page.IsPostBack)
         {
-            //prevPage = Request.UrlReferrer.ToString();
+            prevPage = Request.UrlReferrer.ToString();
 
-            ApplicationDbContext context = new ApplicationDbContext();
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            context = new ApplicationDbContext();
+            userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin"))
             {
                 divUpload.Visible = true;
             }
             ListarDocumentos();
-        }
-
-            
+        }      
     }
 
-    private void ListarDocumentos()
+    void ListarDocumentos()
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
+            
             GvDocumentos.DataSource = mylib.ListarDocumentosActivos();
-            GvDocumentos.DataBind();
+            GvDocumentos.DataBind();           
         }
+    }
+
+    protected void GvDocumentos_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{
+        //    e.Row.Cells[3].Visible = false;           
+        //}
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (!userManager.IsInRole(ExistingUser.Id, "SuperAdmin"))
+            {
+                e.Row.Cells[3].Visible = false;
+            }
+        }
+        
     }
 
     protected void lnkImprimir_Click(object sender, EventArgs e)
@@ -61,23 +87,28 @@ public partial class imprimir_documentos : System.Web.UI.Page
 
     protected void lnkEliminar_Click(object sender, EventArgs e)
     {
-        //LinkButton btn = (LinkButton)(sender);
-        //int Id_DocumentoPorParticipante = Convert.ToInt32(btn.CommandArgument);
-       
+        LinkButton btn = (LinkButton)(sender);
+        int Id_Documento = Convert.ToInt32(btn.CommandArgument);
 
-        //string Id = Session["Id_Participante"].ToString();
-        //using (Ley22Entities mylib = new Ley22Entities())
-        //{
-        //    mylib.EliminarDocuemntoPorParticipante(Id_DocumentoPorParticipante);
-        //}
-        //foreach (GridViewRow item in GvRecepcionDocumentos.Rows)
-        //{
-        //    if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
-        //    {
-        //        File.Delete("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
-        //    }
-        //}
-       
+        try
+        {
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                mylib.EliminarDocumentoActivo(Id_Documento);
+            }
+            foreach (GridViewRow item in GvDocumentos.Rows)
+            {
+                if (GvDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_Documento.ToString())
+                {
+                    File.Delete(MapPath("~/Documentos/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
+                }
+            }
+           // ListarDocumentos();
+        }
+        catch (Exception ex)
+        {
+            
+        }
     }
 
     protected void BtnSubirDocumento_Click(object sender, EventArgs e)
@@ -100,7 +131,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
                         mylib.GuardarDocumento(Documento, Archivo, ChkImportante.Checked == true ? 1 : 0, ChkRecurrente.Checked == true ? 1 : 0);
                     }
 
-                    ListarDocumentos();
+                //    ListarDocumentos();
                }
             }
             catch (Exception ex)
@@ -108,6 +139,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
                 // StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
             }
         }
+      
 
     }
 

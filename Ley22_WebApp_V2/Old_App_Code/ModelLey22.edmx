@@ -409,6 +409,9 @@
         <Function Name="EliminarDocuemntoPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_DocumentoPorParticipante" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarDocumentoActivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Documento" Type="int" Mode="In" />
+        </Function>
         <Function Name="EliminarExcepcionesTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Excepciones" Type="int" Mode="In" />
         </Function>
@@ -1141,6 +1144,9 @@
             <Parameter Name="Archivo" Mode="In" Type="String" />
             <Parameter Name="Importante" Mode="In" Type="Int32" />
             <Parameter Name="Recurrente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarDocumentoActivo">
+            <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2758,6 +2764,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GuardarDocumento" FunctionName="Ley22Model.Store.GuardarDocumento" />
+          <FunctionImportMapping FunctionImportName="EliminarDocumentoActivo" FunctionName="Ley22Model.Store.EliminarDocumentoActivo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

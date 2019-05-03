@@ -1332,5 +1332,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarDocumento", documentoParameter, archivoParameter, importanteParameter, recurrenteParameter);
         }
+    
+        public virtual int EliminarDocumentoActivo(Nullable<int> id_Documento)
+        {
+            var id_DocumentoParameter = id_Documento.HasValue ?
+                new ObjectParameter("Id_Documento", id_Documento) :
+                new ObjectParameter("Id_Documento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarDocumentoActivo", id_DocumentoParameter);
+        }
     }
 }

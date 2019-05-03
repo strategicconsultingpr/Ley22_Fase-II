@@ -1,20 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" Inherits="imprimir_documentos" Codebehind="imprimir-documentos.aspx.cs" %>
            <%@ Register Src="~/WUC/WUCUsuario.ascx" TagPrefix="uc1" TagName="WUCUsuario" %>
-<asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
-   <script type="text/javascript" language="javascript">
 
-$(document).ready(function() 
-
-{
-
-  $('#<%=GvDocumentos.ClientID %>').Scrollable();
-
-}
-
-)
-
-</script>
-</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
 
@@ -54,7 +40,7 @@ $(document).ready(function()
         <br />
         <div class="card">
             <div class="card-header">
-                Documentos Impresión: Usuario: <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                Documentos para Imprimir
                 
                 <asp:Button ID="BtnCancelar" runat="server" Text="Volver" CssClass="btn btn-primary mr-3" style="position:relative; float:right; margin-right:50px;" OnClick="BtnCancelar_Click" CausesValidation="false" />
             
@@ -69,7 +55,7 @@ $(document).ready(function()
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10 col-md-12">
 
-                        <asp:GridView ID="GvDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" GridLines="None" CellSpacing="-1" AllowPaging="true" PageSize="30">
+                        <asp:GridView ID="GvDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" GridLines="None" CellSpacing="-1" PageSize="30" OnRowDataBound="GvDocumentos_RowDataBound" DataKeyNames="Id_Documento, Archivo">
                             <Columns>
                                 <asp:BoundField DataField="Documento" HeaderText="Documento" />
                                 <asp:BoundField DataField="FechadeRevision" HeaderText="Fecha de Revisión" DataFormatString="{0:MM/dd/yyyy}" />
@@ -80,7 +66,7 @@ $(document).ready(function()
                                 </asp:TemplateField>
                                  <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClick="lnkEliminar_Click" OnClientClick="return confirm('Seguro de querer borrar el documento?');" CausesValidation="false" CommandArgument='<%# Bind("Id_Documento") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClientClick="return confirm('Esta seguro de querer borrar este documento?');" OnClick="lnkEliminar_Click" CausesValidation="false" CommandArgument='<%# Bind("Id_Documento") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -102,7 +88,67 @@ $(document).ready(function()
 
     </div>
     <!-- container-fluid -->
+     <script type="text/javascript">
 
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+         }
+
+         //$(document).ready(function () {
+         //    $('lnkEliminar').click(function () {
+         //        swal({
+         //        title: "Are you sure?",
+         //        text: "Once deleted, you will not be able to recover this imaginary file!",
+         //        icon: "warning",
+         //        buttons: true,
+         //        dangerMode: true,
+         //    })
+         //        .then((willDelete) => {
+         //            if (willDelete) {
+         //                swal("Poof! Your imaginary file has been deleted!", {
+         //                    icon: "success",
+         //                });
+
+         //                return true;
+         //                alert("true");
+         //            } else {
+         //                swal("Your imaginary file is safe!");
+         //                return false;
+         //                alert("false");
+         //            }
+         //        });
+         //    })
+         //})
+
+         function alertaBorrar() {
+
+             swal({
+                 title: "Are you sure?",
+                 text: "Once deleted, you will not be able to recover this imaginary file!",
+                 icon: "warning",
+                 buttons: true,
+                 dangerMode: true,
+             })
+                 .then((willDelete) => {
+                     if (willDelete) {
+                         swal("Poof! Your imaginary file has been deleted!", {
+                             icon: "success",
+                         });
+
+                         return true;
+                         alert("true");
+                     } else {
+                         swal("Your imaginary file is safe!");
+                         return false;
+                         alert("false");
+                     }
+                 });
+             alert("final");
+             //return false;
+             
+         }
+
+    </script>
 
 
 </asp:Content>

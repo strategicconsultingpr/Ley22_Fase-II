@@ -96,6 +96,9 @@
                           <li class="nav-item">
                           <a class="nav-link" href="../Reportes.aspx">Reportes</a>
                         </li> 
+                          <li class="nav-item">
+                          <a class="nav-link" href="../imprimir-documentos.aspx">Documentos</a>
+                        </li> 
                       </ul>
                     </nav>  
                     </div>
@@ -123,9 +126,9 @@
                         <li class="nav-item">
                           <a id="reportes" class="nav-link" href="../Reportes.aspx">Reportes</a>
                         </li>        
-                        <%--<li class="nav-item">
-                          <a class="nav-link" href="#">Administración</a>
-                        </li>--%>
+                        <li class="nav-item">
+                          <a class="nav-link" href="../imprimir-documentos.aspx">Documentos</a>
+                        </li> 
                    
                       </ul>
                     </nav>  
@@ -141,9 +144,9 @@
                         <li class="nav-item">
                           <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
                         </li>                
-                        <li class="nav-item">
+                        <%--<li class="nav-item">
                           <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
-                        </li>                                      
+                        </li>  --%>                                    
                            <li class="nav-item">
                           <a class="nav-link" href="../trabajor-excepciones.aspx">Mi Calendario de Citas</a>
                         </li>
@@ -177,7 +180,10 @@
                   <ul class="nav">
                     <li class="nav-item">
                       <a class="nav-link" href="../entrada.aspx">Recepción y Citas</a>
-                    </li>                                
+                    </li>     
+                      <li class="nav-item">
+                          <a class="nav-link" href="../imprimir-documentos.aspx">Documentos</a>
+                        </li> 
                   </ul>
                 </nav>  
                 </div>
@@ -204,6 +210,8 @@
 
       </RoleGroups>
       </asp:LoginView>
+
+
 
 <%--Supervisor--%>
      <%-- <asp:LoginView runat="server" ViewStateMode="Disabled">

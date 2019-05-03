@@ -66,15 +66,6 @@ public partial class imprimir_documentos {
     protected global::System.Web.UI.WebControls.Button BtnSubirDocumento;
     
     /// <summary>
-    /// WUCUsuario control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::WUC_WUCUsuario WUCUsuario;
-    
-    /// <summary>
     /// BtnCancelar control.
     /// </summary>
     /// <remarks>

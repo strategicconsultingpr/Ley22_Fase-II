@@ -143,7 +143,7 @@
     <div class="card">
 
         <div class="card-header">
-            Próximo Paso. Usuario: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
+            Tablero de Perfil: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
         </div>
 
    <!-- Bloque Principal -->
@@ -176,10 +176,10 @@
                                 <asp:LinkButton ID="LnkBtnCasos" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCasos"></asp:LinkButton>
                             </span>
                         </li>
-                        <li class="list-group-item justify-content-between">Licencia          
+                       <%-- <li class="list-group-item justify-content-between">Licencia          
                             <span>
                                 <asp:Literal ID="LitLicencia" runat="server"></asp:Literal></span>
-                        </li>
+                        </li>--%>
                         <li class="list-group-item justify-content-between">
                             <strong>Estatus: </strong><asp:Literal ID="LitEstatus" runat="server"></asp:Literal>                            
                         </li>
@@ -200,7 +200,7 @@
                         </li>
                     </ul>
 
-                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Registro de Usuario</a>
+                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Tablero de Perfil</a>
                 </div>
 
                 <!-- Bloque Interior -->
@@ -228,7 +228,7 @@
                                                             <p class="mt-4">
                                                                 <a href="OrdenNuevo.aspx">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                                                        <img src="../images/caso-icon.png" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>                                   

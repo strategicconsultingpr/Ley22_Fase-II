@@ -10,7 +10,7 @@
 
         <div class="card mb-5">
             <div class="card-header">
-                Balance de Cuenta. Usuario: <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                Balance de Cuenta. Participante: <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
  
             </div>
             <div class="card-block">
@@ -23,11 +23,11 @@
 
                         <div class="row mb-4 bt pt-4">
                             <div class="col-md-6">
-                                <strong>Registrar Pago</strong>
+                                <strong>Historial Financiero</strong>
                             </div>
 
                             <div class="col-md-3">
-                                    <strong><label for="orden">Orden Judicial</label></strong> 
+                                    <strong><label for="orden">Caso Criminal</label></strong> 
 
 
                                           <div class="row">
@@ -52,7 +52,7 @@
                         <nav>
                           <ul class="nav">
                               <li class="nav-item">
-                              <a id="pagar" class="nav-link active" href="#" onclick="Pagar()">Realizar Pago</a>
+                              <a id="pagar" class="nav-link active" href="#" onclick="Pagar()">Historial de Cargos</a>
                             </li>
                             <li class="nav-item">
                               <a id="historial" class="nav-link" href="#" onclick="Historial()">Historial de Pagos</a>

@@ -9,7 +9,7 @@
 
         <div class="card">
             <div class="card-header">
-                Cierre de Caso - Usuario:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+                Cierre de Caso - Participante:  <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
              </div>
  
             <div class="card-block">

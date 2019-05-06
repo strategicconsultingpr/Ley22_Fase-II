@@ -245,6 +245,7 @@
     <Content Include="EmailReciboPago_PDF.html" />
     <Content Include="images\64951510234941531.png" />
     <Content Include="images\calendar_icon.png" />
+    <Content Include="images\caso-icon.png" />
     <Content Include="images\certificate_icon.png" />
     <Content Include="images\certificate_icon_blue.png" />
     <Content Include="images\clock_icon.png" />

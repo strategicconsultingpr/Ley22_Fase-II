@@ -9,22 +9,38 @@ using Ley22_WebApp_V2.Old_App_Code;
 
 public partial class listado_perfiles : System.Web.UI.Page
 {
-    
+    protected Data_SA_Persona du;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["User"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
+        if (Session["SA_Persona"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor seleccione el participante";
+            Session["Redirect"] = "Entrada.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
+
         if (!Page.IsPostBack)
         {
-            if (Session["DataParticipante"] != null)
-            {
-                DataParticipante du = (DataParticipante)Session["DataParticipante"];
+          
+                du = (Data_SA_Persona)Session["SA_Persona"];
 
-                LitIUP.Text = du.IUP.ToString();
-                LitLicencia.Text = du.Licencia;
+                LitIUP.Text = du.PK_Persona.ToString();
+                
                 LitEpisodio.Text = Request.QueryString["pk_episodio"].ToString();
-            }
-            LoadPerfiles();
-            //int TotalReg = BindGridView(1);
-            //this.FillJumpToList(TotalReg);
+            
+                LoadPerfiles();
+           
         }
     }
 

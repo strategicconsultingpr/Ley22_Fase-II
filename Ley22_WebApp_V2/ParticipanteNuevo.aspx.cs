@@ -126,6 +126,10 @@ namespace Ley22_WebApp_V2
                         
 
                     }
+                    else
+                    {
+                        BtnActualizar.Visible = true;
+                    }
              
                 }
             }

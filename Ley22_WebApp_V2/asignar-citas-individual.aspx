@@ -359,7 +359,7 @@
                         Caso Criminal
                     </div>
                     <div class="card-block">
-                        <label for="orden">Número asocialdo a la cita</label>
+                        <label for="orden">Número de caso criminal</label>
 
 
                         <div class="row">

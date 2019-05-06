@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-header">
-            Próximo Paso. Usuario:<uc1:WUCUsuario runat="server" ID="WUCUsuario" />
+            Historial del sistema SEPS: <uc1:WUCUsuario runat="server" ID="WUCUsuario" />
 
         </div>
         <div class="card-block">
@@ -29,12 +29,7 @@
                                <%-- <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaEpisodios"></asp:HyperLink>--%>
                                <asp:Literal ID="LitEpisodio" runat="server"></asp:Literal>
                             </span>
-                        </li>
-                        <li class="list-group-item justify-content-between">Licencia
-           
-                            <span>
-                                <asp:Literal ID="LitLicencia" runat="server"></asp:Literal></span>
-                        </li>
+                        </li>                      
 
                         <li class="list-group-item justify-content-between">
                             <strong>Estatus</strong>
@@ -45,28 +40,12 @@
                     </ul>
 
 
-                    <p class="mb-4">Históricos:</p>
-
-
-                    <ul class="list-group mb-4 pb-4 slim">
-                        <li class="list-group-item justify-content-between">
-
-                            <span>
-                                <asp:HyperLink ID="HLCitas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCitas"></asp:HyperLink>
-                            </span>
-                        </li>
-                        <li class="list-group-item justify-content-between">
-
-                            <span>
-                                <asp:HyperLink ID="HlCharlas" runat="server" ForeColor="Blue" data-toggle="modal" data-target="#myModalListaCharlas"></asp:HyperLink>
-                            </span>
-                        </li>
-                    </ul>
+                   
 
 
 
 
-                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Registro de Usuario</a>
+                    <a href="seleccion-proximo-paso.aspx" class="btn btn-secondary btn-block mb-4">Volver al Tablero de Perfil</a>
                    </div>
                 </div>
            

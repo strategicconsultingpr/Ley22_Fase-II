@@ -39,15 +39,6 @@ public partial class listado_perfiles {
     protected global::System.Web.UI.WebControls.Literal LitEpisodio;
     
     /// <summary>
-    /// LitLicencia control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Literal LitLicencia;
-    
-    /// <summary>
     /// LitEstatus control.
     /// </summary>
     /// <remarks>
@@ -55,24 +46,6 @@ public partial class listado_perfiles {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Literal LitEstatus;
-    
-    /// <summary>
-    /// HLCitas control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HLCitas;
-    
-    /// <summary>
-    /// HlCharlas control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HlCharlas;
     
     /// <summary>
     /// gvPerfiles control.

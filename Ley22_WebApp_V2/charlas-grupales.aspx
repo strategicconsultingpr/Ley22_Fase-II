@@ -446,7 +446,7 @@
      
                     </div>
                     <div class="card-block">
-                        <p>Seleccione la región y haga clic en el calendario para ver la lista de asistentes.</p>
+                        <p>Seleccione el centro y haga clic en el calendario para ver la lista de charlas y sus participantes.</p>
                         <%--<div class="form-group">
                             <label for="orden">Región</label>
                             <asp:DropDownList ID="DdlRegion" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlRegion_SelectedIndexChanged"></asp:DropDownList>

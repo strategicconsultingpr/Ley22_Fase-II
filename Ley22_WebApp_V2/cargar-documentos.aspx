@@ -90,7 +90,7 @@
                                 <asp:BoundField DataField="Documento" HeaderText="Tipo de Documento" />
                                 <asp:BoundField DataField="PathNameDocumento" HeaderText="Documento" />
                                 <asp:BoundField DataField="FechaEntrega" HeaderText="Fecha de Entrega" DataFormatString="{0:MM/dd/yyyy}"/>            
-                                <asp:BoundField DataField="AprobadoTexto" HeaderText="Aprobado" />                       
+                                <%--<asp:BoundField DataField="AprobadoTexto" HeaderText="Aprobado" />  --%>                     
 
                                 <asp:TemplateField>
 

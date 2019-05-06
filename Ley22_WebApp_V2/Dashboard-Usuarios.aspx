@@ -6,7 +6,7 @@
 
     <div class="card">
         <div class="card-header">
-            Usuario:<asp:Literal ID="LitNombre" runat="server"></asp:Literal>
+            Tablero del Usuario: <asp:Literal ID="LitNombre" runat="server"></asp:Literal>
 
         </div>
         <div class="card-block">

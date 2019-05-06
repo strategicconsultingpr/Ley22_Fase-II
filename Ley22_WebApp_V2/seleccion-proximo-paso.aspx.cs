@@ -40,7 +40,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             du = (Data_SA_Persona)Session["SA_Persona"];
 
             LitIUP.Text = du.PK_Persona.ToString();
-            LitLicencia.Text = "12345";
+           // LitLicencia.Text = "12345";
             Programa = Convert.ToInt32(Session["Programa"].ToString());
             NombreParticipante.Text = Session["NombreParticipante"].ToString();
             NombrePrograma.Text = Session["NombrePrograma"].ToString();

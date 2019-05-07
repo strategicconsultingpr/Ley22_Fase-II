@@ -143,7 +143,7 @@
     <div class="card">
 
         <div class="card-header">
-            Tablero de Perfil: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
+            Tablero de Expediente: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
         </div>
 
    <!-- Bloque Principal -->

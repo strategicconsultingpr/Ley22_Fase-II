@@ -561,8 +561,7 @@
                                     <p class="mt-4">
                                         <a href="../Entrada.aspx">
                                             <span class="fa-stack fa-3x">
-                                               <%-- <i class="fas fa-circle fa-stack-2x" id="iCircleDoc" runat="server"></i>
-                                                <i class="fas fa-users fa-stack-1x fa-inverse"></i>--%>
+                                              
                                                 <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
                                             </span>
                                         </a>

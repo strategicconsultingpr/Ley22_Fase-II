@@ -192,8 +192,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             AsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             string mensaje = "El participante cumplió con la charla";
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('Cumplió','" + mensaje + "','success')", true);
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "NoCumplio", "openModal()", true);
-            // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            
             return;
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "NoAsistioParticipante")
@@ -201,8 +200,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             NoAsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             string mensaje = "El participante NO cumplió con la charla";
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('NO cumplió','" + mensaje + "','error')", true);
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "NoCumplio", "openModal()", true);
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            
             return;
         }
     }

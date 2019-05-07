@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.AppCode;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Ley22_WebApp_V2
 {
@@ -20,8 +21,33 @@ namespace Ley22_WebApp_V2
             if ((System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated && ((ApplicationUser)Session["User"] != null))
             {
                 ApplicationUser ExistingUser = (ApplicationUser)Session["User"];
+                string userId = ExistingUser.Id;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
                 Usuario.Text = ExistingUser.UserName + "<br/><small>"+ Session["Role_Usuario"].ToString() + "</small>";
-               
+
+                if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial")
+                   || userManager.IsInRole(userId, "Recepcion") || userManager.IsInRole(userId, "CoordinadorCharlas"))
+                {
+                    liExpediente.Visible = true;
+                    liDocumentos.Visible = true;
+                }
+                if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial"))
+                {
+                    liCitas.Visible = true;
+                }
+                if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "CoordinadorCharlas"))
+                {
+                    liCharlas.Visible = true;
+                }
+                if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "Recaudador"))
+                {
+                    liRecaudo.Visible = true;
+                    liReportes.Visible = true;
+                }
+
+
             }
             else
             {

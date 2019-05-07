@@ -1,6 +1,7 @@
 ﻿using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Ley22_WebApp_V2
     public partial class Dashboard_Usuarios : System.Web.UI.Page
     {
         ApplicationUser ExistingUser = new ApplicationUser();
+        ApplicationDbContext context = new ApplicationDbContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,14 +31,33 @@ namespace Ley22_WebApp_V2
                 }
 
                 ExistingUser = (ApplicationUser)Session["User"];
+                string userId = ExistingUser.Id;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
                 LitNombre.Text = ExistingUser.FirstName + " " + ExistingUser.LastName;
                 LitEmail.Text = ExistingUser.Email;
                 LitPrimerNombre.Text = ExistingUser.FirstName;
                 LitPrimerApellido.Text = ExistingUser.LastName;
 
-                
-                
-                
+                if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial") 
+                   || userManager.IsInRole(userId, "Recepcion") || userManager.IsInRole(userId, "CoordinadorCharlas"))                   
+                {
+                    divExpediente.Visible = true;
+                }
+                if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial"))
+                {
+                    divCitas.Visible = true;
+                }
+                if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "CoordinadorCharlas"))
+                {
+                    divCharlas.Visible = true;
+                }
+                if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "Recaudador"))
+                {
+                    divRecaudos.Visible = true;
+                    divReportes.Visible = true;
+                }                               
             }
         }
 

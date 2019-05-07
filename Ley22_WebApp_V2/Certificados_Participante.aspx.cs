@@ -191,7 +191,7 @@ namespace Ley22_WebApp_V2
                 var fechaInical = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Min();
                 var fechaFinal = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Max();
 
-                string nombrePrograma = dsPerfil.SA_PROGRAMA.Where(a => a.PK_Programa.Equals(Id_Programa)).Select(p => p.NB_Programa).SingleOrDefault();
+                string nombrePrograma = dsPerfil.SA_PROGRAMA.Where(a => a.PK_Programa.Equals(Id_Programa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN LEY 22 DE", "")).SingleOrDefault();
 
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/Certificado_" + Caso.Id_CasoCriminal + ".pdf";
 

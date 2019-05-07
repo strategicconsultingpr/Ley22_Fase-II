@@ -200,7 +200,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
         {
            
             short idPrograma = Convert.ToInt16(Session["Programa"]);
-            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa).Single();
+            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
 
             expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(Id_Participante)).Select(u => u.NR_Expediente).SingleOrDefault();
 

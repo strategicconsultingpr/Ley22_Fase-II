@@ -25,7 +25,7 @@ namespace Ley22_WebApp_V2
                 ApplicationDbContext context = new ApplicationDbContext();
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-                Usuario.Text = ExistingUser.UserName + "<br/><small>"+ Session["Role_Usuario"].ToString() + "</small>";
+                Usuario.Text = ExistingUser.FirstName + " " + ExistingUser.LastName + "<br/><small>"+ ExistingUser.Email + "</small>";
 
                 if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial")
                    || userManager.IsInRole(userId, "Recepcion") || userManager.IsInRole(userId, "CoordinadorCharlas"))

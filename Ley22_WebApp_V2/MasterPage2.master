@@ -23,7 +23,7 @@
     </asp:ContentPlaceHolder>
 
 </head>
-<body>
+<body class="login">
 
     <div class="container-fluid">
   <header class="row align-items-end main">

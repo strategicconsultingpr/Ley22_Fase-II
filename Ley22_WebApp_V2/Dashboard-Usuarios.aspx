@@ -23,7 +23,10 @@
                         </li>
                         <li class="list-group-item justify-content-between">Email:           
                             <span><asp:Literal ID="LitEmail" runat="server"></asp:Literal></span>
-                        </li>                                               
+                        </li> 
+                        <li class="list-group-item justify-content-between">Roles:           
+                            <span><asp:Literal ID="LitRoles" runat="server"></asp:Literal></span>
+                        </li>
                     </ul>
  
                  <%--<a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>--%>

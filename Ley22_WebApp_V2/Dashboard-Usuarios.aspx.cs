@@ -35,6 +35,13 @@ namespace Ley22_WebApp_V2
                 ApplicationDbContext context = new ApplicationDbContext();
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+                var roles = userManager.GetRoles(userId);
+
+                foreach (var rol in roles)
+                {
+                    LitRoles.Text += rol + " ";
+                }
+
                 LitNombre.Text = ExistingUser.FirstName + " " + ExistingUser.LastName;
                 LitEmail.Text = ExistingUser.Email;
                 LitPrimerNombre.Text = ExistingUser.FirstName;

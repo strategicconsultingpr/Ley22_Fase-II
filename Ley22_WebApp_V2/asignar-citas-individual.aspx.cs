@@ -547,20 +547,27 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                 else
                 {
-                    mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue),userId, Convert.ToInt32(DdlTipo.SelectedValue));
-
-                    string mensaje = "La cita fue creada correctamente.";
-                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);
-
-                    int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                    var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
-
-                    if (email.Count() > 0)
+                    try
                     {
+                        mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue), userId, Convert.ToInt32(DdlTipo.SelectedValue));
 
-                        EmailService mail = new EmailService();
-                        string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
-                        mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                        string mensaje = "La cita fue creada correctamente.";
+                        ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);
+
+                        int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                        var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
+
+                        if (email.Count() > 0)
+                        {
+
+                            EmailService mail = new EmailService();
+                            string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                            mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        
                     }
 
                     DdlTrabajadorSocial_SelectedIndexChanged(null, null);

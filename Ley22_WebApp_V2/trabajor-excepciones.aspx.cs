@@ -58,7 +58,7 @@ public partial class trabajor_excepciones : System.Web.UI.Page
                 usuarios_programas = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
             }
 
-            if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
+            if(!userManager.IsInRole(userId, "TrabajadorSocial"))
             {
                 DivBtnModalAsignarCita.Visible = false;
             }

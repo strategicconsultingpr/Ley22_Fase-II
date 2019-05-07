@@ -279,7 +279,6 @@
                                 <asp:TextBox runat="server" ID="TxtMaxCantParticipantes" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
                                 <asp:RequiredFieldValidator runat="server" ErrorMessage="*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtMaxCantParticipantes" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtMaxCantParticipantes" ForeColor="Red" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
-
                             </div>
                         </div>
                       <%--  <div class="col-md-6">

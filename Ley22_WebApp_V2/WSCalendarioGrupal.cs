@@ -244,8 +244,9 @@ namespace Ley22_WebApp_V2
                         }
 
                     }
-                    
-                    Parti += "<div class=\"col-md-4\">" + HrefPrint+ "<label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> </div> <div class=\"col-md-4\" style=\"text-align:center\">" + HrefRemover + "  -  " + HrefAsistio +"</div> "+ HrefEstatus;
+
+                    //Parti += "<div class=\"col-md-4\">" + HrefPrint+ "<label class=\"form-check-label\">" + c.NB_Primero + " " + c.AP_Primero + "</label> </div> <div class=\"col-md-4\" style=\"text-align:center\">" + HrefRemover + "  -  " + HrefAsistio +"</div> "+ HrefEstatus;
+                    Parti += "<div class=\"col-md-4\">" + HrefPrint + "<a href=\"#\"   onclick=\"javacript:__doPostBack('ExpedienteParticipante','" + c.Id_Participante + "')\">" + c.NB_Primero + " " + c.AP_Primero+"</a> </div> <div class=\"col-md-4\" style=\"text-align:center\">" + HrefRemover + "  -  " + HrefAsistio + "</div> " + HrefEstatus;
                     HrefPrint = "";
                 }
 

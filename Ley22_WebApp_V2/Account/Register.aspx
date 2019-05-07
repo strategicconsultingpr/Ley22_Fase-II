@@ -72,7 +72,10 @@
   </div>
 </div>
     <script type="text/javascript">
-       
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
+
         function sweetAlert(titulo,texto,icono) {
             swal(
               title: titulo,

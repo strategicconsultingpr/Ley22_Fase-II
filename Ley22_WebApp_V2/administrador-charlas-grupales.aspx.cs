@@ -203,6 +203,10 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             
             return;
         }
+        else if (Page.Request.Params["__EVENTTARGET"] == "ExpedienteParticipante")
+        {
+            ExpedienteParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+        }
     }
 
     void GenerarCalendario()
@@ -678,6 +682,53 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             DivBtnModalAsignarCita.Visible = true;
         }
         GenerarCalendario();
+    }
+
+    void ExpedienteParticipante(int idParticipante)
+    {
+       
+        int Id_Participante = idParticipante;
+
+        string expediente;
+
+        using (SEPSEntities1 mlib = new SEPSEntities1())
+        {
+
+            short idPrograma = Convert.ToInt16(DdlCentro.SelectedValue.ToString());
+            Session["Programa"] = DdlCentro.SelectedValue;
+            Session["NombrePrograma"] = DdlCentro.SelectedItem.Text;
+
+            expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(Id_Participante)).Select(u => u.NR_Expediente).SingleOrDefault();
+
+
+
+            var sa_personas = mlib.SA_PERSONA.Where(a => a.PK_Persona.Equals(Id_Participante)).Single();
+
+            Data_SA_Persona sa_persona = new Data_SA_Persona()
+            {
+                PK_Persona = sa_personas.PK_Persona,
+                NR_SeguroSocial = sa_personas.NR_SeguroSocial,
+                FK_Sexo = Convert.ToInt32(sa_personas.FK_Sexo),
+                NB_Primero = sa_personas.NB_Primero,
+                NB_Segundo = sa_personas.NB_Segundo,
+                AP_Primero = sa_personas.AP_Primero,
+                AP_Segundo = sa_personas.AP_Segundo,
+                FE_Nacimiento = Convert.ToDateTime(sa_personas.FE_Nacimiento),
+                FK_Veterano = Convert.ToInt32(sa_personas.FK_Veterano),
+                FK_GrupoEtnico = Convert.ToInt32(sa_personas.FK_GrupoEtnico),
+                FE_Edicion = Convert.ToDateTime(sa_personas.FE_Edicion),
+                TI_Edicion = Convert.ToChar(sa_personas.TI_Edicion)
+
+            };
+
+            Session["Id_Participante"] = sa_persona.PK_Persona;
+            Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero + " " + sa_persona.AP_Segundo;
+            //Session["NombreParticipante2"] = 9;
+            Session["SA_Persona"] = sa_persona;
+            Session["Expediente"] = expediente;
+
+            Response.Redirect("seleccion-proximo-paso.aspx", false);
+        }
     }
 
     void EliminarParticipante(int Id_Participante)

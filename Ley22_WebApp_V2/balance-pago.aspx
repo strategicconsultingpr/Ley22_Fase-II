@@ -211,7 +211,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="return confirm('Los datos del pago estan correctos?');" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
+                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Los datos del pago estan correctos?')) return false;" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -224,7 +224,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
         <div class="card mb-5">
             <div class="card-header">
-                Balance de Cuenta. Usuario:
+                Balance de cuenta del participante:
                 <uc1:WUCUsuario runat="server" ID="WUCUsuario" />  &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal>
 
             </div>

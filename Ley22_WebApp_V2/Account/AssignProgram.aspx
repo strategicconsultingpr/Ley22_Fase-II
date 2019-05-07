@@ -138,6 +138,9 @@
         </div>
 
     <script type="text/javascript">
+         if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
         function Agregar() {
             var ddlEmail = document.getElementById("<%=DdlEmailD.ClientID %>");
             var Email = ddlEmail.value;

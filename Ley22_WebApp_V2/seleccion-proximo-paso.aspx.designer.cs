@@ -154,4 +154,31 @@ public partial class seleccion_proximo_paso {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlImage inboxImg;
+    
+    /// <summary>
+    /// divCharlas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCharlas;
+    
+    /// <summary>
+    /// divCertificados control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCertificados;
+    
+    /// <summary>
+    /// divCerrarCaso control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCerrarCaso;
 }

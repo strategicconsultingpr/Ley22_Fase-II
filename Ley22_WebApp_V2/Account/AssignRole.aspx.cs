@@ -88,19 +88,24 @@ namespace Ley22_WebApp_V2.Account
                     userManager.AddToRole(ExistingUser.Id, DdlRol.SelectedValue);
 
                     string mensaje = "El rol " + DdlRol.SelectedItem.Text + " se le añadió al usuario con email " + ExistingUser.Email + " correctamente.";
-                    //string script = "window.onload = function(){ alert('";
-                    //script += mensaje;
-                    //script += "')};";
-                    //ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", script, true);
+                    
 
                     ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", "sweetAlert('Rol Registrado','" + mensaje + "','success')", true);
 
                     int TotalReg = BindGridView(1);
                     this.FillJumpToList(TotalReg);
                 }
+                else
+                {
+                    string mensaje = "El usuario " + ExistingUser.Email + " ya contiene el rol de " + DdlRol.SelectedItem.Text + ", seleccione otro.";
+
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", "sweetAlert('Rol Registrado','" + mensaje + "','error')", true);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", "sweetAlert('Rol Registrado','" + ex.Message + "','error')", true);
                 throw;
             }
         }
@@ -116,18 +121,23 @@ namespace Ley22_WebApp_V2.Account
                     userManager.RemoveFromRole(ExistingUser.Id, DdlRol.SelectedValue);
 
                     string mensaje = "El rol " + DdlRol.SelectedItem.Text + " se removió del usuario con email " + ExistingUser.Email + " correctamente.";
-                    //string script = "window.onload = function(){ alert('";
-                    //script += mensaje;
-                    //script += "')};";
-                    //ClientScript.RegisterStartupScript(this.GetType(), "Rol Removido", script, true);
+                   
                     ClientScript.RegisterStartupScript(this.GetType(), "Rol Removido", "sweetAlert('Rol Removido','" + mensaje + "','success')", true);
 
                     int TotalReg = BindGridView(1);
                     this.FillJumpToList(TotalReg);
                 }
+                else
+                {
+                    string mensaje = "El usuario " + ExistingUser.Email + " no contiene el rol de " + DdlRol.SelectedItem.Text + ", seleccione otro.";
+
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", "sweetAlert('Rol Registrado','" + mensaje + "','error')", true);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ClientScript.RegisterStartupScript(this.GetType(), "Rol Registrado", "sweetAlert('Rol Registrado','" + ex.Message + "','error')", true);
                 throw;
             }
         }

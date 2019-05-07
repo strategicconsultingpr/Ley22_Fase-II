@@ -94,14 +94,14 @@ namespace Ley22_WebApp_V2.Account
                 programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22"))
                     .Where(p => !programas_usuario.Contains(p.PK_Programa))
                     .Where(a => programas_director.Contains(a.PK_Programa))
-                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
             }
             else
             {
                 programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
 
-                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => !programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => !programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
             }
                 DdlProgramA.DataValueField = "Value";
                 DdlProgramA.DataTextField = "Text";
@@ -126,14 +126,14 @@ namespace Ley22_WebApp_V2.Account
                 programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22"))
                     .Where(p => programas_usuario.Contains(p.PK_Programa))
                     .Where(a => programas_director.Contains(a.PK_Programa))
-                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                    .Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
             }
             else
             {
                 programas_usuario = dsLey22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(email)).Select(p => p.FK_Programa).ToList();
 
-                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa }).ToList();
+                programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => programas_usuario.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
             }
 
@@ -269,7 +269,7 @@ namespace Ley22_WebApp_V2.Account
                                {
                                    Email = user.Email,
                                    Program = (from programs in programas where programs.FK_Usuario == user.Id
-                                              select programs.NB_Programa).ToList()
+                                              select programs.NB_Programa.Replace("EVALUACIÓN ", "")).ToList()
                                }).ToList();
                                 var UserPrograms = UserProgram.Select(p => new UserProgramModel()
                                {

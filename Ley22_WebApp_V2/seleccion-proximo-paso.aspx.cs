@@ -4,7 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class seleccion_proximo_paso : System.Web.UI.Page
 {
@@ -12,6 +15,8 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
    // protected DataParticipante du;
     protected Data_SA_Persona du;
     protected OrdenesJudiciale ordenes;
+    ApplicationUser ExistingUser = new ApplicationUser();
+    ApplicationDbContext context = new ApplicationDbContext();
     int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -38,6 +43,11 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             this.ley22 = new Ley22Entities();
             //du = (DataParticipante)Session["DataParticipante"];
             du = (Data_SA_Persona)Session["SA_Persona"];
+
+            ExistingUser = (ApplicationUser)Session["User"];
+            string userId = ExistingUser.Id;
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             LitIUP.Text = du.PK_Persona.ToString();
            // LitLicencia.Text = "12345";
@@ -67,6 +77,17 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             verificarCasosAnteriores(du.PK_Persona);
             ConsultarCharlasPorParticipante(du.PK_Persona);
             verificarCitas(du.PK_Persona);
+
+            if (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor") || userManager.IsInRole(userId, "TrabajadorSocial") 
+                || userManager.IsInRole(userId, "CoordinadorCharlas"))
+            {
+                divCharlas.Visible = true;
+            }
+            if(userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor"))
+            {
+                divCertificados.Visible = true;
+                divCerrarCaso.Visible = true;
+            }
         }
     }
 

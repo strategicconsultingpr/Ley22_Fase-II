@@ -100,7 +100,7 @@
                     <div class="col">
 
                     </div>
-                    <div class="col">
+                    <div class="col" id="divGenerar" runat="server">
                         <%--<asp:Button ID="BtnGenerar" runat="server" Text="GENERAR CERTIFICADO"  CssClass="btn btn-primary mr-3" />   --%>
                         <a data-dismiss="modal" href="#" class="btn btn-primary mr-3" data-toggle="modal" data-target="#modal-certificados" data-whatever="@getbootstrap" runat="server" id="lnkCertificados" >GENERAR CERTIFICADO</a>
                     </div>
@@ -127,12 +127,12 @@
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField>
+                                <%--<asp:TemplateField>
 
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClick="lnkEliminar_Click" OnClientClick="return confirm('Seguro de querer borrar el documento?');" CausesValidation="false" CommandArgument='<%# Bind("Value") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                             </Columns>
                             <EmptyDataTemplate>
                                 <div class="card-block">

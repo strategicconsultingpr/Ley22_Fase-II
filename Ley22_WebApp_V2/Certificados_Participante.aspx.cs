@@ -119,11 +119,32 @@ namespace Ley22_WebApp_V2
             using (Ley22Entities mylib = new Ley22Entities())
             {
 
+                int IdParticipante = Convert.ToInt32(Session["Id_Participante"]);
+                int IdPrograma = Convert.ToInt32(Session["Programa"]);
+
+
+                
+
                 DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
                 DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
-                DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+                // DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+                //var CasosCriminales = mylib.CasoCriminals.Where(a => a.Id_Participante.Equals(IdParticipante)).Where(p => p.FK_Programa == IdPrograma).Select(r => new ListItem { Value = r.Id_CasoCriminal.ToString(), Text = r.NumeroCasoCriminal }).ToList();
+                var CasosCriminales = mylib.ListarCasosCriminalesCompletados(IdParticipante, IdPrograma).ToList();
+                DdlNumeroOrdenJudicial.DataSource = CasosCriminales;
                 DdlNumeroOrdenJudicial.DataBind();
-                DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+                if (CasosCriminales.Count() > 1)
+                {
+                    DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+                }
+                else if (CasosCriminales.Count() < 1)
+                {
+                    DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("NO CASO CRIMINAL COMPLETADO", "0"));
+                }
+                else
+                {
+                    BidGrid();
+                }
             }
         }
 
@@ -134,6 +155,22 @@ namespace Ley22_WebApp_V2
             int Id = Convert.ToInt32(Session["Id_Participante"]);
             Programa = Convert.ToInt32(Session["Programa"].ToString());
             int Id_CasoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                var caso = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_CasoCriminal)).SingleOrDefault();
+
+                if(caso.Activa == 0)
+                {
+                    DateTime FE_Charla = Convert.ToDateTime(caso.FechaCierre.ToString());
+                    TimeSpan ts = DateTime.Now.Subtract(FE_Charla);
+
+                    if(ts.Days > 8)
+                    {
+                        divGenerar.Visible = false;
+                    }
+                }
+            }
 
             try
             {
@@ -195,24 +232,33 @@ namespace Ley22_WebApp_V2
 
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/Certificado_" + Caso.Id_CasoCriminal + ".pdf";
 
-                if (File.Exists(PathNameDocumento))
-                {
-                    DirectoryInfo directory = new DirectoryInfo("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
-                    FileInfo[] fileInfo = directory.GetFiles();
-                    int count = fileInfo.Count();
-                    
-                    foreach (FileInfo file in fileInfo)
-                    {
-                        
-                        if (file.Name == "Certificado_" + Caso.Id_CasoCriminal+".pdf")
-                        {
-                            while (File.Exists(directory.FullName + "Certificado_" + Caso.Id_CasoCriminal + "_Version#" + count+".pdf"))
-                            { count++; }
+                //if (File.Exists(PathNameDocumento))
+                //{
+                //    DirectoryInfo directory = new DirectoryInfo("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
+                //    FileInfo[] fileInfo = directory.GetFiles();
+                //    int count = fileInfo.Count();
 
-                            mensaje += "Documento " + file.Name + " modificado a " + file.Name + "_Version#" + count;
-                            File.Move(file.FullName, file.FullName.Replace(file.Name, "Certificado_" + Caso.Id_CasoCriminal + "_Version#" + count+".pdf"));                            
-                        }
-                    }
+                //    foreach (FileInfo file in fileInfo)
+                //    {
+
+                //        if (file.Name == "Certificado_" + Caso.Id_CasoCriminal+".pdf")
+                //        {
+                //            while (File.Exists(directory.FullName + "Certificado_" + Caso.Id_CasoCriminal + "_Version#" + count+".pdf"))
+                //            { count++; }
+
+                //            mensaje += "Documento " + file.Name + " modificado a " + file.Name + "_Version#" + count;
+                //            File.Move(file.FullName, file.FullName.Replace(file.Name, "Certificado_" + Caso.Id_CasoCriminal + "_Version#" + count+".pdf"));                            
+                //        }
+                //    }
+                //}
+
+                if (Caso.Activa == 0 && File.Exists(PathNameDocumento))
+                {
+                    File.Delete(PathNameDocumento);
+                }
+                else
+                {
+                    dsLey22.CerrarCasoCriminal(Caso.Id_CasoCriminal, 1, "El participante completo las charlas y no tiene balance de deuda", "Certificado_" + Caso.Id_CasoCriminal + ".pdf", userId);
                 }
 
                 if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/"))
@@ -246,7 +292,7 @@ namespace Ley22_WebApp_V2
 
                 doc.Close();
 
-                mensaje += "Certificado para " + Nombre + " " + Apellido + " fue generado. <br/>";
+                mensaje += "Certificado para " + Nombre + " " + Apellido + " fue generado.";
 
                 DdlAdiestrador.SelectedValue = "0";
                 DdlSupervisor.SelectedValue = "0";
@@ -255,15 +301,10 @@ namespace Ley22_WebApp_V2
                 //}
 
 
-
-                if (mensaje != string.Empty)
-                {
+                
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Certificado", "sweetAlert('Certificado','" + mensaje + "','success')", true);
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Certificado", "sweetAlert('Certificado','El caso criminal para este participante se encuentra abierto. Favor verificar la asistencia de charlas y el balance.','error')", true);
-                }
+                
+                
             }
             catch(Exception ex)
             {

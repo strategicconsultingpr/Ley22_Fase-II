@@ -62,7 +62,15 @@ namespace Ley22_WebApp_V2
             {
                 ValidatorPrograma.Enabled = false;
                 DivPrograma.Visible = false;
-               // Session["Programa"] = programas[0].Value;
+
+                DdlPrograma.DataValueField = "Value";
+                DdlPrograma.DataTextField = "Text";
+                DdlPrograma.DataSource = programas;
+                DdlPrograma.DataBind();
+
+                DdlPrograma.SelectedValue = programas[0].Value;
+
+                MostrarReportes();
             }
             else
             {
@@ -74,43 +82,7 @@ namespace Ley22_WebApp_V2
         {
             if (DdlPrograma.SelectedValue != "0")
             {
-                string programa = "";
-                //  Session["Programa"] = DdlPrograma.SelectedValue;
-
-                this.DetalleIngresos.NavigateUrl = "";
-                this.ServiciosDiarios.NavigateUrl = "";
-
-                Div.Visible = true;
-
-                switch(DdlPrograma.SelectedValue)
-                    {
-                    case "61":
-                        programa = "SanJuan";
-                        break;
-                    case "62":
-                        programa = "Ponce";
-                        break;
-                    case "63":
-                        programa = "Mayaguez";
-                        break;
-                    case "64":
-                        programa = "Arecibo";
-                        break;
-                    case "65":
-                        programa = "Moca";
-                        break;
-                    case "66":
-                        programa = "Guayama";
-                        break;
-                }
-                   
-                System.Configuration.AppSettingsReader configurationAppSettings = new System.Configuration.AppSettingsReader();
-                string URL_ReportingServices = ((string)(configurationAppSettings.GetValue("URL_ReportingServices", typeof(string))));
-                string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
-                this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
-                
-                this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa;
-                this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa;
+                MostrarReportes();
 
             }
             else
@@ -119,6 +91,47 @@ namespace Ley22_WebApp_V2
             }
 
 
+        }
+
+        private void MostrarReportes()
+        {
+            string programa = "";
+            //  Session["Programa"] = DdlPrograma.SelectedValue;
+
+            this.DetalleIngresos.NavigateUrl = "";
+            this.ServiciosDiarios.NavigateUrl = "";
+
+            Div.Visible = true;
+
+            switch (DdlPrograma.SelectedValue)
+            {
+                case "61":
+                    programa = "SanJuan";
+                    break;
+                case "62":
+                    programa = "Ponce";
+                    break;
+                case "63":
+                    programa = "Mayaguez";
+                    break;
+                case "64":
+                    programa = "Arecibo";
+                    break;
+                case "65":
+                    programa = "Moca";
+                    break;
+                case "66":
+                    programa = "Guayama";
+                    break;
+            }
+
+            System.Configuration.AppSettingsReader configurationAppSettings = new System.Configuration.AppSettingsReader();
+            string URL_ReportingServices = ((string)(configurationAppSettings.GetValue("URL_ReportingServices", typeof(string))));
+            string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
+            this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
+
+            this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa;
+            this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa;
         }
     }
 

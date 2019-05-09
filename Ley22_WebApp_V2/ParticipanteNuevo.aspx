@@ -179,7 +179,10 @@
     </div>
 
     <script type="text/javascript">
-        
+
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
         function sweetAlertRef(titulo, texto, icono, ref) {
            
             swal({

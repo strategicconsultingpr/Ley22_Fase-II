@@ -84,7 +84,7 @@
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10 col-md-12">
 
-                        <asp:GridView ID="GvRecepcionDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_DocumentoPorParticipante , PathNameDocumento" GridLines="None" CellSpacing="-1">
+                        <asp:GridView ID="GvRecepcionDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="Id_DocumentoPorParticipante , PathNameDocumento" GridLines="None" CellSpacing="-1"  OnRowDataBound="GvDocumentos_RowDataBound">
                             <Columns>
                                 <asp:BoundField DataField="NumeroCasoCriminal" HeaderText="N# Orden Judicial" />
                                 <asp:BoundField DataField="Documento" HeaderText="Tipo de Documento" />

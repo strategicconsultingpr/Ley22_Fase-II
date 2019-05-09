@@ -1341,5 +1341,18 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarDocumentoActivo", id_DocumentoParameter);
         }
+    
+        public virtual ObjectResult<ListarCasosCriminalesCompletados_Result> ListarCasosCriminalesCompletados(Nullable<int> id_Participante, Nullable<int> id_Programa)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCasosCriminalesCompletados_Result>("ListarCasosCriminalesCompletados", id_ParticipanteParameter, id_ProgramaParameter);
+        }
     }
 }

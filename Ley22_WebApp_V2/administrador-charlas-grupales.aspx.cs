@@ -338,32 +338,42 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                     List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(element.Id_CharlaGrupal).ToList();
                     List<InfoCharlaGrupal_Result> resultCharla = mylib.InfoCharlaGrupal(element.Id_CharlaGrupal).ToList();
                     var diaActual = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(element.Id_CharlaGrupal)).Single();
+                    bool activa = false;
+
+                    DateTime Activa = Convert.ToDateTime(diaActual.FechaFinal.ToString());
+                    TimeSpan ts = DateTime.Now.Subtract(Activa);
+
+                    if(ts.Days > 7)
+                    {
+                        activa = true;
+                    }
+                    
 
                     //if (diaActual.FechaFinal > DateTime.Today)
                     //{
-                        if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
+                    if (resulParaticipalntes.Count > element.NrodeParticipantes || resulParaticipalntes.Count == element.NrodeParticipantes)
                         {
-                            LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','"+userId+"'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','"+ resultCharla[0].Id_TipoCharla.ToString() + "','"+ resultCharla[0].Id_NiveldeCharla.ToString() + "','"+ resultCharla[0].NrodeParticipantes.ToString() + "','"+ resultCharla[0].NumeroCharla.ToString() + "')\"   data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item nohay\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','"+userId+ "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','"+ resultCharla[0].Id_TipoCharla.ToString() + "','"+ resultCharla[0].Id_NiveldeCharla.ToString() + "','"+ resultCharla[0].NrodeParticipantes.ToString() + "','"+ resultCharla[0].NumeroCharla.ToString() + "')\"   data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if(diaActual.NumeroCharla == 1)
                         {
-                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item primera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: black\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 2)
                         {
-                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item segunda\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 3)
                         {
-                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item tercera\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 4)
                         {
-                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item cuarta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                         else if (diaActual.NumeroCharla == 5)
                         {
-                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                            LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
                     //}
                     //else
@@ -498,10 +508,10 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         string mensaje = string.Empty;
         foreach (var item in Casos)
         {
-            var asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
+            int asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
             decimal balance = Convert.ToDecimal(item.Cargos) - Convert.ToDecimal(item.Pagos);
 
-            if(asistencias == 5 && balance.Equals(0.00))
+            if(asistencias == 5 && balance.Equals(Convert.ToDecimal(0.00)))
             {
                 string Id = item.Id_Participante.ToString();
                 string Nombre = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.NB_Primero).SingleOrDefault();
@@ -516,46 +526,62 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-                if (!File.Exists(PathNameDocumento))
+      
+
+                if (item.Activa == 0)
                 {
-                    if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                    DateTime FE_Cierre = Convert.ToDateTime(item.FechaCierre.ToString());
+                    TimeSpan ts = DateTime.Now.Subtract(FE_Cierre);
+
+                    if(ts.Days > 8)
                     {
-                        Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                        continue;
                     }
-
-                    string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
-
-                    // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
-
-                    string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
-
-                    PdfPageSize pageSize = PdfPageSize.Letter;
-
-                    PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
-
-                    int webPageWidth = 850;
-                    int webPageHeight = 0;
-
-                    HtmlToPdf converter = new HtmlToPdf();
-
-                    converter.Options.PdfPageSize = pageSize;
-                    converter.Options.PdfPageOrientation = pdfOrientation;
-                    converter.Options.WebPageWidth = webPageWidth;
-                    converter.Options.WebPageHeight = webPageHeight;
-
-                    PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
-
-                    doc.Save(PathNameDocumento);
-
-                    doc.Close();
-
-                    mensaje += "Certificado para "+Nombre + " " + Apellido + " fue generado. <br/>";
-
-                    dsLey22.CerrarCasoCriminal(item.Id_CasoCriminal, 1, "El participante completo las charlas y no tiene balance de deuda", "Certificado_" + item.Id_CasoCriminal + ".pdf", userId);
-                    
                 }
-               
                 
+                if (item.Activa == 0 && File.Exists(PathNameDocumento))
+                {
+                    File.Delete(PathNameDocumento);
+                }
+                else
+                {
+                    dsLey22.CerrarCasoCriminal(item.Id_CasoCriminal, 1, "El participante completo las charlas y no tiene balance de deuda", "Certificado_" + item.Id_CasoCriminal + ".pdf", userId);
+                }
+
+
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                {
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                }
+
+                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+
+                // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
+
+                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
+
+                PdfPageSize pageSize = PdfPageSize.Letter;
+
+                PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
+
+                int webPageWidth = 850;
+                int webPageHeight = 0;
+
+                HtmlToPdf converter = new HtmlToPdf();
+
+                converter.Options.PdfPageSize = pageSize;
+                converter.Options.PdfPageOrientation = pdfOrientation;
+                converter.Options.WebPageWidth = webPageWidth;
+                converter.Options.WebPageHeight = webPageHeight;
+
+                PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
+
+                doc.Save(PathNameDocumento);
+
+                doc.Close();
+
+                mensaje += "Certificado para " + Nombre + " " + Apellido + " fue generado. <br/>";
+             
             }
 
         }

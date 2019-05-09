@@ -969,22 +969,31 @@
     </div> 
     <!-- container-fluid -->
     <script type="text/javascript">
-
+        if ( window.history.replaceState ) {
+           window.history.replaceState( null, null, window.location.href );
+        }
         function openModal() {
-            alert("hola");
+           
                                 $('#modal-Info-Charla').modal({ show: true });
                             }
 
-                            function changeDivContent(Id_CharlaGrupal, userId) {
-
-                               
-
+                            function changeDivContent(Id_CharlaGrupal, userId, activa) {
+                                
+                                if (activa == "True") {
+                                    document.getElementById("<%=A1.ClientID %>").style.visibility = 'hidden';
+                                    document.getElementById("<%=BtnEliminarCharla.ClientID %>").style.visibility = 'hidden';
+                                    
+                                }
+                                else {
+                                    document.getElementById("<%=A1.ClientID %>").style.visibility = 'visible';
+                                    document.getElementById("<%=BtnEliminarCharla.ClientID %>").style.visibility = 'visible';
+                                    
+                                }
                             document.getElementById("<%=Id_CharlaGrupal.ClientID %>").value = Id_CharlaGrupal;
                             document.getElementById("<%=H_Id_CharlaGrupal.ClientID%>").value = Id_CharlaGrupal;
                        
 
-                          //var Id_Participante = <%=Session["Id_Participante"].ToString()%>; 
-                         //  var NombreParticipante = '<%=Session["NombreParticipante"].ToString()%>';
+                          
 
                            var ajax_data = '{Id_CharlaGrupal:"'  + Id_CharlaGrupal + '", userId:"' + userId + '"}'
 

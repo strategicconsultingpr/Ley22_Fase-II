@@ -306,7 +306,7 @@ public partial class balance_pago : System.Web.UI.Page
         }
         if (e.Row.RowType == DataControlRowType.Footer)
             // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
-            LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " | Cantidad Pagada: $ " + pagos.ToString();
+            LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
     }
 
     protected void GvPagar_RowDataBound(object sender, GridViewRowEventArgs e)

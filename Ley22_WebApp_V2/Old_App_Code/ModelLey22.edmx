@@ -536,6 +536,10 @@
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="Id_Programa" Type="int" Mode="In" />
         </Function>
+        <Function Name="ListarCasosCriminalesCompletados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_Programa" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarCharlasCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Centro" Type="int" Mode="In" />
           <Parameter Name="fechaInicial" Type="date" Mode="In" />
@@ -1146,7 +1150,11 @@
             <Parameter Name="Recurrente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EliminarDocumentoActivo">
-            <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Documento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCasosCriminalesCompletados" ReturnType="Collection(Ley22Model.ListarCasosCriminalesCompletados_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1908,6 +1916,10 @@
           <Property Name="Importante" Type="Int32" />
           <Property Name="Recurrente" Type="Int32" />
         </EntityType>
+        <ComplexType Name="ListarCasosCriminalesCompletados_Result">
+          <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
+          <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2765,6 +2777,14 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GuardarDocumento" FunctionName="Ley22Model.Store.GuardarDocumento" />
           <FunctionImportMapping FunctionImportName="EliminarDocumentoActivo" FunctionName="Ley22Model.Store.EliminarDocumentoActivo" />
+          <FunctionImportMapping FunctionImportName="ListarCasosCriminalesCompletados" FunctionName="Ley22Model.Store.ListarCasosCriminalesCompletados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarCasosCriminalesCompletados_Result">
+                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
+                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

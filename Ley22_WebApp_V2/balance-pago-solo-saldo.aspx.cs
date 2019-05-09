@@ -159,17 +159,32 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
 
-            //DdlNumeroOrdenJudicial.DataTextField = "NumeroOrdenJudicial";
-            //DdlNumeroOrdenJudicial.DataValueField = "Id_OrdenJudicial";
-            //DdlNumeroOrdenJudicial.DataSource = mylib.ListarOrdenesJudicialesActivas(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+
+
+            //DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
+            //DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
+            //DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
             //DdlNumeroOrdenJudicial.DataBind();
             //DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            DdlNumeroOrdenJudicial.DataTextField = "NumeroCasoCriminal";
-            DdlNumeroOrdenJudicial.DataValueField = "Id_CasoCriminal";
-            DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            int IdParticipante = Convert.ToInt32(Session["Id_Participante"]);
+            int IdPrograma = Convert.ToInt32(Session["Programa"]);
+
+            DdlNumeroOrdenJudicial.DataTextField = "Text";
+            DdlNumeroOrdenJudicial.DataValueField = "Value";
+            // DdlNumeroOrdenJudicial.DataSource = mylib.ListarCasosCriminalesActivos(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
+            var CasosCriminales = mylib.CasoCriminals.Where(a => a.Id_Participante.Equals(IdParticipante)).Where(p => p.FK_Programa == IdPrograma).Select(r => new ListItem { Value = r.Id_CasoCriminal.ToString(), Text = r.NumeroCasoCriminal }).ToList();
+            DdlNumeroOrdenJudicial.DataSource = CasosCriminales;
             DdlNumeroOrdenJudicial.DataBind();
-            DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            if (CasosCriminales.Count() > 0)
+            {
+                DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            }
+            else if (CasosCriminales.Count() < 1)
+            {
+                DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("NO TIENE CASO CRIMINAL", "0"));
+            }
 
         }
 

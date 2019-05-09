@@ -230,8 +230,25 @@ public partial class cargar_documentos : System.Web.UI.Page
             }
             else
             {
+                int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
+                if (activa == 1)
+                {
+                    ActualizarDocumentosDdl();
+                    CargarDocumentosFaltantes();
+                }
+                else
+                {
+                    BtnSubirDocumento.Enabled = false;
+                    FileUpload1.Enabled = false;
+                    DdlDocumento.Enabled = false;
+
+                }
                 BidGrid();
             }
+
+
+
            
            
          }
@@ -242,8 +259,31 @@ public partial class cargar_documentos : System.Web.UI.Page
     {
         if(DdlNumeroOrdenJudicial.SelectedValue != "0")
         {
-            ActualizarDocumentosDdl();
-            BidGrid();
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
+                if (activa == 1)
+                {
+                    BtnSubirDocumento.Enabled = true;
+                    FileUpload1.Enabled = true;
+                    DdlDocumento.Enabled = true;
+
+                    ActualizarDocumentosDdl();
+                    CargarDocumentosFaltantes();
+                }
+                else
+                {
+                    BtnSubirDocumento.Enabled = false;
+                    FileUpload1.Enabled = false;
+                    DdlDocumento.Enabled = false;
+
+                    GridView1.DataSource = null;
+                    GridView1.DataBind();
+                    DivDocumentos.Visible = false;
+                }
+                BidGrid();
+            }
         }
         else
         {
@@ -254,9 +294,11 @@ public partial class cargar_documentos : System.Web.UI.Page
             GvRecepcionDocumentos.DataSource = null;
             GvRecepcionDocumentos.DataBind();
 
+            CargarDocumentosFaltantes();
+
         }
        
-        CargarDocumentosFaltantes();
+        
     }
 
     protected void ActualizarDocumentosDdl()

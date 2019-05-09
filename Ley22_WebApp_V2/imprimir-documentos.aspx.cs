@@ -34,7 +34,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
 
             context = new ApplicationDbContext();
             userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
+            
             if (userManager.IsInRole(ExistingUser.Id, "SuperAdmin"))
             {
                 divUpload.Visible = true;
@@ -49,23 +49,29 @@ public partial class imprimir_documentos : System.Web.UI.Page
         {
             
             GvDocumentos.DataSource = mylib.ListarDocumentosActivos();
-            GvDocumentos.DataBind();           
+            GvDocumentos.DataBind();  
+            
+        }
+        if (ChkImportante.Checked == true)
+        {
+            ChkImportante.Checked = false;
+        }
+        if (ChkRecurrente.Checked == true)
+        {
+            ChkRecurrente.Checked = false;
         }
     }
 
-    protected void GvDocumentos_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void GvDocumentos_RowDataBound(object sender, EventArgs e)
     {
-        //if (e.Row.RowType == DataControlRowType.DataRow)
-        //{
-        //    e.Row.Cells[3].Visible = false;           
-        //}
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
+        context = new ApplicationDbContext();
+        userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
             if (!userManager.IsInRole(ExistingUser.Id, "SuperAdmin"))
             {
-                e.Row.Cells[3].Visible = false;
+                GvDocumentos.Columns[3].Visible = false;
             }
-        }
+        
         
     }
 
@@ -89,7 +95,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
     {
         LinkButton btn = (LinkButton)(sender);
         int Id_Documento = Convert.ToInt32(btn.CommandArgument);
-
+        string mensaje = string.Empty;
         try
         {
             using (Ley22Entities mylib = new Ley22Entities())
@@ -101,9 +107,12 @@ public partial class imprimir_documentos : System.Web.UI.Page
                 if (GvDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_Documento.ToString())
                 {
                     File.Delete(MapPath("~/Documentos/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
+                    mensaje += "Documento " + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString() + " fue eliminado.";
                 }
             }
-           // ListarDocumentos();
+            ListarDocumentos();
+            
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Eliminar", "sweetAlert('Eliminar','" + mensaje + "','error')", true);
         }
         catch (Exception ex)
         {
@@ -120,7 +129,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
             {
                 string Archivo = Path.GetFileName(FileUpload1.FileName);
                 string tipo = Path.GetExtension(FileUpload1.FileName);
-                
+                string mensaje = string.Empty;
                 if ((!File.Exists(MapPath("~/Documentos/" + Archivo))) && tipo == ".pdf")
                 {
                     string Documento = Archivo.Substring(0, Archivo.LastIndexOf(".pdf"));
@@ -131,8 +140,10 @@ public partial class imprimir_documentos : System.Web.UI.Page
                         mylib.GuardarDocumento(Documento, Archivo, ChkImportante.Checked == true ? 1 : 0, ChkRecurrente.Checked == true ? 1 : 0);
                     }
 
-                //    ListarDocumentos();
-               }
+                    ListarDocumentos();
+                    mensaje += "Documento " + Archivo + " fue guardado.";
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento Guardado", "sweetAlert('Documento Guardado','" + mensaje + "','success')", true);
+                }
             }
             catch (Exception ex)
             {

@@ -17,13 +17,13 @@
                           
                         <label class="form-check-label">
                                     <asp:CheckBox ID="ChkImportante" runat="server" class="form-check-input"/>
-                                  Importante
+                                  Requerido
                                 </label>
                     </div>
                     <div class="col">
                         <label class="form-check-label">
                                     <asp:CheckBox ID="ChkRecurrente" runat="server" class="form-check-input"/>
-                                  Recurrente
+                                  Reusable
                                 </label>                                           
                     </div>
                     <div class="col">
@@ -55,7 +55,7 @@
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10 col-md-12">
 
-                        <asp:GridView ID="GvDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" GridLines="None" CellSpacing="-1" PageSize="30" OnRowDataBound="GvDocumentos_RowDataBound" DataKeyNames="Id_Documento, Archivo">
+                        <asp:GridView ID="GvDocumentos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" GridLines="None" CellSpacing="-1" PageSize="30" OnPreRender="GvDocumentos_RowDataBound" DataKeyNames="Id_Documento, Archivo">
                             <Columns>
                                 <asp:BoundField DataField="Documento" HeaderText="Documento" />
                                 <asp:BoundField DataField="FechadeRevision" HeaderText="Fecha de Revisión" DataFormatString="{0:MM/dd/yyyy}" />
@@ -94,31 +94,15 @@
            window.history.replaceState( null, null, window.location.href );
          }
 
-         //$(document).ready(function () {
-         //    $('lnkEliminar').click(function () {
-         //        swal({
-         //        title: "Are you sure?",
-         //        text: "Once deleted, you will not be able to recover this imaginary file!",
-         //        icon: "warning",
-         //        buttons: true,
-         //        dangerMode: true,
-         //    })
-         //        .then((willDelete) => {
-         //            if (willDelete) {
-         //                swal("Poof! Your imaginary file has been deleted!", {
-         //                    icon: "success",
-         //                });
-
-         //                return true;
-         //                alert("true");
-         //            } else {
-         //                swal("Your imaginary file is safe!");
-         //                return false;
-         //                alert("false");
-         //            }
-         //        });
-         //    })
-         //})
+        function sweetAlert(titulo,texto,icono) {
+        
+             swal({
+                 title: titulo,
+                 html: texto,
+                 icon: icono
+             }
+             );  
+        }
 
          function alertaBorrar() {
 

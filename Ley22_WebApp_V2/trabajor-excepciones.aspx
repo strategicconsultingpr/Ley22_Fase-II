@@ -151,7 +151,7 @@
                     <br />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
+                    <button type="button" id="BtnEliModal" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
                     <%--<asp:Button ID="BtnEliminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClientClick="return EliminarCita()"  CausesValidation="false"/>
                     --%><asp:Button ID="BtnAsistioCita" runat="server" Text="Asistio" CssClass="btn btn-success btn-lg" OnClick="BtnAsistioCita_Click" OnClientClick="if (!alertaAsistio()) return false;" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
@@ -811,7 +811,20 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa,TS) {
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa) {
+
+            if (activa == "False")
+            {
+                document.getElementById("<%=BtnAsistioCita.ClientID %>").style.visibility = 'hidden';
+                document.getElementById("BtnEliModal").style.visibility = 'hidden';
+                                    
+            }
+            else {
+                document.getElementById("<%=BtnAsistioCita.ClientID %>").style.visibility = 'visible';
+                document.getElementById("BtnEliModal").style.visibility = 'visible';
+                                    
+            }
+
             document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
@@ -823,7 +836,14 @@
        
         }
 
-         function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa,TS) {
+        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa) {
+            if (activa == "False")
+            {
+                document.getElementById("<%=BtnNoAsistio.ClientID %>").style.visibility = 'hidden';
+            }
+            else {
+                document.getElementById("<%=BtnNoAsistio.ClientID %>").style.visibility = 'visible';
+            }
 
             document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
             document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
@@ -836,7 +856,14 @@
        
          }
 
-        function changeDivContent2(Fecha, Horas, NumerodeExcepcion) {
+        function changeDivContent2(Fecha, Horas, NumerodeExcepcion,activa) {
+            if (activa == "False")
+            {
+                document.getElementById("<%=BtnEliminarExcepcion.ClientID %>").style.visibility = 'hidden';
+            }
+            else {
+                document.getElementById("<%=BtnEliminarExcepcion.ClientID %>").style.visibility = 'visible';
+            }
 
             document.getElementById("Fecha2").innerHTML = "<b>Excepcion para el día:</b> " + Fecha;
             document.getElementById("Horas2").innerHTML = "<b>Hora:</b> " + Horas;

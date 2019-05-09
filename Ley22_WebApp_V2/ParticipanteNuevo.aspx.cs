@@ -96,33 +96,26 @@ namespace Ley22_WebApp_V2
                         Char TI = sa_persona.TI_Edicion;
 
                         //Si el usuario tiene acceso a modificacion de participante
-                        if ((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || (ts.Days < 8 && TI == 'C')))
-                        {
-                            if((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")) && (ts.Days < 8))
+                            if((userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || TI == 'C') && (ts.Days < 8))
                             {
                                 TxtNroSeguroSocial.Text = ssn;
                                 TxtNroSeguroSocial.ReadOnly = false;
                                 RegularExpressionValidator1.EnableClientScript = true;
-                            }
-                            else if((ts.Days < 8 && TI == 'C'))
-                            {
-                                TxtNroSeguroSocial.Text = ssn;
-                                TxtNroSeguroSocial.ReadOnly = false;
-                                RegularExpressionValidator1.EnableClientScript = true;
-                            }
-                            
-                            DdlSexo.Enabled = true;
-                            TxtPrimerNombre.ReadOnly = false;
-                            TxtSegundoNombre.ReadOnly = false;
-                            TxtPrimerApellido.ReadOnly = false;
-                            TxtSegundoApellido.ReadOnly = false;
-                            TxtFechaNacimiento.ReadOnly = false;
-                            ChkVeterano.Enabled = true;
-                            DdlGrupoEtnico.Enabled = false;
-                            TxtExpediente.ReadOnly = false;
 
-                            BtnActualizar.Visible = true;
-                        }
+                                DdlSexo.Enabled = true;
+                                TxtPrimerNombre.ReadOnly = false;
+                                TxtSegundoNombre.ReadOnly = false;
+                                TxtPrimerApellido.ReadOnly = false;
+                                TxtSegundoApellido.ReadOnly = false;
+                                TxtFechaNacimiento.ReadOnly = false;
+                                ChkVeterano.Enabled = true;
+                                DdlGrupoEtnico.Enabled = false;
+                                TxtExpediente.ReadOnly = false;
+
+                                BtnActualizar.Visible = true;
+                            }
+                          
+                        
                         
 
                     }

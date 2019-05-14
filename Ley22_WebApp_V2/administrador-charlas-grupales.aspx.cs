@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ley22_WebApp_V2;
 using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
 using Microsoft.AspNet.Identity;
@@ -635,7 +637,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         using (Ley22Entities mylib = new Ley22Entities())
         {
-
+            string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(p => p.FechaInicial).Single().ToString();
             mylib.ModificarCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal),
                                         Convert.ToDateTime(TxtFechaModCharla.Text + " " + TxtIncialModCharla.Text),
                                         Convert.ToDateTime(TxtFechaModCharla.Text + " " + TxtFinalModCharla.Text),
@@ -646,6 +648,44 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlNumeroCharla2.SelectedIndex)
 
                );
+
+            var participantes = mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).ToList();
+
+            foreach (var item in participantes)
+            {
+                int casoCriminal = Convert.ToInt32(mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Where(a => a.Id_Participante.Equals(item.Id_Participante)).Select(r => r.Id_OrdenJudicial).Single());
+                var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+
+                string numeroCaso = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(casoCriminal)).Select(p => p.NumeroCasoCriminal).Single();
+
+                if (email.Count() > 0)
+                {
+
+                    
+
+                    var du = dsPerfil.SA_PERSONA.Where(a => a.PK_Persona.Equals(item.Id_Participante)).Single();
+
+                    string evento = "Se realizo un cambio en charla con fecha " + charla;
+                    GridView gv = new GridView();
+                    gv.DataSource = mylib.ConsultarCharlasParaTarjeta(item.Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
+
+                    gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
+                    gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.RowStyle.Font.Size = 10;
+                    gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.CellPadding = 7;
+
+                    gv.RowStyle.Wrap = false;
+                    gv.DataBind();
+
+                    EmailService mail = new EmailService();
+                    string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, numeroCaso, DdlCentro.SelectedItem.Text, evento);
+                    mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+                }
+            }
         }
         GenerarCalendario();
 
@@ -664,7 +704,17 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            mylib.EliminarCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal));
+            var participantes = mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(r => r.Id_Participante).DefaultIfEmpty().ToList();
+
+            if(participantes.Count() > 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Eliminar Charla", "sweetAlert('NO PUEDE ELIMINAR CHARLA','La charla contiene participantes, favor eliminarlos antes de eliminar la charla.','error')", true);
+            }
+            else
+            {
+                mylib.EliminarCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal));
+            }
+            
         }
         GenerarCalendario();
     }
@@ -760,9 +810,46 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
     void EliminarParticipante(int Id_Participante)
     {
         //int Id_Participante = Convert.ToInt32(Request["__EVENTARGUMENT"]);
+        int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
         using (Ley22Entities mylib = new Ley22Entities())
+        {
+            int casoCriminal = Convert.ToInt32(mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Where(a => a.Id_Participante.Equals(Id_Participante)).Select(r => r.Id_OrdenJudicial).Single());
+            var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+
+            string numeroCaso = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(casoCriminal)).Select(p => p.NumeroCasoCriminal).Single();
+
             mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
+
+            if (email.Count() > 0)
+            {
+
+                string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+
+                var du = dsPerfil.SA_PERSONA.Where(a => a.PK_Persona.Equals(Id_Participante)).Single();
+              
+
+                string evento = "Se elimino charla con fecha " + charla;
+                GridView gv = new GridView();
+                gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
+
+                gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
+                gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
+                gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
+                gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                gv.RowStyle.Font.Size = 10;
+                gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
+                gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
+                gv.CellPadding = 7;
+
+                gv.RowStyle.Wrap = false;
+                gv.DataBind();
+
+                EmailService mail = new EmailService();
+                string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, numeroCaso, DdlCentro.SelectedItem.Text, evento);
+                mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+            }
+        }
         GenerarCalendario();
 
     }
@@ -815,6 +902,30 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         return body;
 
+    }
+
+    private string CreateBody(GridView gv, string Nombre, string Caso, string Programa, string Evento)
+    {
+        string body = string.Empty;
+
+        StringBuilder strBuilder = new StringBuilder();
+        StringWriter strWriter = new StringWriter(strBuilder);
+        HtmlTextWriter htw = new HtmlTextWriter(strWriter);
+
+        gv.RenderControl(htw);
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTarjetaCharlas.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{GridView}", strBuilder.ToString());
+        body = body.Replace("{Nombre}", Nombre);
+        body = body.Replace("{Caso}", Caso);
+        body = body.Replace("{Centro}", Programa);
+        body = body.Replace("{Evento}", Evento);
+
+
+        return body;
     }
 
 }

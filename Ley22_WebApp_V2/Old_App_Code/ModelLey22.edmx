@@ -391,6 +391,10 @@
         <Function Name="ConsultarCasosXPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pk_Persona" Type="int" Mode="In" />
         </Function>
+        <Function Name="ConsultarCharlasParaTarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="FK_Programa" Type="int" Mode="In" />
+        </Function>
         <Function Name="ConsultarCharlasPorParticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
         </Function>
@@ -1156,6 +1160,10 @@
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarCharlasParaTarjeta" ReturnType="Collection(Ley22Model.ConsultarCharlasParaTarjeta_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
           <Property Type="Int32" Name="PK_Persona" Nullable="false" />
@@ -1919,6 +1927,13 @@
         <ComplexType Name="ListarCasosCriminalesCompletados_Result">
           <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
           <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="ConsultarCharlasParaTarjeta_Result">
+          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Asistencia" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="C_Charla" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2782,6 +2797,17 @@
               <ComplexTypeMapping TypeName="Ley22Model.ListarCasosCriminalesCompletados_Result">
                 <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
                 <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarCharlasParaTarjeta" FunctionName="Ley22Model.Store.ConsultarCharlasParaTarjeta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ConsultarCharlasParaTarjeta_Result">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Asistencia" ColumnName="Asistencia" />
+                <ScalarProperty Name="C_Charla" ColumnName="#Charla" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

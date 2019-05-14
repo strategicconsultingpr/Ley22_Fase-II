@@ -35,7 +35,23 @@
 
 <%--Dashboard de Usuario--%>
                 <div class="col-md-9">
-                        <div class="row">             
+                        <div class="row"> 
+                            
+                            <div class="col-md-4" id="divExpediente" runat="server" visible="false">
+                                <div class="card text-center mb-3 card-menu">
+                                    <div class="card-block">
+                                        <p class="mt-4">
+                                            <a href="../Entrada.aspx">
+                                                <span class="fa-stack fa-3x">
+                                                    <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                                </span>
+                                            </a>
+                                        </p>
+                                        <h4 class="card-title"><a href="../Entrada.aspx">Expediente del Participante</a></h4>
+                                    </div>
+                                </div>
+                            </div> 
+
                             <div class="col-md-4" id="divCitas" runat="server" visible="false">
                                 <div class="card text-center mb-3 card-menu">
                                     <div class="card-block">
@@ -66,20 +82,7 @@
                                 </div>
                             </div> 
 
-                            <div class="col-md-4" id="divExpediente" runat="server" visible="false">
-                            <div class="card text-center mb-3 card-menu">
-                                <div class="card-block">
-                                    <p class="mt-4">
-                                        <a href="../Entrada.aspx">
-                                            <span class="fa-stack fa-3x">
-                                                <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
-                                            </span>
-                                        </a>
-                                    </p>
-                                    <h4 class="card-title"><a href="../Entrada.aspx">Buscar Participante</a></h4>
-                                </div>
-                            </div>
-                        </div> 
+                           
 
                            <div class="col-md-4" id="divRecaudos" runat="server" visible="false">
                             <div class="card  text-center mb-3 card-menu">

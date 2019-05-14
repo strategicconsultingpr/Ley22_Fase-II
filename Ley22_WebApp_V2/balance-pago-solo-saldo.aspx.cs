@@ -40,6 +40,7 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
             ContadordeCharlaCitasPorPagar = 0;
             ContadorCharlasCitasPagadas = 0;
             TotalPagado = 0;
+            divNav.Visible = false;
             CargarOrdenesJudiciales();
 
           //  BidGrid();

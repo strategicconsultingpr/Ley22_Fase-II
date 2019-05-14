@@ -81,7 +81,7 @@
                         <div class="col-md-4 text-right">
                             <span>
                                 <asp:Literal ID="LitCantidadUsuarios" runat="server"></asp:Literal>
-                                Usuarios Encontrados</span>
+                                Participantes Encontrados</span>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@
         <div class="col-md-4">
 
 
-            <asp:Button ID="BtnCrearNuevaCuenta" runat="server" Text="Crear Nueva Cuenta" class="btn btn-secondary btn-lg btn-block mb-4" OnClick="BtnCrearNuevaCuenta_Click" CausesValidation="false" />
+            <asp:Button ID="BtnCrearNuevaCuenta" runat="server" Text="Registrar Nuevo Participante" class="btn btn-secondary btn-lg btn-block mb-4" OnClick="BtnCrearNuevaCuenta_Click" CausesValidation="false" />
 
 
             <div class="card mb-4">

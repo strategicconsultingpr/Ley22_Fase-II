@@ -76,7 +76,7 @@
                       <nav>
                       <ul class="nav" id="nav">
                         <li class="nav-item" id="liExpediente" runat="server" visible="false">
-                          <a class="nav-link active" href="../entrada.aspx">Recepción y Citas</a>
+                          <a class="nav-link active" href="../entrada.aspx">Expediente del Participante</a>
                         </li>  
                           <li class="nav-item" id="liCitas" runat="server" visible="false">
                           <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>

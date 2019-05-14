@@ -61,7 +61,7 @@
                                 <asp:BoundField DataField="FechadeRevision" HeaderText="Fecha de Revisión" DataFormatString="{0:MM/dd/yyyy}" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" CssClass="fas fa-print fa-lg" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%# Bind("Archivo") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%# Bind("Archivo") %>'><img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                  <asp:TemplateField>

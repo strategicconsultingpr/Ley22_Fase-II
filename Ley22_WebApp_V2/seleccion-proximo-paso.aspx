@@ -200,7 +200,7 @@
                         </li>
                     </ul>
 
-                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Tablero de Perfil</a>
+                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Tablero de Expediente</a>
                 </div>
 
                 <!-- Bloque Interior -->
@@ -232,7 +232,7 @@
                                                                     </span>
                                                                 </a>
                                                             </p>                                   
-                                                            <h4 class="card-title"><a href="OrdenNuevo.aspx">Abrir Caso Criminal</a></h4>
+                                                            <h4 class="card-title"><a href="OrdenNuevo.aspx">Registro de Caso Criminal</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -303,7 +303,7 @@
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Recaudos</a></h4>
+                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Historial Financiero</a></h4>
                                                         </div>
                                                     </div>
 

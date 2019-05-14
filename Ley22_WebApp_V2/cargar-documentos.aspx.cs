@@ -220,7 +220,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             DdlNumeroOrdenJudicial.DataSource = CasosCriminales;
             DdlNumeroOrdenJudicial.DataBind();
 
-            if(CasosCriminales.Count() > 1)
+            if(CasosCriminales.Count() > 0)
             {
                 DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
             }
@@ -228,24 +228,24 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("NO TIENE CASO CRIMINAL", "0"));
             }
-            else
-            {
-                int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
-                if (activa == 1)
-                {
-                    ActualizarDocumentosDdl();
-                    CargarDocumentosFaltantes();
-                }
-                else
-                {
-                    BtnSubirDocumento.Enabled = false;
-                    FileUpload1.Enabled = false;
-                    DdlDocumento.Enabled = false;
+            //else
+            //{
+            //    int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+            //    int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
+            //    if (activa == 1)
+            //    {
+            //        ActualizarDocumentosDdl();
+            //        CargarDocumentosFaltantes();
+            //    }
+            //    else
+            //    {
+            //        BtnSubirDocumento.Enabled = false;
+            //        FileUpload1.Enabled = false;
+            //        DdlDocumento.Enabled = false;
 
-                }
-                BidGrid();
-            }
+            //    }
+            //    BidGrid();
+            //}
 
 
 

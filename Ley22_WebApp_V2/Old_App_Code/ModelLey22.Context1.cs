@@ -1354,5 +1354,18 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCasosCriminalesCompletados_Result>("ListarCasosCriminalesCompletados", id_ParticipanteParameter, id_ProgramaParameter);
         }
+    
+        public virtual ObjectResult<ConsultarCharlasParaTarjeta_Result> ConsultarCharlasParaTarjeta(Nullable<int> id_Participante, Nullable<int> fK_Programa)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCharlasParaTarjeta_Result>("ConsultarCharlasParaTarjeta", id_ParticipanteParameter, fK_ProgramaParameter);
+        }
     }
 }

@@ -519,7 +519,7 @@
                 <div class="card mb-3">
 
                     <div class="card-header">
-                       Charlas y Excepciones Grupales
+                       Charlas socio-Educativas
                     </div>
 
                      <div class="card-block">
@@ -541,7 +541,7 @@
 
                                 <div class="form-group" id="Div1" runat="server">
                                 
-                                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla">Crear Charla</a>
+                                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla" data-whatever="@getbootstrap" runat="server" id="btnCrearCharla">Registrar Charla</a>
                                 </div>
                             </div>
                             <br />
@@ -584,8 +584,9 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='2da CHARLA'><span class="bloque-leyenda grupo2"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='3era CHARLA'><span class="bloque-leyenda grupo3"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='4ta CHARLA'><span class="bloque-leyenda grupo4"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; <span class="bloque-leyenda nohay"></span>
-                        No hay Espacio (Cerrado)
+                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; 
+                        <a href="#" data-toggle="tooltip" data-html="true" title='NO HAY ESPACIO (CERRADO)'><span class="bloque-leyenda nohay"></span></a>
+                        
      
                     </div>
 

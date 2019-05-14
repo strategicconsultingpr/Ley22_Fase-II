@@ -239,6 +239,7 @@
     <Content Include="Dashboard-Usuarios.aspx" />
     <Content Include="DocumentosPorParticipantes\61\649373\1-Ley22-ToDo.txt" />
     <Content Include="EmailCitaParticipante.html" />
+    <Content Include="EmailCitaUbicacion.html" />
     <Content Include="EmailConfirmation.html" />
     <Content Include="EmailPassword.html" />
     <Content Include="EmailReciboPago.html" />

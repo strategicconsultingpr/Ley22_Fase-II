@@ -102,6 +102,24 @@ public partial class trabajor_excepciones {
     protected global::System.Web.UI.HtmlControls.HtmlInputHidden HNroCita;
     
     /// <summary>
+    /// LnkNombre control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton LnkNombre;
+    
+    /// <summary>
+    /// HIdParticipante control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlInputHidden HIdParticipante;
+    
+    /// <summary>
     /// BtnAsistioCita control.
     /// </summary>
     /// <remarks>
@@ -145,6 +163,15 @@ public partial class trabajor_excepciones {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden1;
+    
+    /// <summary>
+    /// LnkNombre2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton LnkNombre2;
     
     /// <summary>
     /// BtnNoAsistio control.

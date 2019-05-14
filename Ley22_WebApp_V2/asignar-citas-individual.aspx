@@ -184,7 +184,7 @@
                     <br />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
+                    <button type="button" id="btnEliminar" data-toggle="modal" data-target="#modalEliminarCita" class="btn btn-danger btn-lg">Eliminar</button>
                    <%-- <asp:Button ID="BtnELiminarCita" runat="server" Text="Eliminar"  class="btn btn-danger btn-lg" OnClick="BtnELiminarCita_Click"  CausesValidation="false"/>
                    --%>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cerrar</button>
@@ -847,10 +847,18 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa) {
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, Eliminar, Desc) {
+            if (Eliminar == "False")
+            {
+                document.getElementById("btnEliminar").style.visibility = 'hidden';
+            }
+            else
+            {
+                document.getElementById("btnEliminar").style.visibility = 'visible';                      
+            }
 
             document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
-            document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluación para el día:</b> " + Fecha;
+            document.getElementById("Fecha").innerHTML = "<b>"+Desc+" para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
             document.getElementById("NombreCompleto").innerHTML = "<b>Usuario:</b> " + NombreCompleto;
             document.getElementById("TelefonoContacto").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
@@ -868,10 +876,18 @@
             document.getElementById("<%= HNroExcepcion.ClientID %>").value = NumerodeExcepcion;
 
         }
-        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa) {
+        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita,Programa, Eliminar, Desc) {
+             if (Eliminar == "False")
+            {
+                document.getElementById("btnEliminar").style.visibility = 'hidden';
+            }
+            else
+            {
+                document.getElementById("btnEliminar").style.visibility = 'visible';                      
+            }
 
             document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
-            document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
+            document.getElementById("FechaA").innerHTML = "<b>"+Desc+" para el día:</b> " + Fecha;
             document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
             document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
             document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;

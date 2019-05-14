@@ -143,7 +143,8 @@
                     <div id="Horas"></div>
                     <input id="HNroCita" name="HNroCita" type="hidden" runat="server" />
                     <br />
-                    <div id="NombreCompleto"></div>
+                    <div id="NombreCompleto"><b>Participante:</b> <asp:LinkButton ID="LnkNombre" runat="server" ForeColor="Blue" OnClick="ExpedienteParticipante" CausesValidation="false"></asp:LinkButton></div>
+                    <input id="HIdParticipante" name="HIdParticipante" type="hidden" runat="server" />
                     <br />
                     <div id="TelefonoContacto"></div>
                     <br />
@@ -207,7 +208,7 @@
                     <div id="HorasA"></div>
                     <input id="Hidden1" name="HNroCita" type="hidden" runat="server" />
                     <br />
-                    <div id="NombreCompletoA"></div>
+                    <div id="NombreCompletoA"><b>Participante:</b> <asp:LinkButton ID="LnkNombre2" runat="server" ForeColor="Blue" OnClick="ExpedienteParticipante" CausesValidation="false"></asp:LinkButton></div>
                     <br />
                     <div id="TelefonoContactoA"></div>
                     <br />
@@ -813,7 +814,7 @@
     <!-- container-fluid -->
     <script>
 
-        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa) {
+        function changeDivContent(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa, IdParticipante,Desc) {
 
             if (activa == "False")
             {
@@ -828,17 +829,19 @@
             }
 
             document.getElementById("Programa").innerHTML = "<b>Programa:</b> " + Programa;
-            document.getElementById("Fecha").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
+            document.getElementById("Fecha").innerHTML = "<b>"+Desc+" para el día:</b> " + Fecha;
             document.getElementById("Horas").innerHTML = "<b>Hora:</b> " + Horas;
-            document.getElementById("NombreCompleto").innerHTML = "<b>Participante:</b> " + NombreCompleto;
+            //document.getElementById("NombreCompleto").innerHTML = "<b>Participante:</b> " + NombreCompleto;
+            document.getElementById("<%=LnkNombre.ClientID %>").innerHTML = NombreCompleto;
             document.getElementById("TelefonoContacto").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
             document.getElementById("TS").innerHTML = "<b>Asistente Psicosocial:</b> " + TS;
             
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
+            document.getElementById("<%= HIdParticipante.ClientID %>").value = IdParticipante;
        
         }
 
-        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa) {
+        function changeDivContentAsistio(Fecha, Horas, NombreCompleto, TelefonoContacto, NumerodeCita, Programa, TS, activa, IdParticipante,Desc) {
             if (activa == "False")
             {
                 document.getElementById("<%=BtnNoAsistio.ClientID %>").style.visibility = 'hidden';
@@ -848,13 +851,15 @@
             }
 
             document.getElementById("ProgramaA").innerHTML = "<b>Programa:</b> " + Programa;
-            document.getElementById("FechaA").innerHTML = "<b>Cita de Pre-Evaluacion para el día:</b> " + Fecha;
+            document.getElementById("FechaA").innerHTML = "<b>"+Desc+" para el día:</b> " + Fecha;
             document.getElementById("HorasA").innerHTML = "<b>Hora:</b> " + Horas;
-            document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
+            //document.getElementById("NombreCompletoA").innerHTML = "<b>Participante:</b> " + NombreCompleto;
+            document.getElementById("<%=LnkNombre2.ClientID %>").innerHTML = NombreCompleto;
              document.getElementById("TelefonoContactoA").innerHTML = "<b>Teléfono Contacto:</b> " + TelefonoContacto;
              document.getElementById("TSA").innerHTML = "<b>Asistente Psicosocial:</b> " + TS;
              
             document.getElementById("<%= HNroCita.ClientID %>").value = NumerodeCita;
+            document.getElementById("<%= HIdParticipante.ClientID %>").value = IdParticipante;
        
          }
 

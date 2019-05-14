@@ -367,25 +367,35 @@ public partial class asignar_citas_individual : System.Web.UI.Page
                 return bk.FechaInicial.ToString("dd/MM/yyyy") == Fecha.ToString("dd/MM/yyyy");
             });
 
-            
+
+            du = (Data_SA_Persona)Session["SA_Persona"];
 
             foreach (ListarCitasCalendario_Result element in ListaCitasXDia)
             {            
                 var asistio = dsley22.Calendarios.Where(u => u.Id_Calendario.Equals(element.Id_Calendario)).Single();
+                string Desc = dsley22.ControldePagoes.Where(u => u.FK_Calendario == element.Id_Calendario).Select(a => a.Descripcion).Single();
                 if (asistio.Activo == 1)
                 {
+                    bool eliminar = false;
+                    
+
+                    if (asistio.Id_Participante == du.PK_Persona)
+                    {
+                        eliminar = true;
+                    }
+
                     if (asistio.Asistio == 1)
                     {
-                        LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContentAsistio('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asistio-cita" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                        LitContCelda[i].Text += "<div class=\"" + "item ts-disponible\"" + "><a onClick=\"changeDivContentAsistio('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "', '" + eliminar + "', '" + Desc + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asistio-cita" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
 
                     }
                     else if (asistio.FechaFinal < DateTime.Today && asistio.Asistio == 0)
                     {
-                        LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                        LitContCelda[i].Text += "<div class=\"" + "item nohay\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "', '" + eliminar + "', '" + Desc + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
                     }
                     else
                     {
-                        LitContCelda[i].Text += "<div class=\"" + "item proceso\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
+                        LitContCelda[i].Text += "<div class=\"" + "item proceso\"" + "><a onClick=\"changeDivContent('" + element.FechaFinal.ToLongDateString() + "','" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + "','" + UppercaseFirst(element.AP_Primero) + ", " + UppercaseFirst(element.NB_Primero) + "','" + element.TelefonoCitas + "', '" + element.Id_Calendario.ToString() + "', '" + element.NB_Programa + "', '" + eliminar + "', '" + Desc + "')\" href =\"" + "\" data-toggle=\"" + "modal" + "\" data-target=\"" + "#asignar-citas-confirmacion" + "\" data-whatever=\"@getbootstrap\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + /*"." + element.NB_Primero.Substring(0, 1) + "." + UppercaseFirst(element.AP_Primero) +*/ "</a></div>";
 
                     }
                 }
@@ -563,10 +573,19 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
                         if (email.Count() > 0)
                         {
-
                             EmailService mail = new EmailService();
-                            string body = CreateBody(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
-                            mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                            string body = string.Empty;
+
+                            if (DdlTipo.SelectedItem.Text.Contains("Ubicacion"))
+                            {
+                                body = CreateBodyUbicacion(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                                mail.SendAsyncCita(email, "Cita para Ubicación", body);
+                            }
+                            else
+                            {
+                                body = CreateBodySentencia(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                                mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                            }                                                       
                         }
                     }
                     catch(Exception ex)
@@ -657,11 +676,29 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         Response.Redirect("imprimir-documentos.aspx", false);
     }
 
-    private string CreateBody(string FirstName, string LastName, string FechaCita, string TrabajadorSocial, string Programa)
+    private string CreateBodySentencia(string FirstName, string LastName, string FechaCita, string TrabajadorSocial, string Programa)
     {
         string body = string.Empty;
        
         using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailCitaParticipante.html")))
+        {
+            body = reader.ReadToEnd();
+        }
+        body = body.Replace("{NombreCompleto}", FirstName + " " + LastName);
+        body = body.Replace("{FechaCitaHeader}", FechaCita);
+        body = body.Replace("{FechaCita}", FechaCita);
+        body = body.Replace("{TrabajadorSocial}", TrabajadorSocial);
+        body = body.Replace("{Programa}", Programa);
+
+        return body;
+
+    }
+
+    private string CreateBodyUbicacion(string FirstName, string LastName, string FechaCita, string TrabajadorSocial, string Programa)
+    {
+        string body = string.Empty;
+
+        using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailCitaUbicacion.html")))
         {
             body = reader.ReadToEnd();
         }

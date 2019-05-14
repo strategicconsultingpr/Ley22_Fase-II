@@ -133,7 +133,7 @@ namespace Ley22_WebApp_V2
                 DdlNumeroOrdenJudicial.DataSource = CasosCriminales;
                 DdlNumeroOrdenJudicial.DataBind();
 
-                if (CasosCriminales.Count() > 1)
+                if (CasosCriminales.Count() > 0)
                 {
                     DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
                 }
@@ -141,10 +141,10 @@ namespace Ley22_WebApp_V2
                 {
                     DdlNumeroOrdenJudicial.Items.Insert(0, new ListItem("NO CASO CRIMINAL COMPLETADO", "0"));
                 }
-                else
-                {
-                    BidGrid();
-                }
+                //else
+                //{
+                //    BidGrid();
+                //}
             }
         }
 

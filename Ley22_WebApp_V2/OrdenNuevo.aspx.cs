@@ -107,7 +107,7 @@ namespace Ley22_WebApp_V2
                     DateTime FE_Creacion = Convert.ToDateTime(caso.FechaCreacion.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(FE_Creacion);
 
-                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 8) || caso.FK_Programa != Convert.ToInt32(Session["Programa"]))
+                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 8) || caso.FK_Programa != Convert.ToInt32(Session["Programa"]) || caso.Activa != 1)
                     {
                         TxtNroCasoCriminal.ReadOnly = true;
                         TxtFechaOrden.ReadOnly = true;

@@ -60,7 +60,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="alcohol">Por ciento de alcohol (*)</label>
-                                <asp:TextBox ID="Txtalcohol" runat="server" class="form-control" placeholder="Ej. 0.10" MaxLength="30"></asp:TextBox>
+                                <asp:TextBox ID="Txtalcohol" runat="server" class="form-control" placeholder="Ej. 0.10" MaxLength="5"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="(((\d{1,2}\.\d{1,2})))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="Txtalcohol" />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ControlToValidate="Txtalcohol" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <!-- col -->

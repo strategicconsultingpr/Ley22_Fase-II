@@ -237,6 +237,15 @@
 
                     <script type="text/javascript">
 
+                        var TxtSeguro = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>");
+                        TxtSeguro.addEventListener("keyup", function (event) {
+                            if (event.keyCode === 13) {
+                                event.preventDefault();
+
+                                document.getElementById("<%=BtnBuscar.ClientID %>").click();
+                            }
+                        });
+
                         function CheckTextBoxes(sender, args) {
                             var TxtNroSeguroSocial = document.getElementById("<%=TxtNroSeguroSocial.ClientID %>").value;
                           

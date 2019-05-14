@@ -81,7 +81,7 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body" style="width: 100%; height: 500px; overflow: scroll">
                     <asp:GridView ID="GVListadeCitas" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False">
                         <Columns>
                             <asp:BoundField DataField="Id_Calendario" HeaderText="Nro. Cita" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />
@@ -115,7 +115,7 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body" style="width: 100%; height: 500px; overflow: scroll">
                     <asp:GridView ID="GVResumenCharlas" runat="server" CssClass="table table-bordered table-hover" AutoGenerateColumns="False">
                         <Columns>
                             <asp:BoundField DataField="NumeroCasoCriminal" HeaderText="Caso Criminal" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" />

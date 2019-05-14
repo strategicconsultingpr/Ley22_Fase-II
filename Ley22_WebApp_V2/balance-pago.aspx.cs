@@ -96,7 +96,7 @@ public partial class balance_pago : System.Web.UI.Page
                 if (email.Count() > 0)
                 {
                     EmailService mail = new EmailService();
-                    string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, TxtCantidad.Text, TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, DdlDTipoPago.SelectedItem.Text, TxtNumeroRecibo.Text);
+                    string body = CreateBody(du.NB_Primero, du.AP_Primero, TxtFechaDelPago.Text, balance.ToString(), TxtCantidad.Text, DdlFormadePago.SelectedItem.Text, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, DdlDTipoPago.SelectedItem.Text, TxtNumeroRecibo.Text);
                     mail.SendAsyncCita(email, "Recibo de Pago", body);
                 }
 
@@ -192,6 +192,9 @@ public partial class balance_pago : System.Web.UI.Page
                 TxtNumeroRecibo.Text = "";
                 TxtNumeroCheque.Text = "";
                 DdlDTipoPago.SelectedValue = "0";
+
+                string mensaje = "El pago se realizó correctamente.";
+                ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Pago Correcto", "sweetAlert('Pago Correcto','" + mensaje + "','success')", true);
             }
 
             

@@ -218,6 +218,11 @@ public partial class balance_pago : System.Web.UI.Page
         
     }
 
+    protected void BtnGuardarVoid_Click(object sender, EventArgs e)
+    {
+
+    }
+
     protected void DdlFormadePago_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (DdlFormadePago.SelectedValue == "1")
@@ -253,16 +258,23 @@ public partial class balance_pago : System.Web.UI.Page
             else
             {
                 divNav.Visible = true;
-
+                BtnPagar.Visible = true;
                 int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
                 if(activa == 1)
                 {
-                    BtnPagar.Visible = true;
+                    //BtnPagar.Visible = true;
+                    DdlDTipoPago.Items[1].Enabled = true;
+                    DdlDTipoPago.Items[2].Enabled = true;
+                    DdlDTipoPago.Items[3].Enabled = true;
                 }
                 else
                 {
-                    BtnPagar.Visible = false;
+                    //BtnPagar.Visible = false;
+                    DdlDTipoPago.Items[1].Enabled = false;
+                    DdlDTipoPago.Items[2].Enabled = false;
+                    DdlDTipoPago.Items[3].Enabled = false;
+
                 }
                 
             }
@@ -285,8 +297,9 @@ public partial class balance_pago : System.Web.UI.Page
         {
            
             Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+            Literal LitVoid = (Literal)e.Row.FindControl("LitVoid");
             //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
+            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago, Cheque, FormadePagoVoid,NumerodeChequeVoid,FechaPagoVoid,TipoVoid;
             decimal Cantidad, CantidadAPagar;
             NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
             Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
@@ -297,11 +310,17 @@ public partial class balance_pago : System.Web.UI.Page
             //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
             NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
 
+            FormadePagoVoid = DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString();
+            NumerodeChequeVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "NumerodeCheque").ToString() + "\"";
+            FechaPagoVoid = "\"" + Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "FechaPago")).ToString("MM/dd/yyyy") + "\"";
+            TipoVoid = DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString();
 
             //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
             //{
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechaPago").ToString() + "\"";
                 LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + Cantidad +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+                LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + FormadePago + ","+NumerodeChequeVoid+ "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+            //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
             //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
             //    ContadorCharlasCitasPagadas += 1;
             //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());

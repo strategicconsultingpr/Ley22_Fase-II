@@ -179,7 +179,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:ListItem Value="3">Charlas Socio Educativas</asp:ListItem>
                                         <asp:ListItem Value="4">Toxicologia</asp:ListItem>
                                         <asp:ListItem Value="5">Certificaciones</asp:ListItem>
-                                        <asp:ListItem></asp:ListItem>
+                                        
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
@@ -218,6 +218,108 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             </div>
         </div>
     </div>
+
+<!--Modal VOID -->
+    <div class="modal fade" id="Void-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Pagar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-10">
+                        <div class="row">
+
+
+                            <!-- col -->
+
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="sexo">Forma de Pago</label>
+                                    <asp:TextBox ID="DdlFormaPagoVoid" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                      
+                                </div>
+
+                            </div>
+                            <!-- col -->
+                            <div class="col-md-3">
+                                <label for="fecha-pago">Número del Cheque</label>
+
+                                <asp:TextBox ID="TxtChequeVoid" runat="server" class="form-control" placeholder="Ej. 200" ReadOnly="true"></asp:TextBox>
+                              
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="fecha-pago">Fecha del Pago</label>
+                                    <asp:TextBox ID="TxtFechaVoid" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" MaxLength="10" ReadOnly="true"></asp:TextBox>
+                                   <%-- <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="CalendarExtender1" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaDelPago" />--%>
+                                    
+                                </div>
+
+                            </div>
+
+                            <div class="col">
+
+                                <label for="fecha-pago">Cantidad</label>
+                                <asp:TextBox ID="TxtCantidadVoid" runat="server" class="form-control" placeholder="Ej. 100.00" MaxLength="10" ReadOnly="true"></asp:TextBox>
+                               
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="tipoPago">Tipo de Pago</label>
+                                    <asp:TextBox ID="DdlTipoPagoVoid" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                    
+                                </div>
+
+                            </div>
+
+                            <div class="col">
+
+                                <label for="fecha-pago">Numero de Recibo</label>
+                                <asp:TextBox ID="TxtReciboVoid" runat="server" class="form-control" placeholder="59456" MaxLength="10" ReadOnly="true"></asp:TextBox>
+                              
+                            </div>
+
+                           <%-- <div style="margin-left:auto;margin-right:auto;">
+
+                                <label for="fecha-pago">Balance</label>
+                                <asp:Label ID="Label1" runat="server"></asp:Label>
+                                
+                            </div>--%>
+
+                            <!-- col -->
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="fecha-pago">Explicación del Void</label>
+                                <asp:TextBox ID="TxtVoid" runat="server" class="form-control" MaxLength="48"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequerirVoid" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtVoid" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false;" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid">
 
@@ -364,6 +466,11 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:Literal ID="LitColocarModal" runat="server"></asp:Literal>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Literal ID="LitVoid" runat="server"></asp:Literal>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>  
 
@@ -420,6 +527,15 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
         };
 
+        function changeDivVoid(DdlFormaPago,TxtCheque,FechaPago,Cantidad,TipoPago,Recibo) {
+            document.getElementById("<%=DdlFormaPagoVoid.ClientID %>").value = DdlFormaPago;
+            document.getElementById("<%=TxtChequeVoid.ClientID %>").value = TxtCheque;
+            document.getElementById("<%=TxtFechaVoid.ClientID %>").value = FechaPago;
+            document.getElementById("<%=TxtCantidadVoid.ClientID %>").value = "$ "+Cantidad;
+            document.getElementById("<%=DdlTipoPagoVoid.ClientID %>").value = TipoPago;
+            document.getElementById("<%=TxtReciboVoid.ClientID %>").value = Recibo;
+        };
+
         function Cheque() {
             var DdlForma = document.getElementById("<%=DdlFormadePago.ClientID %>");
             var TxtCheque = document.getElementById("<%=TxtNumeroCheque.ClientID %>");
@@ -438,6 +554,8 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             
 
         };
+
+       
 
         function Historial() {     
             $(".nav").find(".active").removeClass("active");

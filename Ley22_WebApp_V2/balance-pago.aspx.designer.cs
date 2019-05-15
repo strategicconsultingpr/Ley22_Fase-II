@@ -201,6 +201,87 @@ public partial class balance_pago {
     protected global::System.Web.UI.WebControls.Button BtnGuardarPago;
     
     /// <summary>
+    /// DdlFormaPagoVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox DdlFormaPagoVoid;
+    
+    /// <summary>
+    /// TxtChequeVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtChequeVoid;
+    
+    /// <summary>
+    /// TxtFechaVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtFechaVoid;
+    
+    /// <summary>
+    /// TxtCantidadVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtCantidadVoid;
+    
+    /// <summary>
+    /// DdlTipoPagoVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox DdlTipoPagoVoid;
+    
+    /// <summary>
+    /// TxtReciboVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtReciboVoid;
+    
+    /// <summary>
+    /// TxtVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtVoid;
+    
+    /// <summary>
+    /// RequerirVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequerirVoid;
+    
+    /// <summary>
+    /// BtnVoid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button BtnVoid;
+    
+    /// <summary>
     /// WUCUsuario control.
     /// </summary>
     /// <remarks>

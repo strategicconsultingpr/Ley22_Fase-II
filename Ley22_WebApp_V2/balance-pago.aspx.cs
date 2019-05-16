@@ -15,6 +15,8 @@ using Ley22_WebApp_V2.Old_App_Code;
 using Syncfusion.HtmlConverter;
 //using Syncfusion.Pdf;
 using SelectPdf;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class balance_pago : System.Web.UI.Page
 {
@@ -23,6 +25,8 @@ public partial class balance_pago : System.Web.UI.Page
     decimal TotalPagado, BalanceDebido, cargos, pagos;
     static string prevPage = String.Empty;
     ApplicationUser ExistingUser = new ApplicationUser();
+    ApplicationDbContext context;
+    UserManager<ApplicationUser> userManager;
     SEPSEntities1 dsPerfil = new SEPSEntities1();
     Ley22Entities dsLey22 = new Ley22Entities();
     static string userId = String.Empty;
@@ -49,13 +53,21 @@ public partial class balance_pago : System.Web.UI.Page
             Response.Redirect("Mensajes.aspx", false);
             return;
         }
+        if (Session["User"] == null)
+        {
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
         // -----------------------------------------------------------------------------
 
 
-
+        ExistingUser = (ApplicationUser)Session["User"];
         if (!Page.IsPostBack)
         {
-            ExistingUser = (ApplicationUser)Session["User"];
+           
             userId = ExistingUser.Id;
 
             prevPage = Request.UrlReferrer.ToString();
@@ -87,7 +99,7 @@ public partial class balance_pago : System.Web.UI.Page
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
                 short aa = Convert.ToInt16(a);
-                var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa).First();
+                var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
@@ -220,7 +232,92 @@ public partial class balance_pago : System.Web.UI.Page
 
     protected void BtnGuardarVoid_Click(object sender, EventArgs e)
     {
+        du = (Data_SA_Persona)Session["SA_Persona"];
+        int PK_ControlPago = Convert.ToInt32(IdCP.Value);
+        try
+        {
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                var ControlPago = dsLey22.ControldePagoes.Where(p => p.PK_ControldePago.Equals(PK_ControlPago)).Single();
 
+                mylib.RegistrarVoidPago(PK_ControlPago,Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, ControlPago.Cantidad, ControlPago.NumeroRecibo, ControlPago.NumerodeCheque, ControlPago.Descripcion, TxtVoid.Text);
+
+                int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                short aa = Convert.ToInt16(a);
+                var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
+
+                int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+                var balance = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Cargos - r.Pagos).SingleOrDefault();
+
+                var FormaPago = dsLey22.FormadePagoes.Where(b => b.Id_FormadePago.Equals(ControlPago.FK_FormadePago)).Select(r => r.FormadePago1).Single();
+
+                if (email.Count() > 0)
+                {
+                    EmailService mail = new EmailService();
+                    string body = CreateBody(du.NB_Primero, du.AP_Primero, DateTime.Now.ToShortDateString(), balance.ToString(), "-"+ ControlPago.Cantidad.ToString(), FormaPago, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, ControlPago.Descripcion, ControlPago.NumeroRecibo);
+                    mail.SendAsyncCita(email, "Recibo de Void", body);
+                }
+
+                string Id = Session["Id_Participante"].ToString();
+                string pagoPara = DdlTipoPagoVoid.Text;
+                Programa = Convert.ToInt32(Session["Programa"].ToString());
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
+                {
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
+                }
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + ControlPago.NumeroRecibo + "_" + ControlPago.Descripcion + "_Void" + ".pdf";
+
+                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+
+                
+
+                string bodyPDF = CreateBodyPDF(du.NB_Primero, du.AP_Primero, DateTime.Now.ToShortDateString(), balance.ToString(), "-" + ControlPago.Cantidad.ToString(), FormaPago, DdlNumeroOrdenJudicial.SelectedItem.Text, NB_Programa, ControlPago.Descripcion, ControlPago.NumeroRecibo);
+     
+
+
+
+                PdfPageSize pageSize = PdfPageSize.Letter;
+
+                PdfPageOrientation pdfOrientation = PdfPageOrientation.Portrait;
+
+                int webPageWidth = 850;
+                int webPageHeight = 0;
+
+                HtmlToPdf converter = new HtmlToPdf();
+
+                converter.Options.PdfPageSize = pageSize;
+                converter.Options.PdfPageOrientation = pdfOrientation;
+                converter.Options.WebPageWidth = webPageWidth;
+                converter.Options.WebPageHeight = webPageHeight;
+
+                PdfDocument doc = converter.ConvertHtmlString(bodyPDF, baseUrl);
+
+                doc.Save(PathNameDocumento);
+
+                doc.Close();
+                
+
+                TxtVoid.Text = "";
+
+                string mensaje = "El void se realizó correctamente.";
+                ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Void Correcto", "sweetAlert('Void Correcto','" + mensaje + "','success')", true);
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+          
+            TxtVoid.Text = "";
+
+            string mensaje = ex.InnerException.Message;
+            ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
+
+        }
+
+        BidGrid(sender, e);
     }
 
     protected void DdlFormadePago_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,6 +390,8 @@ public partial class balance_pago : System.Web.UI.Page
         cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
         pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
 
+        
+
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
            
@@ -319,7 +418,7 @@ public partial class balance_pago : System.Web.UI.Page
             //{
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechaPago").ToString() + "\"";
                 LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + Cantidad +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
-                LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + FormadePago + ","+NumerodeChequeVoid+ "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+                LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + ","+NumerodeChequeVoid+ "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
             //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
             //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
             //    ContadorCharlasCitasPagadas += 1;
@@ -340,6 +439,19 @@ public partial class balance_pago : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.Footer)
             // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
             LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
+    }
+
+    protected void GvHistorial_Pre(object sender, EventArgs e)
+    {
+        context = new ApplicationDbContext();
+        userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+        if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")))
+        {
+            GvPagos.Columns[8].Visible = false;
+        }
+
+
     }
 
     protected void GvPagar_RowDataBound(object sender, GridViewRowEventArgs e)

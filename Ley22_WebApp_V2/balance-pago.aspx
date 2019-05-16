@@ -312,7 +312,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false;" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false" />
+                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false;" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false" CausesValidation="false"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -448,7 +448,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         </asp:GridView>                          
                         </div>
                            
-                         <asp:GridView ID="GvPagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvHistorial_RowDataBound" style="visibility:hidden">
+                         <asp:GridView ID="GvPagos" runat="server" AutoGenerateColumns="False" CssClass="table table-hover mb-5" DataKeyNames="PK_ControldePago" GridLines="None" CellSpacing="-1" OnRowDataBound="GvHistorial_RowDataBound" OnPreRender="GvHistorial_Pre" style="visibility:hidden">
                             <Columns>
                                 <asp:BoundField DataField="NumeroRecibo" HeaderText="Número de Recibo" />
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
@@ -527,7 +527,8 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
         };
 
-        function changeDivVoid(DdlFormaPago,TxtCheque,FechaPago,Cantidad,TipoPago,Recibo) {
+        function changeDivVoid(Valor, DdlFormaPago, TxtCheque, FechaPago, Cantidad, TipoPago, Recibo) {
+            document.getElementById("<%= IdCP.ClientID %>").value = Valor;
             document.getElementById("<%=DdlFormaPagoVoid.ClientID %>").value = DdlFormaPago;
             document.getElementById("<%=TxtChequeVoid.ClientID %>").value = TxtCheque;
             document.getElementById("<%=TxtFechaVoid.ClientID %>").value = FechaPago;

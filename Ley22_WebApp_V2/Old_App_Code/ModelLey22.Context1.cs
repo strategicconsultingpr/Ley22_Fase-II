@@ -51,8 +51,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<DesempleoRazon> DesempleoRazons { get; set; }
         public virtual DbSet<TS_Excepciones> TS_Excepciones { get; set; }
         public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
-        public virtual DbSet<ControldePago> ControldePagoes { get; set; }
         public virtual DbSet<Documento> Documentos { get; set; }
+        public virtual DbSet<ControldePago> ControldePagoes { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -1366,6 +1366,43 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("FK_Programa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCharlasParaTarjeta_Result>("ConsultarCharlasParaTarjeta", id_ParticipanteParameter, fK_ProgramaParameter);
+        }
+    
+        public virtual int RegistrarVoidPago(Nullable<int> pK_ControlPago, Nullable<int> fK_CasoCriminal, string fK_Usuario, Nullable<decimal> cantidad, string numeroRecibo, Nullable<int> numerodeCheque, string descripcion, string voidDesc)
+        {
+            var pK_ControlPagoParameter = pK_ControlPago.HasValue ?
+                new ObjectParameter("PK_ControlPago", pK_ControlPago) :
+                new ObjectParameter("PK_ControlPago", typeof(int));
+    
+            var fK_CasoCriminalParameter = fK_CasoCriminal.HasValue ?
+                new ObjectParameter("FK_CasoCriminal", fK_CasoCriminal) :
+                new ObjectParameter("FK_CasoCriminal", typeof(int));
+    
+            var fK_UsuarioParameter = fK_Usuario != null ?
+                new ObjectParameter("FK_Usuario", fK_Usuario) :
+                new ObjectParameter("FK_Usuario", typeof(string));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(decimal));
+    
+            var numeroReciboParameter = numeroRecibo != null ?
+                new ObjectParameter("NumeroRecibo", numeroRecibo) :
+                new ObjectParameter("NumeroRecibo", typeof(string));
+    
+            var numerodeChequeParameter = numerodeCheque.HasValue ?
+                new ObjectParameter("NumerodeCheque", numerodeCheque) :
+                new ObjectParameter("NumerodeCheque", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var voidDescParameter = voidDesc != null ?
+                new ObjectParameter("VoidDesc", voidDesc) :
+                new ObjectParameter("VoidDesc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarVoidPago", pK_ControlPagoParameter, fK_CasoCriminalParameter, fK_UsuarioParameter, cantidadParameter, numeroReciboParameter, numerodeChequeParameter, descripcionParameter, voidDescParameter);
         }
     }
 }

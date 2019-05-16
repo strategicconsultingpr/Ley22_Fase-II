@@ -26,5 +26,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string Descripcion { get; set; }
         public string NumeroRecibo { get; set; }
         public Nullable<int> NumerodeCheque { get; set; }
+        public string VoidDesc { get; set; }
     }
 }

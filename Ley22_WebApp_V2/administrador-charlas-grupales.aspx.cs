@@ -33,18 +33,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             Response.Redirect("Mensajes.aspx", false);
             return;
         }
-        
 
-        if(!Page.IsPostBack)
+        if (Session["User"] == null)
         {
-            if (Session["User"] == null)
-            {
-                Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
-                Session["MensajeError"] = "Por favor ingrese al sistema";
-                Session["Redirect"] = "Account/Login.aspx";
-                Response.Redirect("Mensajes.aspx", false);
-                return;
-            }
+            Session["TipodeAlerta"] = ConstTipoAlerta.Danger;
+            Session["MensajeError"] = "Por favor ingrese al sistema";
+            Session["Redirect"] = "Account/Login.aspx";
+            Response.Redirect("Mensajes.aspx", false);
+            return;
+        }
+
+
+        if (!Page.IsPostBack)
+        {
+            
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var usuarios_programas = new List<int>();

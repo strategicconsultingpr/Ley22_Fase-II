@@ -47,6 +47,30 @@
             <td>Reporte el cual genera los ingresos por dia de los servicios cobrados en detalle.</td>
             <td><asp:HyperLink ID="ServiciosDiarios" runat="server" NavigateUrl="ServiciosDiariosCobrados_" Text="ver..."/></td>
         </tr>
+        <tr>
+            <td>Ageing Report</td>
+            <td>Reporte el cual genera deudas de participantes.</td>
+            <td><asp:HyperLink ID="AgeingReport" runat="server" NavigateUrl="AgeingReport&Programa=" Text="ver..."/></td>
+        </tr>
+        <tr>
+            <td>Reporte de Participantes por Programa Seleccionado</td>
+            <td>Reporte el cual genera estatus de casos criminales de los participantes.</td>
+            <td><asp:HyperLink ID="ParticipantesPrograma" runat="server" NavigateUrl="ReporteParticipantePrograma&FK_Programa=" Text="ver..."/></td>
+        </tr>
+        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                    <RoleGroups>
+                                        <asp:RoleGroup Roles="SuperAdmin">
+                                            <ContentTemplate>
+        <tr>
+            <td>Reporte de Participantes para todos los Programas</td>
+            <td>Reporte el cual genera estatus de casos criminales de los participantes para todos los programas.</td>
+            <td><asp:HyperLink ID="Participantes" runat="server" NavigateUrl="http://vhermes/ReportServer?/Informes Sistema Ley 22/ReporteParticipante" Text="ver..."/></td>
+        </tr>
+                                                </ContentTemplate>
+                                        </asp:RoleGroup>
+
+                                    </RoleGroups>
+                                </asp:LoginView>
 
     </table>
   </div>

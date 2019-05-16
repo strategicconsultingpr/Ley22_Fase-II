@@ -1,5 +1,7 @@
 ﻿using Ley22_WebApp_V2.Models;
 using Ley22_WebApp_V2.Old_App_Code;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +102,10 @@ namespace Ley22_WebApp_V2
 
             this.DetalleIngresos.NavigateUrl = "";
             this.ServiciosDiarios.NavigateUrl = "";
+            this.AgeingReport.NavigateUrl = "";
+            this.ParticipantesPrograma.NavigateUrl = "";
+
+           
 
             Div.Visible = true;
 
@@ -132,6 +138,9 @@ namespace Ley22_WebApp_V2
 
             this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa;
             this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa;
+            this.AgeingReport.NavigateUrl = this.Session["URL_Reports"].ToString() + "AgeingReport&Programa=" + DdlPrograma.SelectedValue;
+            this.ParticipantesPrograma.NavigateUrl = this.Session["URL_Reports"].ToString() + "ReporteParticipantePrograma&FK_Programa=" + DdlPrograma.SelectedValue;
+            
         }
     }
 

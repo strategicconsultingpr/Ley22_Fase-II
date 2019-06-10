@@ -130,7 +130,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:ListItem Value="3">Ajustes</asp:ListItem>
                                         <asp:ListItem></asp:ListItem>
                                     </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlFormadePago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlFormadePago" InitialValue="0" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
                                 </div>
 
@@ -140,7 +140,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 <label for="fecha-pago">Número del Cheque</label>
 
                                 <asp:TextBox ID="TxtNumeroCheque" runat="server" class="form-control" placeholder="Ej. 200" MaxLength="10"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RFVNumeroCheque" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroCheque" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RFVNumeroCheque" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroCheque" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
 
                             </div>
@@ -152,7 +152,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                     <asp:TextBox ID="TxtFechaDelPago" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" MaxLength="10"></asp:TextBox>
                                     <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaDelPago" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaDelPago" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtFechaDelPago" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtFechaDelPago" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
                                 </div>
 
@@ -163,7 +163,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                 <label for="fecha-pago">Cantidad</label>
                                 <asp:TextBox ID="TxtCantidad" runat="server" class="form-control" placeholder="Ej. 100.00" MaxLength="10"></asp:TextBox>
                                 <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="((\d+)((\.\d{1,2})?))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="TxtCantidad" />
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtCantidad" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtCantidad" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
 
                             </div>
@@ -181,7 +181,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:ListItem Value="5">Certificaciones</asp:ListItem>
                                         
                                     </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
                                 </div>
 
@@ -191,7 +191,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
                                 <label for="fecha-pago">Numero de Recibo</label>
                                 <asp:TextBox ID="TxtNumeroRecibo" runat="server" class="form-control" placeholder="59456" MaxLength="10"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroRecibo" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroRecibo" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
 
                             </div>
@@ -211,7 +211,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Los datos del pago estan correctos?')) return false;" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" />
+                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Los datos del pago estan correctos?')) return false;" OnClick="BtnGuardarPago_Click"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -312,7 +312,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false;" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false" CausesValidation="false"/>
+                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false; groupVal();" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -541,7 +541,10 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             var DdlForma = document.getElementById("<%=DdlFormadePago.ClientID %>");
             var TxtCheque = document.getElementById("<%=TxtNumeroCheque.ClientID %>");
             var val = document.getElementById("<%=RFVNumeroCheque.ClientID %>");
-           
+            var valVoid = document.getElementById("<%=RequerirVoid.ClientID %>");
+
+            groupValEnable();
+            ValidatorEnable(valVoid, false);
             var selectedValue = DdlForma.value;
             if (selectedValue == "2") {
                 TxtCheque.style.visibility = 'visible';
@@ -556,16 +559,56 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
 
         };
 
-       
+        function HasPageValidators()
+        {
+            var hasValidators = false;
+          
+            try
+            {
+                if (Page_Validators.length > 0)
+                {
+                    hasValidators = true;
+                }
+            }
+            catch (error)
+            {
+            }
+          
+            return hasValidators;
+        }
+
+        function groupVal() {
+           if (HasPageValidators())
+            {
+                for(i=0; i < Page_Validators.length; i++)
+                {
+                    if (Page_Validators[i].validationGroup == "gPago")
+                    {
+                        ValidatorEnable(Page_Validators[i], false);
+                    }
+                }
+            } 
+        }
+
+        function groupValEnable() {
+           if (HasPageValidators())
+            {
+                for(i=0; i < Page_Validators.length; i++)
+                {
+                    if (Page_Validators[i].validationGroup == "gPago")
+                    {
+                        ValidatorEnable(Page_Validators[i], true);
+                    }
+                }
+            } 
+        }
 
         function Historial() {     
             $(".nav").find(".active").removeClass("active");
             $("#historial").addClass("active");
             document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'visible';
             document.getElementById("divPagar").style.display = 'none';
-        }
-
-        
+        }  
 
         function Pagar() {
             $(".nav").find(".active").removeClass("active");

@@ -25,6 +25,7 @@
     <input id="IdCP" name="IdCP" type="hidden" runat="server" />
     <input id="NumRecibo" name="NumRecibo" type="hidden" runat="server" />
     <input id="IdDesc" name="IdDesc" type="hidden" runat="server" />
+    <input id="HVoid" name="HVoid" type="hidden" runat="server" />
     
     <!-- Modal -->
     <div class="modal fade" id="imprimir-recibo-modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -211,7 +212,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Los datos del pago estan correctos?')) return false;" OnClick="BtnGuardarPago_Click"/>
+                    <asp:Button ID="BtnGuardarPago" runat="server" Text="Registrar Pago" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Los datos del pago estan correctos?')) return false;" OnClick="BtnGuardarPago_Click" UseSubmitBehavior="false" ValidationGroup="gPago"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -312,7 +313,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                 </div>
                 <div class="modal-footer">
 
-                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false; groupVal();" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false"/>
+                    <asp:Button ID="BtnVoid" runat="server" Text="Registrar Void" CssClass="btn btn-primary mr-3" OnClientClick="if (!confirm('Desea realizar el void?')) return false;" OnClick="BtnGuardarVoid_Click" UseSubmitBehavior="false"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                 </div>
@@ -508,10 +509,11 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
            window.history.replaceState( null, null, window.location.href );
         }
 
-        function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto) {
+        function changeDivContent(Valor, NroRecibo, Descripcion, FormadePago, Fecha, Cantidad, NombreCompleto, HVoid) {
             document.getElementById("<%= IdCP.ClientID %>").value = Valor;
             document.getElementById("<%= NumRecibo.ClientID %>").value = NroRecibo;
             document.getElementById("<%= IdDesc.ClientID %>").value = Descripcion;
+            document.getElementById("<%= HVoid.ClientID %>").value = HVoid;
             document.getElementById("NroRecibo").innerHTML = "Recibo #: " + NroRecibo;
             document.getElementById("Descripcion").innerHTML = "Descripción: " + Descripcion;
 
@@ -543,7 +545,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             var val = document.getElementById("<%=RFVNumeroCheque.ClientID %>");
             var valVoid = document.getElementById("<%=RequerirVoid.ClientID %>");
 
-            groupValEnable();
+            //groupValEnable();
             ValidatorEnable(valVoid, false);
             var selectedValue = DdlForma.value;
             if (selectedValue == "2") {
@@ -603,7 +605,10 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
             } 
         }
 
-        function Historial() {     
+        function Historial() { 
+            var valVoid = document.getElementById("<%=RequerirVoid.ClientID %>");
+            groupVal();
+            ValidatorEnable(valVoid, true);
             $(".nav").find(".active").removeClass("active");
             $("#historial").addClass("active");
             document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'visible';
@@ -611,6 +616,9 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
         }  
 
         function Pagar() {
+            var valVoid = document.getElementById("<%=RequerirVoid.ClientID %>");
+            groupValEnable();
+            ValidatorEnable(valVoid, false);
             $(".nav").find(".active").removeClass("active");
             $("#pagar").addClass("active");
             document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'hidden';

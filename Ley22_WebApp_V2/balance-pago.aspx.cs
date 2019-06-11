@@ -261,7 +261,8 @@ public partial class balance_pago : System.Web.UI.Page
                 }
 
                 string Id = Session["Id_Participante"].ToString();
-                string pagoPara = DdlTipoPagoVoid.Text;
+                //string pagoPara = DdlTipoPagoVoid.Text;
+                string pagoPara = ControlPago.Descripcion;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
                 if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
                 {
@@ -390,7 +391,9 @@ public partial class balance_pago : System.Web.UI.Page
         cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
         pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
 
-        
+        string Id = Session["Id_Participante"].ToString();
+        Programa = Convert.ToInt32(Session["Programa"].ToString());
+
 
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
@@ -398,11 +401,12 @@ public partial class balance_pago : System.Web.UI.Page
             Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
             Literal LitVoid = (Literal)e.Row.FindControl("LitVoid");
             //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago, Cheque, FormadePagoVoid,NumerodeChequeVoid,FechaPagoVoid,TipoVoid;
+            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago, Cheque, FormadePagoVoid,NumerodeChequeVoid,FechaPagoVoid,TipoVoid, DescVoid;
             decimal Cantidad, CantidadAPagar;
             NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
             Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
             Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
+            DescVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void\"";
             FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
             Fecha = "\"" + ""+ "\"";
             Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
@@ -416,10 +420,26 @@ public partial class balance_pago : System.Web.UI.Page
 
             //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
             //{
+                char a = Cantidad.ToString()[0]; 
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechaPago").ToString() + "\"";
-                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + Cantidad +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
-                LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + ","+NumerodeChequeVoid+ "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
-            //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
+                
+            if (a != '-')
+            {
+                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
+
+                if(!File.Exists(PathNameDocumento))
+                {
+                    LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + "," + NumerodeChequeVoid + "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+                }
+               
+            }
+            else
+            {
+                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + DescVoid + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+            }
+                //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
             //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
             //    ContadorCharlasCitasPagadas += 1;
             //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
@@ -630,18 +650,39 @@ public partial class balance_pago : System.Web.UI.Page
 
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf"; 
+
+        try
+        {
+            //if(HVoid.Value.Contains("_Void"))
+            //{
+            //    PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf";
+            //}
+            //if(File.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + IdDesc.Value + ".pdf"))
+            //{
+            //   PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + IdDesc.Value + ".pdf";
+            //}
+            //else
+            //{
+            //   PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + IdDesc.Value + "_Void.pdf";
+            //}
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+            Response.TransmitFile(PathNameDocumento);
+            Response.End();
+            Response.Redirect("/");
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        
+
        
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+ IdDesc.Value + "/" + NumRecibo.Value+ "_" + IdDesc.Value + ".pdf";
-
-
-        Response.Clear();
-        Response.ClearHeaders();
-        Response.ClearContent();
-        Response.ContentType = "application/octet-stream";
-        Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
-        Response.TransmitFile(PathNameDocumento);
-        Response.End();
-        Response.Redirect("/");
     }
 
     public override void VerifyRenderingInServerForm(Control control)

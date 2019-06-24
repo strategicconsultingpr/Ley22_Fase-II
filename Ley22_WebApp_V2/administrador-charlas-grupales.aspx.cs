@@ -14,6 +14,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SelectPdf;
 
+
+/*Esta clase crea, modifica, borrar y obtiene información de charlas grupales. El personal podrá ver las charlas gruaples y los participantes asignados bajo 
+ cada charla. Se podrá llevar asistencia y generar los certificados de cumplimientos a los participantes.*/
 public partial class administrador_charlas_grupales : System.Web.UI.Page
 {
     static string prevPage = String.Empty;

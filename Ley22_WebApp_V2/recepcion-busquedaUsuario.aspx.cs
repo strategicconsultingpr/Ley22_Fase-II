@@ -229,7 +229,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //    idParticipante = Pk_Persona;
             //}
             short idPrograma = Convert.ToInt16(Session["Programa"]);
-            Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
+            //Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
 
             expediente = mlib.SA_PERSONA_PROGRAMA.Where(p => p.FK_Programa.Equals(idPrograma)).Where(a => a.FK_Persona.Equals(idParticipante)).Select(u => u.NR_Expediente).SingleOrDefault();
 

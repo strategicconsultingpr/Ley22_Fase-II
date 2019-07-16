@@ -200,6 +200,7 @@ namespace Ley22_WebApp_V2
 
                     Session["SA_Persona"] = sa_persona;
                     Session["Expediente"] = TxtExpediente.Text;
+                    Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero + " " + sa_persona.AP_Segundo;
 
                     string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se añadió correctamente.";
 
@@ -265,6 +266,7 @@ namespace Ley22_WebApp_V2
 
                 Session["SA_Persona"] = sa_persona;
                 Session["Expediente"] = TxtExpediente.Text;
+                Session["NombreParticipante"] = sa_persona.NB_Primero + " " + sa_persona.AP_Primero + " " + sa_persona.AP_Segundo;
 
                 string mensaje = "El participante " + TxtPrimerNombre.Text + " " + TxtPrimerApellido.Text + " se actualizo correctamente.";
 
@@ -278,7 +280,7 @@ namespace Ley22_WebApp_V2
                 }
                 else
                 {
-                    mensaje += " Este participante NO contiene algun caso abierto, favor agregar caso.";
+                    mensaje += " Este participante NO contiene algún caso abierto, favor agregar caso.";
                     ClientScript.RegisterStartupScript(this.GetType(), "Participante Actualizado", "sweetAlertRef('Participante Actualizado','" + mensaje + "','success','OrdenNuevo.aspx');", true);
                    // Response.Redirect("OrdenNuevo.aspx", false);
                 }

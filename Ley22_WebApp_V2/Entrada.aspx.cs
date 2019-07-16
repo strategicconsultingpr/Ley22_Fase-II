@@ -53,6 +53,12 @@ public partial class Entrada : System.Web.UI.Page
                 ValidatorPrograma.Enabled = false;
                 DivPrograma.Visible = false;
                 Session["Programa"] = programas[0].Value;
+
+                using (SEPSEntities1 mlib = new SEPSEntities1())
+                {
+                    short idPrograma = Convert.ToInt16(Session["Programa"]);
+                    Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
+                }
             }
             else
             {
@@ -68,6 +74,12 @@ public partial class Entrada : System.Web.UI.Page
         if (DdlPrograma.SelectedValue != "0")
         {
             Session["Programa"] = DdlPrograma.SelectedValue;
+
+            using (SEPSEntities1 mlib = new SEPSEntities1())
+            {
+                short idPrograma = Convert.ToInt16(Session["Programa"]);
+                Session["NombrePrograma"] = mlib.SA_PROGRAMA.Where(p => p.PK_Programa.Equals(idPrograma)).Select(u => u.NB_Programa.Replace("EVALUACIÓN ", "")).Single();
+            }
         }
         else
         {

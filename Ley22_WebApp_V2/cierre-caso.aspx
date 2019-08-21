@@ -111,7 +111,7 @@
 
                     <div class="col-md-12">
                         <asp:Button ID="BtnGuardar" runat="server" Text="Cerrar Caso" CssClass="btn btn-primary btn-lg" OnClick="BtnGuardar_Click" />
-                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false" />
+                        <asp:Button ID="BtnCancelar" runat="server" Text="Volver al Expediente" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false" />
 
                     </div>
                     <!-- col-12 -->

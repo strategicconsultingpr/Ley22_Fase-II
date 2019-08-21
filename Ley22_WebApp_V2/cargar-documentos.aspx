@@ -73,7 +73,7 @@
                         <asp:Button ID="BtnSubirDocumento" runat="server" Text="SUBIR DOCUMENTO" OnClick="BtnSubirDocumento_Click" CssClass="btn btn-primary mr-3" />                       
                     </div>
                     <div class="col">
-                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary btn-lg"  OnClick="BtnCancelar_Click" CausesValidation="false" />
+                        <asp:Button ID="BtnCancelar" runat="server" Text="Volver al Expediente" CssClass="btn btn-secondary btn-lg"  OnClick="BtnCancelar_Click" CausesValidation="false" />
                     </div>
                     
                     <div class="col-lg-1"></div>

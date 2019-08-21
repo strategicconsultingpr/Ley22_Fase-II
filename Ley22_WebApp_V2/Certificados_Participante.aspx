@@ -105,7 +105,7 @@
                         <a data-dismiss="modal" href="#" class="btn btn-primary mr-3" data-toggle="modal" data-target="#modal-certificados" data-whatever="@getbootstrap" runat="server" id="lnkCertificados" >GENERAR CERTIFICADO</a>
                     </div>
                     <div class="col">
-                        <a id="BtnCancelar" href="seleccion-proximo-paso.aspx" class="btn btn-secondary btn-lg">CANCELAR</a>
+                        <a id="BtnCancelar" href="seleccion-proximo-paso.aspx" class="btn btn-secondary btn-lg">Volver al Expediente</a>
                     </div>
                     
                     <div class="col-lg-1"></div>

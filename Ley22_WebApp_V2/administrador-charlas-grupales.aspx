@@ -545,7 +545,7 @@
                                 </div>
                             </div>
                             <br />
-                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver al Dashboard</a>
+                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
                         </div>
                     </div>
                 </div>
@@ -1045,8 +1045,8 @@
                                 document.getElementById("<%=TxtFinalModCharla.ClientID %>").value = FechaFinal;
                                 document.getElementById("<%=DdlTipodeCharla2.ClientID %>").value = Id_TipoCharla;
                                 document.getElementById("<%=DdlNivelCharlas2.ClientID %>").value = Id_NiveldeCharla;
-                                document.getElementById("<%=DdlNumeroCharla2.ClientID %>").value = NrodeParticipantes;
-                                document.getElementById("<%=TxtMaxCantParticipantes2.ClientID %>").value = NumeroCharla;
+                                document.getElementById("<%=DdlNumeroCharla2.ClientID %>").value = NumeroCharla;
+                                document.getElementById("<%=TxtMaxCantParticipantes2.ClientID %>").value = NrodeParticipantes;
                             }
 
         function checkDate(sender, args) {

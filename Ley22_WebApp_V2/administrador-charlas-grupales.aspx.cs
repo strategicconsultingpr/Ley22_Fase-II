@@ -710,8 +710,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
         {
             var participantes = mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Select(r => r.Id_Participante).DefaultIfEmpty().ToList();
-
-            if(participantes.Count() > 0)
+            
+            if (participantes.Count() > 0 && participantes.First() != 0)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Eliminar Charla", "sweetAlert('NO PUEDE ELIMINAR CHARLA','La charla contiene participantes, favor eliminarlos antes de eliminar la charla.','error')", true);
             }

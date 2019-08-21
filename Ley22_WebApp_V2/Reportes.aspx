@@ -7,7 +7,7 @@
                     <div class="col-md-2">
                         <strong>Escoger un Programa: </strong>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <div class="row">
 
                             <div class="col-md-10">
@@ -21,6 +21,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-2">
+                       <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-lg">Volver a mi Tablero</a>
                     </div>
                 </div> 
         </div>

@@ -76,7 +76,7 @@
                       <nav>
                       <ul class="nav" id="nav">
                         <li class="nav-item" id="liExpediente" runat="server" visible="false">
-                          <a class="nav-link active" href="../entrada.aspx">Expediente del Participante</a>
+                          <a class="nav-link active" href="../entrada.aspx">Búsqueda de Expediente</a>
                         </li>  
                           <li class="nav-item" id="liCitas" runat="server" visible="false">
                           <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
@@ -107,7 +107,7 @@
                     <li class="nav-item dropdown"">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><asp:Literal runat="server" ID="Usuario"/></a>
                             <div class="dropdown-menu">                                
-                                <a class="dropdown-item" href="../Dashboard-Usuarios.aspx">Dashboard</a>
+                                <a class="dropdown-item" href="../Dashboard-Usuarios.aspx">Mi Tablero</a>
                                 <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">
@@ -131,7 +131,7 @@
                               
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item">
-                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Cerrar Sesión" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
                                  </a>
                             </div>
                     </li>

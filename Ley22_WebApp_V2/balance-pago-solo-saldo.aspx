@@ -40,7 +40,7 @@
                                 </div>
 
                             <div class="col" style="text-align: right; width: 100%;">
-                                <asp:Button ID="BtnCancelar" runat="server" Text="Volver" CssClass="btn btn-primary mr-3" OnClick="BtnCancelar_Click" CausesValidation="false" />
+                                <asp:Button ID="BtnCancelar" runat="server" Text="Volver al Expediente" CssClass="btn btn-primary mr-3" OnClick="BtnCancelar_Click" CausesValidation="false" />
                             </div>
                          </div>
 

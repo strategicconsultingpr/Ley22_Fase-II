@@ -42,7 +42,7 @@
             <div class="card-header">
                 Documentos para Imprimir
                 
-                <asp:Button ID="BtnCancelar" runat="server" Text="Volver" CssClass="btn btn-primary mr-3" style="position:relative; float:right; margin-right:50px;" OnClick="BtnCancelar_Click" CausesValidation="false" />
+                <asp:Button ID="BtnCancelar" runat="server" Text="Volver a mi Tablero" CssClass="btn btn-primary mr-3" style="position:relative; float:right; margin-right:50px;" OnClick="BtnCancelar_Click" CausesValidation="false" />
             
             </div>
             

@@ -363,7 +363,7 @@
                                 </button>
                             </div>
                             <br />
-                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver al Dashboard</a>
+                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
                         </div>
                     </div>
                 </div>

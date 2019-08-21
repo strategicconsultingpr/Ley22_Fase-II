@@ -142,6 +142,8 @@ namespace Ley22_WebApp_V2
             this.ParticipantesPrograma.NavigateUrl = this.Session["URL_Reports"].ToString() + "ReporteParticipantePrograma&FK_Programa=" + DdlPrograma.SelectedValue;
             
         }
+
+        
     }
 
     

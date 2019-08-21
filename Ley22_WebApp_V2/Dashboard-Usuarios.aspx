@@ -30,7 +30,7 @@
                     </ul>
  
                  <%--<a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Dashboard</a>--%>
-                 <asp:LoginStatus runat="server" class="btn btn-secondary btn-block mb-4" LogoutAction="Redirect" LogoutText="Salir del Dashboard" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
+                 <asp:LoginStatus runat="server" class="btn btn-secondary btn-block mb-4" LogoutAction="Redirect" LogoutText="Cerrar Sesión" LogoutPageUrl="~/Account/Login" OnLoggingOut="Unnamed_LoggingOut" />
                 </div>
 
 <%--Dashboard de Usuario--%>
@@ -47,7 +47,7 @@
                                                 </span>
                                             </a>
                                         </p>
-                                        <h4 class="card-title"><a href="../Entrada.aspx">Expediente del Participante</a></h4>
+                                        <h4 class="card-title"><a href="../Entrada.aspx">Búsqueda de Expediente</a></h4>
                                     </div>
                                 </div>
                             </div> 

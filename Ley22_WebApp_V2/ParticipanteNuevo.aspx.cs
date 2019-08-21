@@ -121,9 +121,15 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
+                        TxtNroSeguroSocial.Text = ssn;
                         BtnActualizar.Visible = true;
+                        RegularExpressionValidator1.Enabled = false;
                     }
              
+                }
+                else
+                {
+                    RegularExpressionValidator1.Enabled = true;
                 }
             }
         }

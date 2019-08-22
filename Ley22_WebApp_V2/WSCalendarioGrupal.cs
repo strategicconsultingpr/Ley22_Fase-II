@@ -243,14 +243,14 @@ namespace Ley22_WebApp_V2
                     if(c.Asistio == 0)
                     {
                         HrefAsistio = "<a " + HrefPermiso + "  id=\"asistioID\""+ AsistioOnclick + "style=\"color: #FF5733\">No Asistio</a>";
-                        //if (balance.Equals(Convert.ToDecimal(0.00)))
-                        //{
-                        //   HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-6\"><a>$0.00</a></div></div></div>";
-                        //}
-                        //else 
-                        //{
+                        if (status > 4)
+                        {
+                            HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
+                        }
+                        else
+                        {
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
-                      //  }
+                        }
                     }
                     else
                     {

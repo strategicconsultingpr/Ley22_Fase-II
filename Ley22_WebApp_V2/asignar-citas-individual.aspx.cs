@@ -103,15 +103,6 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
 
-            var tipo = dsley22.Precios.Where(a => a.Descripcion.Contains("Cita")).Select(r => new ListItem { Value = r.Id_Precio.ToString(), Text = r.Descripcion }).ToList();
-            DdlTipo.DataValueField = "Value";
-            DdlTipo.DataTextField = "Text";
-            DdlTipo.DataSource = tipo;
-            DdlTipo.DataBind();
-            DdlTipo.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-
-
 
             CargarOrdenesJudiciales();
             verificarCitas();
@@ -233,6 +224,9 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
     protected void DdlNumeroOrdenJudicial_Selected(object sender, EventArgs e)
     {
+        du = (Data_SA_Persona)Session["SA_Persona"];
+        int PK_Programa = Convert.ToInt32(Session["Programa"]);
+
         if (DdlNumeroOrdenJudicial.SelectedValue == "0")
         {
 
@@ -252,13 +246,31 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         }
         else
         {
-            //DdlRegion.Enabled = true;
+            List<ListItem> tipo;
+            int Caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+            var Citas = dsley22.Calendarios.Where(a => a.Id_Participante.Equals(du.PK_Persona)).Where(b => b.Id_OrdenJudicial == Caso)
+                .Where(f => f.Id_Programa == PK_Programa).Where(c => c.Activo.Equals(1)).Where(d => d.Asistio.Equals(1)).Count();
+
+            if(Citas == 0)
+            {
+                tipo = dsley22.Precios.Where(a => a.Descripcion.Contains("Cita")).Where(o => !o.Descripcion.Contains("Ubicacion")).Select(r => new ListItem { Value = r.Id_Precio.ToString(), Text = r.Descripcion }).ToList();
+            }
+            else
+            {
+                tipo = dsley22.Precios.Where(a => a.Descripcion.Contains("Cita Ubicacion")).Select(r => new ListItem { Value = r.Id_Precio.ToString(), Text = r.Descripcion }).ToList();
+            }
+           
+                
+
+            DdlTipo.DataValueField = "Value";
+            DdlTipo.DataTextField = "Text";
+            DdlTipo.DataSource = tipo;
+            DdlTipo.DataBind();
+            DdlTipo.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
             DdlCentro.Enabled = true;
             DdlTrabajadorSocial.Enabled = false;
-            //if(DdlCentro.Items.FindByValue("0") != null)
-            //{
-            //    DdlCentro.SelectedIndex = 0;
-            //}
+           
             if(DdlTrabajadorSocial.Items.FindByValue("0") != null)
             {
                 DdlTrabajadorSocial.SelectedIndex = 0;
@@ -507,111 +519,130 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
         //du = (DataParticipante)Session["DataParticipante"];
         du = (Data_SA_Persona)Session["SA_Persona"];
+        int centro = Convert.ToInt32(DdlCentro.SelectedValue);
 
-        DateComparisonResult comparison;
+        int Caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+        var Citas = dsley22.Calendarios.Where(a => a.Id_Participante.Equals(du.PK_Persona)).Where(b => b.Id_OrdenJudicial == Caso)
+            .Where(f => f.Id_Programa == centro).Where(c => c.Activo.Equals(1)).Where(d => d.Asistio.Equals(1)).Count();
 
-        comparison = (DateComparisonResult) Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
+        if (Citas > 1)
+        {
+            string mensaje = "El participante ya asistió a dos(2) citas de evaluación ó ubicación.";
+            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "No Disponible", "sweetAlert('No Disponible','" + mensaje + "','error')", true);
 
-        if (comparison == DateComparisonResult.Later && Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
+            TxtHoraFinal.Text = "";
+            TxtHoraInicial.Text = "";
+            TxtFecha.Text = "";
+            return;
+        }
+        else
         {
 
-            using (Ley22Entities mylib = new Ley22Entities())
+            DateComparisonResult comparison;
+
+            comparison = (DateComparisonResult)Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
+
+            if (comparison == DateComparisonResult.Later && Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
             {
 
-                List<ListarCitasCalendario_Result> myResult = mylib.ListarCitasCalendario(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
-                var filtro = myResult.Select(u => u.Id_Calendario).ToList();
-                var filtro2 = mylib.Calendarios.Where(u => filtro.Contains(u.Id_Calendario) && u.Activo.Equals(1)).Select(p => p.Id_Calendario).ToList();
-                List<ListarCitasCalendario_Result> myResultFiltro = myResult.Where(u => filtro2.Contains(u.Id_Calendario)).ToList();
-
-
-                List<ListarCitasCalendario_Result> ListaCharlasXDia = myResultFiltro.FindAll(delegate (ListarCitasCalendario_Result bk)
+                using (Ley22Entities mylib = new Ley22Entities())
                 {
-                    return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
-                });
 
-                List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35), Convert.ToInt32(Session["Programa"])).ToList();
-                List<ListarExcepcionesTrabajadorSocial_Result> ListaExcepcionesXDia = myResult2.FindAll(delegate (ListarExcepcionesTrabajadorSocial_Result bk)
-                { 
-                    return (bk.FechaInicial == Convert.ToDateTime(FechaInicial) || bk.FechaFinal == Convert.ToDateTime(FechaFinal) || (bk.FechaInicial <= Convert.ToDateTime(FechaInicial) && bk.FechaFinal >= Convert.ToDateTime(FechaFinal)));
-                });
-                
-                if (ListaCharlasXDia.Count > 0)
-                {
-                    //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('YA EXISTE UN CITA PARA ESTE MISMO DIA Y HORA!');", true);
-                    string mensaje = "El trabajador social "+ DdlTrabajadorSocial.SelectedItem.Text + " tiene una cita para esta misma fecha.";
-                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Exisitente", "sweetAlert('Cita Exisitente','" + mensaje + "','error')", true);
+                    List<ListarCitasCalendario_Result> myResult = mylib.ListarCitasCalendario(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35)).ToList();
+                    var filtro = myResult.Select(u => u.Id_Calendario).ToList();
+                    var filtro2 = mylib.Calendarios.Where(u => filtro.Contains(u.Id_Calendario) && u.Activo.Equals(1)).Select(p => p.Id_Calendario).ToList();
+                    List<ListarCitasCalendario_Result> myResultFiltro = myResult.Where(u => filtro2.Contains(u.Id_Calendario)).ToList();
 
-                    TxtHoraFinal.Text = "";
-                    TxtHoraInicial.Text = "";
-                    TxtFecha.Text = "";
-                    return;
-                }
 
-                else if (ListaExcepcionesXDia.Count > 0)
-                {
-                    //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('TRABAJADOR SOCIAL NO ESTARA DISPONIBLE A ESTA HORA!');", true);
-                    string mensaje = "El trabajador social " + DdlTrabajadorSocial.SelectedItem.Text + " no disponible para esta fecha.";
-                    ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "No Disponible", "sweetAlert('No Disponible','" + mensaje + "','error')", true);
-
-                    TxtHoraFinal.Text = "";
-                    TxtHoraInicial.Text = "";
-                    TxtFecha.Text = "";
-                    return;
-                }
-
-                else
-                {
-                    try
+                    List<ListarCitasCalendario_Result> ListaCharlasXDia = myResultFiltro.FindAll(delegate (ListarCitasCalendario_Result bk)
                     {
-                        mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue), userId, Convert.ToInt32(DdlTipo.SelectedValue));
+                        return bk.FechaInicial == Convert.ToDateTime(FechaInicial);
+                    });
 
-                        string mensaje = "La cita fue creada correctamente.";
-                        ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);
+                    List<ListarExcepcionesTrabajadorSocial_Result> myResult2 = mylib.ListarExcepcionesTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToDateTime(Session["FechaBase"]), Convert.ToDateTime(Session["FechaBase"]).AddDays(35), Convert.ToInt32(Session["Programa"])).ToList();
+                    List<ListarExcepcionesTrabajadorSocial_Result> ListaExcepcionesXDia = myResult2.FindAll(delegate (ListarExcepcionesTrabajadorSocial_Result bk)
+                    {
+                        return (bk.FechaInicial == Convert.ToDateTime(FechaInicial) || bk.FechaFinal == Convert.ToDateTime(FechaFinal) || (bk.FechaInicial <= Convert.ToDateTime(FechaInicial) && bk.FechaFinal >= Convert.ToDateTime(FechaFinal)));
+                    });
 
-                        int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                        var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
+                    if (ListaCharlasXDia.Count > 0)
+                    {
+                        //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('YA EXISTE UN CITA PARA ESTE MISMO DIA Y HORA!');", true);
+                        string mensaje = "El trabajador social " + DdlTrabajadorSocial.SelectedItem.Text + " tiene una cita para esta misma fecha.";
+                        ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Exisitente", "sweetAlert('Cita Exisitente','" + mensaje + "','error')", true);
 
-                        if (email.Count() > 0)
+                        TxtHoraFinal.Text = "";
+                        TxtHoraInicial.Text = "";
+                        TxtFecha.Text = "";
+                        return;
+                    }
+
+                    else if (ListaExcepcionesXDia.Count > 0)
+                    {
+                        //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('TRABAJADOR SOCIAL NO ESTARA DISPONIBLE A ESTA HORA!');", true);
+                        string mensaje = "El trabajador social " + DdlTrabajadorSocial.SelectedItem.Text + " no disponible para esta fecha.";
+                        ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "No Disponible", "sweetAlert('No Disponible','" + mensaje + "','error')", true);
+
+                        TxtHoraFinal.Text = "";
+                        TxtHoraInicial.Text = "";
+                        TxtFecha.Text = "";
+                        return;
+                    }
+
+                    else
+                    {
+                        try
                         {
-                            EmailService mail = new EmailService();
-                            string body = string.Empty;
+                            mylib.GuardarCitaTrabajadorSocial(DdlTrabajadorSocial.SelectedValue, Convert.ToInt32(Session["Id_Participante"]), Convert.ToDateTime(FechaInicial), Convert.ToDateTime(FechaFinal), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), Convert.ToInt32(DdlCentro.SelectedValue), userId, Convert.ToInt32(DdlTipo.SelectedValue));
 
-                            if (DdlTipo.SelectedItem.Text.Contains("Ubicacion"))
+                            string mensaje = "La cita fue creada correctamente.";
+                            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Cita Creada", "sweetAlert('Cita Creada','" + mensaje + "','success')", true);
+
+                            int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                            var email = dsley22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(a => a.Email).SingleOrDefault();
+
+                            if (email.Count() > 0)
                             {
-                                body = CreateBodyUbicacion(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
-                                mail.SendAsyncCita(email, "Cita para Ubicación", body);
+                                EmailService mail = new EmailService();
+                                string body = string.Empty;
+
+                                if (DdlTipo.SelectedItem.Text.Contains("Ubicacion"))
+                                {
+                                    body = CreateBodyUbicacion(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                                    mail.SendAsyncCita(email, "Cita para Ubicación", body);
+                                }
+                                else
+                                {
+                                    body = CreateBodySentencia(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
+                                    mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
+                                }
                             }
-                            else
-                            {
-                                body = CreateBodySentencia(du.NB_Primero, du.AP_Primero, FechaInicial + " - " + TxtHoraFinal.Text, DdlTrabajadorSocial.SelectedItem.Text, DdlCentro.SelectedItem.Text);
-                                mail.SendAsyncCita(email, "Cita Entrevista Inicial", body);
-                            }                                                       
                         }
-                    }
-                    catch(Exception ex)
-                    {
-                        
-                    }
+                        catch (Exception ex)
+                        {
 
-                    DdlTrabajadorSocial_SelectedIndexChanged(null, null);
-                    verificarCitas();
-                    GenerarCalendario();
+                        }
+
+                        DdlTrabajadorSocial_SelectedIndexChanged(null, null);
+                        verificarCitas();
+                        GenerarCalendario();
+                    }
                 }
             }
-        }
-        else if(Convert.ToDateTime(FechaInicial) > Convert.ToDateTime(FechaFinal))
-        {
-            //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);
-            string mensaje = "Hora inicial insertada es despues de la hora final.";
-            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
-            return;
-        }
-        else if (Convert.ToDateTime(FechaInicial) == Convert.ToDateTime(FechaFinal))
-        {
-            //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
-            string mensaje = "Hora inicial insertada es igual a la hora final.";
-            ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
-            return;
+            else if (Convert.ToDateTime(FechaInicial) > Convert.ToDateTime(FechaFinal))
+            {
+                //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES DESPUES DE LA HORA FINAL!');", true);
+                string mensaje = "Hora inicial insertada es despues de la hora final.";
+                ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
+                return;
+            }
+            else if (Convert.ToDateTime(FechaInicial) == Convert.ToDateTime(FechaFinal))
+            {
+                //ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "checkTime", "alert('LA HORA INICIAL INSERTADA ES IGUAL A LA HORA FINAL!');", true);
+                string mensaje = "Hora inicial insertada es igual a la hora final.";
+                ScriptManager.RegisterClientScriptBlock(btnAsignarCita, btnAsignarCita.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
+                return;
+            }
         }
     }
 

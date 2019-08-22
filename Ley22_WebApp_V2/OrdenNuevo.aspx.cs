@@ -271,6 +271,10 @@ namespace Ley22_WebApp_V2
             {
                 Response.Redirect(prevPage, false);
             }
+            else
+            {
+                Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
             
         }
     }

@@ -214,6 +214,12 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         {
             ExpedienteParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
         }
+        else if (Page.Request.Params["__EVENTTARGET"] == "TodosAsistieron")
+        {
+            TodosAsistieron(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            string mensaje = "Todos los participantes asistieron a esta charla";
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('Cumplió','" + mensaje + "','success')", true);
+        }
     }
 
     void GenerarCalendario()
@@ -880,6 +886,17 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         GenerarCalendario();
 
         
+    }
+
+    void TodosAsistieron(int Id_CharlaGrupal)
+    {
+        dsLey22.AsistieronTodosCharla(Id_CharlaGrupal);
+        string mensaje = "Todos los participantes asistieron a esta charla";
+
+        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','success')", true);
+
+        GenerarCalendario();
+
     }
 
     private string CreateBodyPDF(string Fecha, string Juez, string Caso, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)

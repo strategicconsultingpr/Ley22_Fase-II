@@ -357,6 +357,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AsistieronTodosCharla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
         <Function Name="AsistioCharla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_ParticipantePorCharlaGrupal" Type="int" Mode="In" />
         </Function>
@@ -1184,6 +1187,9 @@
             <Parameter Name="NumerodeCheque" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="VoidDesc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AsistieronTodosCharla">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2835,6 +2841,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RegistrarVoidPago" FunctionName="Ley22Model.Store.RegistrarVoidPago" />
+          <FunctionImportMapping FunctionImportName="AsistieronTodosCharla" FunctionName="Ley22Model.Store.AsistieronTodosCharla" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

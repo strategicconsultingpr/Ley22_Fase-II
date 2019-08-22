@@ -191,10 +191,20 @@ namespace Ley22_WebApp_V2
                 if(ts.Days > 7)
                 {
                     HrefPermiso = "";
+                    HreAdicionar = "";
                 }
                 else
                 {
                     HrefPermiso = "href=\"#\"";
+
+                    if (resulParaticipalntes.Where(u => u.Asistio == 1).Count() > 0)
+                    {
+                        HreAdicionar = "";
+                    }
+                    else
+                    {
+                        HreAdicionar = "<a role=\"button\" class=\"btn btn-secondary btn - lg\" onclick=\"javacript:__doPostBack('TodosAsistieron','" + Id_CharlaGrupal + "')\" style=\"background - color:#8fbc8f\"><strong>Todos Asistieron</strong></a>";
+                    }
                 }
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
@@ -216,9 +226,10 @@ namespace Ley22_WebApp_V2
                     if(ts.Days > 7 || activa == 0)
                     {
                         EliminarOnclick = "";
-                        AsistioOnclick = "";
-                        NoAsistioOnclick = "";
+                        AsistioOnclick = " onclick=\"javascript: alert('Fecha expirada para poder modificar asistencia de este participante')\"";
+                        NoAsistioOnclick = " onclick=\"javascript: alert('Fecha expirada para poder modificar asistencia de este participante')\"";
                         HrefRemover = "";
+                        HreAdicionar = "";
                     }
                     else
                     {
@@ -282,7 +293,7 @@ namespace Ley22_WebApp_V2
                 }
 
                 
-                HreAdicionar = "";
+               
                 
 
                 mydata.Participantes = Parti;

@@ -113,7 +113,19 @@
                 <div class="modal-footer">
 <%--                    <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Aceptar</button>
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Imprimir</button> --%>
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                            <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                            </div>
+                            <div class="col-5">
+                            
+                            </div>
+                            <div class="col" id="BtnAsistencia">
+                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1023,7 +1035,7 @@
                                 $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                                 $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                                 $("#Participantes").html(myData.Participantes);
-                                $("#AdcionarParticipante").html(myData.AdcionarParticipante);
+                                $("#BtnAsistencia").html(myData.AdcionarParticipante);
                                 
 
                             }

@@ -60,9 +60,15 @@ namespace Ley22_WebApp_V2
                 {
                     this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
 
+                    short idPrograma = Convert.ToInt16(Session["Programa"]);
+                    
+
                     var caso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_Caso)).SingleOrDefault();
 
+                    var CasoExpediente = dsPerfil.SA_PERSONA_PROGRAMA.Where(b => b.FK_Programa.Equals(idPrograma)).Where(c => c.FK_Persona.Equals(sa_persona.PK_Persona)).Select(f => f.NR_Expediente).SingleOrDefault();
+
                     TxtNroCasoCriminal.Text = caso.NumeroCasoCriminal;
+                    TxtExpediente.Text = CasoExpediente;
                     TxtFechaOrden.Text = caso.FechaOrden.ToString();
                     TxtSentencia.Text = caso.FechaSentencia.ToString();
                     Txtalcohol.Text = caso.Alcohol;

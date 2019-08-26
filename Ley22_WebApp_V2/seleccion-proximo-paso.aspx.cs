@@ -186,7 +186,7 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
             List <ResumendeAsistenciasCharlas_Result>  myresul2 = mylib.ResumendeAsistenciasCharlas(Pk_Persona).ToList();
 
-            HLnkCharlas.Text = myresul2[0].TotalAsistencias .ToString() + " Charlas : " + myresul2[0].TotalAsistencias.ToString() + " Asistencias, " + myresul2[0].TotalInasistencias.ToString() + " Inasistencias.";
+            HLnkCharlas.Text = myresul2[0].TotaldeCharlas .ToString() + " Charlas : " + myresul2[0].TotalAsistencias.ToString() + " Asistencias, " + myresul2[0].TotalInasistencias.ToString() + " Inasistencias.";
 
 
         }

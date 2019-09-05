@@ -13,6 +13,24 @@ namespace Ley22_WebApp_V2 {
     public partial class OrdenNuevo {
         
         /// <summary>
+        /// NombreParticipante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal NombreParticipante;
+        
+        /// <summary>
+        /// NombrePrograma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal NombrePrograma;
+        
+        /// <summary>
         /// TxtNroCasoCriminal control.
         /// </summary>
         /// <remarks>

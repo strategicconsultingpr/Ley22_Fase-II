@@ -6,16 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using Ley22_WebApp_V2.Old_App_Code;
+using Ley22_WebApp_V2.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 public partial class cargar_documentos : System.Web.UI.Page
 {
     //protected DataParticipante du;
     protected Data_SA_Persona du;
+    ApplicationUser ExistingUser = new ApplicationUser();
+    ApplicationDbContext context;
+    UserManager<ApplicationUser> userManager;
     int Programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        ExistingUser = (ApplicationUser)Session["User"];
         if (!Page.IsPostBack)
         {
             if (Session["SA_Persona"] == null)
@@ -28,6 +34,9 @@ public partial class cargar_documentos : System.Web.UI.Page
             }
 
             // this.du = (DataParticipante)Session["DataParticipante"];
+
+            context = new ApplicationDbContext();
+            userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             this.du = (Data_SA_Persona)Session["SA_Persona"];
             Programa = Convert.ToInt32(Session["Programa"].ToString());
@@ -85,7 +94,9 @@ public partial class cargar_documentos : System.Web.UI.Page
 
     protected void GvDocumentos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        
+        context = new ApplicationDbContext();
+        userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
@@ -94,7 +105,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
             }
-            if (activa == 0)
+            if (activa == 0 || !(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")))
             {
                 e.Row.Cells[5].Visible = false;
             }

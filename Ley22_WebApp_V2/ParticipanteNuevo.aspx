@@ -39,9 +39,10 @@
                                 <label for="n-seguro-social">Número de Seguro Social (*)</label>
                                 <div class="row">
                                     <div class="col">
-                                        <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="9"></asp:TextBox>
+                                        <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control" placeholder="Ej. *****9999" MaxLength="9"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator99" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtNroSeguroSocial" Display="Dynamic"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red"></asp:RegularExpressionValidator>
+                                         <asp:RegularExpressionValidator Display = "Dynamic" ControlToValidate = "TxtNroSeguroSocial" ID="RegularExpressionValidator1" ValidationExpression = "^[\s\S]{9,}$" runat="server" ErrorMessage="Se requiere nueve (9) caracteres." ForeColor="Red"></asp:RegularExpressionValidator>
+                                        <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red"></asp:RegularExpressionValidator>--%>
                                     </div>
 <%--                                    <div class="col-md-1">
                                         <asp:LinkButton ID="lnkBuscar" runat="server" CssClass="fas fa-search fa-lg" CausesValidation="false" OnClick="lnkBuscar_Click"></asp:LinkButton>

@@ -56,6 +56,9 @@ namespace Ley22_WebApp_V2
                 TxtIUP.Text = sa_persona.PK_Persona.ToString();
                 LoadDropDownList();
 
+                NombreParticipante.Text = Session["NombreParticipante"].ToString();
+                NombrePrograma.Text = Session["NombrePrograma"].ToString();
+
                 if (Request.QueryString["id_caso"] != null)
                 {
                     this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
@@ -113,7 +116,7 @@ namespace Ley22_WebApp_V2
                     DateTime FE_Creacion = Convert.ToDateTime(caso.FechaCreacion.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(FE_Creacion);
 
-                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || ts.Days < 8) || caso.FK_Programa != Convert.ToInt32(Session["Programa"]) || caso.Activa != 1)
+                    if (!(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || ts.Days < 8) || caso.FK_Programa != Convert.ToInt32(Session["Programa"]) || (caso.Activa != 1 && !(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor"))))
                     {
                         TxtNroCasoCriminal.ReadOnly = true;
                         TxtFechaOrden.ReadOnly = true;

@@ -6,7 +6,7 @@
 
     <div class="card mb-4">
         <div class="card-header">
-            Caso Nuevo
+           <strong> Nuevo Caso Criminal</strong> &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp Participante: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal> 
         </div>
         <div class="card-block">
 

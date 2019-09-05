@@ -64,7 +64,11 @@ namespace Ley22_WebApp_V2
                 {
                     divRecaudos.Visible = true;
                     divReportes.Visible = true;
-                }                               
+                }
+                if(userManager.IsInRole(userId, "TrabajadorSocial"))
+                {
+                    divReportes.Visible = true;
+                }
             }
         }
 

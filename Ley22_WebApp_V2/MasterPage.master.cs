@@ -46,6 +46,10 @@ namespace Ley22_WebApp_V2
                     liRecaudo.Visible = true;
                     liReportes.Visible = true;
                 }
+                if (userManager.IsInRole(userId, "TrabajadorSocial"))
+                {
+                    liReportes.Visible = true;
+                }
 
 
             }

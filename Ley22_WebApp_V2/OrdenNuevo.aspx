@@ -25,9 +25,9 @@
                                 <label for="n-caso-criminal">Núm. Caso Criminal (*)</label>
                                 <div class="row">
                                     <div class="col">
-                                        <asp:TextBox ID="TxtNroCasoCriminal" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="9"></asp:TextBox>
+                                        <asp:TextBox ID="TxtNroCasoCriminal" runat="server" class="form-control" placeholder="Ej. D2TR2030-0000" MaxLength="15"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator99" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtNroCasoCriminal" Display="Dynamic"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroCasoCriminal" ForeColor="Red"></asp:RegularExpressionValidator>
+                                        <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroCasoCriminal" ForeColor="Red"></asp:RegularExpressionValidator>--%>
                                     </div>
 <%--                                    <div class="col-md-1">
                                         <asp:LinkButton ID="lnkBuscar" runat="server" CssClass="fas fa-search fa-lg" CausesValidation="false" OnClick="lnkBuscar_Click"></asp:LinkButton>
@@ -60,8 +60,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="alcohol">Por ciento de alcohol (*)</label>
-                                <asp:TextBox ID="Txtalcohol" runat="server" class="form-control" placeholder="Ej. 0.10" MaxLength="5"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="(((\d{1,2}\.\d{1,2})))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="Txtalcohol" />
+                                <asp:TextBox ID="Txtalcohol" runat="server" class="form-control" placeholder="Ej. 0.115" MaxLength="5"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="Regex1" runat="server" ForeColor="Red" Display="Dynamic" ValidationExpression="(((\d{1,2}\.\d{1,3})))$" ErrorMessage="Agregar cantidades correcta." ControlToValidate="Txtalcohol" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ControlToValidate="Txtalcohol" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>

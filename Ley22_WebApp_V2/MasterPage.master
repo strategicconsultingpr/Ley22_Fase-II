@@ -167,6 +167,24 @@
     //        $(this).addClass("active");
     //    }
     //});
+          function WebForm_OnSubmit() {
+        if (typeof (ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) {
+            for (var i in Page_Validators) {
+                try {
+                    if (!Page_Validators[i].isvalid) {
+                        var control = $("#" + Page_Validators[i].controltovalidate);
+ 
+                        var top = control.offset().top;
+                        $('html, body').animate({ scrollTop: top - 80 }, "fast");
+                        control.focus();
+                        return;
+                    }
+                } catch (e) { }
+            }
+            return false;
+        }
+        return true;
+    }
           </script>
  
 </div><!-- container-fluid -->

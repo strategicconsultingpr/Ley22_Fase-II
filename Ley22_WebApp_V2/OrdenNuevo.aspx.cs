@@ -66,11 +66,11 @@ namespace Ley22_WebApp_V2
                     var caso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_Caso)).SingleOrDefault();
 
                     var CasoExpediente = dsPerfil.SA_PERSONA_PROGRAMA.Where(b => b.FK_Programa.Equals(idPrograma)).Where(c => c.FK_Persona.Equals(sa_persona.PK_Persona)).Select(f => f.NR_Expediente).SingleOrDefault();
-
+                  
                     TxtNroCasoCriminal.Text = caso.NumeroCasoCriminal;
                     TxtExpediente.Text = CasoExpediente;
-                    TxtFechaOrden.Text = caso.FechaOrden.ToString();
-                    TxtSentencia.Text = caso.FechaSentencia.ToString();
+                    TxtFechaOrden.Text = Convert.ToDateTime(caso.FechaOrden).ToString("MM/dd/yyyy");
+                    TxtSentencia.Text = Convert.ToDateTime(caso.FechaSentencia).ToString("MM/dd/yyyy");
                     Txtalcohol.Text = caso.Alcohol;
                     DdlTribunal.SelectedValue = caso.FK_Tribunal.ToString();
                     TxtJuez.Text = caso.NB_Juez;
@@ -231,44 +231,72 @@ namespace Ley22_WebApp_V2
 
         protected void BtnCrear_Click(object sender, EventArgs e)
         {
-            using (Ley22Entities mylib = new Ley22Entities())
-                mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), 
-                    Convert.ToDateTime(TxtSentencia.Text),Txtalcohol.Text,Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
-                    ExistingUser.Id, Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
-                    Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text,TxtTelHogar.Text, 
-                    TxtTelefonoFamiliarMasCercano.Text,TxtDireccionLinea1.Text, TxtDireccionLinea2.Text,Convert.ToInt32(DdlPueblo.SelectedValue),TxtCodigoPostal.Text, 
-                    TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
-                    Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue), 
-                    TxtTrabajo.Text,TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                    TxtPareja.Text, TxtPadre.Text,TxtMadre.Text);
+            try
+            {
+                using (Ley22Entities mylib = new Ley22Entities())
+                    mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
+                        Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
+                        ExistingUser.Id, Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
+                        Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,
+                        TxtTelefonoFamiliarMasCercano.Text, TxtDireccionLinea1.Text, TxtDireccionLinea2.Text, Convert.ToInt32(DdlPueblo.SelectedValue), TxtCodigoPostal.Text,
+                        TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
+                        Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
+                        TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
 
-            string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
-           
-            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
-            Response.Redirect("seleccion-proximo-paso.aspx", false);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+               
+
+                Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+            
             // mylib.GuardarOrdenJudicial(Convert.ToInt32(Session["Id_Participante"]), TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text), Convert.ToInt32(Session["Id_UsuarioApp"]), Convert.ToInt32(Session["Programa"]));
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            using (Ley22Entities mylib = new Ley22Entities())
-                mylib.ModificarCasoCriminal(this.Id_Caso, TxtNroCasoCriminal.Text, Convert.ToDateTime(TxtFechaOrden.Text),
-                    Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
-                    Convert.ToInt32(TxtLicencia.Text),
-                    Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,
-                    TxtTelefonoFamiliarMasCercano.Text, TxtDireccionLinea1.Text, TxtDireccionLinea2.Text, Convert.ToInt32(DdlPueblo.SelectedValue),
-                    TxtCodigoPostal.Text,
-                    TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
-                    Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
-                    TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                    TxtPareja.Text, TxtPadre.Text, TxtMadre.Text);
+            this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
 
-            string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
+            try
+            {
+                using (Ley22Entities mylib = new Ley22Entities())
+                    mylib.ModificarCasoCriminal(this.Id_Caso, TxtNroCasoCriminal.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
+                        Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
+                        Convert.ToInt32(TxtLicencia.Text),
+                        Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,
+                        TxtTelefonoFamiliarMasCercano.Text, TxtDireccionLinea1.Text, TxtDireccionLinea2.Text, Convert.ToInt32(DdlPueblo.SelectedValue),
+                        TxtCodigoPostal.Text,
+                        TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
+                        Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
+                        TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
 
-            ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Actualizado", "sweetAlert('Caso Criminal Actualizado','" + mensaje + "','success')", true);
+                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
 
-            Response.Redirect("OrdenNuevo.aspx", false);
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+
+                Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.InnerException.Message;
+
+                
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+            
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

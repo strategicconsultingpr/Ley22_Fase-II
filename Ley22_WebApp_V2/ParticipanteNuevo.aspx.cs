@@ -218,8 +218,10 @@ namespace Ley22_WebApp_V2
             }
             catch (Exception ex)
             {
-                string mensaje = ex.Message;
-                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
 
             }
 
@@ -293,9 +295,11 @@ namespace Ley22_WebApp_V2
             }
             catch(Exception ex)
             {
-                string mensaje = ex.Message;
-                ClientScript.RegisterStartupScript(this.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
-                
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+
             }
 
                 

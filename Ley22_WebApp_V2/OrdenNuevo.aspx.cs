@@ -249,10 +249,11 @@ namespace Ley22_WebApp_V2
 
                 string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
-                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
                
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlertRef('Caso Criminal Registrado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
 
-                Response.Redirect("seleccion-proximo-paso.aspx", false);
+
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
             }
             catch (Exception ex)
             {
@@ -287,9 +288,10 @@ namespace Ley22_WebApp_V2
                 string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
 
 
-                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+               // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlertRef('Caso Criminal Registrado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
 
-                Response.Redirect("seleccion-proximo-paso.aspx", false);
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
             }
             catch (Exception ex)
             {

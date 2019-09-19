@@ -82,7 +82,7 @@ namespace Ley22_WebApp_V2
                     TxtEmail.Text = caso.Email;
                     TxtCelular.Text = caso.TelCelular;
                     TxtTelHogar.Text = caso.TelHogar;
-                    TxtTelefonoFamiliarMasCercano.Text = caso.TelHogar;
+                    TxtTelefonoFamiliarMasCercano.Text = caso.TelTrabajo;
                     TxtDireccionLinea1.Text = caso.DireccionLinea1;
                     TxtDireccionLinea2.Text = caso.DireccionLinea2;
                     DdlPueblo.SelectedValue = caso.FK_Pueblo.ToString();
@@ -96,7 +96,7 @@ namespace Ley22_WebApp_V2
                     DdlImpedimento.SelectedValue = caso.Impedimento;
                     DdlGrado.SelectedValue = caso.FK_Grado.ToString();
                     TxtTrabajo.Text = caso.LugarTrabajo;
-                    TxtOcupacion.Text = caso.LugarTrabajo;
+                    TxtOcupacion.Text = caso.Ocupacion;
                     if (caso.Veterano == 1)
                     {
                         ChkNoTrabajo.Checked = true;

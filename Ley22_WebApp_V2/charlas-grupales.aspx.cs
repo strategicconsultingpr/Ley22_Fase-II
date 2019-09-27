@@ -567,42 +567,60 @@ public partial class charlas_grupales : System.Web.UI.Page
        int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
        int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
-        using (Ley22Entities mylib = new Ley22Entities())
+        try
         {
-            int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-            var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
-
-            mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
-
-            if (email.Count() > 0)
+            using (Ley22Entities mylib = new Ley22Entities())
             {
+                int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
 
-                string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+                mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
 
-                Data_SA_Persona du = (Data_SA_Persona)Session["SA_Persona"];
+                string mensaje = "Se eliminó correctamente el participante de la charla";
 
-                string evento = "Se elimino charla con fecha " + charla;
-                GridView gv = new GridView();
-                gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
 
-                gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
-                gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
-                gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.RowStyle.Font.Size = 10;
-                gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
-                gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.CellPadding = 7;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Participante fuera de Charla", "sweetAlert('Participante fuera de Charla','" + mensaje + "','success')", true);
 
-                gv.RowStyle.Wrap = false;
-                gv.DataBind();
+                if (email.Count() > 0)
+                {
 
-                EmailService mail = new EmailService();
-                string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, DdlNumeroOrdenJudicial.SelectedItem.Text, DdlCentro.SelectedItem.Text, evento);
-                mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+                    string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+
+                    Data_SA_Persona du = (Data_SA_Persona)Session["SA_Persona"];
+
+                    string evento = "Se elimino charla con fecha " + charla;
+                    GridView gv = new GridView();
+                    gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
+
+                    gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
+                    gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.RowStyle.Font.Size = 10;
+                    gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.CellPadding = 7;
+
+                    gv.RowStyle.Wrap = false;
+                    gv.DataBind();
+
+                    EmailService mail = new EmailService();
+                    string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, DdlNumeroOrdenJudicial.SelectedItem.Text, DdlCentro.SelectedItem.Text, evento);
+                    mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+                }
             }
+            GenerarCalendario();
         }
-        GenerarCalendario();
+        catch (Exception ex)
+        {
+
+            string mensaje = ex.InnerException.Message;
+
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+        }
+
+
 
     }
 
@@ -610,44 +628,61 @@ public partial class charlas_grupales : System.Web.UI.Page
     {
          int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
         int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
-
-        using (Ley22Entities mylib = new Ley22Entities())
+        try
         {
-            int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-            var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
-
-            var NumeroCharla = mylib.CharlaGrupals.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Select(u => u.NumeroCharla).Single();
-            mylib.GuardarParticipantePorCharlas(Id_Charla, Id_Participante, userId, Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue),NumeroCharla);
-
-            if (email.Count() > 0)
+            using (Ley22Entities mylib = new Ley22Entities())
             {
+                int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+                var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
 
-                string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+                var NumeroCharla = mylib.CharlaGrupals.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Select(u => u.NumeroCharla).Single();
+                mylib.GuardarParticipantePorCharlas(Id_Charla, Id_Participante, userId, Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), NumeroCharla);
 
-                Data_SA_Persona du = (Data_SA_Persona)Session["SA_Persona"];
+                string mensaje = "Se agregó correctamente el participante a la charla";
 
-                string evento = "Se agrego una charla el " + charla;
-                GridView gv = new GridView();
-                gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
 
-                gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
-                gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
-                gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.RowStyle.Font.Size = 10;
-                gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
-                gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
-                gv.CellPadding = 7;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Participante en Charla", "sweetAlert('Participante en Charla','" + mensaje + "','success')", true);
 
-                gv.RowStyle.Wrap = false;
-                gv.DataBind();
+                if (email.Count() > 0)
+                {
 
-                EmailService mail = new EmailService();
-                string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, DdlNumeroOrdenJudicial.SelectedItem.Text, DdlCentro.SelectedItem.Text, evento);
-                mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+                    string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+
+                    Data_SA_Persona du = (Data_SA_Persona)Session["SA_Persona"];
+
+                    string evento = "Se agrego una charla el " + charla;
+                    GridView gv = new GridView();
+                    gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
+
+                    gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
+                    gv.HeaderStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.RowStyle.Font.Size = 10;
+                    gv.RowStyle.ForeColor = System.Drawing.Color.Gray;
+                    gv.RowStyle.HorizontalAlign = HorizontalAlign.Center;
+                    gv.CellPadding = 7;
+
+                    gv.RowStyle.Wrap = false;
+                    gv.DataBind();
+
+                    EmailService mail = new EmailService();
+                    string body = CreateBody(gv, du.NB_Primero + " " + du.AP_Primero, DdlNumeroOrdenJudicial.SelectedItem.Text, DdlCentro.SelectedItem.Text, evento);
+                    mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
+                }
             }
-        }
             GenerarCalendario();
+        }
+        catch (Exception ex)
+        {
+
+            string mensaje = ex.InnerException.Message;
+
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+        }
+
+       
 
     }
 

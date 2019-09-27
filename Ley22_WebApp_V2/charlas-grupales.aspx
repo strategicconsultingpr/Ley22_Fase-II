@@ -890,6 +890,14 @@
                        window.history.replaceState( null, null, window.location.href );
                    }
 
+                   function sweetAlert(titulo, texto, icono) {
+                       swal({
+                           title: titulo,
+                           text: texto,
+                           icon: icono
+                       })
+                   }
+
                    function changeDivContent4(Id_CharlaGrupal) {
                        $.ajax({
                            type: "POST",

@@ -188,13 +188,13 @@ namespace Ley22_WebApp_V2
                 string HrefPrint = string.Empty;
                 string HrefPermiso = string.Empty;
 
-                if(ts.Days > 7)
-                {
-                    HrefPermiso = "";
-                    HreAdicionar = "";
-                }
-                else
-                {
+                //if(ts.Days > 7)
+                //{
+                //    HrefPermiso = "";
+                //    HreAdicionar = "";
+                //}
+                //else
+                //{
                     HrefPermiso = "href=\"#\"";
 
                     if (resulParaticipalntes.Where(u => u.Asistio == 1).Count() > 0)
@@ -205,7 +205,7 @@ namespace Ley22_WebApp_V2
                     {
                         HreAdicionar = "<a role=\"button\" class=\"btn btn-secondary btn - lg\" onclick=\"javacript:__doPostBack('TodosAsistieron','" + Id_CharlaGrupal + "')\" style=\"background - color:#8fbc8f\"><strong>Todos Asistieron</strong></a>";
                     }
-                }
+              //  }
 
                 foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
                 {
@@ -223,11 +223,11 @@ namespace Ley22_WebApp_V2
 
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
-                    if(ts.Days > 7 || activa == 0)
+                    if(activa == 0)
                     {
                         EliminarOnclick = "";
-                        AsistioOnclick = " onclick=\"javascript: alert('Fecha expirada para poder modificar asistencia de este participante')\"";
-                        NoAsistioOnclick = " onclick=\"javascript: alert('Fecha expirada para poder modificar asistencia de este participante')\"";
+                        AsistioOnclick = " onclick=\"javascript: alert('Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante')\"";
+                        NoAsistioOnclick = " onclick=\"javascript: alert('Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante')\"";
                         HrefRemover = "";
                         HreAdicionar = "";
                     }
@@ -254,7 +254,7 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        if(balance.Equals(Convert.ToDecimal(0.00)) && status == 5)
+                        if(balance.Equals(Convert.ToDecimal(0.00)) && status > 4)
                         {
                            
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio </a>";
@@ -274,7 +274,7 @@ namespace Ley22_WebApp_V2
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$0.00</a></div></div></div>";
                         }
-                        else if ((!balance.Equals(Convert.ToDecimal(0.00))) && status == 5)
+                        else if ((!balance.Equals(Convert.ToDecimal(0.00))) && status > 4)
                         {
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance+"</a></div></div></div>";

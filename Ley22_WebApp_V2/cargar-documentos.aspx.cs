@@ -47,47 +47,13 @@ public partial class cargar_documentos : System.Web.UI.Page
 
         }
     }
-    void BidGrid()
+    void BidGrid(int IdCaso)
 
     {
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidosCasoCriminal(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]));
-            GvRecepcionDocumentos.DataBind();
-
-           
-                //var list = new List<int>();
-                //list.Add(1);
-                //list.Add(7);
-                //list.Add(10);
-                //list.Add(18);
-                //list.Add(6);
-                //list.Add(8);
-
-                //var DocNecesarios = list.AsQueryable();
-
-                //var orden = mylib.OrdenesJudiciales.Where(u => u.Id_Participante.Equals(this.du.Id_Participante)).Where(a => a.Activa.Equals(1)).Select(q => q.Id_OrdenJudicial);
-                //var docs = mylib.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Select(p => p.Id_Documento);
-
-                //if ((docs.Contains(1) && docs.Contains(7) && docs.Contains(10) && docs.Contains(18) && (docs.Contains(6) || docs.Contains(8))))
-                //{
-
-                //}
-                //else
-                //{
-                //    var DocNec = mylib.Documentos.Where(u => DocNecesarios.Contains(u.Id_Documento));
-                //    // var DocEntregar = mylib.Documentos.Where(u => !DocNecesarios.Contains(u.Id_Documento)).Select(p => p.Id_Documento);
-
-
-
-                //    var DocumentosFaltantes = DocNec.Where(u => !docs.Contains(u.Id_Documento)).ToList();
-                //    // var DocumentosFaltantes = mylib.Documentos.Where(u => DocEntregar.Contains(u.Id_Documento)).ToList();
-
-                //    GridView1.DataSource = DocumentosFaltantes;
-                //    GridView1.DataBind();
-
-                //}
-            
+            GvRecepcionDocumentos.DataSource = mylib.ListarDocumentosRecibidosCasoCriminal(Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(Session["Programa"]), IdCaso);
+            GvRecepcionDocumentos.DataBind();          
 
         }
     }
@@ -105,7 +71,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
             }
-            if (activa == 0 || !(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")))
+            if (activa == 0 || !(userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas")))
             {
                 e.Row.Cells[5].Visible = false;
             }
@@ -195,7 +161,7 @@ public partial class cargar_documentos : System.Web.UI.Page
 
 
         ActualizarDocumentosDdl();
-        BidGrid();
+        BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
         CargarDocumentosFaltantes();
     }
     protected void lnkImprimir_Click(object sender, EventArgs e)
@@ -293,7 +259,7 @@ public partial class cargar_documentos : System.Web.UI.Page
                     GridView1.DataBind();
                     DivDocumentos.Visible = false;
                 }
-                BidGrid();
+                BidGrid(IdCaso);
             }
         }
         else
@@ -342,7 +308,7 @@ public partial class cargar_documentos : System.Web.UI.Page
                 FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
                 GuardarDocumento(Convert.ToInt32(DdlDocumento.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), filename, Convert.ToInt32(Session["Id_UsuarioApp"]));
-                BidGrid();
+                BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
                 CargarDocumentosFaltantes();
                 ActualizarDocumentosDdl();
             }

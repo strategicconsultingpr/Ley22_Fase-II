@@ -577,6 +577,7 @@
         <Function Name="ListarDocumentosRecibidosCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="Id_Programa" Type="int" Mode="In" />
+          <Parameter Name="Id_CasoCriminal" Type="int" Mode="In" />
         </Function>
         <Function Name="ListarExcepcionesCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Centro" Type="int" Mode="In" />
@@ -1012,10 +1013,6 @@
             <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
             <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ListarDocumentosRecibidosCasoCriminal" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidosCasoCriminal_Result)">
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CerrarCasoCriminal">
             <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
             <Parameter Name="Id_MotivoCierre" Mode="In" Type="Int32" />
@@ -1189,7 +1186,12 @@
             <Parameter Name="VoidDesc" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AsistieronTodosCharla">
-            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarDocumentosRecibidosCasoCriminal" ReturnType="Collection(Ley22Model.ListarDocumentosRecibidosCasoCriminal_Result)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
+            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1775,16 +1777,6 @@
           <Property Type="Decimal" Name="CantidadAPagar" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="NumeroRecibo" Nullable="false" MaxLength="128" />
         </ComplexType>
-        <ComplexType Name="ListarDocumentosRecibidosCasoCriminal_Result">
-          <Property Type="Int32" Name="Id_DocumentoPorParticipante" Nullable="false" />
-          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
-          <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
-          <Property Type="String" Name="PathNameDocumento" Nullable="false" MaxLength="2048" />
-          <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Aprobado" Nullable="false" />
-          <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
-          <Property Type="String" Name="AprobadoTexto" Nullable="false" MaxLength="2" />
-        </ComplexType>
         <ComplexType Name="ConsultarCasosXPersona_Result">
           <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
           <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
@@ -1963,6 +1955,16 @@
           <Property Name="NumerodeCheque" Type="Int32" />
           <Property Name="VoidDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="ListarDocumentosRecibidosCasoCriminal_Result">
+          <Property Type="Int32" Name="Id_DocumentoPorParticipante" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="NumeroCasoCriminal" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="PathNameDocumento" Nullable="false" MaxLength="2048" />
+          <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Aprobado" Nullable="false" />
+          <Property Type="Int32" Name="Id_CasoCriminal" Nullable="false" />
+          <Property Type="String" Name="AprobadoTexto" Nullable="false" MaxLength="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2615,20 +2617,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarDocumentosRecibidosCasoCriminal" FunctionName="Ley22Model.Store.ListarDocumentosRecibidosCasoCriminal">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosRecibidosCasoCriminal_Result">
-                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
-                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
-                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
-                <ScalarProperty Name="AprobadoTexto" ColumnName="AprobadoTexto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CerrarCasoCriminal" FunctionName="Ley22Model.Store.CerrarCasoCriminal" />
           <FunctionImportMapping FunctionImportName="GuardarCasoCriminal" FunctionName="Ley22Model.Store.GuardarCasoCriminal" />
           <FunctionImportMapping FunctionImportName="ConsultarCasosXPersona" FunctionName="Ley22Model.Store.ConsultarCasosXPersona">
@@ -2842,6 +2830,20 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RegistrarVoidPago" FunctionName="Ley22Model.Store.RegistrarVoidPago" />
           <FunctionImportMapping FunctionImportName="AsistieronTodosCharla" FunctionName="Ley22Model.Store.AsistieronTodosCharla" />
+          <FunctionImportMapping FunctionImportName="ListarDocumentosRecibidosCasoCriminal" FunctionName="Ley22Model.Store.ListarDocumentosRecibidosCasoCriminal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarDocumentosRecibidosCasoCriminal_Result">
+                <ScalarProperty Name="Id_DocumentoPorParticipante" ColumnName="Id_DocumentoPorParticipante" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+                <ScalarProperty Name="PathNameDocumento" ColumnName="PathNameDocumento" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
+                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
+                <ScalarProperty Name="AprobadoTexto" ColumnName="AprobadoTexto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

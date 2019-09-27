@@ -355,11 +355,11 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                     DateTime Activa = Convert.ToDateTime(diaActual.FechaFinal.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(Activa);
-
-                    if(ts.Days > 7)
-                    {
-                        activa = true;
-                    }
+                   
+                    //if (ts.Days > 7)
+                    //{
+                    //    activa = true;
+                    //}
                     
 
                     //if (diaActual.FechaFinal > DateTime.Today)

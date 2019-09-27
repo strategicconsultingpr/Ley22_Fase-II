@@ -790,19 +790,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarBalancedePagosCasosCriminales_Result>("ListarBalancedePagosCasosCriminales", id_ParticipanteParameter, id_CasoCriminalParameter);
         }
     
-        public virtual ObjectResult<ListarDocumentosRecibidosCasoCriminal_Result> ListarDocumentosRecibidosCasoCriminal(Nullable<int> id_Participante, Nullable<int> id_Programa)
-        {
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            var id_ProgramaParameter = id_Programa.HasValue ?
-                new ObjectParameter("Id_Programa", id_Programa) :
-                new ObjectParameter("Id_Programa", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidosCasoCriminal_Result>("ListarDocumentosRecibidosCasoCriminal", id_ParticipanteParameter, id_ProgramaParameter);
-        }
-    
         public virtual int CerrarCasoCriminal(Nullable<int> id_CasoCriminal, Nullable<int> id_MotivoCierre, string comentarioCierre, string documentoAprobacion, string id_UsuarioCierre)
         {
             var id_CasoCriminalParameter = id_CasoCriminal.HasValue ?
@@ -1412,6 +1399,23 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_CharlaGrupal", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AsistieronTodosCharla", id_CharlaGrupalParameter);
+        }
+    
+        public virtual ObjectResult<ListarDocumentosRecibidosCasoCriminal_Result> ListarDocumentosRecibidosCasoCriminal(Nullable<int> id_Participante, Nullable<int> id_Programa, Nullable<int> id_CasoCriminal)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_ProgramaParameter = id_Programa.HasValue ?
+                new ObjectParameter("Id_Programa", id_Programa) :
+                new ObjectParameter("Id_Programa", typeof(int));
+    
+            var id_CasoCriminalParameter = id_CasoCriminal.HasValue ?
+                new ObjectParameter("Id_CasoCriminal", id_CasoCriminal) :
+                new ObjectParameter("Id_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidosCasoCriminal_Result>("ListarDocumentosRecibidosCasoCriminal", id_ParticipanteParameter, id_ProgramaParameter, id_CasoCriminalParameter);
         }
     }
 }

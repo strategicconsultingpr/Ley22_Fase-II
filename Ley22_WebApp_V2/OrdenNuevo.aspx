@@ -253,6 +253,7 @@
                                 <label for="licencia">Licencia (*)</label>
                                 <asp:TextBox ID="TxtLicencia" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="30"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtLicencia" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpLicencia" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtLicencia" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                         </div>
 

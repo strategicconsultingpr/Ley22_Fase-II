@@ -768,6 +768,9 @@
     <Compile Include="Old_App_Code\BuscarSEPSPersonaXNroSeguroSocial_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\BusquedaSencilladePersonasRecepcionExpediente_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\BusquedaSencilladePersonasRecepcion_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>

@@ -39,22 +39,22 @@ public partial class Entrada {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidatorPrograma;
     
     /// <summary>
-    /// TxtNroSeguroSocial control.
+    /// RegularExpressionValidator3 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TxtNroSeguroSocial;
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
     
     /// <summary>
-    /// RegularExpressionValidator1 control.
+    /// TxtExpediente control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+    protected global::System.Web.UI.WebControls.TextBox TxtExpediente;
     
     /// <summary>
     /// TxtNombre control.
@@ -82,6 +82,24 @@ public partial class Entrada {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox TxtSegundoApellido;
+    
+    /// <summary>
+    /// TxtNroSeguroSocial control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox TxtNroSeguroSocial;
+    
+    /// <summary>
+    /// RegularExpressionValidator1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     
     /// <summary>
     /// TxtFechaNacimiento control.

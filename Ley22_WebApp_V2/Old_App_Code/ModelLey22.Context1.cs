@@ -1417,5 +1417,18 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidosCasoCriminal_Result>("ListarDocumentosRecibidosCasoCriminal", id_ParticipanteParameter, id_ProgramaParameter, id_CasoCriminalParameter);
         }
+    
+        public virtual ObjectResult<BusquedaSencilladePersonasRecepcionExpediente_Result> BusquedaSencilladePersonasRecepcionExpediente(Nullable<short> fK_Programa, string nR_Expediente)
+        {
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(short));
+    
+            var nR_ExpedienteParameter = nR_Expediente != null ?
+                new ObjectParameter("NR_Expediente", nR_Expediente) :
+                new ObjectParameter("NR_Expediente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonasRecepcionExpediente_Result>("BusquedaSencilladePersonasRecepcionExpediente", fK_ProgramaParameter, nR_ExpedienteParameter);
+        }
     }
 }

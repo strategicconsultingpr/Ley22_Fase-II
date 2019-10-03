@@ -193,23 +193,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Seguro Social</label>
-                        <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control"></asp:TextBox>
-                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red"></asp:RegularExpressionValidator>
+                                    <label for="formGroupExampleInput">Expediente</label>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtExpediente" ForeColor="Red" Display="Dynamic" ValidationGroup="ValGroup1"></asp:RegularExpressionValidator>
+                                    <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 593912684"></asp:TextBox>
+                                </div>
 
-                    </div>
-
-                   <%-- <div class="form-group">
-                        <label for="formGroupExampleInput">Identificación</label>
-                        <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control"></asp:TextBox>
-                    </div>--%>
-
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Fecha de Nacimiento</label>
-                        <asp:TextBox ID="TxtFechaNacimiento" runat="server" class="form-control"></asp:TextBox>
-                        <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaNacimiento" />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaNacimiento" ForeColor="Red"></asp:RegularExpressionValidator>
-                    </div>
+                    
 
                     
                      
@@ -229,6 +218,24 @@
                                     <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
                                 </div>
                             
+                            <div class="form-group">
+                        <label for="formGroupExampleInput">Seguro Social</label>
+                        <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control"></asp:TextBox>
+                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red"></asp:RegularExpressionValidator>
+
+                    </div>
+
+                   <%-- <div class="form-group">
+                        <label for="formGroupExampleInput">Identificación</label>
+                        <asp:TextBox ID="TxtIdentificacion" runat="server" class="form-control"></asp:TextBox>
+                    </div>--%>
+
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Fecha de Nacimiento</label>
+                        <asp:TextBox ID="TxtFechaNacimiento" runat="server" class="form-control"></asp:TextBox>
+                        <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaNacimiento" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaNacimiento" ForeColor="Red"></asp:RegularExpressionValidator>
+                    </div>
                 <!--    <asp:CustomValidator ID="valValidateTextBox" runat="server" ValidateEmptyText="true" Display="Dynamic" ErrorMessage="*introduzca al menos 1 campo de búsqueda<br/>" ClientValidationFunction="CheckTextBoxes" ForeColor="Red" /> -->
                     <asp:Label ID="label4" runat="server" Display="Dynamic" CssClass="ui-field-error" ForeColor="Red"></asp:Label>
                 <!--    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Seleccione algun tipo de documento<br/>" ControlToValidate="RBLDocumentos" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator> -->
@@ -252,9 +259,10 @@
                             var TxtFechaNacimiento = document.getElementById("<%=TxtFechaNacimiento.ClientID %>").value;
                             var TxtNombre = document.getElementById("<%=TxtNombre.ClientID %>").value;
                             var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
-                             var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
+                            var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
+                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value
 
-                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "" && TxtSegundoApellido == "") {
+                            if (TxtNroSeguroSocial == "" && TxtFechaNacimiento == "" && TxtNombre == "" && TxtApellido == "" && TxtSegundoApellido == "" && TxtExpediente == "") {
                               //  args.IsValid = false;
                                 
                                document.getElementById("<%=label4.ClientID%>").innerHTML = "*introduzca al menos 1 campo de búsqueda";

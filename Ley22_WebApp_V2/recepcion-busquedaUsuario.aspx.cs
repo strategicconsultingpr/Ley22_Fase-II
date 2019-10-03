@@ -167,7 +167,8 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
             TxtApellido.Text.Trim() == "" &&
-            TxtSegundoApellido.Text.Trim() == ""))
+            TxtSegundoApellido.Text.Trim() == "" &&
+            TxtExpediente.Text.Trim() == ""))
         {
 
 
@@ -178,6 +179,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
+            Session["TxtExpediente"] = TxtExpediente.Text.Trim();
         }
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

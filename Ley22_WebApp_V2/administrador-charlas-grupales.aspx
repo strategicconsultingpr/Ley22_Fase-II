@@ -34,7 +34,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
- 
 
                     <div id="Fecha"></div>
                     <br />
@@ -182,7 +181,7 @@
                                     <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaCrearCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla"  ></asp:TextBox>
 
-                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaCrearCharla" OnClientDateSelectionChanged="checkDate" />
+                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaCrearCharla"/>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaCrearCharla" ForeColor="Red" Display="Dynamic" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ErrorMessage="<br />*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtFechaCrearCharla" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
 
@@ -335,7 +334,7 @@
                                     <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaModCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla2"  ></asp:TextBox>
 
-                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" OnClientDateSelectionChanged="checkDate" />
+                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaModCharla" ForeColor="Red" Display="Dynamic" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ErrorMessage="<br />*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtFechaModCharla" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
 

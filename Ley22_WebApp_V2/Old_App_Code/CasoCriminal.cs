@@ -58,6 +58,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public string NB_Madre { get; set; }
         public Nullable<decimal> Cargos { get; set; }
         public Nullable<decimal> Pagos { get; set; }
+        public string NumeroCasoCriminalDos { get; set; }
+        public string NumeroCasoCriminalTres { get; set; }
     
         public virtual Tribunal Tribunal { get; set; }
     }

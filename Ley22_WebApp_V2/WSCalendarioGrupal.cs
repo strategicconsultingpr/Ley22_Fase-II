@@ -221,6 +221,11 @@ namespace Ley22_WebApp_V2
 
                     var balance = cargos - pagos;
 
+
+                    var charlasRegulares = dsLey22.ListarAsistenciaCharlasRegulares(c.Id_Participante, orden).SingleOrDefault();
+
+                    var victima = dsLey22.ListarAsistenciaCharlasImpacto(c.Id_Participante, orden).SingleOrDefault();
+
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
                     if(activa == 0)
@@ -243,7 +248,7 @@ namespace Ley22_WebApp_V2
                     if(c.Asistio == 0)
                     {
                         HrefAsistio = "<a " + HrefPermiso + "  id=\"asistioID\""+ AsistioOnclick + "style=\"color: #FF5733\">No Asistio</a>";
-                        if (status > 4)
+                        if (charlasRegulares > 9 && (victima == 1 || victima == -1))
                         {
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
                         }
@@ -254,7 +259,7 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        if(balance.Equals(Convert.ToDecimal(0.00)) && status > 4)
+                        if(balance.Equals(Convert.ToDecimal(0.00)) && charlasRegulares > 9 && (victima == 1 || victima == -1))
                         {
                            
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio </a>";
@@ -269,12 +274,12 @@ namespace Ley22_WebApp_V2
                                 HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
                             
                         }
-                        else if(balance.Equals(Convert.ToDecimal(0.00)) && status < 5)
+                        else if(balance.Equals(Convert.ToDecimal(0.00)) && (charlasRegulares < 10 || victima == 0))
                         {
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$0.00</a></div></div></div>";
                         }
-                        else if ((!balance.Equals(Convert.ToDecimal(0.00))) && status > 4)
+                        else if ((!balance.Equals(Convert.ToDecimal(0.00))) && charlasRegulares > 9 && (victima == 1 || victima == -1))
                         {
                             HrefAsistio = "<a " + HrefPermiso + NoAsistioOnclick + " style=\"color: #0bbd0d\">Asistio</a>";
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance+"</a></div></div></div>";

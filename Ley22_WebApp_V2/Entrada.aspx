@@ -175,6 +175,7 @@
                                 var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
                                 var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
                                 var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
+                                var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
                                 //
 <%--                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
                             var TxtLicencia = document.getElementById("<%=TxtLicencia.ClientID %>").value;

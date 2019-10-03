@@ -65,6 +65,60 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Requerido" ControlToValidate="Txtalcohol" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
+
+                        <div class="col-md-3">
+
+                            <div class="form-check">
+                                <p>&nbsp;</p>
+                                <h5>
+                                <label class="form-check-label">
+                                    <asp:CheckBox ID="ChkCaso" runat="server" class="form-check-input" OnClick="combinarCaso();"/>
+                                   Combinar Caso Criminal
+                                </label>
+                                </h5>
+                            </div>
+
+                            </div>
+
+                         <div class="col-md-3">
+
+                            <div class="form-group" id="CasoDos" style="visibility:hidden" runat="server">
+                                <label for="n-caso-criminal">Segundo Núm. Caso Criminal</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <asp:TextBox ID="TxtNroCasoCriminal2" runat="server" class="form-control" placeholder="Ej. D2TR2030-0000" MaxLength="15"></asp:TextBox>
+                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtNroCasoCriminal" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                        <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroCasoCriminal" ForeColor="Red"></asp:RegularExpressionValidator>--%>
+                                    </div>
+<%--                                    <div class="col-md-1">
+                                        <asp:LinkButton ID="lnkBuscar" runat="server" CssClass="fas fa-search fa-lg" CausesValidation="false" OnClick="lnkBuscar_Click"></asp:LinkButton>
+                                    </div>--%>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-md-3">
+
+                            <div class="form-group" id="CasoTres" style="visibility:hidden" runat="server">
+                                <label for="n-caso-criminal">Tercer Núm. Caso Criminal (*)</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <asp:TextBox ID="TxtNroCasoCriminal3" runat="server" class="form-control" placeholder="Ej. D2TR2030-0000" MaxLength="15"></asp:TextBox>
+                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtNroCasoCriminal" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                        <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroCasoCriminal" ForeColor="Red"></asp:RegularExpressionValidator>--%>
+                                    </div>
+<%--                                    <div class="col-md-1">
+                                        <asp:LinkButton ID="lnkBuscar" runat="server" CssClass="fas fa-search fa-lg" CausesValidation="false" OnClick="lnkBuscar_Click"></asp:LinkButton>
+                                    </div>--%>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="col-md-3">
+                            </div>
+
                         <!-- col -->
 
                         <div class="col-md-3">
@@ -783,6 +837,21 @@
                   ValidatorEnable(validator17,false);
               }
 
+          }
+
+          function combinarCaso() {
+              var Check = document.getElementById("<%=ChkCaso.ClientID %>");
+
+             
+
+              if (Check.checked == true) {
+                  document.getElementById("<%=CasoDos.ClientID %>").style.visibility = 'visible';
+                  document.getElementById("<%=CasoTres.ClientID %>").style.visibility = 'visible';
+              }
+              else {
+                  document.getElementById("<%=CasoDos.ClientID %>").style.visibility = 'hidden';
+                  document.getElementById("<%=CasoTres.ClientID %>").style.visibility = 'hidden';
+              }
           }
     </script>
    

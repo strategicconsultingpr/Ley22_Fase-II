@@ -346,12 +346,13 @@ public partial class balance_pago : System.Web.UI.Page
         {
             //GvControldePagos.DataSource = mylib.ListarBalancedePagosCasosCriminales( Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
             //GvControldePagos.DataBind();
-            if(DdlNumeroOrdenJudicial.SelectedValue == "0")
+            LitBalance.Text = "";
+            LitInfo.Text = "";
+            if (DdlNumeroOrdenJudicial.SelectedValue == "0")
             {
                 divNav.Visible = false;
                 BtnPagar.Visible = false;
-                LitBalance.Text = "";
-                LitInfo.Text = "";
+                
             }
             else
             {

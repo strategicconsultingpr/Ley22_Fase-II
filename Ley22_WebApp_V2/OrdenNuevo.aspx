@@ -851,6 +851,9 @@
               else {
                   document.getElementById("<%=CasoDos.ClientID %>").style.visibility = 'hidden';
                   document.getElementById("<%=CasoTres.ClientID %>").style.visibility = 'hidden';
+                  document.getElementById("<%=TxtNroCasoCriminal2.ClientID %>").value = "";
+                  document.getElementById("<%=TxtNroCasoCriminal3.ClientID %>").value = "";
+
               }
           }
     </script>

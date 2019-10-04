@@ -524,7 +524,11 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             int asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
             decimal balance = Convert.ToDecimal(item.Cargos) - Convert.ToDecimal(item.Pagos);
 
-            if(asistencias == 5 && balance.Equals(Convert.ToDecimal(0.00)))
+            var charlasRegulares = dsLey22.ListarAsistenciaCharlasRegulares(item.Id_Participante, item.Id_CasoCriminal).SingleOrDefault();
+
+            var victima = dsLey22.ListarAsistenciaCharlasImpacto(item.Id_Participante, item.Id_CasoCriminal).SingleOrDefault();
+
+            if ((charlasRegulares > 9 && (victima == 1 || victima == -1)) && balance.Equals(Convert.ToDecimal(0.00)))
             {
                 string Id = item.Id_Participante.ToString();
                 string Nombre = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.NB_Primero).SingleOrDefault();
@@ -539,19 +543,19 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-      
+
 
                 if (item.Activa == 0)
                 {
                     DateTime FE_Cierre = Convert.ToDateTime(item.FechaCierre.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(FE_Cierre);
 
-                    if(ts.Days > 8)
+                    if (ts.Days > 8)
                     {
                         continue;
                     }
                 }
-                
+
                 if (item.Activa == 0 && File.Exists(PathNameDocumento))
                 {
                     File.Delete(PathNameDocumento);
@@ -571,7 +575,17 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                 // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
-                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
+                string casosMerge = item.NumeroCasoCriminal;
+
+                if (item.NumeroCasoCriminalDos != "" && item.NumeroCasoCriminalDos != null)
+                {
+                    casosMerge += "-" + item.NumeroCasoCriminalDos;
+                }
+                if (item.NumeroCasoCriminalTres != "" && item.NumeroCasoCriminalTres != null)
+                {
+                    casosMerge += "-" + item.NumeroCasoCriminalTres;
+                }
+                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, casosMerge, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
 
                 PdfPageSize pageSize = PdfPageSize.Letter;
 

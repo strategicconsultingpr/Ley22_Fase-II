@@ -24,7 +24,7 @@
                             <div class="col">
 
                                 <asp:TextBox ID="TxtFecha" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" MaxLength="10"></asp:TextBox>
-                                <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFecha_CalendarExtender" runat="server" BehaviorID="TxtFecha_CalendarExtender" TargetControlID="TxtFecha" OnClientDateSelectionChanged="checkDate"/>
+                                <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFecha_CalendarExtender" runat="server" BehaviorID="TxtFecha_CalendarExtender" TargetControlID="TxtFecha"/>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Display="Dynamic" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFecha" ForeColor="Red"></asp:RegularExpressionValidator>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtFecha" Display="Dynamic"> </asp:RequiredFieldValidator>
 

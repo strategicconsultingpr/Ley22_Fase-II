@@ -433,6 +433,11 @@
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarParticipanteCharlaGrupalCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="CasoCriminal" Type="int" Mode="In" />
+        </Function>
         <Function Name="GuardarCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="NumeroCasoCriminal" Type="varchar" Mode="In" />
@@ -620,6 +625,9 @@
           <Parameter Name="FK_CasoCriminal" Type="int" Mode="In" />
         </Function>
         <Function Name="ListarParticipantesPorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarParticipantesPorCharlasCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
         </Function>
         <Function Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1226,6 +1234,14 @@
             <Parameter Name="NB_Pareja" Mode="In" Type="String" />
             <Parameter Name="NB_Padre" Mode="In" Type="String" />
             <Parameter Name="NB_Madre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarParticipantesPorCharlasCasoCriminal" ReturnType="Collection(Ley22Model.ListarParticipantesPorCharlasCasoCriminal_Result)">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarParticipanteCharlaGrupalCasoCriminal">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2017,6 +2033,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ListarParticipantesPorCharlasCasoCriminal_Result">
+          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2917,6 +2942,20 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GuardarCasoCriminal" FunctionName="Ley22Model.Store.GuardarCasoCriminal" />
           <FunctionImportMapping FunctionImportName="ModificarCasoCriminal" FunctionName="Ley22Model.Store.ModificarCasoCriminal" />
+          <FunctionImportMapping FunctionImportName="ListarParticipantesPorCharlasCasoCriminal" FunctionName="Ley22Model.Store.ListarParticipantesPorCharlasCasoCriminal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarParticipantesPorCharlasCasoCriminal_Result">
+                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarParticipanteCharlaGrupalCasoCriminal" FunctionName="Ley22Model.Store.EliminarParticipanteCharlaGrupalCasoCriminal" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

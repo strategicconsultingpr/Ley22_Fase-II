@@ -54,7 +54,7 @@ namespace Ley22_WebApp_V2
         }
 
         [WebMethod]
-        public DataCharla BindModalAsistencia(int Id_CharlaGrupal, string Id_Participante, string NombreParticipante)
+        public DataCharla BindModalAsistencia(int Id_CharlaGrupal, string Id_Participante, string NombreParticipante, int Id_CasoCriminal)
         //  public DataCharla BindModalAsistencia()
 
         {
@@ -68,9 +68,12 @@ namespace Ley22_WebApp_V2
             using (Ley22Entities mylib = new Ley22Entities())
 
             {
-                List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(Id_CharlaGrupal).ToList();
+                //List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(Id_CharlaGrupal).ToList();
+                List<ListarParticipantesPorCharlasCasoCriminal_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlasCasoCriminal(Id_CharlaGrupal).ToList();
                 List<DetalleCharlaGrupal_Result> resulDetalle = mylib.DetalleCharlaGrupal(Id_CharlaGrupal).ToList();
                 var asistio = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Single();
+
+                var activa = mylib.CasoCriminals.Where(u => u.Id_CasoCriminal.Equals(Id_CasoCriminal)).Single();
 
                 mydata.NroCharla = resulDetalle[0].NumeroCharla.ToString();
                 mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel + " - Numero de Charla:#"+ mydata.NroCharla;
@@ -86,23 +89,24 @@ namespace Ley22_WebApp_V2
                 string HreAdicionar = string.Empty;
                 bool swEstaenLaCharla = false;
                 int num = 1;
-                foreach (ListarParticipantesPorCharlas_Result c in resulParaticipalntes)
+                foreach (ListarParticipantesPorCharlasCasoCriminal_Result c in resulParaticipalntes)
                 {
                     //&& asistio.FechaFinal > DateTime.Today
-                    if (c.Id_Participante.ToString() == Id_Participante.ToString())
+                    if (c.Id_Participante.ToString() == Id_Participante.ToString() && c.Id_OrdenJudicial.ToString() == Id_CasoCriminal.ToString() && activa.Activa == 1)
                     {
                         swEstaenLaCharla = true;
                         HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
 
                     }
-                    else if(c.Id_Participante.ToString() == Id_Participante.ToString())
+                    else if(c.Id_Participante.ToString() == Id_Participante.ToString() && c.Id_OrdenJudicial.ToString() != Id_CasoCriminal.ToString())
                     {
-                        swEstaenLaCharla = false;
+                        
                         HrefRemover = "";
 
                     }
                     else
                     {
+                        
                         HrefRemover = "";
                     }
                     Parti += " <label class=\"form-check-label\">"+ num + ". " + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
@@ -238,7 +242,7 @@ namespace Ley22_WebApp_V2
                     }
                     else
                     {
-                        EliminarOnclick = " onclick=\"javacript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "')\"";
+                        EliminarOnclick = " onclick=\"javacript:__doPostBack('EliminarParticipante','" + c.Id_Participante+","+orden + "')\"";
                         AsistioOnclick = " onclick=\"javacript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"";
                         NoAsistioOnclick = "onclick =\"javacript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"";
                         HrefRemover = " <a " + HrefPermiso + EliminarOnclick + " >Eliminar</a>  -  ";

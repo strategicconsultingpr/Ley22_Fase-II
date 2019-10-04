@@ -605,7 +605,12 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='2da CHARLA'><span class="bloque-leyenda grupo2"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='3era CHARLA'><span class="bloque-leyenda grupo3"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='4ta CHARLA'><span class="bloque-leyenda grupo4"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; 
+                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='6ta CHARLA'><span class="bloque-leyenda grupo6"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='7ma CHARLA'><span class="bloque-leyenda grupo7"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='8va CHARLA'><span class="bloque-leyenda grupo8"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='9na CHARLA'><span class="bloque-leyenda grupo9"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='10ma CHARLA'><span class="bloque-leyenda grupo10"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; 
                         <a href="#" data-toggle="tooltip" data-html="true" title='NO HAY ESPACIO (CERRADO)'><span class="bloque-leyenda nohay"></span></a>
                         
      

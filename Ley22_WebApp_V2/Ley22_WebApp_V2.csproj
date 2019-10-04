@@ -885,6 +885,9 @@
     <Compile Include="Old_App_Code\ListarPagosCasosCriminales_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>
+    <Compile Include="Old_App_Code\ListarParticipantesPorCharlasCasoCriminal_Result.cs">
+      <DependentUpon>ModelLey22.tt</DependentUpon>
+    </Compile>
     <Compile Include="Old_App_Code\ListarParticipantesPorCharlas_Result.cs">
       <DependentUpon>ModelLey22.tt</DependentUpon>
     </Compile>

@@ -1472,5 +1472,31 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCasoCriminal", id_CasoCriminalParameter, numeroCasoCriminalParameter, numeroCasoCriminalDosParameter, numeroCasoCriminalTresParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
         }
+    
+        public virtual ObjectResult<ListarParticipantesPorCharlasCasoCriminal_Result> ListarParticipantesPorCharlasCasoCriminal(Nullable<int> id_CharlaGrupal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlasCasoCriminal_Result>("ListarParticipantesPorCharlasCasoCriminal", id_CharlaGrupalParameter);
+        }
+    
+        public virtual int EliminarParticipanteCharlaGrupalCasoCriminal(Nullable<int> id_CharlaGrupal, Nullable<int> id_Participante, Nullable<int> casoCriminal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var casoCriminalParameter = casoCriminal.HasValue ?
+                new ObjectParameter("CasoCriminal", casoCriminal) :
+                new ObjectParameter("CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarParticipanteCharlaGrupalCasoCriminal", id_CharlaGrupalParameter, id_ParticipanteParameter, casoCriminalParameter);
+        }
     }
 }

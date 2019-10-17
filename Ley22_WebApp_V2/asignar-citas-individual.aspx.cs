@@ -541,8 +541,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             DateComparisonResult comparison;
 
             comparison = (DateComparisonResult)Convert.ToDateTime(FechaInicial).CompareTo(DateTime.Now);
-
-            if (comparison == DateComparisonResult.Later && Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
+            //comparison == DateComparisonResult.Later &&
+            if ( Convert.ToDateTime(FechaInicial) < Convert.ToDateTime(FechaFinal))
             {
 
                 using (Ley22Entities mylib = new Ley22Entities())

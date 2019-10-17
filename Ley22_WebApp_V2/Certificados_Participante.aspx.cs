@@ -270,7 +270,27 @@ namespace Ley22_WebApp_V2
 
                 // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
-                string bodyPDF = CreateBodyPDF(fecha, Caso.NB_Juez, Caso.NumeroCasoCriminal, nombrePrograma, Nombre, Apellido, Caso.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
+                string casos2;
+                string casos3;
+
+                if (Caso.NumeroCasoCriminalDos == "" || Caso.NumeroCasoCriminalDos == null)
+                {
+                    casos2 = "";
+                }
+                else
+                {
+                    casos2 = Caso.NumeroCasoCriminalDos;
+                }
+                if (Caso.NumeroCasoCriminalTres == "" || Caso.NumeroCasoCriminalTres == null)
+                {
+                    casos3 = "";
+                }
+                else
+                {
+                    casos3 = Caso.NumeroCasoCriminalTres;
+                }
+
+                string bodyPDF = CreateBodyPDF(fecha, Caso.NB_Juez, Caso.NumeroCasoCriminal,casos2,casos3, nombrePrograma, Nombre, Apellido, Caso.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
 
                 PdfPageSize pageSize = PdfPageSize.Letter;
 
@@ -354,7 +374,7 @@ namespace Ley22_WebApp_V2
            // Response.Redirect("/");
         }
 
-        private string CreateBodyPDF(string Fecha, string Juez, string Caso, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)
+        private string CreateBodyPDF(string Fecha, string Juez, string Caso, string Caso2, string Caso3, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)
         {
             string body = string.Empty;
 
@@ -365,6 +385,8 @@ namespace Ley22_WebApp_V2
             body = body.Replace("{Fecha}", Fecha);
             body = body.Replace("{Juez}", Juez);
             body = body.Replace("{CasoCriminal}", Caso);
+            body = body.Replace("{CasoCriminal2}", Caso2);
+            body = body.Replace("{CasoCriminal3}", Caso3);
             body = body.Replace("{RegionPrograma}", RegionPrograma);
             body = body.Replace("{NombreParticipante}", Nombre + " " + Apellido);
             body = body.Replace("{FechaSentencia}", FechaSentencia);

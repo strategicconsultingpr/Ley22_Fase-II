@@ -46,7 +46,8 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
            TxtFechaNacimiento.Text.Trim() == "" &&
            TxtNombre.Text.Trim() == "" &&
             TxtApellido.Text.Trim() == "" &&
-            TxtSegundoApellido.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
+            TxtSegundoApellido.Text.Trim() == ""
+            && TxtExpediente.Text.Trim() == "")) { Response.Redirect("recaudos-busqueda-usuario.aspx", false); }
 
         else
         {
@@ -57,7 +58,7 @@ public partial class recaudos_busqueda_usuario : System.Web.UI.Page
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim();
-
+            Session["TxtExpediente"] = TxtExpediente.Text.Trim();
 
             Response.Redirect("recaudos-resultados-busqueda.aspx", false);
         }

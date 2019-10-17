@@ -68,6 +68,8 @@
           <Property Name="NB_Madre" Type="varchar" MaxLength="128" />
           <Property Name="Cargos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Pagos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NumeroCasoCriminalDos" Type="varchar" MaxLength="128" />
+          <Property Name="NumeroCasoCriminalTres" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CCG_Excepciones">
           <Key>
@@ -431,9 +433,16 @@
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarParticipanteCharlaGrupalCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="CasoCriminal" Type="int" Mode="In" />
+        </Function>
         <Function Name="GuardarCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="NumeroCasoCriminal" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCasoCriminalDos" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCasoCriminalTres" Type="varchar" Mode="In" />
           <Parameter Name="FechaOrden" Type="datetime" Mode="In" />
           <Parameter Name="FechaSentencia" Type="datetime" Mode="In" />
           <Parameter Name="Alcohol" Type="varchar" Mode="In" />
@@ -533,6 +542,14 @@
         <Function Name="InfoCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
         </Function>
+        <Function Name="ListarAsistenciaCharlasImpacto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarAsistenciaCharlasRegulares" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Participante" Type="int" Mode="In" />
+          <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarBalancedePagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
@@ -610,6 +627,9 @@
         <Function Name="ListarParticipantesPorCharlas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
         </Function>
+        <Function Name="ListarParticipantesPorCharlasCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarTipodeDocumentosPorParticipanteOrdenJudicial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
@@ -618,6 +638,8 @@
         <Function Name="ModificarCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CasoCriminal" Type="int" Mode="In" />
           <Parameter Name="NumeroCasoCriminal" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCasoCriminalDos" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCasoCriminalTres" Type="varchar" Mode="In" />
           <Parameter Name="FechaOrden" Type="datetime" Mode="In" />
           <Parameter Name="FechaSentencia" Type="datetime" Mode="In" />
           <Parameter Name="Alcohol" Type="varchar" Mode="In" />
@@ -1024,80 +1046,8 @@
             <Parameter Name="DocumentoAprobacion" Mode="In" Type="String" />
             <Parameter Name="Id_UsuarioCierre" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GuardarCasoCriminal">
-            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
-            <Parameter Name="NumeroCasoCriminal" Mode="In" Type="String" />
-            <Parameter Name="FechaOrden" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaSentencia" Mode="In" Type="DateTime" />
-            <Parameter Name="Alcohol" Mode="In" Type="String" />
-            <Parameter Name="FK_Tribunal" Mode="In" Type="Int32" />
-            <Parameter Name="NB_Juez" Mode="In" Type="String" />
-            <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="String" />
-            <Parameter Name="FK_Programa" Mode="In" Type="Int32" />
-            <Parameter Name="NumLicencia" Mode="In" Type="Int32" />
-            <Parameter Name="FK_EstadoCivil" Mode="In" Type="Int32" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="TelCelular" Mode="In" Type="String" />
-            <Parameter Name="TelHogar" Mode="In" Type="String" />
-            <Parameter Name="TelTrabajo" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea1" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea2" Mode="In" Type="String" />
-            <Parameter Name="FK_Pueblo" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea1Postal" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea2Postal" Mode="In" Type="String" />
-            <Parameter Name="FK_PuebloPostal" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoPostalPostal" Mode="In" Type="String" />
-            <Parameter Name="FK_PlanMedico" Mode="In" Type="Int32" />
-            <Parameter Name="CondicionSalud" Mode="In" Type="String" />
-            <Parameter Name="Impedimento" Mode="In" Type="String" />
-            <Parameter Name="FK_Grado" Mode="In" Type="Int32" />
-            <Parameter Name="LugarTrabajo" Mode="In" Type="String" />
-            <Parameter Name="Ocupacion" Mode="In" Type="String" />
-            <Parameter Name="Veterano" Mode="In" Type="Byte" />
-            <Parameter Name="FK_DesempleoRazon" Mode="In" Type="Int32" />
-            <Parameter Name="CantidadFamilia" Mode="In" Type="Int32" />
-            <Parameter Name="NB_Pareja" Mode="In" Type="String" />
-            <Parameter Name="NB_Padre" Mode="In" Type="String" />
-            <Parameter Name="NB_Madre" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="ConsultarCasosXPersona" ReturnType="Collection(Ley22Model.ConsultarCasosXPersona_Result)">
           <Parameter Name="Pk_Persona" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ModificarCasoCriminal">
-            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
-            <Parameter Name="NumeroCasoCriminal" Mode="In" Type="String" />
-            <Parameter Name="FechaOrden" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaSentencia" Mode="In" Type="DateTime" />
-            <Parameter Name="Alcohol" Mode="In" Type="String" />
-            <Parameter Name="FK_Tribunal" Mode="In" Type="Int32" />
-            <Parameter Name="NB_Juez" Mode="In" Type="String" />
-            <Parameter Name="NumLicencia" Mode="In" Type="Int32" />
-            <Parameter Name="FK_EstadoCivil" Mode="In" Type="Int32" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="TelCelular" Mode="In" Type="String" />
-            <Parameter Name="TelHogar" Mode="In" Type="String" />
-            <Parameter Name="TelTrabajo" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea1" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea2" Mode="In" Type="String" />
-            <Parameter Name="FK_Pueblo" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea1Postal" Mode="In" Type="String" />
-            <Parameter Name="DireccionLinea2Postal" Mode="In" Type="String" />
-            <Parameter Name="FK_PuebloPostal" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoPostalPostal" Mode="In" Type="String" />
-            <Parameter Name="FK_PlanMedico" Mode="In" Type="Int32" />
-            <Parameter Name="CondicionSalud" Mode="In" Type="String" />
-            <Parameter Name="Impedimento" Mode="In" Type="String" />
-            <Parameter Name="FK_Grado" Mode="In" Type="Int32" />
-            <Parameter Name="LugarTrabajo" Mode="In" Type="String" />
-            <Parameter Name="Ocupacion" Mode="In" Type="String" />
-            <Parameter Name="Veterano" Mode="In" Type="Byte" />
-            <Parameter Name="FK_DesempleoRazon" Mode="In" Type="Int32" />
-            <Parameter Name="CantidadFamilia" Mode="In" Type="Int32" />
-            <Parameter Name="NB_Pareja" Mode="In" Type="String" />
-            <Parameter Name="NB_Padre" Mode="In" Type="String" />
-            <Parameter Name="NB_Madre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BusquedaSencilladePersonasRecepcion" ReturnType="Collection(Ley22Model.BusquedaSencilladePersonasRecepcion_Result)">
             <Parameter Name="NR_SeguroSocial" Mode="In" Type="String" />
@@ -1121,11 +1071,6 @@
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="Id_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CasoCriminals" EntityType="Ley22Model.CasoCriminal" />
-          <AssociationSet Name="FK_Tribunal_Tribunal_Id_Tribunal" Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal">
-            <End Role="Tribunal" EntitySet="Tribunals" />
-            <End Role="CasoCriminal" EntitySet="CasoCriminals" />
-          </AssociationSet>
           <FunctionImport Name="ListarCargosCasosCriminales" ReturnType="Collection(Ley22Model.ListarCargosCasosCriminales_Result)">
           <Parameter Name="FK_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1200,6 +1145,103 @@
           <FunctionImport Name="BusquedaSencilladePersonasRecepcionExpediente" ReturnType="Collection(Ley22Model.BusquedaSencilladePersonasRecepcionExpediente_Result)">
             <Parameter Name="FK_Programa" Mode="In" Type="Int16" />
             <Parameter Name="NR_Expediente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarAsistenciaCharlasImpacto" ReturnType="Collection(Int32)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarAsistenciaCharlasRegulares" ReturnType="Collection(Int32)">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="Id_OrdenJudicial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CasoCriminals" EntityType="Ley22Model.CasoCriminal" />
+          <AssociationSet Name="FK_Tribunal_Tribunal_Id_Tribunal" Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal">
+            <End Role="Tribunal" EntitySet="Tribunals" />
+            <End Role="CasoCriminal" EntitySet="CasoCriminals" />
+          </AssociationSet>
+          <FunctionImport Name="GuardarCasoCriminal">
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroCasoCriminal" Mode="In" Type="String" />
+            <Parameter Name="NumeroCasoCriminalDos" Mode="In" Type="String" />
+            <Parameter Name="NumeroCasoCriminalTres" Mode="In" Type="String" />
+            <Parameter Name="FechaOrden" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSentencia" Mode="In" Type="DateTime" />
+            <Parameter Name="Alcohol" Mode="In" Type="String" />
+            <Parameter Name="FK_Tribunal" Mode="In" Type="Int32" />
+            <Parameter Name="NB_Juez" Mode="In" Type="String" />
+            <Parameter Name="Id_UsuarioCreacion" Mode="In" Type="String" />
+            <Parameter Name="FK_Programa" Mode="In" Type="Int32" />
+            <Parameter Name="NumLicencia" Mode="In" Type="Int32" />
+            <Parameter Name="FK_EstadoCivil" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="TelCelular" Mode="In" Type="String" />
+            <Parameter Name="TelHogar" Mode="In" Type="String" />
+            <Parameter Name="TelTrabajo" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea1" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea2" Mode="In" Type="String" />
+            <Parameter Name="FK_Pueblo" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea1Postal" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea2Postal" Mode="In" Type="String" />
+            <Parameter Name="FK_PuebloPostal" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoPostalPostal" Mode="In" Type="String" />
+            <Parameter Name="FK_PlanMedico" Mode="In" Type="Int32" />
+            <Parameter Name="CondicionSalud" Mode="In" Type="String" />
+            <Parameter Name="Impedimento" Mode="In" Type="String" />
+            <Parameter Name="FK_Grado" Mode="In" Type="Int32" />
+            <Parameter Name="LugarTrabajo" Mode="In" Type="String" />
+            <Parameter Name="Ocupacion" Mode="In" Type="String" />
+            <Parameter Name="Veterano" Mode="In" Type="Byte" />
+            <Parameter Name="FK_DesempleoRazon" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadFamilia" Mode="In" Type="Int32" />
+            <Parameter Name="NB_Pareja" Mode="In" Type="String" />
+            <Parameter Name="NB_Padre" Mode="In" Type="String" />
+            <Parameter Name="NB_Madre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarCasoCriminal">
+            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroCasoCriminal" Mode="In" Type="String" />
+            <Parameter Name="NumeroCasoCriminalDos" Mode="In" Type="String" />
+            <Parameter Name="NumeroCasoCriminalTres" Mode="In" Type="String" />
+            <Parameter Name="FechaOrden" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSentencia" Mode="In" Type="DateTime" />
+            <Parameter Name="Alcohol" Mode="In" Type="String" />
+            <Parameter Name="FK_Tribunal" Mode="In" Type="Int32" />
+            <Parameter Name="NB_Juez" Mode="In" Type="String" />
+            <Parameter Name="NumLicencia" Mode="In" Type="Int32" />
+            <Parameter Name="FK_EstadoCivil" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="TelCelular" Mode="In" Type="String" />
+            <Parameter Name="TelHogar" Mode="In" Type="String" />
+            <Parameter Name="TelTrabajo" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea1" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea2" Mode="In" Type="String" />
+            <Parameter Name="FK_Pueblo" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea1Postal" Mode="In" Type="String" />
+            <Parameter Name="DireccionLinea2Postal" Mode="In" Type="String" />
+            <Parameter Name="FK_PuebloPostal" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoPostalPostal" Mode="In" Type="String" />
+            <Parameter Name="FK_PlanMedico" Mode="In" Type="Int32" />
+            <Parameter Name="CondicionSalud" Mode="In" Type="String" />
+            <Parameter Name="Impedimento" Mode="In" Type="String" />
+            <Parameter Name="FK_Grado" Mode="In" Type="Int32" />
+            <Parameter Name="LugarTrabajo" Mode="In" Type="String" />
+            <Parameter Name="Ocupacion" Mode="In" Type="String" />
+            <Parameter Name="Veterano" Mode="In" Type="Byte" />
+            <Parameter Name="FK_DesempleoRazon" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadFamilia" Mode="In" Type="Int32" />
+            <Parameter Name="NB_Pareja" Mode="In" Type="String" />
+            <Parameter Name="NB_Padre" Mode="In" Type="String" />
+            <Parameter Name="NB_Madre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarParticipantesPorCharlasCasoCriminal" ReturnType="Collection(Ley22Model.ListarParticipantesPorCharlasCasoCriminal_Result)">
+          <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarParticipanteCharlaGrupalCasoCriminal">
+            <Parameter Name="Id_CharlaGrupal" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Participante" Mode="In" Type="Int32" />
+            <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1821,70 +1863,6 @@
           <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
         </ComplexType>
-        <EntityType Name="CasoCriminal">
-          <Key>
-            <PropertyRef Name="Id_CasoCriminal" />
-          </Key>
-          <Property Name="Id_CasoCriminal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
-          <Property Name="NumeroCasoCriminal" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="FechaOrden" Type="DateTime" Precision="3" />
-          <Property Name="FechaSentencia" Type="DateTime" Precision="3" />
-          <Property Name="Alcohol" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Tribunal" Type="Int32" Nullable="false" />
-          <Property Name="NB_Juez" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Activa" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Id_UsuarioCreacion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCierre" Type="DateTime" Precision="3" />
-          <Property Name="Id_MotivoCierre" Type="Int32" />
-          <Property Name="ComentarioCierre" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
-          <Property Name="Id_UsuarioCierre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Programa" Type="Int32" />
-          <Property Name="NumLicencia" Type="Int32" />
-          <Property Name="FK_EstadoCivil" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TelCelular" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="TelHogar" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="TelTrabajo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DireccionLinea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DireccionLinea2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Pueblo" Type="Int32" />
-          <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DireccionLinea1Postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DireccionLinea2Postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FK_PuebloPostal" Type="Int32" />
-          <Property Name="CodigoPostalPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FK_PlanMedico" Type="Int32" />
-          <Property Name="CondicionSalud" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Impedimento" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Grado" Type="Int32" />
-          <Property Name="LugarTrabajo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Ocupacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Veterano" Type="Byte" />
-          <Property Name="FK_DesempleoRazon" Type="Int32" />
-          <Property Name="CantidadFamilia" Type="Int32" />
-          <Property Name="NB_Pareja" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="NB_Padre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="NB_Madre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Cargos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Pagos" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Tribunal" Relationship="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" FromRole="CasoCriminal" ToRole="Tribunal" />
-        </EntityType>
-        <Association Name="FK_Tribunal_Tribunal_Id_Tribunal">
-          <End Type="Ley22Model.Tribunal" Role="Tribunal" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Ley22Model.CasoCriminal" Role="CasoCriminal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tribunal">
-              <PropertyRef Name="Id_Tribunal" />
-            </Principal>
-            <Dependent Role="CasoCriminal">
-              <PropertyRef Name="FK_Tribunal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="ListarCargosCasosCriminales_Result">
           <Property Type="Int32" Name="PK_ControldePago" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
@@ -1985,6 +1963,84 @@
           <Property Type="Byte" Name="FK_Veterano" Nullable="false" />
           <Property Type="Byte" Name="FK_GrupoEtnico" Nullable="false" />
           <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <ComplexType Name="ListarAsistenciaCharlasRegulares_Result">
+          <Property Type="Int32" Name="suma" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CasoCriminal">
+          <Key>
+            <PropertyRef Name="Id_CasoCriminal" />
+          </Key>
+          <Property Name="Id_CasoCriminal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Participante" Type="Int32" Nullable="false" />
+          <Property Name="NumeroCasoCriminal" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOrden" Type="DateTime" Precision="3" />
+          <Property Name="FechaSentencia" Type="DateTime" Precision="3" />
+          <Property Name="Alcohol" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Tribunal" Type="Int32" Nullable="false" />
+          <Property Name="NB_Juez" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Activa" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_UsuarioCreacion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCierre" Type="DateTime" Precision="3" />
+          <Property Name="Id_MotivoCierre" Type="Int32" />
+          <Property Name="ComentarioCierre" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UsuarioCierre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Programa" Type="Int32" />
+          <Property Name="NumLicencia" Type="Int32" />
+          <Property Name="FK_EstadoCivil" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TelCelular" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelHogar" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TelTrabajo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Pueblo" Type="Int32" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea1Postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionLinea2Postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_PuebloPostal" Type="Int32" />
+          <Property Name="CodigoPostalPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FK_PlanMedico" Type="Int32" />
+          <Property Name="CondicionSalud" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Impedimento" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Grado" Type="Int32" />
+          <Property Name="LugarTrabajo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Ocupacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Veterano" Type="Byte" />
+          <Property Name="FK_DesempleoRazon" Type="Int32" />
+          <Property Name="CantidadFamilia" Type="Int32" />
+          <Property Name="NB_Pareja" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Padre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Madre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Cargos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Pagos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NumeroCasoCriminalDos" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCasoCriminalTres" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tribunal" Relationship="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" FromRole="CasoCriminal" ToRole="Tribunal" />
+        </EntityType>
+        <Association Name="FK_Tribunal_Tribunal_Id_Tribunal">
+          <End Type="Ley22Model.Tribunal" Role="Tribunal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Ley22Model.CasoCriminal" Role="CasoCriminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tribunal">
+              <PropertyRef Name="Id_Tribunal" />
+            </Principal>
+            <Dependent Role="CasoCriminal">
+              <PropertyRef Name="FK_Tribunal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ListarParticipantesPorCharlasCasoCriminal_Result">
+          <Property Type="Int32" Name="Id_ParticipantePorCharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="Int32" Name="Id_Participante" Nullable="false" />
+          <Property Type="String" Name="NB_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AP_Primero" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Asistio" Nullable="false" />
+          <Property Type="Int32" Name="Id_OrdenJudicial" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2639,7 +2695,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CerrarCasoCriminal" FunctionName="Ley22Model.Store.CerrarCasoCriminal" />
-          <FunctionImportMapping FunctionImportName="GuardarCasoCriminal" FunctionName="Ley22Model.Store.GuardarCasoCriminal" />
           <FunctionImportMapping FunctionImportName="ConsultarCasosXPersona" FunctionName="Ley22Model.Store.ConsultarCasosXPersona">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ConsultarCasosXPersona_Result">
@@ -2651,7 +2706,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ModificarCasoCriminal" FunctionName="Ley22Model.Store.ModificarCasoCriminal" />
           <FunctionImportMapping FunctionImportName="BusquedaSencilladePersonasRecepcion" FunctionName="Ley22Model.Store.BusquedaSencilladePersonasRecepcion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.BusquedaSencilladePersonasRecepcion_Result">
@@ -2691,56 +2745,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CasoCriminals">
-            <EntityTypeMapping TypeName="Ley22Model.CasoCriminal">
-              <MappingFragment StoreEntitySet="CasoCriminal">
-                <ScalarProperty Name="Pagos" ColumnName="Pagos" />
-                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
-                <ScalarProperty Name="NB_Madre" ColumnName="NB_Madre" />
-                <ScalarProperty Name="NB_Padre" ColumnName="NB_Padre" />
-                <ScalarProperty Name="NB_Pareja" ColumnName="NB_Pareja" />
-                <ScalarProperty Name="CantidadFamilia" ColumnName="CantidadFamilia" />
-                <ScalarProperty Name="FK_DesempleoRazon" ColumnName="FK_DesempleoRazon" />
-                <ScalarProperty Name="Veterano" ColumnName="Veterano" />
-                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
-                <ScalarProperty Name="LugarTrabajo" ColumnName="LugarTrabajo" />
-                <ScalarProperty Name="FK_Grado" ColumnName="FK_Grado" />
-                <ScalarProperty Name="Impedimento" ColumnName="Impedimento" />
-                <ScalarProperty Name="CondicionSalud" ColumnName="CondicionSalud" />
-                <ScalarProperty Name="FK_PlanMedico" ColumnName="FK_PlanMedico" />
-                <ScalarProperty Name="CodigoPostalPostal" ColumnName="CodigoPostalPostal" />
-                <ScalarProperty Name="FK_PuebloPostal" ColumnName="FK_PuebloPostal" />
-                <ScalarProperty Name="DireccionLinea2Postal" ColumnName="DireccionLinea2Postal" />
-                <ScalarProperty Name="DireccionLinea1Postal" ColumnName="DireccionLinea1Postal" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="FK_Pueblo" ColumnName="FK_Pueblo" />
-                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
-                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
-                <ScalarProperty Name="TelTrabajo" ColumnName="TelTrabajo" />
-                <ScalarProperty Name="TelHogar" ColumnName="TelHogar" />
-                <ScalarProperty Name="TelCelular" ColumnName="TelCelular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FK_EstadoCivil" ColumnName="FK_EstadoCivil" />
-                <ScalarProperty Name="NumLicencia" ColumnName="NumLicencia" />
-                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
-                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
-                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
-                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="NB_Juez" ColumnName="NB_Juez" />
-                <ScalarProperty Name="FK_Tribunal" ColumnName="FK_Tribunal" />
-                <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
-                <ScalarProperty Name="FechaSentencia" ColumnName="FechaSentencia" />
-                <ScalarProperty Name="FechaOrden" ColumnName="FechaOrden" />
-                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
-                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
-                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ListarCargosCasosCriminales" FunctionName="Ley22Model.Store.ListarCargosCasosCriminales">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Ley22Model.ListarCargosCasosCriminales_Result">
@@ -2882,6 +2886,76 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarAsistenciaCharlasImpacto" FunctionName="Ley22Model.Store.ListarAsistenciaCharlasImpacto" />
+          <FunctionImportMapping FunctionImportName="ListarAsistenciaCharlasRegulares" FunctionName="Ley22Model.Store.ListarAsistenciaCharlasRegulares" />
+          <EntitySetMapping Name="CasoCriminals">
+            <EntityTypeMapping TypeName="Ley22Model.CasoCriminal">
+              <MappingFragment StoreEntitySet="CasoCriminal">
+                <ScalarProperty Name="NumeroCasoCriminalTres" ColumnName="NumeroCasoCriminalTres" />
+                <ScalarProperty Name="NumeroCasoCriminalDos" ColumnName="NumeroCasoCriminalDos" />
+                <ScalarProperty Name="Pagos" ColumnName="Pagos" />
+                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
+                <ScalarProperty Name="NB_Madre" ColumnName="NB_Madre" />
+                <ScalarProperty Name="NB_Padre" ColumnName="NB_Padre" />
+                <ScalarProperty Name="NB_Pareja" ColumnName="NB_Pareja" />
+                <ScalarProperty Name="CantidadFamilia" ColumnName="CantidadFamilia" />
+                <ScalarProperty Name="FK_DesempleoRazon" ColumnName="FK_DesempleoRazon" />
+                <ScalarProperty Name="Veterano" ColumnName="Veterano" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+                <ScalarProperty Name="LugarTrabajo" ColumnName="LugarTrabajo" />
+                <ScalarProperty Name="FK_Grado" ColumnName="FK_Grado" />
+                <ScalarProperty Name="Impedimento" ColumnName="Impedimento" />
+                <ScalarProperty Name="CondicionSalud" ColumnName="CondicionSalud" />
+                <ScalarProperty Name="FK_PlanMedico" ColumnName="FK_PlanMedico" />
+                <ScalarProperty Name="CodigoPostalPostal" ColumnName="CodigoPostalPostal" />
+                <ScalarProperty Name="FK_PuebloPostal" ColumnName="FK_PuebloPostal" />
+                <ScalarProperty Name="DireccionLinea2Postal" ColumnName="DireccionLinea2Postal" />
+                <ScalarProperty Name="DireccionLinea1Postal" ColumnName="DireccionLinea1Postal" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="FK_Pueblo" ColumnName="FK_Pueblo" />
+                <ScalarProperty Name="DireccionLinea2" ColumnName="DireccionLinea2" />
+                <ScalarProperty Name="DireccionLinea1" ColumnName="DireccionLinea1" />
+                <ScalarProperty Name="TelTrabajo" ColumnName="TelTrabajo" />
+                <ScalarProperty Name="TelHogar" ColumnName="TelHogar" />
+                <ScalarProperty Name="TelCelular" ColumnName="TelCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FK_EstadoCivil" ColumnName="FK_EstadoCivil" />
+                <ScalarProperty Name="NumLicencia" ColumnName="NumLicencia" />
+                <ScalarProperty Name="FK_Programa" ColumnName="FK_Programa" />
+                <ScalarProperty Name="Id_UsuarioCierre" ColumnName="Id_UsuarioCierre" />
+                <ScalarProperty Name="ComentarioCierre" ColumnName="ComentarioCierre" />
+                <ScalarProperty Name="Id_MotivoCierre" ColumnName="Id_MotivoCierre" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Id_UsuarioCreacion" ColumnName="Id_UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="NB_Juez" ColumnName="NB_Juez" />
+                <ScalarProperty Name="FK_Tribunal" ColumnName="FK_Tribunal" />
+                <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
+                <ScalarProperty Name="FechaSentencia" ColumnName="FechaSentencia" />
+                <ScalarProperty Name="FechaOrden" ColumnName="FechaOrden" />
+                <ScalarProperty Name="NumeroCasoCriminal" ColumnName="NumeroCasoCriminal" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="Id_CasoCriminal" ColumnName="Id_CasoCriminal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarCasoCriminal" FunctionName="Ley22Model.Store.GuardarCasoCriminal" />
+          <FunctionImportMapping FunctionImportName="ModificarCasoCriminal" FunctionName="Ley22Model.Store.ModificarCasoCriminal" />
+          <FunctionImportMapping FunctionImportName="ListarParticipantesPorCharlasCasoCriminal" FunctionName="Ley22Model.Store.ListarParticipantesPorCharlasCasoCriminal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarParticipantesPorCharlasCasoCriminal_Result">
+                <ScalarProperty Name="Id_ParticipantePorCharlaGrupal" ColumnName="Id_ParticipantePorCharlaGrupal" />
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="Id_Participante" ColumnName="Id_Participante" />
+                <ScalarProperty Name="NB_Primero" ColumnName="NB_Primero" />
+                <ScalarProperty Name="AP_Primero" ColumnName="AP_Primero" />
+                <ScalarProperty Name="Asistio" ColumnName="Asistio" />
+                <ScalarProperty Name="Id_OrdenJudicial" ColumnName="Id_OrdenJudicial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarParticipanteCharlaGrupalCasoCriminal" FunctionName="Ley22Model.Store.EliminarParticipanteCharlaGrupalCasoCriminal" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -409,7 +409,62 @@ input[disabled]
 
 .calendario .item.quinta {
     display: block;
+    background: #F8EB8E;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.sexta {
+    display: block;
     background: #f4428c;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.septima {
+    display: block;
+    background: #FF9919;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.octava {
+    display: block;
+    background: #C1E2EA;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.novena {
+    display: block;
+    background: #F1F1F1;
+    border: 1px solid #74A375;
+    border-radius: 6px;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #212121;
+}
+
+.calendario .item.decima {
+    display: block;
+    background: #747D7B;
     border: 1px solid #74A375;
     border-radius: 6px;
     padding: 0 5px;
@@ -443,6 +498,11 @@ input[disabled]
 .bloque-leyenda.grupo3 {background-color: #6E42F4; border-color: #1A76D1;} /* Azul */
 .bloque-leyenda.grupo4 {background-color: #CB42F4; border-color: #8C6E63;} /* Marron */
 .bloque-leyenda.grupo5 {background-color: #F4428C; border-color: #8C6E63;}
+.bloque-leyenda.grupo6 {background-color: #F6E779; border-color: #8C6E63;}
+.bloque-leyenda.grupo7 {background-color: #FF9919; border-color: #8C6E63;}
+.bloque-leyenda.grupo8 {background-color: #C1E2EA; border-color: #8C6E63;}
+.bloque-leyenda.grupo9 {background-color: #F1F1F1; border-color: #8C6E63;}
+.bloque-leyenda.grupo10 {background-color: #747D7B; border-color: #8C6E63;}
 
 .bloque-leyenda.realizarse {background-color: #E9CA6D; border-color: #8C6E63;}
 .bloque-leyenda.asistio {background-color: #D5EB98; border-color: #8C6E63;}

@@ -52,6 +52,8 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         using (Ley22Entities mylib = new Ley22Entities())
 
         {
+            LitBalance.Text = "";
+            LitInfo.Text = "";
             //GvControldePagos.DataSource = mylib.ListarBalancedePagos(Convert.ToInt32(Session["Id_Participante"]),Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
             if (DdlNumeroOrdenJudicial.SelectedValue == "0")
             {

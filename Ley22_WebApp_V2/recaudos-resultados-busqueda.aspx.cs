@@ -72,21 +72,37 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
 
         using (Ley22Entities ml22e = new Ley22Entities())
         {
+            if (Session["TxtExpediente"].ToString() != "")
+            {
+                List<BusquedaSencilladePersonasRecepcionExpediente_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcionExpediente(idPrograma, Session["TxtExpediente"].ToString()).ToList();
 
-            List<BusquedaSencilladePersonasRecepcion_Result> Resultado = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
+                //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+                //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
+                LitCantidadUsuarios.Text = Resul.Count.ToString();
+
+                GridView1.PageIndex = pagina - 1;
+                GridView1.DataSource = Resul;
+                GridView1.DataBind();
+                return Resul.Count();
+            }
+            else
+            {
+                List<BusquedaSencilladePersonasRecepcion_Result> Resultado = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
                                                                      Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(),
-                                                                     Session["TxtSegundoApellido"].ToString(),idPrograma).ToList();
+                                                                     Session["TxtSegundoApellido"].ToString(), idPrograma).ToList();
 
-            var Result = Resultado.Where(u => u.Identificacion.Contains("LEY 22")).ToList();
-            var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
-            var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
-            LitCantidadUsuarios.Text = Resul.Count.ToString();
+                var Result = Resultado.Where(u => u.Identificacion.Contains("LEY 22")).ToList();
+                var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+                var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
+                LitCantidadUsuarios.Text = Resul.Count.ToString();
 
-            GridView1.PageIndex = pagina - 1;
-            GridView1.DataSource = Resul;
-            GridView1.DataBind();
-            return Resul.Count();
+                GridView1.PageIndex = pagina - 1;
+                GridView1.DataSource = Resul;
+                GridView1.DataBind();
+                return Resul.Count();
+            }
+            
         }
 
     }
@@ -133,7 +149,8 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
             TxtApellido.Text.Trim() == "" &&
-            TxtSegundoApellido.Text.Trim() == ""))
+            TxtSegundoApellido.Text.Trim() == "" &&
+            TxtExpediente.Text.Trim() == ""))
         {
             Session["TxtNroSeguroSocial"] = TxtNroSeguroSocial.Text.Trim();          
             Session["TxtFechaNacimiento"] = TxtFechaNacimiento.Text.Trim();
@@ -141,6 +158,7 @@ public partial class recaudos_resultados_busqueda : System.Web.UI.Page
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
+            Session["TxtExpediente"] = TxtExpediente.Text.Trim();
         }
 
         Response.Redirect("recaudos-resultados-busqueda.aspx", false);

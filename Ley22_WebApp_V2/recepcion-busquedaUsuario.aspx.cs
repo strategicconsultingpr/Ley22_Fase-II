@@ -91,20 +91,36 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             //                                         FechaNac,
             //                                         Session["TxtNombreyApellido"].ToString()).ToList ()
             //                                         ;
-            
-            List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
+            if(Session["TxtExpediente"].ToString() != "")
+            {
+                List<BusquedaSencilladePersonasRecepcionExpediente_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcionExpediente(idPrograma, Session["TxtExpediente"].ToString()).ToList();
+
+                //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+                //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
+                LitCantidadUsuarios.Text = Resul.Count.ToString();
+
+                GridView1.PageIndex = pagina - 1;
+                GridView1.DataSource = Resul;
+                GridView1.DataBind();
+                return Resul.Count();
+            }
+            else
+            {
+                List<BusquedaSencilladePersonasRecepcion_Result> Resul = ml22e.BusquedaSencilladePersonasRecepcion(Session["TxtNroSeguroSocial"].ToString(),
                                                                      Session["TxtIdentificacion"].ToString(), FechaNac,
                                                                      Session["TxtNombre"].ToString(), Session["TxtApellido"].ToString(), Session["TxtSegundoApellido"].ToString(),
                                                                      idPrograma).ToList();
 
-            //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
-            //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
-            LitCantidadUsuarios.Text = Resul.Count.ToString();
-                  
-            GridView1.PageIndex = pagina - 1; 
-            GridView1.DataSource = Resul;
-            GridView1.DataBind();
-            return Resul.Count();
+                //var Expedientes = dsPerfil.SA_PERSONA_PROGRAMA.Where(a => a.FK_Programa.Equals(idPrograma)).Select(p => p.FK_Persona).Cast<int?>().ToList();
+                //var Resul = Result.Where(a => Expedientes.Contains(a.PK_Persona)).ToList();
+                LitCantidadUsuarios.Text = Resul.Count.ToString();
+
+                GridView1.PageIndex = pagina - 1;
+                GridView1.DataSource = Resul;
+                GridView1.DataBind();
+                return Resul.Count();
+            }
+            
         }
 
     }
@@ -151,7 +167,8 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
             TxtApellido.Text.Trim() == "" &&
-            TxtSegundoApellido.Text.Trim() == ""))
+            TxtSegundoApellido.Text.Trim() == "" &&
+            TxtExpediente.Text.Trim() == ""))
         {
 
 
@@ -162,6 +179,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
             Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim();
+            Session["TxtExpediente"] = TxtExpediente.Text.Trim();
         }
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

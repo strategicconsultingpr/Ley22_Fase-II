@@ -99,7 +99,8 @@ public partial class Entrada : System.Web.UI.Page
             TxtFechaNacimiento.Text.Trim() == "" &&
             TxtNombre.Text.Trim() == "" &&
             TxtApellido.Text.Trim() == "" &&
-            TxtSegundoApellido.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
+            TxtSegundoApellido.Text.Trim() == "" &&
+            TxtExpediente.Text.Trim() == "")) {Response.Redirect("entrada.aspx", false); }
 
         else
         { 
@@ -109,7 +110,8 @@ public partial class Entrada : System.Web.UI.Page
             Session["TxtNombre"] = TxtNombre.Text.Trim();
             Session["TxtApellido"] = TxtApellido.Text.Trim();
             Session["TxtSegundoApellido"] = TxtSegundoApellido.Text.Trim();
-            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim(); 
+            Session["TxtNombreyApellido"] = TxtNombre.Text.Trim() + ' ' + TxtApellido.Text.Trim() + ' ' + TxtSegundoApellido.Text.Trim();
+            Session["TxtExpediente"] = TxtExpediente.Text.Trim();
 
 
             Response.Redirect("recepcion-busquedaUsuario.aspx", false);

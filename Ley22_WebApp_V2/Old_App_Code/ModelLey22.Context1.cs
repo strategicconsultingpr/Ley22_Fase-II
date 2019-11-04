@@ -50,9 +50,9 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<Tribunal> Tribunals { get; set; }
         public virtual DbSet<DesempleoRazon> DesempleoRazons { get; set; }
         public virtual DbSet<TS_Excepciones> TS_Excepciones { get; set; }
-        public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
         public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<ControldePago> ControldePagoes { get; set; }
+        public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -815,151 +815,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CerrarCasoCriminal", id_CasoCriminalParameter, id_MotivoCierreParameter, comentarioCierreParameter, documentoAprobacionParameter, id_UsuarioCierreParameter);
         }
     
-        public virtual int GuardarCasoCriminal(Nullable<int> id_Participante, string numeroCasoCriminal, Nullable<System.DateTime> fechaOrden, Nullable<System.DateTime> fechaSentencia, string alcohol, Nullable<int> fK_Tribunal, string nB_Juez, string id_UsuarioCreacion, Nullable<int> fK_Programa, Nullable<int> numLicencia, Nullable<int> fK_EstadoCivil, string email, string telCelular, string telHogar, string telTrabajo, string direccionLinea1, string direccionLinea2, Nullable<int> fK_Pueblo, string codigoPostal, string direccionLinea1Postal, string direccionLinea2Postal, Nullable<int> fK_PuebloPostal, string codigoPostalPostal, Nullable<int> fK_PlanMedico, string condicionSalud, string impedimento, Nullable<int> fK_Grado, string lugarTrabajo, string ocupacion, Nullable<byte> veterano, Nullable<int> fK_DesempleoRazon, Nullable<int> cantidadFamilia, string nB_Pareja, string nB_Padre, string nB_Madre)
-        {
-            var id_ParticipanteParameter = id_Participante.HasValue ?
-                new ObjectParameter("Id_Participante", id_Participante) :
-                new ObjectParameter("Id_Participante", typeof(int));
-    
-            var numeroCasoCriminalParameter = numeroCasoCriminal != null ?
-                new ObjectParameter("NumeroCasoCriminal", numeroCasoCriminal) :
-                new ObjectParameter("NumeroCasoCriminal", typeof(string));
-    
-            var fechaOrdenParameter = fechaOrden.HasValue ?
-                new ObjectParameter("FechaOrden", fechaOrden) :
-                new ObjectParameter("FechaOrden", typeof(System.DateTime));
-    
-            var fechaSentenciaParameter = fechaSentencia.HasValue ?
-                new ObjectParameter("FechaSentencia", fechaSentencia) :
-                new ObjectParameter("FechaSentencia", typeof(System.DateTime));
-    
-            var alcoholParameter = alcohol != null ?
-                new ObjectParameter("Alcohol", alcohol) :
-                new ObjectParameter("Alcohol", typeof(string));
-    
-            var fK_TribunalParameter = fK_Tribunal.HasValue ?
-                new ObjectParameter("FK_Tribunal", fK_Tribunal) :
-                new ObjectParameter("FK_Tribunal", typeof(int));
-    
-            var nB_JuezParameter = nB_Juez != null ?
-                new ObjectParameter("NB_Juez", nB_Juez) :
-                new ObjectParameter("NB_Juez", typeof(string));
-    
-            var id_UsuarioCreacionParameter = id_UsuarioCreacion != null ?
-                new ObjectParameter("Id_UsuarioCreacion", id_UsuarioCreacion) :
-                new ObjectParameter("Id_UsuarioCreacion", typeof(string));
-    
-            var fK_ProgramaParameter = fK_Programa.HasValue ?
-                new ObjectParameter("FK_Programa", fK_Programa) :
-                new ObjectParameter("FK_Programa", typeof(int));
-    
-            var numLicenciaParameter = numLicencia.HasValue ?
-                new ObjectParameter("NumLicencia", numLicencia) :
-                new ObjectParameter("NumLicencia", typeof(int));
-    
-            var fK_EstadoCivilParameter = fK_EstadoCivil.HasValue ?
-                new ObjectParameter("FK_EstadoCivil", fK_EstadoCivil) :
-                new ObjectParameter("FK_EstadoCivil", typeof(int));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var telCelularParameter = telCelular != null ?
-                new ObjectParameter("TelCelular", telCelular) :
-                new ObjectParameter("TelCelular", typeof(string));
-    
-            var telHogarParameter = telHogar != null ?
-                new ObjectParameter("TelHogar", telHogar) :
-                new ObjectParameter("TelHogar", typeof(string));
-    
-            var telTrabajoParameter = telTrabajo != null ?
-                new ObjectParameter("TelTrabajo", telTrabajo) :
-                new ObjectParameter("TelTrabajo", typeof(string));
-    
-            var direccionLinea1Parameter = direccionLinea1 != null ?
-                new ObjectParameter("DireccionLinea1", direccionLinea1) :
-                new ObjectParameter("DireccionLinea1", typeof(string));
-    
-            var direccionLinea2Parameter = direccionLinea2 != null ?
-                new ObjectParameter("DireccionLinea2", direccionLinea2) :
-                new ObjectParameter("DireccionLinea2", typeof(string));
-    
-            var fK_PuebloParameter = fK_Pueblo.HasValue ?
-                new ObjectParameter("FK_Pueblo", fK_Pueblo) :
-                new ObjectParameter("FK_Pueblo", typeof(int));
-    
-            var codigoPostalParameter = codigoPostal != null ?
-                new ObjectParameter("CodigoPostal", codigoPostal) :
-                new ObjectParameter("CodigoPostal", typeof(string));
-    
-            var direccionLinea1PostalParameter = direccionLinea1Postal != null ?
-                new ObjectParameter("DireccionLinea1Postal", direccionLinea1Postal) :
-                new ObjectParameter("DireccionLinea1Postal", typeof(string));
-    
-            var direccionLinea2PostalParameter = direccionLinea2Postal != null ?
-                new ObjectParameter("DireccionLinea2Postal", direccionLinea2Postal) :
-                new ObjectParameter("DireccionLinea2Postal", typeof(string));
-    
-            var fK_PuebloPostalParameter = fK_PuebloPostal.HasValue ?
-                new ObjectParameter("FK_PuebloPostal", fK_PuebloPostal) :
-                new ObjectParameter("FK_PuebloPostal", typeof(int));
-    
-            var codigoPostalPostalParameter = codigoPostalPostal != null ?
-                new ObjectParameter("CodigoPostalPostal", codigoPostalPostal) :
-                new ObjectParameter("CodigoPostalPostal", typeof(string));
-    
-            var fK_PlanMedicoParameter = fK_PlanMedico.HasValue ?
-                new ObjectParameter("FK_PlanMedico", fK_PlanMedico) :
-                new ObjectParameter("FK_PlanMedico", typeof(int));
-    
-            var condicionSaludParameter = condicionSalud != null ?
-                new ObjectParameter("CondicionSalud", condicionSalud) :
-                new ObjectParameter("CondicionSalud", typeof(string));
-    
-            var impedimentoParameter = impedimento != null ?
-                new ObjectParameter("Impedimento", impedimento) :
-                new ObjectParameter("Impedimento", typeof(string));
-    
-            var fK_GradoParameter = fK_Grado.HasValue ?
-                new ObjectParameter("FK_Grado", fK_Grado) :
-                new ObjectParameter("FK_Grado", typeof(int));
-    
-            var lugarTrabajoParameter = lugarTrabajo != null ?
-                new ObjectParameter("LugarTrabajo", lugarTrabajo) :
-                new ObjectParameter("LugarTrabajo", typeof(string));
-    
-            var ocupacionParameter = ocupacion != null ?
-                new ObjectParameter("Ocupacion", ocupacion) :
-                new ObjectParameter("Ocupacion", typeof(string));
-    
-            var veteranoParameter = veterano.HasValue ?
-                new ObjectParameter("Veterano", veterano) :
-                new ObjectParameter("Veterano", typeof(byte));
-    
-            var fK_DesempleoRazonParameter = fK_DesempleoRazon.HasValue ?
-                new ObjectParameter("FK_DesempleoRazon", fK_DesempleoRazon) :
-                new ObjectParameter("FK_DesempleoRazon", typeof(int));
-    
-            var cantidadFamiliaParameter = cantidadFamilia.HasValue ?
-                new ObjectParameter("CantidadFamilia", cantidadFamilia) :
-                new ObjectParameter("CantidadFamilia", typeof(int));
-    
-            var nB_ParejaParameter = nB_Pareja != null ?
-                new ObjectParameter("NB_Pareja", nB_Pareja) :
-                new ObjectParameter("NB_Pareja", typeof(string));
-    
-            var nB_PadreParameter = nB_Padre != null ?
-                new ObjectParameter("NB_Padre", nB_Padre) :
-                new ObjectParameter("NB_Padre", typeof(string));
-    
-            var nB_MadreParameter = nB_Madre != null ?
-                new ObjectParameter("NB_Madre", nB_Madre) :
-                new ObjectParameter("NB_Madre", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCasoCriminal", id_ParticipanteParameter, numeroCasoCriminalParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, id_UsuarioCreacionParameter, fK_ProgramaParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
-        }
-    
         public virtual ObjectResult<ConsultarCasosXPersona_Result> ConsultarCasosXPersona(Nullable<int> pk_Persona)
         {
             var pk_PersonaParameter = pk_Persona.HasValue ?
@@ -967,143 +822,6 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Pk_Persona", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarCasosXPersona_Result>("ConsultarCasosXPersona", pk_PersonaParameter);
-        }
-    
-        public virtual int ModificarCasoCriminal(Nullable<int> id_CasoCriminal, string numeroCasoCriminal, Nullable<System.DateTime> fechaOrden, Nullable<System.DateTime> fechaSentencia, string alcohol, Nullable<int> fK_Tribunal, string nB_Juez, Nullable<int> numLicencia, Nullable<int> fK_EstadoCivil, string email, string telCelular, string telHogar, string telTrabajo, string direccionLinea1, string direccionLinea2, Nullable<int> fK_Pueblo, string codigoPostal, string direccionLinea1Postal, string direccionLinea2Postal, Nullable<int> fK_PuebloPostal, string codigoPostalPostal, Nullable<int> fK_PlanMedico, string condicionSalud, string impedimento, Nullable<int> fK_Grado, string lugarTrabajo, string ocupacion, Nullable<byte> veterano, Nullable<int> fK_DesempleoRazon, Nullable<int> cantidadFamilia, string nB_Pareja, string nB_Padre, string nB_Madre)
-        {
-            var id_CasoCriminalParameter = id_CasoCriminal.HasValue ?
-                new ObjectParameter("Id_CasoCriminal", id_CasoCriminal) :
-                new ObjectParameter("Id_CasoCriminal", typeof(int));
-    
-            var numeroCasoCriminalParameter = numeroCasoCriminal != null ?
-                new ObjectParameter("NumeroCasoCriminal", numeroCasoCriminal) :
-                new ObjectParameter("NumeroCasoCriminal", typeof(string));
-    
-            var fechaOrdenParameter = fechaOrden.HasValue ?
-                new ObjectParameter("FechaOrden", fechaOrden) :
-                new ObjectParameter("FechaOrden", typeof(System.DateTime));
-    
-            var fechaSentenciaParameter = fechaSentencia.HasValue ?
-                new ObjectParameter("FechaSentencia", fechaSentencia) :
-                new ObjectParameter("FechaSentencia", typeof(System.DateTime));
-    
-            var alcoholParameter = alcohol != null ?
-                new ObjectParameter("Alcohol", alcohol) :
-                new ObjectParameter("Alcohol", typeof(string));
-    
-            var fK_TribunalParameter = fK_Tribunal.HasValue ?
-                new ObjectParameter("FK_Tribunal", fK_Tribunal) :
-                new ObjectParameter("FK_Tribunal", typeof(int));
-    
-            var nB_JuezParameter = nB_Juez != null ?
-                new ObjectParameter("NB_Juez", nB_Juez) :
-                new ObjectParameter("NB_Juez", typeof(string));
-    
-            var numLicenciaParameter = numLicencia.HasValue ?
-                new ObjectParameter("NumLicencia", numLicencia) :
-                new ObjectParameter("NumLicencia", typeof(int));
-    
-            var fK_EstadoCivilParameter = fK_EstadoCivil.HasValue ?
-                new ObjectParameter("FK_EstadoCivil", fK_EstadoCivil) :
-                new ObjectParameter("FK_EstadoCivil", typeof(int));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var telCelularParameter = telCelular != null ?
-                new ObjectParameter("TelCelular", telCelular) :
-                new ObjectParameter("TelCelular", typeof(string));
-    
-            var telHogarParameter = telHogar != null ?
-                new ObjectParameter("TelHogar", telHogar) :
-                new ObjectParameter("TelHogar", typeof(string));
-    
-            var telTrabajoParameter = telTrabajo != null ?
-                new ObjectParameter("TelTrabajo", telTrabajo) :
-                new ObjectParameter("TelTrabajo", typeof(string));
-    
-            var direccionLinea1Parameter = direccionLinea1 != null ?
-                new ObjectParameter("DireccionLinea1", direccionLinea1) :
-                new ObjectParameter("DireccionLinea1", typeof(string));
-    
-            var direccionLinea2Parameter = direccionLinea2 != null ?
-                new ObjectParameter("DireccionLinea2", direccionLinea2) :
-                new ObjectParameter("DireccionLinea2", typeof(string));
-    
-            var fK_PuebloParameter = fK_Pueblo.HasValue ?
-                new ObjectParameter("FK_Pueblo", fK_Pueblo) :
-                new ObjectParameter("FK_Pueblo", typeof(int));
-    
-            var codigoPostalParameter = codigoPostal != null ?
-                new ObjectParameter("CodigoPostal", codigoPostal) :
-                new ObjectParameter("CodigoPostal", typeof(string));
-    
-            var direccionLinea1PostalParameter = direccionLinea1Postal != null ?
-                new ObjectParameter("DireccionLinea1Postal", direccionLinea1Postal) :
-                new ObjectParameter("DireccionLinea1Postal", typeof(string));
-    
-            var direccionLinea2PostalParameter = direccionLinea2Postal != null ?
-                new ObjectParameter("DireccionLinea2Postal", direccionLinea2Postal) :
-                new ObjectParameter("DireccionLinea2Postal", typeof(string));
-    
-            var fK_PuebloPostalParameter = fK_PuebloPostal.HasValue ?
-                new ObjectParameter("FK_PuebloPostal", fK_PuebloPostal) :
-                new ObjectParameter("FK_PuebloPostal", typeof(int));
-    
-            var codigoPostalPostalParameter = codigoPostalPostal != null ?
-                new ObjectParameter("CodigoPostalPostal", codigoPostalPostal) :
-                new ObjectParameter("CodigoPostalPostal", typeof(string));
-    
-            var fK_PlanMedicoParameter = fK_PlanMedico.HasValue ?
-                new ObjectParameter("FK_PlanMedico", fK_PlanMedico) :
-                new ObjectParameter("FK_PlanMedico", typeof(int));
-    
-            var condicionSaludParameter = condicionSalud != null ?
-                new ObjectParameter("CondicionSalud", condicionSalud) :
-                new ObjectParameter("CondicionSalud", typeof(string));
-    
-            var impedimentoParameter = impedimento != null ?
-                new ObjectParameter("Impedimento", impedimento) :
-                new ObjectParameter("Impedimento", typeof(string));
-    
-            var fK_GradoParameter = fK_Grado.HasValue ?
-                new ObjectParameter("FK_Grado", fK_Grado) :
-                new ObjectParameter("FK_Grado", typeof(int));
-    
-            var lugarTrabajoParameter = lugarTrabajo != null ?
-                new ObjectParameter("LugarTrabajo", lugarTrabajo) :
-                new ObjectParameter("LugarTrabajo", typeof(string));
-    
-            var ocupacionParameter = ocupacion != null ?
-                new ObjectParameter("Ocupacion", ocupacion) :
-                new ObjectParameter("Ocupacion", typeof(string));
-    
-            var veteranoParameter = veterano.HasValue ?
-                new ObjectParameter("Veterano", veterano) :
-                new ObjectParameter("Veterano", typeof(byte));
-    
-            var fK_DesempleoRazonParameter = fK_DesempleoRazon.HasValue ?
-                new ObjectParameter("FK_DesempleoRazon", fK_DesempleoRazon) :
-                new ObjectParameter("FK_DesempleoRazon", typeof(int));
-    
-            var cantidadFamiliaParameter = cantidadFamilia.HasValue ?
-                new ObjectParameter("CantidadFamilia", cantidadFamilia) :
-                new ObjectParameter("CantidadFamilia", typeof(int));
-    
-            var nB_ParejaParameter = nB_Pareja != null ?
-                new ObjectParameter("NB_Pareja", nB_Pareja) :
-                new ObjectParameter("NB_Pareja", typeof(string));
-    
-            var nB_PadreParameter = nB_Padre != null ?
-                new ObjectParameter("NB_Padre", nB_Padre) :
-                new ObjectParameter("NB_Padre", typeof(string));
-    
-            var nB_MadreParameter = nB_Madre != null ?
-                new ObjectParameter("NB_Madre", nB_Madre) :
-                new ObjectParameter("NB_Madre", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCasoCriminal", id_CasoCriminalParameter, numeroCasoCriminalParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
         }
     
         public virtual ObjectResult<BusquedaSencilladePersonasRecepcion_Result> BusquedaSencilladePersonasRecepcion(string nR_SeguroSocial, string identificacion, Nullable<System.DateTime> fE_Nacimiento, string nombre, string apellido, string segundoApellido, Nullable<short> fK_Programa)
@@ -1416,6 +1134,369 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_CasoCriminal", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocumentosRecibidosCasoCriminal_Result>("ListarDocumentosRecibidosCasoCriminal", id_ParticipanteParameter, id_ProgramaParameter, id_CasoCriminalParameter);
+        }
+    
+        public virtual ObjectResult<BusquedaSencilladePersonasRecepcionExpediente_Result> BusquedaSencilladePersonasRecepcionExpediente(Nullable<short> fK_Programa, string nR_Expediente)
+        {
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(short));
+    
+            var nR_ExpedienteParameter = nR_Expediente != null ?
+                new ObjectParameter("NR_Expediente", nR_Expediente) :
+                new ObjectParameter("NR_Expediente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BusquedaSencilladePersonasRecepcionExpediente_Result>("BusquedaSencilladePersonasRecepcionExpediente", fK_ProgramaParameter, nR_ExpedienteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ListarAsistenciaCharlasImpacto(Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ListarAsistenciaCharlasImpacto", id_ParticipanteParameter, id_OrdenJudicialParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ListarAsistenciaCharlasRegulares(Nullable<int> id_Participante, Nullable<int> id_OrdenJudicial)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var id_OrdenJudicialParameter = id_OrdenJudicial.HasValue ?
+                new ObjectParameter("Id_OrdenJudicial", id_OrdenJudicial) :
+                new ObjectParameter("Id_OrdenJudicial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ListarAsistenciaCharlasRegulares", id_ParticipanteParameter, id_OrdenJudicialParameter);
+        }
+    
+        public virtual int GuardarCasoCriminal(Nullable<int> id_Participante, string numeroCasoCriminal, string numeroCasoCriminalDos, string numeroCasoCriminalTres, Nullable<System.DateTime> fechaOrden, Nullable<System.DateTime> fechaSentencia, string alcohol, Nullable<int> fK_Tribunal, string nB_Juez, string id_UsuarioCreacion, Nullable<int> fK_Programa, Nullable<int> numLicencia, Nullable<int> fK_EstadoCivil, string email, string telCelular, string telHogar, string telTrabajo, string direccionLinea1, string direccionLinea2, Nullable<int> fK_Pueblo, string codigoPostal, string direccionLinea1Postal, string direccionLinea2Postal, Nullable<int> fK_PuebloPostal, string codigoPostalPostal, Nullable<int> fK_PlanMedico, string condicionSalud, string impedimento, Nullable<int> fK_Grado, string lugarTrabajo, string ocupacion, Nullable<byte> veterano, Nullable<int> fK_DesempleoRazon, Nullable<int> cantidadFamilia, string nB_Pareja, string nB_Padre, string nB_Madre)
+        {
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var numeroCasoCriminalParameter = numeroCasoCriminal != null ?
+                new ObjectParameter("NumeroCasoCriminal", numeroCasoCriminal) :
+                new ObjectParameter("NumeroCasoCriminal", typeof(string));
+    
+            var numeroCasoCriminalDosParameter = numeroCasoCriminalDos != null ?
+                new ObjectParameter("NumeroCasoCriminalDos", numeroCasoCriminalDos) :
+                new ObjectParameter("NumeroCasoCriminalDos", typeof(string));
+    
+            var numeroCasoCriminalTresParameter = numeroCasoCriminalTres != null ?
+                new ObjectParameter("NumeroCasoCriminalTres", numeroCasoCriminalTres) :
+                new ObjectParameter("NumeroCasoCriminalTres", typeof(string));
+    
+            var fechaOrdenParameter = fechaOrden.HasValue ?
+                new ObjectParameter("FechaOrden", fechaOrden) :
+                new ObjectParameter("FechaOrden", typeof(System.DateTime));
+    
+            var fechaSentenciaParameter = fechaSentencia.HasValue ?
+                new ObjectParameter("FechaSentencia", fechaSentencia) :
+                new ObjectParameter("FechaSentencia", typeof(System.DateTime));
+    
+            var alcoholParameter = alcohol != null ?
+                new ObjectParameter("Alcohol", alcohol) :
+                new ObjectParameter("Alcohol", typeof(string));
+    
+            var fK_TribunalParameter = fK_Tribunal.HasValue ?
+                new ObjectParameter("FK_Tribunal", fK_Tribunal) :
+                new ObjectParameter("FK_Tribunal", typeof(int));
+    
+            var nB_JuezParameter = nB_Juez != null ?
+                new ObjectParameter("NB_Juez", nB_Juez) :
+                new ObjectParameter("NB_Juez", typeof(string));
+    
+            var id_UsuarioCreacionParameter = id_UsuarioCreacion != null ?
+                new ObjectParameter("Id_UsuarioCreacion", id_UsuarioCreacion) :
+                new ObjectParameter("Id_UsuarioCreacion", typeof(string));
+    
+            var fK_ProgramaParameter = fK_Programa.HasValue ?
+                new ObjectParameter("FK_Programa", fK_Programa) :
+                new ObjectParameter("FK_Programa", typeof(int));
+    
+            var numLicenciaParameter = numLicencia.HasValue ?
+                new ObjectParameter("NumLicencia", numLicencia) :
+                new ObjectParameter("NumLicencia", typeof(int));
+    
+            var fK_EstadoCivilParameter = fK_EstadoCivil.HasValue ?
+                new ObjectParameter("FK_EstadoCivil", fK_EstadoCivil) :
+                new ObjectParameter("FK_EstadoCivil", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var telCelularParameter = telCelular != null ?
+                new ObjectParameter("TelCelular", telCelular) :
+                new ObjectParameter("TelCelular", typeof(string));
+    
+            var telHogarParameter = telHogar != null ?
+                new ObjectParameter("TelHogar", telHogar) :
+                new ObjectParameter("TelHogar", typeof(string));
+    
+            var telTrabajoParameter = telTrabajo != null ?
+                new ObjectParameter("TelTrabajo", telTrabajo) :
+                new ObjectParameter("TelTrabajo", typeof(string));
+    
+            var direccionLinea1Parameter = direccionLinea1 != null ?
+                new ObjectParameter("DireccionLinea1", direccionLinea1) :
+                new ObjectParameter("DireccionLinea1", typeof(string));
+    
+            var direccionLinea2Parameter = direccionLinea2 != null ?
+                new ObjectParameter("DireccionLinea2", direccionLinea2) :
+                new ObjectParameter("DireccionLinea2", typeof(string));
+    
+            var fK_PuebloParameter = fK_Pueblo.HasValue ?
+                new ObjectParameter("FK_Pueblo", fK_Pueblo) :
+                new ObjectParameter("FK_Pueblo", typeof(int));
+    
+            var codigoPostalParameter = codigoPostal != null ?
+                new ObjectParameter("CodigoPostal", codigoPostal) :
+                new ObjectParameter("CodigoPostal", typeof(string));
+    
+            var direccionLinea1PostalParameter = direccionLinea1Postal != null ?
+                new ObjectParameter("DireccionLinea1Postal", direccionLinea1Postal) :
+                new ObjectParameter("DireccionLinea1Postal", typeof(string));
+    
+            var direccionLinea2PostalParameter = direccionLinea2Postal != null ?
+                new ObjectParameter("DireccionLinea2Postal", direccionLinea2Postal) :
+                new ObjectParameter("DireccionLinea2Postal", typeof(string));
+    
+            var fK_PuebloPostalParameter = fK_PuebloPostal.HasValue ?
+                new ObjectParameter("FK_PuebloPostal", fK_PuebloPostal) :
+                new ObjectParameter("FK_PuebloPostal", typeof(int));
+    
+            var codigoPostalPostalParameter = codigoPostalPostal != null ?
+                new ObjectParameter("CodigoPostalPostal", codigoPostalPostal) :
+                new ObjectParameter("CodigoPostalPostal", typeof(string));
+    
+            var fK_PlanMedicoParameter = fK_PlanMedico.HasValue ?
+                new ObjectParameter("FK_PlanMedico", fK_PlanMedico) :
+                new ObjectParameter("FK_PlanMedico", typeof(int));
+    
+            var condicionSaludParameter = condicionSalud != null ?
+                new ObjectParameter("CondicionSalud", condicionSalud) :
+                new ObjectParameter("CondicionSalud", typeof(string));
+    
+            var impedimentoParameter = impedimento != null ?
+                new ObjectParameter("Impedimento", impedimento) :
+                new ObjectParameter("Impedimento", typeof(string));
+    
+            var fK_GradoParameter = fK_Grado.HasValue ?
+                new ObjectParameter("FK_Grado", fK_Grado) :
+                new ObjectParameter("FK_Grado", typeof(int));
+    
+            var lugarTrabajoParameter = lugarTrabajo != null ?
+                new ObjectParameter("LugarTrabajo", lugarTrabajo) :
+                new ObjectParameter("LugarTrabajo", typeof(string));
+    
+            var ocupacionParameter = ocupacion != null ?
+                new ObjectParameter("Ocupacion", ocupacion) :
+                new ObjectParameter("Ocupacion", typeof(string));
+    
+            var veteranoParameter = veterano.HasValue ?
+                new ObjectParameter("Veterano", veterano) :
+                new ObjectParameter("Veterano", typeof(byte));
+    
+            var fK_DesempleoRazonParameter = fK_DesempleoRazon.HasValue ?
+                new ObjectParameter("FK_DesempleoRazon", fK_DesempleoRazon) :
+                new ObjectParameter("FK_DesempleoRazon", typeof(int));
+    
+            var cantidadFamiliaParameter = cantidadFamilia.HasValue ?
+                new ObjectParameter("CantidadFamilia", cantidadFamilia) :
+                new ObjectParameter("CantidadFamilia", typeof(int));
+    
+            var nB_ParejaParameter = nB_Pareja != null ?
+                new ObjectParameter("NB_Pareja", nB_Pareja) :
+                new ObjectParameter("NB_Pareja", typeof(string));
+    
+            var nB_PadreParameter = nB_Padre != null ?
+                new ObjectParameter("NB_Padre", nB_Padre) :
+                new ObjectParameter("NB_Padre", typeof(string));
+    
+            var nB_MadreParameter = nB_Madre != null ?
+                new ObjectParameter("NB_Madre", nB_Madre) :
+                new ObjectParameter("NB_Madre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarCasoCriminal", id_ParticipanteParameter, numeroCasoCriminalParameter, numeroCasoCriminalDosParameter, numeroCasoCriminalTresParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, id_UsuarioCreacionParameter, fK_ProgramaParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
+        }
+    
+        public virtual int ModificarCasoCriminal(Nullable<int> id_CasoCriminal, string numeroCasoCriminal, string numeroCasoCriminalDos, string numeroCasoCriminalTres, Nullable<System.DateTime> fechaOrden, Nullable<System.DateTime> fechaSentencia, string alcohol, Nullable<int> fK_Tribunal, string nB_Juez, Nullable<int> numLicencia, Nullable<int> fK_EstadoCivil, string email, string telCelular, string telHogar, string telTrabajo, string direccionLinea1, string direccionLinea2, Nullable<int> fK_Pueblo, string codigoPostal, string direccionLinea1Postal, string direccionLinea2Postal, Nullable<int> fK_PuebloPostal, string codigoPostalPostal, Nullable<int> fK_PlanMedico, string condicionSalud, string impedimento, Nullable<int> fK_Grado, string lugarTrabajo, string ocupacion, Nullable<byte> veterano, Nullable<int> fK_DesempleoRazon, Nullable<int> cantidadFamilia, string nB_Pareja, string nB_Padre, string nB_Madre)
+        {
+            var id_CasoCriminalParameter = id_CasoCriminal.HasValue ?
+                new ObjectParameter("Id_CasoCriminal", id_CasoCriminal) :
+                new ObjectParameter("Id_CasoCriminal", typeof(int));
+    
+            var numeroCasoCriminalParameter = numeroCasoCriminal != null ?
+                new ObjectParameter("NumeroCasoCriminal", numeroCasoCriminal) :
+                new ObjectParameter("NumeroCasoCriminal", typeof(string));
+    
+            var numeroCasoCriminalDosParameter = numeroCasoCriminalDos != null ?
+                new ObjectParameter("NumeroCasoCriminalDos", numeroCasoCriminalDos) :
+                new ObjectParameter("NumeroCasoCriminalDos", typeof(string));
+    
+            var numeroCasoCriminalTresParameter = numeroCasoCriminalTres != null ?
+                new ObjectParameter("NumeroCasoCriminalTres", numeroCasoCriminalTres) :
+                new ObjectParameter("NumeroCasoCriminalTres", typeof(string));
+    
+            var fechaOrdenParameter = fechaOrden.HasValue ?
+                new ObjectParameter("FechaOrden", fechaOrden) :
+                new ObjectParameter("FechaOrden", typeof(System.DateTime));
+    
+            var fechaSentenciaParameter = fechaSentencia.HasValue ?
+                new ObjectParameter("FechaSentencia", fechaSentencia) :
+                new ObjectParameter("FechaSentencia", typeof(System.DateTime));
+    
+            var alcoholParameter = alcohol != null ?
+                new ObjectParameter("Alcohol", alcohol) :
+                new ObjectParameter("Alcohol", typeof(string));
+    
+            var fK_TribunalParameter = fK_Tribunal.HasValue ?
+                new ObjectParameter("FK_Tribunal", fK_Tribunal) :
+                new ObjectParameter("FK_Tribunal", typeof(int));
+    
+            var nB_JuezParameter = nB_Juez != null ?
+                new ObjectParameter("NB_Juez", nB_Juez) :
+                new ObjectParameter("NB_Juez", typeof(string));
+    
+            var numLicenciaParameter = numLicencia.HasValue ?
+                new ObjectParameter("NumLicencia", numLicencia) :
+                new ObjectParameter("NumLicencia", typeof(int));
+    
+            var fK_EstadoCivilParameter = fK_EstadoCivil.HasValue ?
+                new ObjectParameter("FK_EstadoCivil", fK_EstadoCivil) :
+                new ObjectParameter("FK_EstadoCivil", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var telCelularParameter = telCelular != null ?
+                new ObjectParameter("TelCelular", telCelular) :
+                new ObjectParameter("TelCelular", typeof(string));
+    
+            var telHogarParameter = telHogar != null ?
+                new ObjectParameter("TelHogar", telHogar) :
+                new ObjectParameter("TelHogar", typeof(string));
+    
+            var telTrabajoParameter = telTrabajo != null ?
+                new ObjectParameter("TelTrabajo", telTrabajo) :
+                new ObjectParameter("TelTrabajo", typeof(string));
+    
+            var direccionLinea1Parameter = direccionLinea1 != null ?
+                new ObjectParameter("DireccionLinea1", direccionLinea1) :
+                new ObjectParameter("DireccionLinea1", typeof(string));
+    
+            var direccionLinea2Parameter = direccionLinea2 != null ?
+                new ObjectParameter("DireccionLinea2", direccionLinea2) :
+                new ObjectParameter("DireccionLinea2", typeof(string));
+    
+            var fK_PuebloParameter = fK_Pueblo.HasValue ?
+                new ObjectParameter("FK_Pueblo", fK_Pueblo) :
+                new ObjectParameter("FK_Pueblo", typeof(int));
+    
+            var codigoPostalParameter = codigoPostal != null ?
+                new ObjectParameter("CodigoPostal", codigoPostal) :
+                new ObjectParameter("CodigoPostal", typeof(string));
+    
+            var direccionLinea1PostalParameter = direccionLinea1Postal != null ?
+                new ObjectParameter("DireccionLinea1Postal", direccionLinea1Postal) :
+                new ObjectParameter("DireccionLinea1Postal", typeof(string));
+    
+            var direccionLinea2PostalParameter = direccionLinea2Postal != null ?
+                new ObjectParameter("DireccionLinea2Postal", direccionLinea2Postal) :
+                new ObjectParameter("DireccionLinea2Postal", typeof(string));
+    
+            var fK_PuebloPostalParameter = fK_PuebloPostal.HasValue ?
+                new ObjectParameter("FK_PuebloPostal", fK_PuebloPostal) :
+                new ObjectParameter("FK_PuebloPostal", typeof(int));
+    
+            var codigoPostalPostalParameter = codigoPostalPostal != null ?
+                new ObjectParameter("CodigoPostalPostal", codigoPostalPostal) :
+                new ObjectParameter("CodigoPostalPostal", typeof(string));
+    
+            var fK_PlanMedicoParameter = fK_PlanMedico.HasValue ?
+                new ObjectParameter("FK_PlanMedico", fK_PlanMedico) :
+                new ObjectParameter("FK_PlanMedico", typeof(int));
+    
+            var condicionSaludParameter = condicionSalud != null ?
+                new ObjectParameter("CondicionSalud", condicionSalud) :
+                new ObjectParameter("CondicionSalud", typeof(string));
+    
+            var impedimentoParameter = impedimento != null ?
+                new ObjectParameter("Impedimento", impedimento) :
+                new ObjectParameter("Impedimento", typeof(string));
+    
+            var fK_GradoParameter = fK_Grado.HasValue ?
+                new ObjectParameter("FK_Grado", fK_Grado) :
+                new ObjectParameter("FK_Grado", typeof(int));
+    
+            var lugarTrabajoParameter = lugarTrabajo != null ?
+                new ObjectParameter("LugarTrabajo", lugarTrabajo) :
+                new ObjectParameter("LugarTrabajo", typeof(string));
+    
+            var ocupacionParameter = ocupacion != null ?
+                new ObjectParameter("Ocupacion", ocupacion) :
+                new ObjectParameter("Ocupacion", typeof(string));
+    
+            var veteranoParameter = veterano.HasValue ?
+                new ObjectParameter("Veterano", veterano) :
+                new ObjectParameter("Veterano", typeof(byte));
+    
+            var fK_DesempleoRazonParameter = fK_DesempleoRazon.HasValue ?
+                new ObjectParameter("FK_DesempleoRazon", fK_DesempleoRazon) :
+                new ObjectParameter("FK_DesempleoRazon", typeof(int));
+    
+            var cantidadFamiliaParameter = cantidadFamilia.HasValue ?
+                new ObjectParameter("CantidadFamilia", cantidadFamilia) :
+                new ObjectParameter("CantidadFamilia", typeof(int));
+    
+            var nB_ParejaParameter = nB_Pareja != null ?
+                new ObjectParameter("NB_Pareja", nB_Pareja) :
+                new ObjectParameter("NB_Pareja", typeof(string));
+    
+            var nB_PadreParameter = nB_Padre != null ?
+                new ObjectParameter("NB_Padre", nB_Padre) :
+                new ObjectParameter("NB_Padre", typeof(string));
+    
+            var nB_MadreParameter = nB_Madre != null ?
+                new ObjectParameter("NB_Madre", nB_Madre) :
+                new ObjectParameter("NB_Madre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarCasoCriminal", id_CasoCriminalParameter, numeroCasoCriminalParameter, numeroCasoCriminalDosParameter, numeroCasoCriminalTresParameter, fechaOrdenParameter, fechaSentenciaParameter, alcoholParameter, fK_TribunalParameter, nB_JuezParameter, numLicenciaParameter, fK_EstadoCivilParameter, emailParameter, telCelularParameter, telHogarParameter, telTrabajoParameter, direccionLinea1Parameter, direccionLinea2Parameter, fK_PuebloParameter, codigoPostalParameter, direccionLinea1PostalParameter, direccionLinea2PostalParameter, fK_PuebloPostalParameter, codigoPostalPostalParameter, fK_PlanMedicoParameter, condicionSaludParameter, impedimentoParameter, fK_GradoParameter, lugarTrabajoParameter, ocupacionParameter, veteranoParameter, fK_DesempleoRazonParameter, cantidadFamiliaParameter, nB_ParejaParameter, nB_PadreParameter, nB_MadreParameter);
+        }
+    
+        public virtual ObjectResult<ListarParticipantesPorCharlasCasoCriminal_Result> ListarParticipantesPorCharlasCasoCriminal(Nullable<int> id_CharlaGrupal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarParticipantesPorCharlasCasoCriminal_Result>("ListarParticipantesPorCharlasCasoCriminal", id_CharlaGrupalParameter);
+        }
+    
+        public virtual int EliminarParticipanteCharlaGrupalCasoCriminal(Nullable<int> id_CharlaGrupal, Nullable<int> id_Participante, Nullable<int> casoCriminal)
+        {
+            var id_CharlaGrupalParameter = id_CharlaGrupal.HasValue ?
+                new ObjectParameter("Id_CharlaGrupal", id_CharlaGrupal) :
+                new ObjectParameter("Id_CharlaGrupal", typeof(int));
+    
+            var id_ParticipanteParameter = id_Participante.HasValue ?
+                new ObjectParameter("Id_Participante", id_Participante) :
+                new ObjectParameter("Id_Participante", typeof(int));
+    
+            var casoCriminalParameter = casoCriminal.HasValue ?
+                new ObjectParameter("CasoCriminal", casoCriminal) :
+                new ObjectParameter("CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarParticipanteCharlaGrupalCasoCriminal", id_CharlaGrupalParameter, id_ParticipanteParameter, casoCriminalParameter);
         }
     }
 }

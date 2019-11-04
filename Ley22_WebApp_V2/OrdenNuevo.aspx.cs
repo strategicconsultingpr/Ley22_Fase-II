@@ -71,6 +71,17 @@ namespace Ley22_WebApp_V2
                     var CasoExpediente = dsPerfil.SA_PERSONA_PROGRAMA.Where(b => b.FK_Programa.Equals(idPrograma)).Where(c => c.FK_Persona.Equals(sa_persona.PK_Persona)).Select(f => f.NR_Expediente).SingleOrDefault();
                   
                     TxtNroCasoCriminal.Text = caso.NumeroCasoCriminal;
+
+                    if(caso.NumeroCasoCriminalDos != "" && caso.NumeroCasoCriminalDos != null)
+                    {
+                        TxtNroCasoCriminal2.Text = caso.NumeroCasoCriminalDos;
+                        TxtNroCasoCriminal3.Text = caso.NumeroCasoCriminalTres;
+
+                        CasoDos.Attributes.Add("style", "visibility:visible");
+                        CasoTres.Attributes.Add("style", "visibility:visible");
+
+                        ChkCaso.Checked = true;
+                    }
                     TxtExpediente.Text = CasoExpediente;
                     TxtFechaOrden.Text = Convert.ToDateTime(caso.FechaOrden).ToString("MM/dd/yyyy");
                     TxtSentencia.Text = Convert.ToDateTime(caso.FechaSentencia).ToString("MM/dd/yyyy");
@@ -119,6 +130,8 @@ namespace Ley22_WebApp_V2
                     if (!(caso.Activa == 1 && (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor") || userManager.IsInRole(ExistingUser.Id, "TrabajadorSocial") || userManager.IsInRole(ExistingUser.Id, "CoordinadorCharlas") || ts.Days < 8)) || caso.FK_Programa != Convert.ToInt32(Session["Programa"]))
                     {
                         TxtNroCasoCriminal.ReadOnly = true;
+                        TxtNroCasoCriminal2.ReadOnly = true;
+                        TxtNroCasoCriminal3.ReadOnly = true;
                         TxtFechaOrden.ReadOnly = true;
                         TxtSentencia.ReadOnly = true;
                         Txtalcohol.ReadOnly = true;
@@ -237,7 +250,7 @@ namespace Ley22_WebApp_V2
             try
             {
                 using (Ley22Entities mylib = new Ley22Entities())
-                    mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
+                    mylib.GuardarCasoCriminal(Convert.ToInt32(sa_persona.PK_Persona), TxtNroCasoCriminal.Text.ToUpper(), TxtNroCasoCriminal2.Text.ToUpper(), TxtNroCasoCriminal3.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
                         Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
                         ExistingUser.Id, Convert.ToInt32(Session["Programa"]), Convert.ToInt32(TxtLicencia.Text),
                         Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,
@@ -274,7 +287,7 @@ namespace Ley22_WebApp_V2
             try
             {
                 using (Ley22Entities mylib = new Ley22Entities())
-                    mylib.ModificarCasoCriminal(this.Id_Caso, TxtNroCasoCriminal.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
+                    mylib.ModificarCasoCriminal(this.Id_Caso, TxtNroCasoCriminal.Text.ToUpper(), TxtNroCasoCriminal2.Text.ToUpper(), TxtNroCasoCriminal3.Text.ToUpper(), Convert.ToDateTime(TxtFechaOrden.Text),
                         Convert.ToDateTime(TxtSentencia.Text), Txtalcohol.Text, Convert.ToInt32(DdlTribunal.SelectedValue), TxtJuez.Text,
                         Convert.ToInt32(TxtLicencia.Text),
                         Convert.ToInt32(DdlEstadoCivil.SelectedValue), TxtEmail.Text, TxtCelular.Text, TxtTelHogar.Text,

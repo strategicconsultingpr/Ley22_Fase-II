@@ -60,11 +60,9 @@
                         <div class="row">
                             <div class="col-sm-2 offset-sm-1">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Seguro Social</label>
-
-                                    <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="9" ValidationGroup="ValGroup1"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red" Display="Dynamic" ValidationGroup="ValGroup1"></asp:RegularExpressionValidator>
-
+                                    <label for="formGroupExampleInput">Expediente</label>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtExpediente" ForeColor="Red" Display="Dynamic" ValidationGroup="ValGroup1"></asp:RegularExpressionValidator>
+                                    <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 593912684"></asp:TextBox>
                                 </div>
                             </div>
                             <%--<div class="col-md-3">
@@ -90,6 +88,13 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Segundo Apellido</label>
                                     <asp:TextBox ID="TxtSegundoApellido" runat="server" class="form-control" placeholder="Ej. Vazquez"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Seguro Social</label>
+                                    <asp:TextBox ID="TxtNroSeguroSocial" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="9" ValidationGroup="ValGroup1"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtNroSeguroSocial" ForeColor="Red" Display="Dynamic" ValidationGroup="ValGroup1"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
                              <div class="col-sm-2">
@@ -170,6 +175,7 @@
                                 var TxtApellido = document.getElementById("<%=TxtApellido.ClientID %>").value;
                                 var TxtSegundoApellido = document.getElementById("<%=TxtSegundoApellido.ClientID %>").value;
                                 var DdlPrograma = document.getElementById("<%=DdlPrograma.ClientID %>").value;
+                                var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
                                 //
 <%--                            var TxtExpediente = document.getElementById("<%=TxtExpediente.ClientID %>").value;
                             var TxtLicencia = document.getElementById("<%=TxtLicencia.ClientID %>").value;
@@ -181,7 +187,8 @@
                                     TxtFechaNacimiento == "" &&
                                     TxtNombre == "" &&
                                     TxtApellido == "" &&
-                                    TxtSegundoApellido == "" && DdlPrograma != "0")
+                                    TxtSegundoApellido == "" && DdlPrograma != "0"
+                                    && TxtExpediente == "")
                                 {
                                     
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda";                             
@@ -192,7 +199,8 @@
                                     TxtFechaNacimiento == "" &&
                                     TxtNombre == "" &&
                                     TxtApellido == "" &&
-                                    TxtSegundoApellido == "" && DdlPrograma == "0")
+                                    TxtSegundoApellido == "" && DdlPrograma == "0"
+                                    && TxtExpediente == "")
                                 {
                                     document.getElementById("<%=label4.ClientID%>").innerHTML = "*Introduzca al menos 1 campo de búsqueda y seleccione un programa";                             
                                     return false;

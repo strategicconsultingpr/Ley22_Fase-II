@@ -191,7 +191,9 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         if (Page.Request.Params["__EVENTTARGET"] == "EliminarParticipante")
         {
-            EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            string[] targets = Request["__EVENTARGUMENT"].Split(',');
+            //EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            EliminarParticipante(Convert.ToInt32(targets[0]), Convert.ToInt32(targets[1]));
             return;
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "AsistioParticipante")
@@ -388,6 +390,26 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                         {
                             LitContCelda[i].Text += " <div class=\"item quinta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
                         }
+                        else if (diaActual.NumeroCharla == 6)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item sexta\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (diaActual.NumeroCharla == 7)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item septima\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (diaActual.NumeroCharla == 8)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item octava\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (diaActual.NumeroCharla == 9)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item novena\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                        }
+                        else if (diaActual.NumeroCharla == 10)
+                        {
+                            LitContCelda[i].Text += " <div class=\"item decima\"><a href='#'  onClick=\"changeDivContent('" + element.Id_CharlaGrupal.ToString() + "','" + userId + "','" + activa + "'); modalModificar('" + resultCharla[0].FechaInicial.ToString("MM/dd/yyyy") + "','" + resultCharla[0].FechaInicial.ToString("hh:mm tt") + "','" + resultCharla[0].FechaFinal.ToString("hh:mm tt") + "','" + resultCharla[0].Id_TipoCharla.ToString() + "','" + resultCharla[0].Id_NiveldeCharla.ToString() + "','" + resultCharla[0].NrodeParticipantes.ToString() + "','" + resultCharla[0].NumeroCharla.ToString() + "')\"  data-toggle=\"modal\" data-target=\"#modal-Info-Charla\" data-whatever=\"@getbootstrap\" style=\"color: white\">" + element.FechaInicial.ToString("hh:mm") + "-" + element.FechaFinal.ToString("hh:mm tt") + " " + element.TipodeCharla + "</a></div>";
+                        }
                     //}
                     //else
                     //{
@@ -524,7 +546,11 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             int asistencias = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(item.Id_Participante)).Where(p => p.Id_OrdenJudicial == item.Id_CasoCriminal).Select(a => a.Asistio).Sum();
             decimal balance = Convert.ToDecimal(item.Cargos) - Convert.ToDecimal(item.Pagos);
 
-            if(asistencias == 5 && balance.Equals(Convert.ToDecimal(0.00)))
+            var charlasRegulares = dsLey22.ListarAsistenciaCharlasRegulares(item.Id_Participante, item.Id_CasoCriminal).SingleOrDefault();
+
+            var victima = dsLey22.ListarAsistenciaCharlasImpacto(item.Id_Participante, item.Id_CasoCriminal).SingleOrDefault();
+
+            if ((charlasRegulares > 9 && (victima == 1 || victima == -1)) && balance.Equals(Convert.ToDecimal(0.00)))
             {
                 string Id = item.Id_Participante.ToString();
                 string Nombre = dsPerfil.SA_PERSONA.Where(r => r.PK_Persona.Equals(item.Id_Participante)).Select(p => p.NB_Primero).SingleOrDefault();
@@ -539,19 +565,19 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                 string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-      
+
 
                 if (item.Activa == 0)
                 {
                     DateTime FE_Cierre = Convert.ToDateTime(item.FechaCierre.ToString());
                     TimeSpan ts = DateTime.Now.Subtract(FE_Cierre);
 
-                    if(ts.Days > 8)
+                    if (ts.Days > 8)
                     {
                         continue;
                     }
                 }
-                
+
                 if (item.Activa == 0 && File.Exists(PathNameDocumento))
                 {
                     File.Delete(PathNameDocumento);
@@ -571,7 +597,26 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
                 // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
-                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
+                string casos2;
+                string casos3;
+
+                if (item.NumeroCasoCriminalDos == "" || item.NumeroCasoCriminalDos == null)
+                {
+                    casos2 = ""; 
+                }
+                else
+                {
+                    casos2 = item.NumeroCasoCriminalDos;
+                }
+                if (item.NumeroCasoCriminalTres == "" || item.NumeroCasoCriminalTres == null)
+                {
+                    casos3 = "";
+                }
+                else
+                {
+                    casos3 = item.NumeroCasoCriminalTres;
+                }
+                string bodyPDF = CreateBodyPDF(fecha, item.NB_Juez, item.NumeroCasoCriminal,casos2,casos3, DdlCentro.SelectedItem.Text, Nombre, Apellido, item.FechaSentencia.ToString(), tribunal, fechaInical.ToShortDateString(), fechaFinal.ToShortDateString(), DdlAdiestrador.SelectedItem.Text, DdlSupervisor.SelectedItem.Text);
 
                 PdfPageSize pageSize = PdfPageSize.Letter;
 
@@ -724,6 +769,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             else
             {
                 mylib.EliminarCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal));
+                string mensaje = "Se eliminó correctamente la charla";
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Nueva Charla", "sweetAlert('Nueva Charla','" + mensaje + "','success')", true);
             }
             
         }
@@ -752,6 +799,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                                         Convert.ToInt32(DdlNumeroCharla.SelectedIndex)
 
                );
+            string mensaje = "Se agregó correctamente la charla";
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Charla Eliminada", "sweetAlert('Nueva Charla','" + mensaje + "','success')", true);
         }
         GenerarCalendario();
 
@@ -818,19 +867,20 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         }
     }
 
-    void EliminarParticipante(int Id_Participante)
+    void EliminarParticipante(int Id_Participante, int casoCriminal)
     {
         //int Id_Participante = Convert.ToInt32(Request["__EVENTARGUMENT"]);
         int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
         using (Ley22Entities mylib = new Ley22Entities())
         {
-            int casoCriminal = Convert.ToInt32(mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Where(a => a.Id_Participante.Equals(Id_Participante)).Select(r => r.Id_OrdenJudicial).Single());
+            //int casoCriminal = Convert.ToInt32(mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Where(a => a.Id_Participante.Equals(Id_Participante)).Select(r => r.Id_OrdenJudicial).Single());
             var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
 
             string numeroCaso = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(casoCriminal)).Select(p => p.NumeroCasoCriminal).Single();
 
-            mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
+            //mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
+            mylib.EliminarParticipanteCharlaGrupalCasoCriminal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante,casoCriminal);
 
             if (email.Count() > 0)
             {
@@ -861,6 +911,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
             }
         }
+        string mensaje = "El participante fué eliminado de la charla";
+        ClientScript.RegisterStartupScript(this.GetType(), "Participante Eliminado", "sweetAlert('Participante Eliminado','" + mensaje + "','success')", true);
         GenerarCalendario();
 
     }
@@ -899,7 +951,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
     }
 
-    private string CreateBodyPDF(string Fecha, string Juez, string Caso, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)
+    private string CreateBodyPDF(string Fecha, string Juez, string Caso, string Caso2, string Caso3, string RegionPrograma, string Nombre, string Apellido, string FechaSentencia, string NombreTribunal, string FechaInicial, string FechaFinal, string NombreAdiestrador, string NombreSupervisor)
     {
         string body = string.Empty;
 
@@ -910,6 +962,8 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         body = body.Replace("{Fecha}", Fecha);
         body = body.Replace("{Juez}",Juez);
         body = body.Replace("{CasoCriminal}", Caso);
+        body = body.Replace("{CasoCriminal2}", Caso2);
+        body = body.Replace("{CasoCriminal3}", Caso3);
         body = body.Replace("{RegionPrograma}", RegionPrograma);
         body = body.Replace("{NombreParticipante}", Nombre + " " + Apellido);
         body = body.Replace("{FechaSentencia}", FechaSentencia);

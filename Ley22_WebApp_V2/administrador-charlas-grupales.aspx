@@ -34,7 +34,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
- 
 
                     <div id="Fecha"></div>
                     <br />
@@ -182,7 +181,7 @@
                                     <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaCrearCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla"  ></asp:TextBox>
 
-                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaCrearCharla" OnClientDateSelectionChanged="checkDate" />
+                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender" TargetControlID="TxtFechaCrearCharla"/>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaCrearCharla" ForeColor="Red" Display="Dynamic" ValidationGroup="VGCrearCharla"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ErrorMessage="<br />*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtFechaCrearCharla" ValidationGroup="VGCrearCharla"></asp:RequiredFieldValidator>
 
@@ -280,6 +279,11 @@
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
 
                             </div>
@@ -335,7 +339,7 @@
                                     <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaModCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla2"  ></asp:TextBox>
 
-                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" OnClientDateSelectionChanged="checkDate" />
+                                    <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="* la fecha debe estar mm/dd/yyyy" ValidationExpression="(?:(?:(?:04|06|09|11)\/(?:(?:[012][0-9])|30))|(?:(?:(?:0[135789])|(?:1[02]))\/(?:(?:[012][0-9])|30|31))|(?:02\/(?:[012][0-9])))\/(?:19|20|21)[0-9][0-9]" ControlToValidate="TxtFechaModCharla" ForeColor="Red" Display="Dynamic" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ErrorMessage="<br />*Requerido" ForeColor="Red" Display="Dynamic" ControlToValidate="TxtFechaModCharla" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
 
@@ -429,6 +433,11 @@
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
                         </div>
@@ -596,7 +605,12 @@
                         <a href="#" data-toggle="tooltip" data-html="true" title='2da CHARLA'><span class="bloque-leyenda grupo2"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='3era CHARLA'><span class="bloque-leyenda grupo3"></span></a>
                         <a href="#" data-toggle="tooltip" data-html="true" title='4ta CHARLA'><span class="bloque-leyenda grupo4"></span></a>
-                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; 
+                        <a href="#" data-toggle="tooltip" data-html="true" title='5ta CHARLA'><span class="bloque-leyenda grupo5"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='6ta CHARLA'><span class="bloque-leyenda grupo6"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='7ma CHARLA'><span class="bloque-leyenda grupo7"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='8va CHARLA'><span class="bloque-leyenda grupo8"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='9na CHARLA'><span class="bloque-leyenda grupo9"></span></a>
+                        <a href="#" data-toggle="tooltip" data-html="true" title='10ma CHARLA'><span class="bloque-leyenda grupo10"></span></a>Disponible (Click para asignar) &nbsp; &nbsp; &nbsp; 
                         <a href="#" data-toggle="tooltip" data-html="true" title='NO HAY ESPACIO (CERRADO)'><span class="bloque-leyenda nohay"></span></a>
                         
      

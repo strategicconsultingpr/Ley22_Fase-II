@@ -105,7 +105,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             if (orden.Count() > 0)
             {
                 var docs = mylib.DocumentosPorParticipantes.Where(u => orden.Contains(u.Id_OrdenJudicial)).Where(a => a.Id_Programa == Programa).Select(p => p.Id_Documento);
-                var docsFaltante = mylib.Documentos.Where(u => !docs.Contains(u.Id_Documento)).Where(a => a.Importante == 1).Select(p => p.Id_Documento).ToList();
+                var docsFaltante = mylib.Documentos.Where(u => !docs.Contains(u.Id_Documento)).Where(a => a.Importante == 1).Where(b => b.Activo == 1).Select(p => p.Id_Documento).ToList();
 
                 if (docsFaltante.Count() < 1)
                 {
@@ -146,23 +146,33 @@ public partial class cargar_documentos : System.Web.UI.Page
         Programa = Convert.ToInt32(Session["Programa"].ToString());
 
         string Id = Session["Id_Participante"].ToString();
-        using (Ley22Entities mylib = new Ley22Entities())
+
+        try
         {
-            mylib.EliminarDocuemntoPorParticipante(Id_DocumentoPorParticipante);
-        }
-        foreach (GridViewRow item in GvRecepcionDocumentos.Rows)
-        {
-            if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
+            using (Ley22Entities mylib = new Ley22Entities())
             {
-                File.Delete("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
+                mylib.EliminarDocuemntoPorParticipante(Id_DocumentoPorParticipante);
             }
+            foreach (GridViewRow item in GvRecepcionDocumentos.Rows)
+            {
+                if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
+                {
+                    File.Delete("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
+                }
+            }
+
+
+
+            ActualizarDocumentosDdl();
+            BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            CargarDocumentosFaltantes();
         }
+        catch (Exception)
+        {
 
-
-
-        ActualizarDocumentosDdl();
-        BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-        CargarDocumentosFaltantes();
+            throw;
+        }
+        
     }
     protected void lnkImprimir_Click(object sender, EventArgs e)
     {

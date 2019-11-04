@@ -80,15 +80,23 @@ public partial class imprimir_documentos : System.Web.UI.Page
         LinkButton btn = (LinkButton)(sender);
         string PathNameDocumento = "/Documentos/" + btn.CommandArgument.ToString();
 
+        try
+        {
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
+            Response.TransmitFile(Server.MapPath("~" + PathNameDocumento));
+            Response.End();
+            Response.Redirect("/");
+        }
+        catch (Exception)
+        {
 
-        Response.Clear();
-        Response.ClearHeaders();
-        Response.ClearContent();
-        Response.ContentType = "application/octet-stream";
-        Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
-        Response.TransmitFile(Server.MapPath("~" + PathNameDocumento));
-        Response.End();
-        Response.Redirect("/");
+            throw;
+        }
+        
     }
 
     protected void lnkEliminar_Click(object sender, EventArgs e)
@@ -144,10 +152,16 @@ public partial class imprimir_documentos : System.Web.UI.Page
                     mensaje += "Documento " + Archivo + " fue guardado.";
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento Guardado", "sweetAlert('Documento Guardado','" + mensaje + "','success')", true);
                 }
+                else
+                {
+                    mensaje += "Documento " + Archivo + " ya existe.";
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento Existente", "sweetAlert('Documento Existente','" + mensaje + "','error')", true);
+                }
             }
             catch (Exception ex)
             {
-                // StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+                string mensaje = ex.InnerException.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Eliminar", "sweetAlert('Eliminar','" + mensaje + "','error')", true);
             }
         }
       

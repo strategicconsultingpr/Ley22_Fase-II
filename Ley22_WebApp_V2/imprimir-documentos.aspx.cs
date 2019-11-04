@@ -77,8 +77,8 @@ public partial class imprimir_documentos : System.Web.UI.Page
 
     protected void lnkImprimir_Click(object sender, EventArgs e)
     {
-        LinkButton btn = (LinkButton)(sender);
-        string PathNameDocumento = "/Documentos/" + btn.CommandArgument.ToString();
+        LinkButton btn = (LinkButton)(sender);//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/"
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosOficiales/" + btn.CommandArgument.ToString();
 
         try
         {
@@ -87,7 +87,8 @@ public partial class imprimir_documentos : System.Web.UI.Page
             Response.ClearContent();
             Response.ContentType = "application/octet-stream";
             Response.AddHeader("Content-Disposition", "attachment; filename=" + PathNameDocumento);
-            Response.TransmitFile(Server.MapPath("~" + PathNameDocumento));
+            //Response.TransmitFile(Server.MapPath("~" + PathNameDocumento));
+            Response.TransmitFile(PathNameDocumento);
             Response.End();
             Response.Redirect("/");
         }
@@ -114,7 +115,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
             {
                 if (GvDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_Documento.ToString())
                 {
-                    File.Delete(MapPath("~/Documentos/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString()));
+                    File.Delete("//Assmca-file/share2/APP-LEY22/DocumentosOficiales/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
                     mensaje += "Documento " + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString() + " fue eliminado.";
                 }
             }
@@ -138,10 +139,10 @@ public partial class imprimir_documentos : System.Web.UI.Page
                 string Archivo = Path.GetFileName(FileUpload1.FileName);
                 string tipo = Path.GetExtension(FileUpload1.FileName);
                 string mensaje = string.Empty;
-                if ((!File.Exists(MapPath("~/Documentos/" + Archivo))) && tipo == ".pdf")
+                if ((!File.Exists("//Assmca-file/share2/APP-LEY22/DocumentosOficiales/" + Archivo)) && tipo == ".pdf")
                 {
                     string Documento = Archivo.Substring(0, Archivo.LastIndexOf(".pdf"));
-                    FileUpload1.SaveAs(MapPath("~/Documentos/" + Archivo));
+                    FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22/DocumentosOficiales/" + Archivo);
 
                     using (Ley22Entities mylib = new Ley22Entities())
                     {

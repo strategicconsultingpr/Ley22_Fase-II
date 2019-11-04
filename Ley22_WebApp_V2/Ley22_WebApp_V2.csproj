@@ -447,35 +447,6 @@
     <Content Include="fonts\fa-solid-900.ttf" />
     <Content Include="fonts\fa-solid-900.woff" />
     <Content Include="fonts\fa-solid-900.woff2" />
-    <Content Include="Documentos\Acuse Notificacion Practicas de Privacidad.pdf" />
-    <Content Include="Documentos\Autorización para recibir servicios.pdf" />
-    <Content Include="Documentos\Autorización Suministrar Info. %28Cliente%29 Borrosa.pdf" />
-    <Content Include="Documentos\Autorización Suministrar Info. %28Cliente%29.pdf" />
-    <Content Include="Documentos\Carta de Cita.pdf" />
-    <Content Include="Documentos\Carta de derechos.pdf" />
-    <Content Include="Documentos\Cita para entrevista Inicial.pdf" />
-    <Content Include="Documentos\Compromiso de Servicios.pdf" />
-    <Content Include="Documentos\Datos de Identificación.pdf" />
-    <Content Include="Documentos\Documentos de Facturación.pdf" />
-    <Content Include="Documentos\Facturación,Plan Pago y Entrega Informe.pdf" />
-    <Content Include="Documentos\Flujograma de Servicios  %28 mapping%29.docx" />
-    <Content Include="Documentos\Hoja de Contacto.pdf" />
-    <Content Include="Documentos\Informe Pre-Sentencia.docx" />
-    <Content Include="Documentos\Normas y Procedimientos.pdf" />
-    <Content Include="Documentos\Nota de Progreso.pdf" />
-    <Content Include="Documentos\Notas de Progreso de Grupo.pdf" />
-    <Content Include="Documentos\Orden Judicial Pre-Sentencia.pdf" />
-    <Content Include="Documentos\Perfil de Admision Charla.pdf" />
-    <Content Include="Documentos\Perfil de Admision.pdf" />
-    <Content Include="Documentos\Perfil de Alta.pdf" />
-    <Content Include="Documentos\Planilla evaluativa sentenciados %28D1%29  .pdf" />
-    <Content Include="Documentos\Planilla Evaluativa.pdf" />
-    <Content Include="Documentos\Sentencia 1.1.pdf" />
-    <Content Include="Documentos\Tabla Adeudan Charlas.pdf" />
-    <Content Include="Documentos\Tabla de pt que adeudan charlas %28E4%29 .pdf" />
-    <Content Include="Documentos\Tabla Perfiles de Alta.pdf" />
-    <Content Include="Documentos\Tarjeta de Control.pdf" />
-    <Content Include="Documentos\Tarjeta de información Basica y planes de Pago.pdf" />
     <Content Include="images\.DS_Store" />
     <Content Include="MasterPage.master" />
     <Content Include="MasterPage2.master" />
@@ -1445,6 +1416,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documentos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UploadSoporteCierreCaso\4-Perfil de Evaluación.pdf" />

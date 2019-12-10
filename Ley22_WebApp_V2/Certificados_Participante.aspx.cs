@@ -176,9 +176,9 @@ namespace Ley22_WebApp_V2
             {
                // string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-                if (Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/"))
+                if (Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/"))
                 {
-                    string[] filesPaths = Directory.GetFiles("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
+                    string[] filesPaths = Directory.GetFiles("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
                     List<ListItem> files = new List<ListItem>();
 
                     foreach (string item in filesPaths)
@@ -230,7 +230,7 @@ namespace Ley22_WebApp_V2
 
                 string nombrePrograma = dsPerfil.SA_PROGRAMA.Where(a => a.PK_Programa.Equals(Id_Programa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN LEY 22 DE", "")).SingleOrDefault();
 
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/Certificado_" + Caso.Id_CasoCriminal + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/Certificado_" + Caso.Id_CasoCriminal + ".pdf";
 
                 //if (File.Exists(PathNameDocumento))
                 //{
@@ -261,9 +261,9 @@ namespace Ley22_WebApp_V2
                     dsLey22.CerrarCasoCriminal(Caso.Id_CasoCriminal, 1, "El participante completo las charlas y no tiene balance de deuda", "Certificado_" + Caso.Id_CasoCriminal + ".pdf", userId);
                 }
 
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Caso.Id_CasoCriminal + "/Certificaciones/");
                 }
 
                 string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";

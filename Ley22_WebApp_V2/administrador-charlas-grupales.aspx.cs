@@ -563,7 +563,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 var fechaInical = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Min();
                 var fechaFinal = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Max();
 
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
 
 
@@ -588,9 +588,9 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 }
 
 
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
                 }
 
                 string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
@@ -666,7 +666,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         int Programa = Convert.ToInt32(DdlCentro.SelectedValue.ToString());
 
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_Caso + "/Certificaciones/Certificado_" + Id_Caso + ".pdf";
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_Caso + "/Certificaciones/Certificado_" + Id_Caso + ".pdf";
 
         if (File.Exists(PathNameDocumento))
         {

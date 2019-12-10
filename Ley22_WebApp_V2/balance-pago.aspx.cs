@@ -115,11 +115,11 @@ public partial class balance_pago : System.Web.UI.Page
                 string Id = Session["Id_Participante"].ToString();
                 string pagoPara = DdlDTipoPago.SelectedItem.Text;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+pagoPara+"/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+pagoPara+"/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
                 }
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + TxtNumeroRecibo.Text + "_"+ DdlDTipoPago.SelectedItem.Text + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + TxtNumeroRecibo.Text + "_"+ DdlDTipoPago.SelectedItem.Text + ".pdf";
                 // FileStream fs = new FileStream("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value+".pdf",FileMode.Create);
                 // Document document = new Document(iTextSharp.text.PageSize.LETTER, 0, 0, 0, 0);
                 // PdfWriter pw = PdfWriter.GetInstance(document, fs);
@@ -140,7 +140,7 @@ public partial class balance_pago : System.Web.UI.Page
                 // WebKitConverterSettings webKitSettings = new WebKitConverterSettings();
 
                 //string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/";
-                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+                string baseUrl = "//vassmcaweb/wwwroot/LEY22_Prueba/images/";
 
                // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
@@ -264,13 +264,13 @@ public partial class balance_pago : System.Web.UI.Page
                 //string pagoPara = DdlTipoPagoVoid.Text;
                 string pagoPara = ControlPago.Descripcion;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
                 }
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + ControlPago.NumeroRecibo + "_" + ControlPago.Descripcion + "_Void" + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + ControlPago.NumeroRecibo + "_" + ControlPago.Descripcion + "_Void" + ".pdf";
 
-                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+                string baseUrl = "//vassmcaweb/wwwroot/LEY22_Prueba/images/";
 
                 
 
@@ -428,7 +428,7 @@ public partial class balance_pago : System.Web.UI.Page
             {
                 LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
 
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
 
                 if(!File.Exists(PathNameDocumento))
                 {
@@ -651,7 +651,7 @@ public partial class balance_pago : System.Web.UI.Page
 
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf"; 
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf"; 
 
         try
         {

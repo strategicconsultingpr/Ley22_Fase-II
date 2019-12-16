@@ -97,9 +97,10 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarPago(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32(DdlFormadePago.SelectedValue), Convert.ToDecimal(TxtCantidad.Text), TxtNumeroRecibo.Text, Convert.ToInt32(TxtNumeroCheque.Text == "" ? "0" : TxtNumeroCheque.Text), DdlDTipoPago.SelectedItem.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
-                var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
+                //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).FirstOrDefault();
+                // short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
+                var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).FirstOrDefault();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
@@ -243,8 +244,9 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarVoidPago(PK_ControlPago,Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, ControlPago.Cantidad, ControlPago.NumeroRecibo, ControlPago.NumerodeCheque, ControlPago.Descripcion, TxtVoid.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
+                // var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                //short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
                 var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);

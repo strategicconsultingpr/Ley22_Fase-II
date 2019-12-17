@@ -97,8 +97,9 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarPago(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32(DdlFormadePago.SelectedValue), Convert.ToDecimal(TxtCantidad.Text), TxtNumeroRecibo.Text, Convert.ToInt32(TxtNumeroCheque.Text == "" ? "0" : TxtNumeroCheque.Text), DdlDTipoPago.SelectedItem.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
+                //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                //short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
                 var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
@@ -252,8 +253,9 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarVoidPago(PK_ControlPago,Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, ControlPago.Cantidad, ControlPago.NumeroRecibo, ControlPago.NumerodeCheque, ControlPago.Descripcion, TxtVoid.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
+                //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                //short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
                 var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
@@ -582,6 +584,9 @@ public partial class balance_pago : System.Web.UI.Page
 
                 if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
                 {
+                    divNav.Visible = false;
+                    BtnPagar.Visible = false;
+
                     Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
                     lbl.Text = "No se le ha agregado ningún cargo a este participante referente a este caso criminal.";
                 }

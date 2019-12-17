@@ -165,6 +165,7 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
 
             if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
             {
+                divNav.Visible = false;
                 Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
                 lbl.Text = "No se le ha agregado ningún cargo a este participante referente a este caso criminal.";
             }

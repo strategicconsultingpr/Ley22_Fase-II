@@ -49,16 +49,16 @@
                         <div class="row mb-4 bt pt-4" id="divNav" runat="server">
                               <div class="col-md-4"></div>
                         <div class="col-md-6">
-                        <nav>
+                       <%-- <nav>--%>
                           <ul class="nav">
                               <li class="nav-item">
-                              <a id="pagar" class="nav-link active" href="#" onclick="Pagar()">Historial de Cargos</a>
+                              <a id="pagar" class="nav-link" href="#" onclick="Pagar()">Historial de Cargos</a>
                             </li>
                             <li class="nav-item">
                               <a id="historial" class="nav-link" href="#" onclick="Historial()">Historial de Pagos</a>
                             </li>                                                 
                           </ul>
-                         </nav>
+                         <%--</nav>--%>
                             </div>
                             </div>
 
@@ -108,6 +108,14 @@
                                 <asp:BoundField DataField="FechaCita" HeaderText="Fecha de Cita" DataFormatString="{0:MM/dd/yyyy}"/>
                                 <asp:BoundField DataField="FechaCharla" HeaderText="Fecha de Charla" DataFormatString="{0:MM/dd/yyyy}"/>                               
                             </Columns>
+                            <EmptyDataTemplate>
+                        <div class="card-block">
+                            <p class="text-center pt-4 pb-4">
+                            <asp:Label runat="server" ID="lblCargosEmpty" />
+                            </p>
+                        </div>
+
+                    </EmptyDataTemplate>
                         </asp:GridView>                          
                         </div>
                            
@@ -130,6 +138,12 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
+                             <EmptyDataTemplate>
+                        <div class="card-block">
+                            <p class="text-center pt-4 pb-4">El participante no ha realizado ningún pago. </p>
+                        </div>
+
+                    </EmptyDataTemplate>
                         </asp:GridView> 
 
                     </div>
@@ -146,18 +160,35 @@
 
         <script type="text/javascript">     
 
-        function Historial() {     
-            $(".nav").find(".active").removeClass("active");
-            $("#historial").addClass("active");
+            $('li a').click(function (e) {
+                e.preventDefault();
+                $('a').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $(function () {
+                var Con = document.getElementById('<%=divNav.ClientID %>');
+                var act = Con.getElementsByClassName("active");
+                if (document.getElementById('<%=divNav.ClientID %>')) {
+                    if (act.length == 0) {
+                        $("#pagar").addClass("active");
+                    }
+                }
+                
+            });
+
+            function Historial() {    
+            //$(".nav").find(".active").removeClass("active");
+            //$("#historial").addClass("active");
             document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'visible';
             document.getElementById("divPagar").style.display = 'none';
         }
 
         
 
-        function Pagar() {
-            $(".nav").find(".active").removeClass("active");
-            $("#pagar").addClass("active");
+            function Pagar() {
+            //$(".nav").find(".active").removeClass("active");
+            //$("#pagar").addClass("active");
             document.getElementById("<%=GvPagos.ClientID %>").style.visibility = 'hidden';
             document.getElementById("divPagar").style.display = 'inline';
         }

@@ -61,53 +61,65 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
               
                 LitBalance.Text = "";
                 LitInfo.Text = "";
+
+                GvCargos.DataSource = null;
+                GvCargos.DataBind();
+
+                GvPagos.DataSource = null;
+                GvPagos.DataBind();
             }
             else
             {
                 divNav.Visible = true;
-               
-            }
-            GvCargos.DataSource = mylib.ListarCargosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvCargos.DataBind();
 
-            GvPagos.DataSource = mylib.ListarPagosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvPagos.DataBind();
+                GvCargos.DataSource = mylib.ListarCargosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+                GvCargos.DataBind();
+
+                GvPagos.DataSource = mylib.ListarPagosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+                GvPagos.DataBind();
+            }
+            
 
         }
     }
     protected void GvHistorial_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
-        pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        if (caso != 0)
         {
+            cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+            pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
 
-            Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
-            //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
-            decimal Cantidad;
-            NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
-            Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
-            Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
-            FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
-            Fecha = "\"" + "" + "\"";
-            Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-            //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
-            NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
-          
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
 
+                Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+                //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
+                string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
+                decimal Cantidad;
+                NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+                Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
+                Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
+                FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
+                Fecha = "\"" + "" + "\"";
+                Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+                NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
+
+
+            }
+            if (e.Row.RowType == DataControlRowType.Footer)
+                // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
+                LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
         }
-        if (e.Row.RowType == DataControlRowType.Footer)
-            // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
-            LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
     }
 
     protected void GvPagar_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+        if (caso != 0)
+        {
+            cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
         pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());       
 
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -150,6 +162,23 @@ public partial class balance_pago_solo_saldo : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.Footer)
             // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
             LitBalance.Text = "Balance: $ " + (cargos - pagos).ToString();
+
+            if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
+            {
+                divNav.Visible = false;
+                Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
+                lbl.Text = "No se le ha agregado ningún cargo a este participante referente a este caso criminal.";
+            }
+
+        }
+        else
+        {
+            if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
+            {
+                Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
+                lbl.Text = "Favor de seleccionar un caso criminal";
+            }
+        }
     }
 
     protected void BtnCancelar_Click(Object sender, EventArgs e)

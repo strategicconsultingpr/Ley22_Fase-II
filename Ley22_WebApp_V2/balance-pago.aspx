@@ -140,7 +140,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                             <div class="col-md-3">
                                 <label for="fecha-pago">Número del Cheque</label>
 
-                                <asp:TextBox ID="TxtNumeroCheque" runat="server" class="form-control" placeholder="Ej. 200" MaxLength="10"></asp:TextBox>
+                                <asp:TextBox ID="TxtNumeroCheque" runat="server" class="form-control" placeholder="Ej. 200" MaxLength="15"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RFVNumeroCheque" runat="server" ErrorMessage="*Requerido" ControlToValidate="TxtNumeroCheque" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
 
 

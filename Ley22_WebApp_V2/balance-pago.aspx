@@ -377,7 +377,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                         
                           <ul class="nav">
                               <li class="nav-item">
-                              <a id="pagar" class="nav-link" href="#" onclick="Pagar()">Realizar Pago</a>
+                              <a id="pagar" class="nav-link" href="#" onclick="Pagar()">Historial De Cargos</a>
                             </li>
                             <li class="nav-item">
                               <a id="historial" class="nav-link" href="#" onclick="Historial()">Historial de Pagos</a>

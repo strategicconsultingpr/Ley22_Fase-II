@@ -409,7 +409,7 @@ input[disabled]
 
 .calendario .item.quinta {
     display: block;
-    background: #F8EB8E;
+    background: #F4428C;
     border: 1px solid #74A375;
     border-radius: 6px;
     padding: 0 5px;
@@ -420,7 +420,7 @@ input[disabled]
 
 .calendario .item.sexta {
     display: block;
-    background: #f4428c;
+    background: #F6E779;
     border: 1px solid #74A375;
     border-radius: 6px;
     padding: 0 5px;

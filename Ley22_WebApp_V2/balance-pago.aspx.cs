@@ -94,7 +94,7 @@ public partial class balance_pago : System.Web.UI.Page
         {
             using (Ley22Entities mylib = new Ley22Entities())
             {
-                mylib.RegistrarPago(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32(DdlFormadePago.SelectedValue), Convert.ToDecimal(TxtCantidad.Text), TxtNumeroRecibo.Text, Convert.ToInt32(TxtNumeroCheque.Text == "" ? "0" : TxtNumeroCheque.Text), DdlDTipoPago.SelectedItem.Text);
+                mylib.RegistrarPago(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32(DdlFormadePago.SelectedValue), Convert.ToDecimal(TxtCantidad.Text), TxtNumeroRecibo.Text, Convert.ToInt64(TxtNumeroCheque.Text == "" ? "0" : TxtNumeroCheque.Text), DdlDTipoPago.SelectedItem.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
                 //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).FirstOrDefault();

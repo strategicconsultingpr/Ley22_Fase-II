@@ -97,8 +97,9 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarPago(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, Convert.ToDateTime(TxtFechaDelPago.Text), Convert.ToInt32(DdlFormadePago.SelectedValue), Convert.ToDecimal(TxtCantidad.Text), TxtNumeroRecibo.Text, Convert.ToInt32(TxtNumeroCheque.Text == "" ? "0" : TxtNumeroCheque.Text), DdlDTipoPago.SelectedItem.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
+                //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                //short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
                 var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
@@ -115,11 +116,11 @@ public partial class balance_pago : System.Web.UI.Page
                 string Id = Session["Id_Participante"].ToString();
                 string pagoPara = DdlDTipoPago.SelectedItem.Text;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+pagoPara+"/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/"+pagoPara+"/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
                 }
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + TxtNumeroRecibo.Text + "_"+ DdlDTipoPago.SelectedItem.Text + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + TxtNumeroRecibo.Text + "_"+ DdlDTipoPago.SelectedItem.Text + ".pdf";
                 // FileStream fs = new FileStream("C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/" + IdCP.Value+".pdf",FileMode.Create);
                 // Document document = new Document(iTextSharp.text.PageSize.LETTER, 0, 0, 0, 0);
                 // PdfWriter pw = PdfWriter.GetInstance(document, fs);
@@ -140,7 +141,7 @@ public partial class balance_pago : System.Web.UI.Page
                 // WebKitConverterSettings webKitSettings = new WebKitConverterSettings();
 
                 //string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/DocumentosPorParticipantes/" + Programa + "/" + Id + "/Pagos/";
-                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+                string baseUrl = "//vassmcaweb/wwwroot/LEY22_Prueba/images/";
 
                // webKitSettings.WebKitPath = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/bin/QtBinaries/";
 
@@ -220,7 +221,16 @@ public partial class balance_pago : System.Web.UI.Page
             TxtNumeroCheque.Text = "";
             DdlDTipoPago.SelectedValue = "0";
 
-            string mensaje = ex.InnerException.Message;
+            string mensaje = string.Empty;
+
+            if (ex.InnerException == null)
+            {
+                mensaje = ex.Message;
+            }
+            else
+            {
+                mensaje = ex.InnerException.Message;
+            }
             ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
         }
@@ -243,8 +253,9 @@ public partial class balance_pago : System.Web.UI.Page
                 mylib.RegistrarVoidPago(PK_ControlPago,Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), userId, ControlPago.Cantidad, ControlPago.NumeroRecibo, ControlPago.NumerodeCheque, ControlPago.Descripcion, TxtVoid.Text);
 
                 int Orden = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
-                short aa = Convert.ToInt16(a);
+                //var a = mylib.Calendarios.Where(u => u.Id_OrdenJudicial.Equals(Orden)).Select(p => p.Id_Programa).First();
+                //short aa = Convert.ToInt16(a);
+                short aa = Convert.ToInt16(Session["Programa"].ToString());
                 var NB_Programa = dsPerfil.SA_PROGRAMA.Where(u => u.PK_Programa.Equals(aa)).Select(p => p.NB_Programa.Replace("EVALUACIÓN ", "")).First();
 
                 int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
@@ -264,13 +275,13 @@ public partial class balance_pago : System.Web.UI.Page
                 //string pagoPara = DdlTipoPagoVoid.Text;
                 string pagoPara = ControlPago.Descripcion;
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
+                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
+                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/");
                 }
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + ControlPago.NumeroRecibo + "_" + ControlPago.Descripcion + "_Void" + ".pdf";
+                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + pagoPara + "/" + ControlPago.NumeroRecibo + "_" + ControlPago.Descripcion + "_Void" + ".pdf";
 
-                string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
+                string baseUrl = "//vassmcaweb/wwwroot/LEY22_Prueba/images/";
 
                 
 
@@ -313,7 +324,16 @@ public partial class balance_pago : System.Web.UI.Page
           
             TxtVoid.Text = "";
 
-            string mensaje = ex.InnerException.Message;
+            string mensaje = string.Empty;
+
+            if (ex.InnerException == null)
+            {
+                mensaje = ex.Message;
+            }
+            else
+            {
+                mensaje = ex.InnerException.Message;
+            }
             ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
         }
@@ -352,36 +372,54 @@ public partial class balance_pago : System.Web.UI.Page
             {
                 divNav.Visible = false;
                 BtnPagar.Visible = false;
-                
+
+                GvCargos.DataSource = null;
+                GvCargos.DataBind();
+
+                GvPagos.DataSource = null;
+                GvPagos.DataBind();
+
             }
             else
             {
                 divNav.Visible = true;
                 BtnPagar.Visible = true;
                 int IdCaso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-                int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
-                if(activa == 1)
+                try
                 {
-                    //BtnPagar.Visible = true;
-                    DdlDTipoPago.Items[1].Enabled = true;
-                    DdlDTipoPago.Items[2].Enabled = true;
-                    DdlDTipoPago.Items[3].Enabled = true;
+                    int activa = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(IdCaso)).Select(p => p.Activa).SingleOrDefault();
+                    if (activa == 1)
+                    {
+                        //BtnPagar.Visible = true;
+                        DdlDTipoPago.Items[1].Enabled = true;
+                        DdlDTipoPago.Items[2].Enabled = true;
+                        DdlDTipoPago.Items[3].Enabled = true;
+                    }
+                    else
+                    {
+                        //BtnPagar.Visible = false;
+                        DdlDTipoPago.Items[1].Enabled = false;
+                        DdlDTipoPago.Items[2].Enabled = false;
+                        DdlDTipoPago.Items[3].Enabled = false;
+
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    //BtnPagar.Visible = false;
-                    DdlDTipoPago.Items[1].Enabled = false;
-                    DdlDTipoPago.Items[2].Enabled = false;
-                    DdlDTipoPago.Items[3].Enabled = false;
+
+                    string mensaje = ex.Message;
+                    ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
                 }
-                
+
+
+                GvCargos.DataSource = mylib.ListarCargosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+                GvCargos.DataBind();
+
+                GvPagos.DataSource = mylib.ListarPagosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+                GvPagos.DataBind();
             }
-            GvCargos.DataSource = mylib.ListarCargosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvCargos.DataBind();
-
-            GvPagos.DataSource = mylib.ListarPagosCasosCriminales(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            GvPagos.DataBind();
+            
 
         }
     }
@@ -389,77 +427,91 @@ public partial class balance_pago : System.Web.UI.Page
     protected void GvHistorial_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
-        pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
-
-        string Id = Session["Id_Participante"].ToString();
-        Programa = Convert.ToInt32(Session["Programa"].ToString());
-
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        if (caso != 0)
         {
-           
-            Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
-            Literal LitVoid = (Literal)e.Row.FindControl("LitVoid");
-            //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago, Cheque, FormadePagoVoid,NumerodeChequeVoid,FechaPagoVoid,TipoVoid, DescVoid;
-            decimal Cantidad, CantidadAPagar;
-            NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
-            Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
-            Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
-            DescVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void\"";
-            FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
-            Fecha = "\"" + ""+ "\"";
-            Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-            //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
-            NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
+        try
+        {
+            cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+            pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
 
-            FormadePagoVoid = DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString();
-            NumerodeChequeVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "NumerodeCheque").ToString() + "\"";
-            FechaPagoVoid = "\"" + Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "FechaPago")).ToString("MM/dd/yyyy") + "\"";
-            TipoVoid = DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString();
+            string Id = Session["Id_Participante"].ToString();
+            Programa = Convert.ToInt32(Session["Programa"].ToString());
 
-            //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
-            //{
-                char a = Cantidad.ToString()[0]; 
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+
+                Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+                Literal LitVoid = (Literal)e.Row.FindControl("LitVoid");
+                //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
+                string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago, Cheque, FormadePagoVoid, NumerodeChequeVoid, FechaPagoVoid, TipoVoid, DescVoid;
+                decimal Cantidad, CantidadAPagar;
+                NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+                Id_Pago = DataBinder.Eval(e.Row.DataItem, "PK_ControldePago").ToString();
+                Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
+                DescVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void\"";
+                FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
+                Fecha = "\"" + "" + "\"";
+                Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+                NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
+
+                FormadePagoVoid = DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString();
+                NumerodeChequeVoid = "\"" + DataBinder.Eval(e.Row.DataItem, "NumerodeCheque").ToString() + "\"";
+                FechaPagoVoid = "\"" + Convert.ToDateTime(DataBinder.Eval(e.Row.DataItem, "FechaPago")).ToString("MM/dd/yyyy") + "\"";
+                TipoVoid = DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString();
+
+                //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
+                //{
+                char a = Cantidad.ToString()[0];
                 Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechaPago").ToString() + "\"";
-                
-            if (a != '-')
-            {
-                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
 
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
-
-                if(!File.Exists(PathNameDocumento))
+                if (a != '-')
                 {
-                    LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + "," + NumerodeChequeVoid + "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+
+                    string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
+
+                    if (!File.Exists(PathNameDocumento))
+                    {
+                        LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + "," + NumerodeChequeVoid + "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+                    }
+
                 }
-               
-            }
-            else
-            {
-                LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + DescVoid + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
-            }
+                else
+                {
+                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + DescVoid + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+                }
                 //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
-            //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
-            //    ContadorCharlasCitasPagadas += 1;
-            //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+                //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
+                //    ContadorCharlasCitasPagadas += 1;
+                //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
 
-            //}
-            //else
-            //{
-            //    ContadordeCharlaCitasPorPagar += 1;
-            //    TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
-            //    BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-            //    LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
-            //    LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
+                //}
+                //else
+                //{
+                //    ContadordeCharlaCitasPorPagar += 1;
+                //    TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
+                //    BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                //    LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
+                //    LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
 
-            //}
+                //}
+
+            }
+            if (e.Row.RowType == DataControlRowType.Footer)
+                // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
+                LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
+        }
+        catch (Exception ex)
+        {
+
+            string mensaje = ex.Message;
+            ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
 
         }
-        if (e.Row.RowType == DataControlRowType.Footer)
-            // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
-            LitInfo.Text = "Total de Cargos: $ " + cargos.ToString() + " &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp Cantidad Pagada: $ " + pagos.ToString();
+
+       }
     }
 
     protected void GvHistorial_Pre(object sender, EventArgs e)
@@ -478,53 +530,83 @@ public partial class balance_pago : System.Web.UI.Page
     protected void GvPagar_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         int caso = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
-        cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
-        pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
-
-        IdCP.Value = caso.ToString();
-        LabelBalance.Text = (cargos - pagos).ToString();
-        IdDesc.Value = "Pago a balance";
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        if (caso != 0)
         {
+            try
+            {
+                cargos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Cargos).Single());
+                pagos = Convert.ToDecimal(dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(caso)).Select(p => p.Pagos).Single());
 
-            //Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
-            //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
-            //string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
-            //decimal Cantidad, CantidadAPagar;
-            //NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
-            //Id_Pago = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
-            //Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
-            //FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
-            //Fecha = "\"" + ""+ "\"";
-            //Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-            //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
-            //NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
+                IdCP.Value = caso.ToString();
+                LabelBalance.Text = (cargos - pagos).ToString();
+                IdDesc.Value = "Pago a balance";
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+
+                    //Literal LitColocarModal = (Literal)e.Row.FindControl("LitColocarModal");
+                    //Literal LitColocarEstatus = (Literal)e.Row.FindControl("LitColocarEstatus");
+                    //string NroRecibo, Descripcion, FormadePago, Fecha, NombreCompleto, Id_Pago;
+                    //decimal Cantidad, CantidadAPagar;
+                    //NroRecibo = DataBinder.Eval(e.Row.DataItem, "NumeroRecibo").ToString();
+                    //Id_Pago = DataBinder.Eval(e.Row.DataItem, "Id_ControldePagos").ToString();
+                    //Descripcion = "\"" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "\"";
+                    //FormadePago = "\"" + DataBinder.Eval(e.Row.DataItem, "FormadePago").ToString() + "\"";
+                    //Fecha = "\"" + ""+ "\"";
+                    //Cantidad = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                    //CantidadAPagar = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+                    //NombreCompleto = "\"" + DataBinder.Eval(e.Row.DataItem, "NombreCompleto").ToString() + "\"";
 
 
-            //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
-            //{
-            //    Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
-            //    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + CantidadAPagar +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
-            //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
-            //    ContadorCharlasCitasPagadas += 1;
-            //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
+                    //if (DataBinder.Eval(e.Row.DataItem, "Estatus").ToString() == "1")
+                    //{
+                    //    Fecha = "\"" + DataBinder.Eval(e.Row.DataItem, "FechadelPago").ToString() + "\"";
+                    //    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + ","+ Descripcion +","+FormadePago +","+ Fecha +"," + CantidadAPagar +"," +NombreCompleto + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-print fa-lg\" data-toggle=\"tooltip\" title=\"Imprimir Recibo\"></span></a>";
+                    //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";
+                    //    ContadorCharlasCitasPagadas += 1;
+                    //    TotalPagado += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString());
 
-            //}
-            //else
-            //{
-            //    ContadordeCharlaCitasPorPagar += 1;
-            //    TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
-            //    BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
-            //    LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
-            //    LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
+                    //}
+                    //else
+                    //{
+                    //    ContadordeCharlaCitasPorPagar += 1;
+                    //    TotalPagado += (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CantidadAPagar").ToString()) - Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString()));
+                    //    BalanceDebido += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad").ToString());
+                    //    LitColocarModal.Text = "<a href=\"#\" OnClick='ActualizarIdCP("+ Id_Pago + ","+Cantidad + "," + Descripcion+ ")' data-toggle=\"modal\" data-target=\"#Pagar-modal\" data-whatever=\"@getbootstrap\"><span class=\"fas fa-money-bill-alt  fa-lg\" data-toggle=\"tooltip\" title=\"Pagar Recibo\"></span></a>";
+                    //    LitColocarEstatus.Text = " <span class=\"text-danger\">Por pagar</span>";
 
-            //}
+                    //}
 
+                }
+                if (e.Row.RowType == DataControlRowType.Footer)
+                    // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
+                    LitBalance.Text = "Balance: $ " + (cargos - pagos).ToString();
+
+                if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
+                {
+                    divNav.Visible = false;
+                    BtnPagar.Visible = false;
+
+                    Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
+                    lbl.Text = "No se le ha agregado ningún cargo a este participante referente a este caso criminal.";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.Message;
+                ScriptManager.RegisterClientScriptBlock(BtnGuardarPago, BtnGuardarPago.GetType(), "Error", "sweetAlert('Error','" + mensaje + "','error')", true);
+
+            }
         }
-        if (e.Row.RowType == DataControlRowType.Footer)
-            // LitInfo.Text = ContadorCharlasCitasPagadas.ToString() + " Charlas/Citas Pagadas por " + TotalPagado.ToString() + " USD, " + ContadordeCharlaCitasPorPagar.ToString() + " Charlas/Citas pendiente por pago.";
-            LitBalance.Text = "Balance: $ " + (cargos - pagos).ToString();
+        else
+        {
+            if (e.Row.RowType.Equals(DataControlRowType.EmptyDataRow))
+            {
+                Label lbl = e.Row.FindControl("lblCargosEmpty") as Label;
+                lbl.Text = "Favor de seleccionar un caso criminal";
+            }
+        }
     }
     protected void CargarOrdenesJudiciales()
     {
@@ -651,7 +733,7 @@ public partial class balance_pago : System.Web.UI.Page
 
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf"; 
+        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + IdDesc.Value + "/" + NumRecibo.Value + "_" + HVoid.Value + ".pdf"; 
 
         try
         {

@@ -67,7 +67,7 @@
         <tr>
             <td>Reporte de Participantes para todos los Programas</td>
             <td>Reporte el cual genera estatus de casos criminales de los participantes para todos los programas.</td>
-            <td><asp:HyperLink ID="Participantes" runat="server" NavigateUrl="http://vhermes/ReportServer?/Informes Sistema Ley 22/ReporteParticipante" Text="ver..."/></td>
+            <td><asp:HyperLink ID="Participantes" runat="server" NavigateUrl="http://vhermes/ReportServer?/Informes Sistema Ley 22/ReporteParticipante_Prueba" Text="ver..."/></td>
         </tr>
                                                 </ContentTemplate>
                                         </asp:RoleGroup>

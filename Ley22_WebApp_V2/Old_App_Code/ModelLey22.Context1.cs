@@ -1498,5 +1498,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarVoidPago", pK_ControlPagoParameter, fK_CasoCriminalParameter, fK_UsuarioParameter, cantidadParameter, numeroReciboParameter, numerodeChequeParameter, descripcionParameter, voidDescParameter);
         }
+    
+        public virtual ObjectResult<ListarCharlasCasoCriminal_Result> ListarCharlasCasoCriminal(Nullable<int> casoCriminal)
+        {
+            var casoCriminalParameter = casoCriminal.HasValue ?
+                new ObjectParameter("CasoCriminal", casoCriminal) :
+                new ObjectParameter("CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCharlasCasoCriminal_Result>("ListarCharlasCasoCriminal", casoCriminalParameter);
+        }
     }
 }

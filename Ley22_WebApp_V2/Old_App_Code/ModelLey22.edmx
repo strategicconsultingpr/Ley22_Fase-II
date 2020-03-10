@@ -571,6 +571,9 @@
           <Parameter Name="fechaInicial" Type="date" Mode="In" />
           <Parameter Name="FechaFinal" Type="date" Mode="In" />
         </Function>
+        <Function Name="ListarCharlasCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CasoCriminal" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarCitasCalendario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_TrabajadorSocial" Type="varchar" Mode="In" />
           <Parameter Name="fechaInicial" Type="date" Mode="In" />
@@ -1239,6 +1242,9 @@
             <Parameter Name="NumerodeCheque" Mode="In" Type="Int64" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="VoidDesc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarCharlasCasoCriminal" ReturnType="Collection(Ley22Model.ListarCharlasCasoCriminal_Result)">
+            <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2039,6 +2045,15 @@
           <Property Name="NumerodeCheque" Type="Int64" />
           <Property Name="VoidDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="ListarCharlasCasoCriminal_Result">
+          <Property Type="Int32" Name="Id_CharlaGrupal" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicial" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Horas" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="TipodeCharla" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="60" />
+          <Property Type="Int32" Name="NumeroCharla" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2932,6 +2947,19 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RegistrarPago" FunctionName="Ley22Model.Store.RegistrarPago" />
           <FunctionImportMapping FunctionImportName="RegistrarVoidPago" FunctionName="Ley22Model.Store.RegistrarVoidPago" />
+          <FunctionImportMapping FunctionImportName="ListarCharlasCasoCriminal" FunctionName="Ley22Model.Store.ListarCharlasCasoCriminal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.ListarCharlasCasoCriminal_Result">
+                <ScalarProperty Name="Id_CharlaGrupal" ColumnName="Id_CharlaGrupal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="TipodeCharla" ColumnName="TipodeCharla" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="NombreDelCentro" ColumnName="NombreDelCentro" />
+                <ScalarProperty Name="NumeroCharla" ColumnName="NumeroCharla" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

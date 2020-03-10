@@ -83,6 +83,8 @@ namespace Ley22_WebApp_V2
                 mydata.FechaHoraCharla = TheDate.ToLongDateString() + ", " + resulDetalle[0].Horas;
 
                 // se cargan los participante 
+                List<ListarCharlasCasoCriminal_Result> CharlasDelCaso = mylib.ListarCharlasCasoCriminal(Id_CasoCriminal).ToList();
+
 
                 string Parti = string.Empty;
                 string HrefRemover = string.Empty;

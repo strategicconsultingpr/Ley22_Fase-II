@@ -42,7 +42,12 @@ namespace Ley22_WebApp_V2.Account
                 var user = manager.FindByName(EmailInput.Text);
                 if (user != null)
                 {
-                    if (!user.EmailConfirmed && user.Email != "admin@assmca.pr.gov")
+                    if (user.Active == true)
+                    {
+                        FailureText.Text = "Su cuenta se encuentra desactivada. Favor de comunicarse con equipo de informática.";
+                        ErrorMessage.Visible = true;
+                    }
+                    else if (!user.EmailConfirmed && user.Email != "admin@assmca.pr.gov")
                     {
                         FailureText.Text = "Intento fallido!. Ustede debe confirmar su cuenta antes de utilizar este sistema.";
                         ErrorMessage.Visible = true;

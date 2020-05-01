@@ -688,6 +688,9 @@
         <Function Name="NoAsistioCitaTrabajadorSocial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Calendario" Type="int" Mode="In" />
         </Function>
+        <Function Name="ReabrirCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CasoCriminal" Type="int" Mode="In" />
+        </Function>
         <Function Name="RegistrarPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FK_CasoCriminal" Type="int" Mode="In" />
           <Parameter Name="FK_Usuario" Type="varchar" Mode="In" />
@@ -1244,7 +1247,10 @@
             <Parameter Name="VoidDesc" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ListarCharlasCasoCriminal" ReturnType="Collection(Ley22Model.ListarCharlasCasoCriminal_Result)">
-            <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
+          <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReabrirCasoCriminal">
+            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2960,6 +2966,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReabrirCasoCriminal" FunctionName="Ley22Model.Store.ReabrirCasoCriminal" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

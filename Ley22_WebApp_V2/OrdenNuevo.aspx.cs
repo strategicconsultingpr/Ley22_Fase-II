@@ -165,6 +165,11 @@ namespace Ley22_WebApp_V2
                         TxtMadre.ReadOnly = true;
 
                         BtnActualizar.Visible = false;
+
+                        if (caso.Activa == 0 && (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")))
+                        {
+                            BtnReabrir.Visible = true;
+                        }
                     }
 
                     BtnCrear.Visible = false;
@@ -315,6 +320,34 @@ namespace Ley22_WebApp_V2
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
             }
             
+        }
+
+        protected void BtnReabrir_Click(object sender, EventArgs e)
+        {
+            this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+
+            try
+            {
+                using (Ley22Entities mylib = new Ley22Entities())
+                    mylib.ReabrirCasoCriminal(this.Id_Caso);
+
+                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " fue reabierto correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Reabierto", "sweetAlertRef('Caso Criminal Reabierto','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
+
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

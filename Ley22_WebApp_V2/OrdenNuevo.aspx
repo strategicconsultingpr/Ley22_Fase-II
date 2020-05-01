@@ -719,6 +719,8 @@
                     <asp:Button ID="BtnCrear" runat="server" Text="Crear" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnCrear_Click"/>
 
                     <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnActualizar_Click" Visible="false"/>
+                    
+                    <asp:Button ID="BtnReabrir" runat="server" Text="Reabrir Caso" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnReabrir_Click" Visible="false"/>
 
                     <asp:Button ID="BtnCancelar" runat="server" Text="Volver al Expediente" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false"/>
 

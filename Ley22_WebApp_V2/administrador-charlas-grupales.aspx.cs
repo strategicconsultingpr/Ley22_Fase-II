@@ -294,9 +294,11 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             if (fecha.ToShortDateString() == DateTime.Now.ToShortDateString())
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
 
+            if (DdlCentro.SelectedValue != "0" && DdlCentro.SelectedValue != "")
+            {
                 AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesCharlaGrupal);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
-                
+            }
 
             if (i.ToString() == "14")
                 LiMesAno.Text = UppercaseFirst(fecha.ToString("MMMM")) + " " + fecha.Year.ToString();

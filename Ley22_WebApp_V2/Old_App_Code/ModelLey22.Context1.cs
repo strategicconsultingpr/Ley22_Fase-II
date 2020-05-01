@@ -1507,5 +1507,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarCharlasCasoCriminal_Result>("ListarCharlasCasoCriminal", casoCriminalParameter);
         }
+    
+        public virtual int ReabrirCasoCriminal(Nullable<int> id_CasoCriminal)
+        {
+            var id_CasoCriminalParameter = id_CasoCriminal.HasValue ?
+                new ObjectParameter("Id_CasoCriminal", id_CasoCriminal) :
+                new ObjectParameter("Id_CasoCriminal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ReabrirCasoCriminal", id_CasoCriminalParameter);
+        }
     }
 }

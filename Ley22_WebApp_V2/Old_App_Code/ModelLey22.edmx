@@ -720,6 +720,9 @@
         <Function Name="sp_READ_CentrobyRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Region" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_READ_ListaDeEvaluadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PK_Programa" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_READ_SA_PERSONAxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Participante" Type="int" Mode="In" />
           <Parameter Name="Pk_Persona" Type="int" Mode="In" />
@@ -1250,7 +1253,10 @@
           <Parameter Name="CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReabrirCasoCriminal">
-            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
+          <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_READ_ListaDeEvaluadores" ReturnType="Collection(Ley22Model.SP_READ_ListaDeEvaluadores_Result)">
+            <Parameter Name="PK_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2059,6 +2065,10 @@
           <Property Type="String" Name="Nivel" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="NombreDelCentro" Nullable="true" MaxLength="60" />
           <Property Type="Int32" Name="NumeroCharla" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_READ_ListaDeEvaluadores_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Nombre" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2967,6 +2977,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReabrirCasoCriminal" FunctionName="Ley22Model.Store.ReabrirCasoCriminal" />
+          <FunctionImportMapping FunctionImportName="SP_READ_ListaDeEvaluadores" FunctionName="Ley22Model.Store.SP_READ_ListaDeEvaluadores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ley22Model.SP_READ_ListaDeEvaluadores_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

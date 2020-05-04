@@ -1516,5 +1516,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ReabrirCasoCriminal", id_CasoCriminalParameter);
         }
+    
+        public virtual ObjectResult<SP_READ_ListaDeEvaluadores_Result> SP_READ_ListaDeEvaluadores(Nullable<int> pK_Programa)
+        {
+            var pK_ProgramaParameter = pK_Programa.HasValue ?
+                new ObjectParameter("PK_Programa", pK_Programa) :
+                new ObjectParameter("PK_Programa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_READ_ListaDeEvaluadores_Result>("SP_READ_ListaDeEvaluadores", pK_ProgramaParameter);
+        }
     }
 }

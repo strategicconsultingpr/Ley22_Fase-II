@@ -382,21 +382,15 @@
                         Región
                     </div>
                     <div class="card-block">
-                        <%--<div class="form-group">
-                            <label for="orden">Región</label>
-                            <asp:DropDownList ID="DdlRegion" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlRegion_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlRegion" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                        </div>--%>
+                       
                         <div class="form-group">
                             <label for="orden">Centro</label>
 
-                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlCentro_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlCentro" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" Enabled="false"></asp:DropDownList>
 
                         </div>
                         <div class="form-group">
-                            <label for="orden">Trabajador Social</label>
+                            <label for="orden">Evaluador</label>
                             <asp:DropDownList ID="DdlTrabajadorSocial" runat="server" CssClass="custom-select w-100" OnSelectedIndexChanged="DdlTrabajadorSocial_SelectedIndexChanged" AutoPostBack="true" Enabled="false"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*Requerido" InitialValue="0" ForeColor="Red" ControlToValidate="DdlTrabajadorSocial" Display="Dynamic"></asp:RequiredFieldValidator>
 

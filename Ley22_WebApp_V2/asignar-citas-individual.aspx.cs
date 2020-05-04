@@ -77,6 +77,17 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             DdlCentro.DataBind();
             DdlCentro.SelectedValue = Session["Programa"].ToString();
             //DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            using (Ley22Entities mylib = new Ley22Entities())
+            {
+                var evaluadores = mylib.SP_READ_ListaDeEvaluadores(Convert.ToInt32(Session["Programa"])).DefaultIfEmpty().ToList();
+
+                DdlTrabajadorSocial.DataTextField = "Nombre";
+                DdlTrabajadorSocial.DataValueField = "Id";
+                DdlTrabajadorSocial.DataSource = evaluadores;
+                DdlTrabajadorSocial.DataBind();
+                DdlTrabajadorSocial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            }
 
 
 
@@ -212,15 +223,10 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         if (DdlNumeroOrdenJudicial.SelectedValue == "0")
         {
 
-            //DdlRegion.Enabled = false;
-            DdlCentro.Enabled = false;
+            
+            //DdlCentro.Enabled = false;
             DdlTrabajadorSocial.Enabled = false;
 
-            DdlCentro.SelectedIndex = 0;
-            //if (DdlCentro.Items.FindByValue("0") != null)
-            //{
-            //    DdlCentro.SelectedIndex = 0;
-            //}
             if (DdlTrabajadorSocial.Items.FindByValue("0") != null)
             {
                 DdlTrabajadorSocial.SelectedIndex = 0;
@@ -250,8 +256,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             DdlTipo.DataBind();
             DdlTipo.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
-            DdlCentro.Enabled = true;
-            DdlTrabajadorSocial.Enabled = false;
+            //DdlCentro.Enabled = true;
+            DdlTrabajadorSocial.Enabled = true;
            
             if(DdlTrabajadorSocial.Items.FindByValue("0") != null)
             {
@@ -261,62 +267,6 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         GenerarCalendario();
     }
 
-
-    protected void DdlCentro_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-        //using (Ley22Entities mylib = new Ley22Entities())
-        //{
-        //    DdlTrabajadorSocial.DataTextField = "NB_USUARIO";
-        //    DdlTrabajadorSocial.DataValueField = "PK_USUARIO";
-        //    DdlTrabajadorSocial.DataSource = mylib.sp_READ_TrabajadorSocialbyCentro(Convert.ToInt32(DdlCentro.SelectedValue)).ToList();
-        //    DdlTrabajadorSocial.DataBind();
-        //    DdlTrabajadorSocial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-
-        //}
-        var rol_ts = context.Roles.Where(u => u.Name.Equals("TrabajadorSocial")).Select(q => q.Id).Single().ToString();
-        //var user = context.Users.Where(u => rol_ts.Contains(u.Id));
-        var UserRoles = (from user in context.Users
-                         select new
-                         {
-                             Id = user.Id,
-                             Email = user.Email,
-                             Role = (from userRoles in user.Roles 
-                                     join role in context.Roles on userRoles.RoleId equals role.Id
-                                     select userRoles.RoleId).ToList()
-                         }).ToList();
-        var usuarios = UserRoles.Where(u => u.Role.Contains(rol_ts)).Select(p => p.Id).ToList();
-
-        int centro = Convert.ToInt32(DdlCentro.SelectedValue);
-
-        var us = dsley22.USUARIO_PROGRAMA.Where(u => usuarios.Contains(u.FK_Usuario)).Where(p => p.FK_Programa == centro).ToList();
-
-        var usuarios2 = context.Users.ToList();
-
-        var usuariofinal = (from a in usuarios2 join b in us on a.Id equals b.FK_Usuario select new ListItem { Value = a.Id, Text = a.FirstName +" "+ a.LastName }).ToList();
-
-        DdlTrabajadorSocial.DataTextField = "Text";
-        DdlTrabajadorSocial.DataValueField = "Value";
-        DdlTrabajadorSocial.DataSource = usuariofinal;
-        DdlTrabajadorSocial.DataBind();
-        DdlTrabajadorSocial.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-        if (DdlCentro.SelectedValue.ToString() == "0")
-        {
-            DdlTrabajadorSocial.Enabled = false;
-            DdlTrabajadorSocial.SelectedIndex = 0;
-        }
-        else
-        {
-            DdlTrabajadorSocial.Enabled = true;
-        }
-
-        GenerarCalendario();
-        DivBtnModalAsignarCita.Visible = false;
-     }
-
- 
     void AsignatCharlaPordia(int i, DateTime Fecha, List<Literal> LitContCelda, List<ListarCitasCalendario_Result> ListarCitasCalendario)
     {
 
@@ -692,13 +642,4 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
     }
 
-    //public static DateTime GetLastWeekdayOfMonth(this DateTime date, DayOfWeek day)
-    //{
-    //    DateTime lastDayOfMonth = new DateTime(date.Year, date.Month, 1)
-    //        .AddMonths(1).AddDays(-1);
-    //    int wantedDay = (int)day;
-    //    int lastDay = (int)lastDayOfMonth.DayOfWeek;
-    //    return lastDayOfMonth.AddDays(
-    //        lastDay >= wantedDay ? wantedDay - lastDay : wantedDay - lastDay - 7);
-    //}
 }

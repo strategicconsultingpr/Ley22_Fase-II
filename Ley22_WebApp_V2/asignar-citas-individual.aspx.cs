@@ -29,13 +29,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
         // valida que se haya buscado el usuario
         // -----------------------------------------------------------------------------
-        //if (Session["DataParticipante"] == null)
-        //{
-        //    Session["TipodeAlerta"] = ConstTipoAlerta.Info;
-        //    Session["MensajeError"] = "Por favor seleccione el participante";
-        //    Response.Redirect("Mensajes.aspx", false);
-        //    return;
-        //}
+        
         if (Session["SA_Persona"] == null)
         {
             Session["TipodeAlerta"] = ConstTipoAlerta.Info;
@@ -50,7 +44,7 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
-            //du = (DataParticipante)Session["DataParticipante"];
+            
             du = (Data_SA_Persona)Session["SA_Persona"];
 
 
@@ -63,15 +57,6 @@ public partial class asignar_citas_individual : System.Web.UI.Page
 
             GenerarCalendario();
 
-            //using (Ley22Entities mylib = new Ley22Entities())
-            //{
-            //        DdlRegion.DataTextField = "Region";
-            //        DdlRegion.DataValueField = "Id_Region";
-            //        DdlRegion.DataSource = mylib.sp_READALL_Regiones();
-            //        DdlRegion.DataBind();
-            //        DdlRegion.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-            //}
-
 
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -82,16 +67,6 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             userId = ExistingUser.Id;
             prevPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
 
-            //if (userManager.IsInRole(userId, "SuperAdmin"))
-            //{
-            //    usuarios_programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Select(p => p.PK_Programa).ToList().Select<short, int>(i => i).ToList();
-            //}
-            //else
-            //{
-            //    usuarios_programas = dsley22.USUARIO_PROGRAMA.Where(u => u.FK_Usuario.Equals(userId)).Select(p => p.FK_Programa).ToList();
-            //}
-
-            //var programas = dsPerfil.SA_PROGRAMA.Where(u => u.NB_Programa.Contains("LEY 22")).Where(p => usuarios_programas.Contains(p.PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
             short PK_Programa = Convert.ToInt16(Session["Programa"]);
             var programas = dsPerfil.SA_PROGRAMA.Where(a => a.PK_Programa.Equals(PK_Programa)).Select(r => new ListItem { Value = r.PK_Programa.ToString(), Text = r.NB_Programa.Replace("EVALUACIÓN ", "") }).ToList();
 
@@ -100,7 +75,8 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             DdlCentro.DataTextField = "Text";
             DdlCentro.DataSource = programas;
             DdlCentro.DataBind();
-            DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            DdlCentro.SelectedValue = Session["Programa"].ToString();
+            //DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
 
 
@@ -180,14 +156,20 @@ public partial class asignar_citas_individual : System.Web.UI.Page
             LitContCelda[i].Text = "";
 
             if (fecha.ToShortDateString() == DateTime.Now.ToShortDateString())
-
+            {
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
-            if (DdlCentro.SelectedValue.ToString() != "")
+            }
+
+            if (DdlTrabajadorSocial.SelectedValue != "")
+            {
                 AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesTrabajadorSocial);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
+            }
 
             if (i.ToString() == "14")
+            {
                 LiMesAno.Text = UppercaseFirst(fecha.ToString("MMMM")) + " " + fecha.Year.ToString();
+            }
 
         }
 
@@ -279,39 +261,6 @@ public partial class asignar_citas_individual : System.Web.UI.Page
         GenerarCalendario();
     }
 
-
-    //protected void DdlRegion_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-        
-    //    using (Ley22Entities mylib = new Ley22Entities())
-    //    {
-    //        DdlCentro.DataTextField = "NB_Programa";
-    //        DdlCentro.DataValueField = "PK_Programa";
-    //        DdlCentro.DataSource = mylib.sp_READ_CentrobyRegion(Convert.ToInt32(DdlRegion.SelectedValue)).ToList();
-    //        DdlCentro.DataBind();
-    //        DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
-    //        DdlCentro_SelectedIndexChanged(sender, e);
-
-    //    }
-
-    //    if (DdlRegion.SelectedValue.ToString() == "0")
-    //    {
-    //        DdlCentro.Enabled = false;
-    //        DdlTrabajadorSocial.Enabled = false;
-    //        DdlCentro.SelectedIndex = 0;
-    //        DdlTrabajadorSocial.SelectedIndex = 0;
-    //    }
-    //    else
-    //    {
-    //        DdlCentro.Enabled = true;
-    //        DdlTrabajadorSocial.Enabled = false;
-    //    }
-
-    //    GenerarCalendario();
-    //    DivBtnModalAsignarCita.Visible = false;
-    //    Session["dataCalendario"] = null;
-    //}
 
     protected void DdlCentro_SelectedIndexChanged(object sender, EventArgs e)
     {

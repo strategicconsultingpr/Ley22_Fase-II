@@ -1097,6 +1097,19 @@
              $('#modal-Info-Charla').modal({ show: true });
         }
 
+        function asistenciaAlerta(titulo, texto, icono) {
+            
+            swal({
+                
+                title: titulo,
+                text: texto,
+                icon: icono
+            }
+            );
+
+            $('#modal-Info-Charla').modal({ show: true });
+        }
+
         function imprimirCertificado(IdParticipante, IdCasoCriminal) {
             document.getElementById("<%=H_Id_Participante.ClientID %>").value = IdParticipante;
             document.getElementById("<%=H_Id_CasoCriminal.ClientID %>").value = IdCasoCriminal;

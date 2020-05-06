@@ -21,6 +21,16 @@ namespace Ley22_WebApp_V2
         public string NroCharla;
     }
 
+    public class DataCharla2
+    {
+        public string TipoCharlaNivel;
+        public string FechaHoraCharla;
+        public string Participantes;
+        public string AdcionarParticipante;
+        public string NroCharla;
+        public string EliminarParticipante;
+    }
+
     public class InfoCharla
     {
         public int Id_CharlaGrupal;
@@ -54,21 +64,13 @@ namespace Ley22_WebApp_V2
         }
 
         [WebMethod]
-        public DataCharla BindModalAsistencia(int Id_CharlaGrupal, string Id_Participante, string NombreParticipante, int Id_CasoCriminal)
-        //  public DataCharla BindModalAsistencia()
-
+        public DataCharla2 BindModalAsistencia(int Id_CharlaGrupal, string Id_Participante, string NombreParticipante, int Id_CasoCriminal)
         {
-
-            //int Id_CharlaGrupal = 1;
-            //int Id_Participante= 1;
-            //string NombreParticipante = "aaa";
-            DataCharla mydata = new DataCharla();
+            DataCharla2 mydata = new DataCharla2();
 
             CultureInfo ci = new CultureInfo("en-US");
             using (Ley22Entities mylib = new Ley22Entities())
-
             {
-                //List<ListarParticipantesPorCharlas_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlas(Id_CharlaGrupal).ToList();
                 List<ListarParticipantesPorCharlasCasoCriminal_Result> resulParaticipalntes = mylib.ListarParticipantesPorCharlasCasoCriminal(Id_CharlaGrupal).ToList();
                 List<DetalleCharlaGrupal_Result> resulDetalle = mylib.DetalleCharlaGrupal(Id_CharlaGrupal).ToList();
                 var asistio = mylib.CharlaGrupals.Where(u => u.Id_CharlaGrupal.Equals(Id_CharlaGrupal)).Single();
@@ -77,6 +79,7 @@ namespace Ley22_WebApp_V2
 
                 mydata.NroCharla = resulDetalle[0].NumeroCharla.ToString();
                 mydata.TipoCharlaNivel = resulDetalle[0].TipodeCharla + ",  " + resulDetalle[0].Nivel + " - Numero de Charla:#"+ mydata.NroCharla;
+
                 // derale de la charla
                 DateTime TheDate = resulDetalle[0].FechaInicial;
                 System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("es-PR");
@@ -85,43 +88,82 @@ namespace Ley22_WebApp_V2
                 // se cargan los participante 
                 List<ListarCharlasCasoCriminal_Result> CharlasDelCaso = mylib.ListarCharlasCasoCriminal(Id_CasoCriminal).ToList();
 
+                var primeraCharla = CharlasDelCaso.Where(u => u.NumeroCharla == 1).Count();
+
+                var charlaRepetida = CharlasDelCaso.Where(u => u.NumeroCharla == resulDetalle[0].NumeroCharla).Where(p => p.Id_CharlaGrupal != Id_CharlaGrupal).Count();
+
 
                 string Parti = string.Empty;
                 string HrefRemover = string.Empty;
                 string HreAdicionar = string.Empty;
                 bool swEstaenLaCharla = false;
                 int num = 1;
+                string participanteEliminar = string.Empty;
+
                 foreach (ListarParticipantesPorCharlasCasoCriminal_Result c in resulParaticipalntes)
                 {
-                    //&& asistio.FechaFinal > DateTime.Today
-                    if (c.Id_Participante.ToString() == Id_Participante.ToString() && c.Id_OrdenJudicial.ToString() == Id_CasoCriminal.ToString() && activa.Activa == 1)
+                    if (c.Id_Participante.ToString() == Id_Participante.ToString())
                     {
                         swEstaenLaCharla = true;
-                        HrefRemover = " <a href=\"#\"   onclick=\"javacript:__doPostBack('EliminarParticipante', '')\" >Eliminar</a>";
 
-                    }
-                    else if(c.Id_Participante.ToString() == Id_Participante.ToString() && c.Id_OrdenJudicial.ToString() != Id_CasoCriminal.ToString())
-                    {
-                        
-                        HrefRemover = "";
-
+                        if(c.Id_OrdenJudicial.ToString() == Id_CasoCriminal.ToString())
+                        {
+                            if(activa.Activa == 1)
+                            {
+                                if (c.Asistio == 1)
+                                {
+                                    //HrefRemover = " <a href=\"#\" onclick=\"javacript:asistioParticipante()\" placeholder=\"'Presione para obtener más información'\"> - PARTICIPANTE NO SE PUEDE ELIMINAR</a>";
+                                    HrefRemover = " <a href=\"#\"> - PARTICIPANTE NO SE PUEDE ELIMINAR</a>";
+                                }
+                                else
+                                {
+                                    HrefRemover = "<label class=\"form-check-label\"> - PARTICIPANTE ACTUAL </label>";
+                                    participanteEliminar =  c.NB_Primero + " " + c.AP_Primero + " &nbsp; <a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:indianred\" onclick=\"javacript:eliminarParticipante()\" ><img src=\"../images/person-dash.svg\" alt=\"\" width=\"32\" height=\"32\" title=\"ELIMINAR PARTICIPANTE DE CHARLA\"></a>";
+                                }
+                            }
+                            else
+                            {
+                                HrefRemover = "<label class=\"form-check-label\"> - CASO CRIMINAL SE ENCUENTRA CERRADO </label>";
+                            }
+                        }
+                        else
+                        {
+                            HrefRemover = "<label class=\"form-check-label\"> - PARTICIPANTE YA ESTA EN ESTA CHARLA BAJO OTRO CASO CRIMINAL </label>";
+                        }
                     }
                     else
                     {
-                        
                         HrefRemover = "";
                     }
+
                     Parti += " <label class=\"form-check-label\">"+ num + ". " + c.NB_Primero + " " + c.AP_Primero + "</label> " + HrefRemover + "<br> ";
                     num++;
                 }
-                //&& asistio.FechaFinal > DateTime.Today
+
                 if (swEstaenLaCharla == false)
-                    HreAdicionar = NombreParticipante + " <a href=\"#\" class=\"btn btn-secondary\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" >Añadir Particpante</A>";
+                {
+                    if(primeraCharla < 1)
+                    {
+                        HreAdicionar = NombreParticipante + " <a href=\"#\" class=\"btn btn-secondary\" onclick=\"javacript:sweetAlert('Falta de Charla','Participante no se encuentra asignado a una primera charla.','warning')\" >INVALIDO</a>";
+                        
+                    }
+                    else if (charlaRepetida > 0)
+                    {
+                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:gold\" onclick=\"javacript:sweetAlert('Charla Repetido','Participante se encuentra asignado a otra charla con este numero.','warning')\" ><img src=\"../images/exclamation-triangle.svg\" alt=\"\" width=\"32\" height=\"32\" title=\"PARTICIPANTE YA ASIGNADO A OTRA CHARLA #" + resulDetalle[0].NumeroCharla.ToString() + "\"></a>";
+                    }
+                    else
+                    {
+                        HreAdicionar = NombreParticipante + " <a href=\"#\" class=\"btn btn-secondary\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" >Añadir Particpante</a>";
+                    }
+                }
                 else
+                {
                     HreAdicionar = "";
+                }
 
                 mydata.Participantes = Parti;
                 mydata.AdcionarParticipante = HreAdicionar;
+                mydata.EliminarParticipante = participanteEliminar;
                 
 
                 return mydata;
@@ -152,13 +194,7 @@ namespace Ley22_WebApp_V2
 
         [WebMethod]
         public DataCharla BindModalParticipantes(int Id_CharlaGrupal, string userId)
-        //  public DataCharla BindModalAsistencia()
-
         {
-
-            //int Id_CharlaGrupal = 1;
-            //int Id_Participante= 1;
-            //string NombreParticipante = "aaa";
             DataCharla mydata = new DataCharla();
 
             CultureInfo ci = new CultureInfo("en-US");
@@ -234,11 +270,18 @@ namespace Ley22_WebApp_V2
 
                     var status = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_Participante.Equals(c.Id_Participante)).Where(p => p.Id_OrdenJudicial == orden).Select(a => a.Asistio).Sum();
 
+                    //var infoCharlas = dsLey22.ParticipantesPorCharlas.Where(u => u.Id_OrdenJudicial == orden).Select(a => a.Id_CharlaGrupal);
+
+                    var asistenciaPrimeraCharla = (from participantes in dsLey22.ParticipantesPorCharlas
+                                                  join charlas in dsLey22.CharlaGrupals on participantes.Id_CharlaGrupal equals charlas.Id_CharlaGrupal
+                                                  where participantes.Id_OrdenJudicial == orden && charlas.NumeroCharla == 1
+                                                  select new { Asistio = participantes.Asistio }).SingleOrDefault();
+
                     if(activa == 0)
                     {
                         EliminarOnclick = "";
-                        AsistioOnclick = " onclick=\"javascript: alert('Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante')\"";
-                        NoAsistioOnclick = " onclick=\"javascript: alert('Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante')\"";
+                        AsistioOnclick = " onclick=\"javascript: asistenciaAlerta('Caso Cerrado','Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante','warning')\"";
+                        NoAsistioOnclick = " onclick=\"javascript: asistenciaAlerta('Caso Cerrado','Este caso criminal se encuentra cerrado. No puede modificar la asistencia de este participante','warning')\"";
                         HrefRemover = "";
                         HreAdicionar = "";
                     }
@@ -253,15 +296,21 @@ namespace Ley22_WebApp_V2
                     
                     if(c.Asistio == 0)
                     {
-                        HrefAsistio = "<a " + HrefPermiso + "  id=\"asistioID\""+ AsistioOnclick + "style=\"color: #FF5733\">No Asistio</a>";
                         if (charlasRegulares > 9 && (victima == 1 || victima == -1))
                         {
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Completado</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
                         }
                         else
                         {
+                            if(Convert.ToInt32(mydata.NroCharla) != 1 && asistenciaPrimeraCharla.Asistio != 1)
+                            {
+                                AsistioOnclick = " onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"";
+                            }
+
                             HrefEstatus = "<div class=\"col-md-4\"><div class=\"row\"><div class=\"col-md-4\"><a>Debe</a></div><div class=\"col-md-2\"></div><div class=\"col-md-4\"><a>$" + balance + "</a></div></div></div>";
                         }
+
+                        HrefAsistio = "<a " + HrefPermiso + "  id=\"asistioID\"" + AsistioOnclick + "style=\"color: #FF5733\">No Asistio</a>";
                     }
                     else
                     {

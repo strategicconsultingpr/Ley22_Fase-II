@@ -316,11 +316,11 @@
                             
                             <br>
                         </div>
-                        <div class="col">
+                        <%--<div class="col">
                              <a data-dismiss="modal" href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-crear-charla_2" data-whatever="@getbootstrap" runat="server" id="A1" visible="false" >Modificar Charla</a>
                             <asp:LinkButton runat="server" ID="BtnEliminarCharla" Text="Eliminar Charla" class="btn btn-primary btn-block" OnClick="BtnEliminar_Click" visible="false" ></asp:LinkButton>
                              <asp:LinkButton runat="server" ID="BtnGetCharla" Text="" Style="display:none;" OnClick="BtnModificarCharla" />
-                        </div>
+                        </div>--%>
                     </div>
                     <div class="row pl-4 pr-4">
                         <div class="col-md-6">
@@ -329,19 +329,27 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                       <%-- <div class="col-md-6">
                              <div id="AdcionarParticipante"></div>
-                        </div>
-                        <div class="col-md-6">
+                            <a href="#">
+                              <img src="../images/exclamation-triangle.svg" alt="" width="32" height="32" title="Bootstrap">
+                            </a>
+                        </div>--%>
+                       <%-- <div class="col-md-6">
                              <div id="NumeroCharla"></div>
-                        </div>
+                        </div>--%>
                     </div>
-
+                    
                 </div>
                 <div class="modal-footer">
-<%--                    <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Aceptar</button>
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Imprimir</button> --%>
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="AdcionarParticipante"></div>
+                        <div id="EliminarParticipante"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -920,18 +928,11 @@
                            });
                    }
                    function changeDivContent3(Id_CharlaGrupal) {
-                      <%-- alert(Id_CharlaGrupal);
-                       alert(<%=Session["Id_Participante"].ToString()%>);
-                       alert('<%=Session["NombreParticipante"]%>');--%>
+                     
                        if (<%=Session["Id_Participante"].ToString()%> != null) {
 
                            document.getElementById("<%=Id_CharlaGrupal.ClientID %>").value = Id_CharlaGrupal;
                            document.getElementById("<%=H_Id_CharlaGrupal.ClientID%>").value = Id_CharlaGrupal;
-
-                         //  var btn = document.getElementById('<%=BtnGetCharla.ClientID%>');
-                         //  btn.click();
-                            
-                           // $("Id_CharlaGrupal").value = Id_CharlaGrupal; 
 
                            var Id_Participante = <%=Session["Id_Participante"].ToString()%>;
                            var NombreParticipante = '<%=Session["NombreParticipante"].ToString()%>';
@@ -1007,6 +1008,7 @@
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                        $("#Participantes").html(myData.Participantes);
                        $("#AdcionarParticipante").html(myData.AdcionarParticipante);
+                       $("#EliminarParticipante").html(myData.EliminarParticipante);
 
                    }
 
@@ -1018,7 +1020,35 @@
 
                        document.getElementById("<%= HNroExcepcion.ClientID %>").value = NumerodeExcepcion;
 
-                    }
+                   }
+
+                   function eliminarParticipante(){
+                      
+                       swal({
+                           title: "Eliminar Participante",
+                           text: "¿Esta seguro de querer eliminar participante de esta charla?",
+                           icon: "warning",
+                           buttons: true,
+                           dangerMode: true
+                       }).then((value) => {
+                           if (value) {
+                               __doPostBack("EliminarParticipante", "");
+                           }
+                           else {
+                           }
+                       })
+                       
+                   }
+
+                   function asistioParticipante() {
+
+                       swal({
+                           title: "Participante Asistió",
+                           text: "Participante asistió a esta charla, por lo tanto no se puede eliminar.",
+                           icon: "warning"
+                       })
+
+                   }
 
     </script>
 </asp:Content>

@@ -249,6 +249,7 @@
     <Content Include="images\certificate_icon_blue.png" />
     <Content Include="images\clock_icon.png" />
     <Content Include="images\derecha.png" />
+    <Content Include="images\exclamation-triangle.svg" />
     <Content Include="images\facebook-circle-colored.png" />
     <Content Include="images\inbox-rojo.png" />
     <Content Include="images\inbox.png" />
@@ -256,6 +257,7 @@
     <Content Include="images\logo_1.jpg" />
     <Content Include="images\logo_2.png" />
     <Content Include="images\Logo_assmca_footer.png" />
+    <Content Include="images\person-dash.svg" />
     <Content Include="images\twitter-circle-colored.png" />
     <Content Include="images\vk-circle-colored.png" />
     <Content Include="images\youtube-circle-colored.png" />

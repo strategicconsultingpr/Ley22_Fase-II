@@ -584,24 +584,24 @@ public partial class charlas_grupales : System.Web.UI.Page
 
     void EliminarParticipante()
     {
-       int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
-       int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
+        int Id_Participante = Convert.ToInt32(Session["Id_Participante"]);
+        int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
         int casoCriminal = Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue);
+
+        string mensaje = string.Empty;
+        string titulo = string.Empty;
+        string tipo = string.Empty;
 
         try
         {
             using (Ley22Entities mylib = new Ley22Entities())
             {
-                
-                
 
-                //mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
-                mylib.EliminarParticipanteCharlaGrupalCasoCriminal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante,casoCriminal);
+                mylib.EliminarParticipanteCharlaGrupalCasoCriminal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante, casoCriminal);
 
-                string mensaje = "Se eliminó correctamente el participante de la charla";
-
-
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Participante fuera de Charla", "sweetAlert('Participante fuera de Charla','" + mensaje + "','success')", true);
+                mensaje = "El participante fué eliminado de la charla";
+                titulo = "Participante Eliminado";
+                tipo = "success";
 
                 var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
 
@@ -638,13 +638,20 @@ public partial class charlas_grupales : System.Web.UI.Page
         catch (Exception ex)
         {
 
-            string mensaje = ex.InnerException.Message;
+            if (ex.InnerException == null)
+            {
+                mensaje = ex.Message;
+            }
+            else
+            {
+                mensaje = ex.InnerException.Message;
+            }
 
-
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            titulo = "Error";
+            tipo = "error";
         }
 
-
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Eliminar Participante", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
 
     }
 

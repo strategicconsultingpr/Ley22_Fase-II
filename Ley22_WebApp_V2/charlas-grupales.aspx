@@ -323,11 +323,27 @@
                         </div>--%>
                     </div>
                     <div class="row pl-4 pr-4">
-                        <div class="col-md-6">
+                        <div class="container">
+                           <p><strong>Lista Participantes</strong></p>
+                           <table class="table table-bordered">
+                               <thead class="thead-default">
+                                   <tr class="d-flex">
+                                    <th class="col-1" style="text-align:center"><h6><strong>#</strong></h6></th>
+                                    <th class="col-9" style="text-align:center"><h6><strong>Nombre de Participantes</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Estatus</strong></h6></th>
+                                   </tr>
+                               </thead>
+                               <tbody id="bodyLista">
+                                   
+                               </tbody>
+                           </table>
+                        </div>
+
+                        <%--<div class="col-md-6">
                             <p><strong>Lista Participantes</strong></p>
                             <div id="Participantes"></div>
 
-                        </div>
+                        </div>--%>
 
                        <%-- <div class="col-md-6">
                              <div id="AdcionarParticipante"></div>
@@ -462,7 +478,7 @@
                         </div>--%>
                         <div class="form-group">
                             <label for="orden">Centro</label>
-                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" AutoPostBack="true" OnSelectedIndexChanged="DdlCentro_SelectedIndexChanged"></asp:DropDownList>
+                            <asp:DropDownList ID="DdlCentro" runat="server" CssClass="custom-select w-100" Enabled="false"></asp:DropDownList>
 
                         </div>
 
@@ -1001,12 +1017,13 @@
 
                    
 
-                   function OnGetAllMembersSuccess(data, status) { 
-                       
+                   function OnGetAllMembersSuccess(data, status) {
+                       $("#bodyLista").find("tr").remove();
+
                        var myData = data.d;
                        $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);
-                       $("#Participantes").html(myData.Participantes);
+                       $("#bodyLista").append(myData.Participantes);
                        $("#AdcionarParticipante").html(myData.AdcionarParticipante);
                        $("#EliminarParticipante").html(myData.EliminarParticipante);
 

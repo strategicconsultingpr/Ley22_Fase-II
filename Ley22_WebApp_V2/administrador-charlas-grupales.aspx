@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4" style="text-align:center">
+                       <%-- <div class="col-md-4" style="text-align:center">
                             <p><strong>Participantes</strong></p>
                         </div>
                         <div class="col-md-4" style="text-align:center">
@@ -101,7 +101,24 @@
                             <strong>Balance</strong>
                             </div>
                             </div>
+                        </div>--%>
+                        <div class="container">
+                            <table class="table table-bordered">
+                               <thead class="thead-default">
+                                   <tr class="d-flex">
+                                    <th class="col-4" style="text-align:center"><h6><strong>Participantes</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Estatus</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Charlas</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Deuda</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Acción</strong></h6></th>
+                                   </tr>
+                               </thead>
+                               <tbody id="bodyLista">
+                                   
+                               </tbody>
+                           </table>
                         </div>
+
                                         
                     </div>
                     <div class="row" id="Participantes">
@@ -1048,7 +1065,7 @@
                                 var myData = data.d;
                                 $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                                 $("#FechaHoraCharla").html(myData.FechaHoraCharla);
-                                $("#Participantes").html(myData.Participantes);
+                                $("#bodyLista").append(myData.Participantes);
                                 $("#BtnAsistencia").html(myData.AdcionarParticipante);
                                 
 
@@ -1107,7 +1124,7 @@
             }
             );
 
-            $('#modal-Info-Charla').modal({ show: true });
+          //  $('#modal-Info-Charla').modal({ show: true });
         }
 
         function imprimirCertificado(IdParticipante, IdCasoCriminal) {

@@ -84,7 +84,8 @@ public partial class charlas_grupales : System.Web.UI.Page
             DdlCentro.DataTextField = "Text";
             DdlCentro.DataSource = programas;
             DdlCentro.DataBind();
-            DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            DdlCentro.SelectedValue = Session["Programa"].ToString();
+            //DdlCentro.Items.Insert(0, new ListItem("-Seleccione-", "0"));
 
             using (Ley22Entities mylib = new Ley22Entities())
             {
@@ -157,22 +158,26 @@ public partial class charlas_grupales : System.Web.UI.Page
         {
 
             //DdlRegion.Enabled = false;
-            DdlCentro.Enabled = false;
+            //DdlCentro.Enabled = false;
 
             //DdlRegion.SelectedIndex = 0;
-            DdlCentro.SelectedIndex = 0;
-            
+            //DdlCentro.SelectedIndex = 0;
+
+            DivBtnModalAsignarCita.Visible = false;
+
         }
         else
         {
             //DdlRegion.Enabled = true;
-            DdlCentro.Enabled = true;
+            //DdlCentro.Enabled = true;
             //DdlRegion.SelectedIndex = 0;
-            if(DdlCentro.Items.FindByValue("0") != null)
-            {
-                DdlCentro.SelectedIndex = 0;
-            }
-           
+            //if(DdlCentro.Items.FindByValue("0") != null)
+            //{
+            //    DdlCentro.SelectedIndex = 0;
+            //}
+
+            DivBtnModalAsignarCita.Visible = true;
+
 
         }
         GenerarCalendario();

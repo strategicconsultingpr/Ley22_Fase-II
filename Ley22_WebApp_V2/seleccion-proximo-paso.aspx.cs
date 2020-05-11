@@ -60,7 +60,13 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             {
                 LitEstatus.Text = "Abierto bajo este programa";
 
-                if(verificarFaltaDeDocumento())
+                ordenImg.HRef = "#";
+                ordenImg.Attributes.Add("OnClick", "javacript:ordenNuevo()");
+
+                ordenText.HRef = "#";
+                ordenText.Attributes.Add("OnClick", "javacript:ordenNuevo()");
+
+                if (verificarFaltaDeDocumento())
                 {
                     inboxImg.Attributes["src"] = "../images/inbox-rojo.png";
                 }

@@ -226,13 +226,13 @@
                                                     <div class="card text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="OrdenNuevo.aspx">
+                                                                <a ID="ordenImg" runat="server" href="OrdenNuevo.aspx">
                                                                     <span class="fa-stack fa-3x">
                                                                         <img src="../images/caso-icon.png" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>                                   
-                                                            <h4 class="card-title"><a href="OrdenNuevo.aspx">Registro de Caso Criminal</a></h4>
+                                                            <h4 class="card-title"><a ID="ordenText" runat="server" href="OrdenNuevo.aspx">Registro de Caso Criminal</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -356,7 +356,25 @@
     </div>
     <!-- Card -->
 
+        <script type="text/javascript">
+            function ordenNuevo() {
 
+                swal({
+                    title: "Registrar Nuevo Caso Criminal",
+                    text: "Esta participante contiene un caso criminal activo bajo este programa ¿Esta seguro de querer registrar un nuevo caso criminal para este participante?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((value) => {
+                    if (value) {
+                        window.location.href = "OrdenNuevo.aspx";
+                    }
+                    else {
+                    }
+                })
+
+            }
+            </script>
 
 
 </asp:Content>

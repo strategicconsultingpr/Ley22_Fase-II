@@ -302,7 +302,10 @@ public partial class cargar_documentos : System.Web.UI.Page
     }
 
     protected void BtnSubirDocumento_Click(object sender, EventArgs e)
-    {    
+    {
+        string mensaje = string.Empty;
+        string titulo = string.Empty;
+        string tipo = string.Empty;
 
         if (FileUpload1.HasFile)
         { 
@@ -311,21 +314,43 @@ public partial class cargar_documentos : System.Web.UI.Page
                 string filename = Path.GetFileName(FileUpload1.FileName);
                 string Id = Session["Id_Participante"].ToString();
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue))
+                if (!Directory.Exists("Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue))
                 {
                     Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/");
                 }
                 FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
                 GuardarDocumento(Convert.ToInt32(DdlDocumento.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), filename, Convert.ToInt32(Session["Id_UsuarioApp"]));
-                BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-                CargarDocumentosFaltantes();
-                ActualizarDocumentosDdl();
+                
+
+                mensaje = "El documento se guardó correctamente";
+                titulo = "Docuento Guardado";
+                tipo = "success";
             }
             catch (Exception ex)
             {
-                // StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+                titulo = "Error";
+                tipo = "error";
             }
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
+
+            BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            CargarDocumentosFaltantes();
+            ActualizarDocumentosDdl();
+
+            
+           // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento", "alert('hola');", true);
+            
         }
 
     }

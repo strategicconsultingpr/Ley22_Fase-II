@@ -65,7 +65,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlDocumento" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col">
-                        <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-file" aria-describedby="fileHelp" />
+                        <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control-file" aria-describedby="fileHelp"/>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="FileUpload1" Display="Dynamic"></asp:RequiredFieldValidator>
 
                     </div>
@@ -127,60 +127,23 @@
 
     <script type="text/javascript">
 
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        function sweetAlert(titulo, texto, icono) {
+
+            swal({
+                title: titulo,
+                html: texto,
+                icon: icono
+            }
+            );
+
+        }
         
 
-        function alertaAsistio(sender) {
-            
-          swal({
-             title: "Are you sure?",
-                text: "You will not be able to recover this imaginary   file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }).then((willDelete) => {
-              if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
-                  icon: "success",
-                  });
-                  return true;
-              } else {
-                  swal("Your imaginary file is safe!");
-                  return false;
-              }
-            });
-            //return confirm("¿Está seguro que el participante SI asistió?");   
-
-       
-
-            //swal({
-            //    title: "Are you sure?",
-            //    text: "You will not be able to recover this imaginary   file!",
-            //    type: "warning",
-            //    showCancelButton: true,
-            //    confirmButtonColor: "#DD6B55",
-            //    confirmButtonText: "Yes, delete it!",
-            //    cancelButtonText: "No, cancel plx!",
-            //    closeOnConfirm: false,
-            //    closeOnCancel: false
-            //},
-            //    function (isConfirm) {
-            //        if (isConfirm) {
-            //            swal({ title: "Deleted!", text: "Your imaginary file has been deleted.", type: "success", confirmButtonText: "OK!", closeOnConfirm: false },
-            //                function () {
-            //                    // RESUME THE DEFAULT LINK ACTION
-            //                    // window.location.href = defaultAction;
-            //                    return true;
-            //                });
-            //        } else {
-            //            swal("Cancelled", "Your imaginary file is safe :)", "error");
-            //            return false;
-            //        }
-            //    });
-        }
+        
 
        
       

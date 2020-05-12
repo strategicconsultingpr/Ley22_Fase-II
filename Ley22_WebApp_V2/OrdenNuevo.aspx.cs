@@ -64,7 +64,6 @@ namespace Ley22_WebApp_V2
                     this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
 
                     short idPrograma = Convert.ToInt16(Session["Programa"]);
-                    
 
                     var caso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_Caso)).SingleOrDefault();
 
@@ -174,6 +173,25 @@ namespace Ley22_WebApp_V2
 
                     BtnCrear.Visible = false;
 
+                    var cargosVacio = (from casos in dsLey22.CasoCriminals
+                                     join control in dsLey22.ControldePagoes on casos.Id_CasoCriminal equals control.FK_CasoCriminal
+                                     where casos.Id_CasoCriminal == this.Id_Caso
+                                     select new { resultado = casos.Id_CasoCriminal }
+                                    ).Count();
+
+                    var documentosVacio = (from casos in dsLey22.CasoCriminals
+                                           join documentos in dsLey22.DocumentosPorParticipantes on casos.Id_CasoCriminal equals documentos.Id_OrdenJudicial
+                                           where casos.Id_CasoCriminal == this.Id_Caso
+                                           select new { resultado = casos.Id_CasoCriminal }
+                                    ).Count();
+
+                    if (caso.Activa == 1 && (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")) && cargosVacio == 0 && documentosVacio == 0)
+                    {
+                        BtnEliminar.Visible = true;
+                    }
+
+
+
                 }
                 else
                 {
@@ -189,6 +207,12 @@ namespace Ley22_WebApp_V2
                 }
 
                 
+            }
+
+            if (Page.Request.Params["__EVENTTARGET"] == "EliminarCasoCriminal")
+            {
+                Eliminar_Caso();
+                return;
             }
         }
 
@@ -336,6 +360,34 @@ namespace Ley22_WebApp_V2
 
                 // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
                 ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Reabierto", "sweetAlertRef('Caso Criminal Reabierto','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
+
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
+        }
+
+        void Eliminar_Caso()
+        {
+            this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+
+            try
+            {
+                //using (Ley22Entities mylib = new Ley22Entities())
+                //    mylib.ReabrirCasoCriminal(this.Id_Caso);
+
+                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " fue eliminado correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Reabierto", "sweetAlertRef('Caso Criminal Eliminado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
 
                 //Response.Redirect("seleccion-proximo-paso.aspx", false);
             }

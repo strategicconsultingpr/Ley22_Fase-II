@@ -722,6 +722,8 @@
                     
                     <asp:Button ID="BtnReabrir" runat="server" Text="Reabrir Caso" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClick="BtnReabrir_Click" Visible="false"/>
 
+                    <asp:Button ID="BtnEliminar" runat="server" Text="Eliminar Caso" CssClass="btn btn-primary btn-lg pr-4 pl-4 mr-4" OnClientClick="eliminar(); return false" Visible="false"/>
+
                     <asp:Button ID="BtnCancelar" runat="server" Text="Volver al Expediente" CssClass="btn btn-secondary btn-lg" OnClick="BtnCancelar_Click" CausesValidation="false"/>
 
                 </div>
@@ -857,6 +859,26 @@
                   document.getElementById("<%=TxtNroCasoCriminal3.ClientID %>").value = "";
 
               }
+          }
+
+          function eliminar() {
+            
+              swal({
+                  title: "Eliminar Caso Criminal",
+                  text: "¿Esta seguro de querer eliminar este caso criminal?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true
+              }).then((value) => {
+                  if (value) {
+                      __doPostBack("EliminarCasoCriminal", "");
+
+                  }
+                  else {
+                      
+                  }
+              })
+              
           }
     </script>
    

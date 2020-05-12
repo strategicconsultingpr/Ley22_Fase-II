@@ -4,6 +4,127 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
+    <div class="modal fade" id="modal-agregar-tribunal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Agregar Nuevo Tribunal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row bb pl-4 pr-4 pb-4 mb-4">
+
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="tribunal-nombre">Nombre</label>
+                               <asp:TextBox runat="server" ID="TxtNombreTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                           </div>
+                       </div>
+
+                        <div class="col-md-6">
+
+                           <div class="row">
+                                <label for="tribunal-telefono">Teléfono</label>
+                           </div>
+
+                           <div class="row">
+                           <div class="col-md-3">
+                                   <asp:TextBox runat="server" ID="TxtTelefonoTribunal1" CssClass="form-control" placeholder="787" MaxLength="3" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal1" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                           </div>
+                           <div class="col-md-3">
+                                   <asp:TextBox runat="server" ID="TxtTelefonoTribunal2" CssClass="form-control" placeholder="555" MaxLength="3" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal2" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                            </div>
+                            <div class="col-md-4">
+                                   <asp:TextBox runat="server" ID="TxtTelefonoTribunal3" CssClass="form-control" placeholder="5555" MaxLength="4" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal3" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                            </div>
+                            </div>
+
+                       </div>
+                        </div>
+                    
+
+                    <div class="row pl-4 pr-4 pb-4 mb-4">
+
+                        <div class="col-md-10">
+                           <div class="form-group">
+                               <label for="tribunal-direccion">Dirección</label>
+                               <asp:TextBox runat="server" ID="TxtDireccionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                           </div>
+                       </div>
+
+                        <div class="col-md-2">
+                           <div class="form-group">
+                               <label for="tribunal-pais">País</label>
+                               <asp:DropDownList runat="server" ID="DdlPaisTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                           </div>
+                       </div>
+
+                        <div class="col-md-12">
+                           <div class="form-group">
+                               <label for="tribunal-box">PO Box</label>
+                               <asp:TextBox runat="server" ID="TxtBoxTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                           </div>
+                       </div>
+
+                        <div class="col-md-6">
+
+                           <div class="row">
+                               <div class="col" style="text-align:left"><label for="tribunal-categoria">Categoria</label></div>
+                               <div class="col" style="text-align:right"><label for="tribunal-newcategoria"><asp:CheckBox ID="ChkCategoria" runat="server" class="form-check-input" OnClick="chkCategoria();"/>Agregar Nueva</label></div>
+                           </div>
+
+                            <div class="form-group" id="divDdlCategoria">
+                               <asp:DropDownList runat="server" ID="DdlCategoriaTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                           </div>
+
+                            <div class="form-group" id="divTxtCategoria" style="visibility:hidden">
+                               <asp:TextBox runat="server" ID="TxtCategoriaTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                           </div>
+
+                       </div>
+
+                        <div class="col-md-6">
+
+                            <div class="row">
+                                <div class="col" style="text-align:left"><label for="tribunal-region">Región</label></div>
+                                <div class="col" style="text-align:right"><label for="tribunal-newregion"><asp:CheckBox ID="ChkRegion" runat="server" class="form-check-input" OnClick="chkRegion();"/>Agregar Nueva</label></div>
+                            </div>
+
+                           <div class="form-group" id="divDdlRegion">
+                               <asp:DropDownList runat="server" ID="DdlRegionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                           </div>
+
+                            <div class="form-group" id="divTxtRegion" style="visibility:hidden">
+                               <asp:TextBox runat="server" ID="TxtRegionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                           </div>
+
+
+                       </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton ID="Button1" runat="server" Text="Agregar Tribunal" CssClass="btn btn-primary mr-3" />
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+
+             </div>
+          </div>
+    </div>
+
+
+
+
     <div class="card mb-4">
         <div class="card-header">
            <strong> Nuevo Caso Criminal</strong> &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp Participante: <asp:Literal ID="NombreParticipante" runat="server"></asp:Literal> &nbsp &nbsp &nbsp &nbsp Programa: <asp:Literal ID="NombrePrograma" runat="server"></asp:Literal> 
@@ -11,8 +132,32 @@
         <div class="card-block">
 
             <div class="row bb pb-4 mb-4">
-                <div class="col-md-2 text-right">
-                    <strong>Situación Legal</strong>
+                <div class="col-md-2">
+                    <div class="row" >
+                        <div class="col" style="text-align:right">
+                            <strong>Situación Legal</strong>
+                        </div>
+                    </div>
+
+                    <div class="row" >
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    
+                    <div class="row">
+                     <div class="col" style="text-align:right">
+                            <a data-dismiss="modal" href="#" data-toggle="modal" data-target="#modal-agregar-tribunal" data-whatever="@getbootstrap" runat="server"><img src="../images/plus-circle.svg" alt="" width="25" height="25" title="AGREGAR NUEVO TRIBUNAL"></a>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="col-md-10">
@@ -67,17 +212,18 @@
                         </div>
 
                         <div class="col-md-3">
-
-                            <div class="form-check">
-                                <p>&nbsp;</p>
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col">
                                 <h5>
                                 <label class="form-check-label">
                                     <asp:CheckBox ID="ChkCaso" runat="server" class="form-check-input" OnClick="combinarCaso();"/>
                                    Combinar Caso Criminal
                                 </label>
                                 </h5>
+                                    </div>
                             </div>
-
+                                </div>
                             </div>
 
                          <div class="col-md-3">
@@ -122,11 +268,26 @@
                         <!-- col -->
 
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="tribunal">Tribunal (*)</label>
-                                <asp:DropDownList ID="DdlTribunal" runat="server" class="form-control"></asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTribunal" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            <div class="row">
+                                    <div class="col" style="text-align:left"><label for="tribunal">Tribunal (*)</label></div>
+                                    <div class="col" style="text-align:right"><label class="form-check-label"><asp:CheckBox ID="ChkTribunal" runat="server" class="form-check-input" OnClick="combinarCaso();"/>Agregar Tribunal</label></div>
                             </div>
+
+                            <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group" >
+                                    <asp:DropDownList ID="DdlPais" runat="server" class="form-control"></asp:DropDownList>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="form-group" >
+                                    <asp:DropDownList ID="DdlTribunal" runat="server" class="form-control"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTribunal" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                                </div>
+
                         </div>
 
                         <!-- col -->
@@ -857,6 +1018,42 @@
                   document.getElementById("<%=CasoTres.ClientID %>").style.visibility = 'hidden';
                   document.getElementById("<%=TxtNroCasoCriminal2.ClientID %>").value = "";
                   document.getElementById("<%=TxtNroCasoCriminal3.ClientID %>").value = "";
+
+              }
+          }
+
+          function chkCategoria() {
+              var Check = document.getElementById("<%=ChkCategoria.ClientID %>");
+
+
+
+              if (Check.checked == true) {
+                  divDdlCategoria.style.visibility = 'hidden';
+                  divTxtCategoria.style.visibility = 'visible';
+                  document.getElementById("<%=DdlCategoriaTribunal.ClientID %>").disabled = true;
+              }
+              else {
+                  document.getElementById("<%=DdlCategoriaTribunal.ClientID %>").disabled = false;
+                  divDdlCategoria.style.visibility = 'visible';
+                  divTxtCategoria.style.visibility = 'hidden';
+
+              }
+          }
+
+          function chkRegion() {
+              var Check = document.getElementById("<%=ChkRegion.ClientID %>");
+
+
+
+              if (Check.checked == true) {
+                  divDdlRegion.style.visibility = 'hidden'; 
+                  divTxtRegion.style.visibility = 'visible'; 
+                  document.getElementById("<%=DdlRegionTribunal.ClientID %>").disabled = true;
+              }
+              else {
+                  document.getElementById("<%=DdlRegionTribunal.ClientID %>").disabled = false;
+                  divDdlRegion.style.visibility = 'visible';
+                  divTxtRegion.style.visibility = 'hidden'; 
 
               }
           }

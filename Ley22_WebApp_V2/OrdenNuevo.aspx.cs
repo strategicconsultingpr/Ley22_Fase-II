@@ -276,6 +276,8 @@ namespace Ley22_WebApp_V2
 
         protected void BtnCrear_Click(object sender, EventArgs e)
         {
+            string mensaje = string.Empty;
+
             try
             {
                 using (Ley22Entities mylib = new Ley22Entities())
@@ -289,7 +291,7 @@ namespace Ley22_WebApp_V2
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
                         TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
 
-                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
+                mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
                
                 ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlertRef('Caso Criminal Registrado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
@@ -299,8 +301,14 @@ namespace Ley22_WebApp_V2
             }
             catch (Exception ex)
             {
-
-                string mensaje = ex.InnerException.Message;
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
 
 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
@@ -382,6 +390,8 @@ namespace Ley22_WebApp_V2
             {
                 //using (Ley22Entities mylib = new Ley22Entities())
                 //    mylib.ReabrirCasoCriminal(this.Id_Caso);
+
+                dsLey22.EliminarCasoCriminal(this.Id_Caso);
 
                 string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " fue eliminado correctamente.";
 

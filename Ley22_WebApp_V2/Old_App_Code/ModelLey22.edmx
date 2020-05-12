@@ -411,6 +411,9 @@
         <Function Name="DetalleCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarCasoCriminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_CasoCriminal" Type="int" Mode="In" />
+        </Function>
         <Function Name="EliminarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
         </Function>
@@ -1256,7 +1259,10 @@
           <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_READ_ListaDeEvaluadores" ReturnType="Collection(Ley22Model.SP_READ_ListaDeEvaluadores_Result)">
-            <Parameter Name="PK_Programa" Mode="In" Type="Int32" />
+          <Parameter Name="PK_Programa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCasoCriminal">
+            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2985,6 +2991,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarCasoCriminal" FunctionName="Ley22Model.Store.EliminarCasoCriminal" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

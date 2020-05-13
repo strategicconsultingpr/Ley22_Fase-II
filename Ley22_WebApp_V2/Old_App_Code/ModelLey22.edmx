@@ -314,6 +314,21 @@
           <Property Name="FK_Region" Type="int" Nullable="false" />
           <Property Name="PO_BOX" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="TribunalCategoria">
+          <Key>
+            <PropertyRef Name="Id_TribunalCategoria" />
+          </Key>
+          <Property Name="Id_TribunalCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NB_TribunalCategoria" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TribunalRegion">
+          <Key>
+            <PropertyRef Name="Id_TribunalRegion" />
+          </Key>
+          <Property Name="Id_TribunalRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NB_TribunalRegion" Type="varchar(max)" Nullable="false" />
+          <Property Name="NB_Pais" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="TS_Excepciones">
           <Key>
             <PropertyRef Name="Id_Excepciones" />
@@ -356,6 +371,34 @@
             </Principal>
             <Dependent Role="CasoCriminal">
               <PropertyRef Name="FK_Tribunal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tribunal_TribunalCategoria_Id_TribunalCategoria">
+          <End Role="TribunalCategoria" Type="Self.TribunalCategoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tribunal" Type="Self.Tribunal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TribunalCategoria">
+              <PropertyRef Name="Id_TribunalCategoria" />
+            </Principal>
+            <Dependent Role="Tribunal">
+              <PropertyRef Name="FK_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tribunal_TribunalRegion_Id_TribunalRegion">
+          <End Role="TribunalRegion" Type="Self.TribunalRegion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tribunal" Type="Self.Tribunal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TribunalRegion">
+              <PropertyRef Name="Id_TribunalRegion" />
+            </Principal>
+            <Dependent Role="Tribunal">
+              <PropertyRef Name="FK_Region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -538,6 +581,17 @@
           <Parameter Name="Id_Usuario" Type="varchar" Mode="In" />
           <Parameter Name="Id_OrdenJudicial" Type="int" Mode="In" />
           <Parameter Name="NumeroCharla" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GuardarTribunal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar(max)" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="pais" Type="varchar" Mode="In" />
+          <Parameter Name="pobox" Type="varchar(max)" Mode="In" />
+          <Parameter Name="catTxt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="regTxt" Type="varchar(max)" Mode="In" />
+          <Parameter Name="catDdl" Type="int" Mode="In" />
+          <Parameter Name="regDdl" Type="int" Mode="In" />
         </Function>
         <Function Name="InfoCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
@@ -791,6 +845,8 @@
           <EntitySet Name="TipodeCharlas" EntityType="Self.TipodeCharlas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrabajadorSocial" EntityType="Self.TrabajadorSocial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tribunal" EntityType="Self.Tribunal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TribunalCategoria" EntityType="Self.TribunalCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TribunalRegion" EntityType="Self.TribunalRegion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TS_Excepciones" EntityType="Self.TS_Excepciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_PROGRAMA" EntityType="Self.USUARIO_PROGRAMA" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Programas__FK_Re__4222D4EF" Association="Self.FK__Programas__FK_Re__4222D4EF">
@@ -800,6 +856,14 @@
           <AssociationSet Name="FK_Tribunal_Tribunal_Id_Tribunal" Association="Self.FK_Tribunal_Tribunal_Id_Tribunal">
             <End Role="Tribunal" EntitySet="Tribunal" />
             <End Role="CasoCriminal" EntitySet="CasoCriminal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tribunal_TribunalCategoria_Id_TribunalCategoria" Association="Self.FK_Tribunal_TribunalCategoria_Id_TribunalCategoria">
+            <End Role="TribunalCategoria" EntitySet="TribunalCategoria" />
+            <End Role="Tribunal" EntitySet="Tribunal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tribunal_TribunalRegion_Id_TribunalRegion" Association="Self.FK_Tribunal_TribunalRegion_Id_TribunalRegion">
+            <End Role="TribunalRegion" EntitySet="TribunalRegion" />
+            <End Role="Tribunal" EntitySet="Tribunal" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1262,7 +1326,28 @@
           <Parameter Name="PK_Programa" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EliminarCasoCriminal">
-            <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
+          <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TribunalCategorias" EntityType="Ley22Model.TribunalCategoria" />
+          <EntitySet Name="TribunalRegions" EntityType="Ley22Model.TribunalRegion" />
+          <AssociationSet Name="FK_Tribunal_TribunalCategoria_Id_TribunalCategoria" Association="Ley22Model.FK_Tribunal_TribunalCategoria_Id_TribunalCategoria">
+            <End Role="TribunalCategoria" EntitySet="TribunalCategorias" />
+            <End Role="Tribunal" EntitySet="Tribunals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tribunal_TribunalRegion_Id_TribunalRegion" Association="Ley22Model.FK_Tribunal_TribunalRegion_Id_TribunalRegion">
+            <End Role="TribunalRegion" EntitySet="TribunalRegions" />
+            <End Role="Tribunal" EntitySet="Tribunals" />
+          </AssociationSet>
+          <FunctionImport Name="GuardarTribunal">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="pais" Mode="In" Type="String" />
+            <Parameter Name="pobox" Mode="In" Type="String" />
+            <Parameter Name="catTxt" Mode="In" Type="String" />
+            <Parameter Name="regTxt" Mode="In" Type="String" />
+            <Parameter Name="catDdl" Mode="In" Type="Int32" />
+            <Parameter Name="regDdl" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -1784,6 +1869,8 @@
           <Property Name="FK_Region" Type="Int32" Nullable="false" />
           <Property Name="PO_BOX" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CasoCriminals" Relationship="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" FromRole="Tribunal" ToRole="CasoCriminal" />
+          <NavigationProperty Name="TribunalCategoria" Relationship="Ley22Model.FK_Tribunal_TribunalCategoria_Id_TribunalCategoria" FromRole="Tribunal" ToRole="TribunalCategoria" />
+          <NavigationProperty Name="TribunalRegion" Relationship="Ley22Model.FK_Tribunal_TribunalRegion_Id_TribunalRegion" FromRole="Tribunal" ToRole="TribunalRegion" />
         </EntityType>
         <EntityType Name="DesempleoRazon">
           <Key>
@@ -2076,6 +2163,51 @@
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="Nombre" Nullable="true" />
         </ComplexType>
+        <EntityType Name="TribunalCategoria">
+          <Key>
+            <PropertyRef Name="Id_TribunalCategoria" />
+          </Key>
+          <Property Name="Id_TribunalCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NB_TribunalCategoria" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tribunals" Relationship="Ley22Model.FK_Tribunal_TribunalCategoria_Id_TribunalCategoria" FromRole="TribunalCategoria" ToRole="Tribunal" />
+        </EntityType>
+        <EntityType Name="TribunalRegion">
+          <Key>
+            <PropertyRef Name="Id_TribunalRegion" />
+          </Key>
+          <Property Name="Id_TribunalRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NB_TribunalRegion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NB_Pais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tribunals" Relationship="Ley22Model.FK_Tribunal_TribunalRegion_Id_TribunalRegion" FromRole="TribunalRegion" ToRole="Tribunal" />
+        </EntityType>
+        <Association Name="FK_Tribunal_TribunalCategoria_Id_TribunalCategoria">
+          <End Type="Ley22Model.TribunalCategoria" Role="TribunalCategoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Ley22Model.Tribunal" Role="Tribunal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TribunalCategoria">
+              <PropertyRef Name="Id_TribunalCategoria" />
+            </Principal>
+            <Dependent Role="Tribunal">
+              <PropertyRef Name="FK_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tribunal_TribunalRegion_Id_TribunalRegion">
+          <End Type="Ley22Model.TribunalRegion" Role="TribunalRegion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Ley22Model.Tribunal" Role="Tribunal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TribunalRegion">
+              <PropertyRef Name="Id_TribunalRegion" />
+            </Principal>
+            <Dependent Role="Tribunal">
+              <PropertyRef Name="FK_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2992,6 +3124,24 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EliminarCasoCriminal" FunctionName="Ley22Model.Store.EliminarCasoCriminal" />
+          <EntitySetMapping Name="TribunalCategorias">
+            <EntityTypeMapping TypeName="Ley22Model.TribunalCategoria">
+              <MappingFragment StoreEntitySet="TribunalCategoria">
+                <ScalarProperty Name="NB_TribunalCategoria" ColumnName="NB_TribunalCategoria" />
+                <ScalarProperty Name="Id_TribunalCategoria" ColumnName="Id_TribunalCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TribunalRegions">
+            <EntityTypeMapping TypeName="Ley22Model.TribunalRegion">
+              <MappingFragment StoreEntitySet="TribunalRegion">
+                <ScalarProperty Name="NB_Pais" ColumnName="NB_Pais" />
+                <ScalarProperty Name="NB_TribunalRegion" ColumnName="NB_TribunalRegion" />
+                <ScalarProperty Name="Id_TribunalRegion" ColumnName="Id_TribunalRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GuardarTribunal" FunctionName="Ley22Model.Store.GuardarTribunal" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

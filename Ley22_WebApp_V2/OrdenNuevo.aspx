@@ -21,7 +21,8 @@
                        <div class="col-md-6">
                            <div class="form-group">
                                <label for="tribunal-nombre">Nombre</label>
-                               <asp:TextBox runat="server" ID="TxtNombreTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="TxtNombreTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtNombreTribunal" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
                        </div>
 
@@ -33,16 +34,19 @@
 
                            <div class="row">
                            <div class="col-md-3">
-                                   <asp:TextBox runat="server" ID="TxtTelefonoTribunal1" CssClass="form-control" placeholder="787" MaxLength="3" ValidationGroup="VGCrearCharla"></asp:TextBox>
-                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal1" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                                   <asp:TextBox runat="server" ID="TxtTelefonoTribunal1" CssClass="form-control" placeholder="787" MaxLength="3" ValidationGroup="VGtribunal"></asp:TextBox>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal1" ForeColor="Red" ValidationGroup="VGtribunal"></asp:RegularExpressionValidator>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoTribunal1" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
                            <div class="col-md-3">
                                    <asp:TextBox runat="server" ID="TxtTelefonoTribunal2" CssClass="form-control" placeholder="555" MaxLength="3" ValidationGroup="VGCrearCharla"></asp:TextBox>
-                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal2" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal2" ForeColor="Red" ValidationGroup="VGtribunal"></asp:RegularExpressionValidator>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoTribunal2" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-md-4">
                                    <asp:TextBox runat="server" ID="TxtTelefonoTribunal3" CssClass="form-control" placeholder="5555" MaxLength="4" ValidationGroup="VGCrearCharla"></asp:TextBox>
-                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal3" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
+                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoTribunal3" ForeColor="Red" ValidationGroup="VGtribunal"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtTelefonoTribunal3" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                             </div>
                             </div>
 
@@ -55,21 +59,26 @@
                         <div class="col-md-10">
                            <div class="form-group">
                                <label for="tribunal-direccion">Dirección</label>
-                               <asp:TextBox runat="server" ID="TxtDireccionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="TxtDireccionTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtDireccionTribunal" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
                        </div>
 
                         <div class="col-md-2">
                            <div class="form-group">
                                <label for="tribunal-pais">País</label>
-                               <asp:DropDownList runat="server" ID="DdlPaisTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                               <asp:DropDownList runat="server" ID="DdlPaisTribunal" CssClass="form-control">
+                                   <asp:ListItem Value="1" Selected="True">PR</asp:ListItem>
+                                   <asp:ListItem Value="2">US</asp:ListItem>
+                               </asp:DropDownList>
                            </div>
                        </div>
 
                         <div class="col-md-12">
                            <div class="form-group">
                                <label for="tribunal-box">PO Box</label>
-                               <asp:TextBox runat="server" ID="TxtBoxTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="TxtBoxTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
+                               <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtBoxTribunal" Display="Dynamic" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
                        </div>
 
@@ -81,11 +90,13 @@
                            </div>
 
                             <div class="form-group" id="divDdlCategoria">
-                               <asp:DropDownList runat="server" ID="DdlCategoriaTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                               <asp:DropDownList runat="server" ID="DdlCategoriaTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="ReqDdlCategoria" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlCategoriaTribunal" Display="Dynamic" InitialValue="0" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
 
                             <div class="form-group" id="divTxtCategoria" style="visibility:hidden">
-                               <asp:TextBox runat="server" ID="TxtCategoriaTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="TxtCategoriaTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="ReqTxtCategoria" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtCategoriaTribunal" Display="Dynamic" Enabled="false" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
 
                        </div>
@@ -98,11 +109,13 @@
                             </div>
 
                            <div class="form-group" id="divDdlRegion">
-                               <asp:DropDownList runat="server" ID="DdlRegionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:DropDownList>
+                               <asp:DropDownList runat="server" ID="DdlRegionTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:DropDownList>
+                               <asp:RequiredFieldValidator ID="ReqDdlRegion" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlRegionTribunal" Display="Dynamic" InitialValue="0" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
 
                             <div class="form-group" id="divTxtRegion" style="visibility:hidden">
-                               <asp:TextBox runat="server" ID="TxtRegionTribunal" CssClass="form-control" ValidationGroup="VGCrearCharla"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="TxtRegionTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="ReqTxtRegion" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtRegionTribunal" Display="Dynamic" Enabled="false" ValidationGroup="VGtribunal"></asp:RequiredFieldValidator>
                            </div>
 
 
@@ -113,7 +126,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <asp:LinkButton ID="Button1" runat="server" Text="Agregar Tribunal" CssClass="btn btn-primary mr-3" />
+                    <asp:Button ID="BtnTribunal" runat="server" Text="Agregar Tribunal" CssClass="btn btn-primary mr-3" OnClick="BtnTribunal_Click" ValidationGroup="VGtribunal"/>
 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
@@ -268,20 +281,21 @@
                         <!-- col -->
 
                         <div class="col-md-3">
-                            <div class="row">
-                                    <div class="col" style="text-align:left"><label for="tribunal">Tribunal (*)</label></div>
-                                    <div class="col" style="text-align:right"><label class="form-check-label"><asp:CheckBox ID="ChkTribunal" runat="server" class="form-check-input" OnClick="combinarCaso();"/>Agregar Tribunal</label></div>
-                            </div>
-
+                           
                             <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group" >
-                                    <asp:DropDownList ID="DdlPais" runat="server" class="form-control"></asp:DropDownList>
+                                    <label for="tribunal">País</label>
+                                    <asp:DropDownList ID="DdlPais" runat="server" class="form-control">
+                                        <asp:ListItem Value="1" Selected="True">PR</asp:ListItem>
+                                        <asp:ListItem Value="2">US</asp:ListItem>
+                                    </asp:DropDownList>
                                     </div>
                             </div>
 
                             <div class="col-md-8">
                                 <div class="form-group" >
+                                    <label for="tribunal">Tribunal (*)</label>
                                     <asp:DropDownList ID="DdlTribunal" runat="server" class="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlTribunal" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                                 </div>
@@ -1024,16 +1038,23 @@
 
           function chkCategoria() {
               var Check = document.getElementById("<%=ChkCategoria.ClientID %>");
-
+              var reqDdlCategoria = document.getElementById("<%=ReqDdlCategoria.ClientID %>");
+              var reqTxtCategoria = document.getElementById("<%=ReqTxtCategoria.ClientID %>");
 
 
               if (Check.checked == true) {
+                  document.getElementById("<%=DdlCategoriaTribunal.ClientID %>").value = "0";
                   divDdlCategoria.style.visibility = 'hidden';
                   divTxtCategoria.style.visibility = 'visible';
+                  ValidatorEnable(reqDdlCategoria, false);
+                  ValidatorEnable(reqTxtCategoria);
                   document.getElementById("<%=DdlCategoriaTribunal.ClientID %>").disabled = true;
               }
               else {
+                  document.getElementById("<%=TxtCategoriaTribunal.ClientID %>").value = ""
                   document.getElementById("<%=DdlCategoriaTribunal.ClientID %>").disabled = false;
+                  ValidatorEnable(reqTxtCategoria, false);
+                  ValidatorEnable(reqDdlCategoria);
                   divDdlCategoria.style.visibility = 'visible';
                   divTxtCategoria.style.visibility = 'hidden';
 
@@ -1042,16 +1063,23 @@
 
           function chkRegion() {
               var Check = document.getElementById("<%=ChkRegion.ClientID %>");
-
+              var reqDdlRegion = document.getElementById("<%=ReqDdlRegion.ClientID %>");
+              var reqTxtRegion = document.getElementById("<%=ReqTxtRegion.ClientID %>");
 
 
               if (Check.checked == true) {
+                  document.getElementById("<%=DdlRegionTribunal.ClientID %>").value = "0";
                   divDdlRegion.style.visibility = 'hidden'; 
                   divTxtRegion.style.visibility = 'visible'; 
+                  ValidatorEnable(reqDdlRegion, false);
+                  ValidatorEnable(reqTxtRegion);
                   document.getElementById("<%=DdlRegionTribunal.ClientID %>").disabled = true;
               }
               else {
+                  document.getElementById("<%=DdlRegionTribunal.ClientID %>").value = ""
                   document.getElementById("<%=DdlRegionTribunal.ClientID %>").disabled = false;
+                  ValidatorEnable(reqTxtRegion, false);
+                  ValidatorEnable(reqDdlRegion);
                   divDdlRegion.style.visibility = 'visible';
                   divTxtRegion.style.visibility = 'hidden'; 
 

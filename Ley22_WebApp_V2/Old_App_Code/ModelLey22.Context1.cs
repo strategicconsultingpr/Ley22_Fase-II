@@ -53,6 +53,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public virtual DbSet<Documento> Documentos { get; set; }
         public virtual DbSet<CasoCriminal> CasoCriminals { get; set; }
         public virtual DbSet<ControldePago> ControldePagoes { get; set; }
+        public virtual DbSet<TribunalCategoria> TribunalCategorias { get; set; }
+        public virtual DbSet<TribunalRegion> TribunalRegions { get; set; }
     
         public virtual ObjectResult<BuscarSEPSPersonaXNroSeguroSocial_Result> BuscarSEPSPersonaXNroSeguroSocial(string nR_SeguroSocial)
         {
@@ -1533,6 +1535,47 @@ namespace Ley22_WebApp_V2.Old_App_Code
                 new ObjectParameter("Id_CasoCriminal", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarCasoCriminal", id_CasoCriminalParameter);
+        }
+    
+        public virtual int GuardarTribunal(string nombre, string telefono, string direccion, string pais, string pobox, string catTxt, string regTxt, Nullable<int> catDdl, Nullable<int> regDdl)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            var poboxParameter = pobox != null ?
+                new ObjectParameter("pobox", pobox) :
+                new ObjectParameter("pobox", typeof(string));
+    
+            var catTxtParameter = catTxt != null ?
+                new ObjectParameter("catTxt", catTxt) :
+                new ObjectParameter("catTxt", typeof(string));
+    
+            var regTxtParameter = regTxt != null ?
+                new ObjectParameter("regTxt", regTxt) :
+                new ObjectParameter("regTxt", typeof(string));
+    
+            var catDdlParameter = catDdl.HasValue ?
+                new ObjectParameter("catDdl", catDdl) :
+                new ObjectParameter("catDdl", typeof(int));
+    
+            var regDdlParameter = regDdl.HasValue ?
+                new ObjectParameter("regDdl", regDdl) :
+                new ObjectParameter("regDdl", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GuardarTribunal", nombreParameter, telefonoParameter, direccionParameter, paisParameter, poboxParameter, catTxtParameter, regTxtParameter, catDdlParameter, regDdlParameter);
         }
     }
 }

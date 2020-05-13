@@ -55,6 +55,7 @@ namespace Ley22_WebApp_V2
 
                 TxtIUP.Text = sa_persona.PK_Persona.ToString();
                 LoadDropDownList();
+                LoadDdlTribunal();
 
                 NombreParticipante.Text = Session["NombreParticipante"].ToString();
                 NombrePrograma.Text = Session["NombrePrograma"].ToString();
@@ -218,14 +219,7 @@ namespace Ley22_WebApp_V2
 
         void LoadDropDownList()
         {           
-            var tribunales = dsLey22.Tribunals.OrderBy(a => a.NB_Tribunal).Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
-
-            DdlTribunal.DataValueField = "Value";
-            DdlTribunal.DataTextField = "Text";
-            DdlTribunal.DataSource = tribunales;
-            DdlTribunal.DataBind();
-            DdlTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
-
+            
 
             var estados_civiles = dsPerfil.SA_LKP_TEDS_ESTADO_MARITAL.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_EstadoMarital.ToString(), Text = r.DE_EstadoMarital }).ToList();
 
@@ -275,6 +269,46 @@ namespace Ley22_WebApp_V2
          //   DdlDesempleado.Items.Insert(0, new ListItem("-Seleccione-", "0"));
         }
 
+        void LoadDdlTribunal()
+        {
+            var tribunales = dsLey22.Tribunals.OrderBy(a => a.NB_Tribunal).Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
+
+            DdlTribunal.DataValueField = "Value";
+            DdlTribunal.DataTextField = "Text";
+            DdlTribunal.DataSource = tribunales;
+            DdlTribunal.DataBind();
+            DdlTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            var categorias = dsLey22.TribunalCategorias.OrderBy(a => a.NB_TribunalCategoria).Select(r => new ListItem { Value = r.Id_TribunalCategoria.ToString(), Text = r.NB_TribunalCategoria }).ToList();
+
+            DdlCategoriaTribunal.DataValueField = "Value";
+            DdlCategoriaTribunal.DataTextField = "Text";
+            DdlCategoriaTribunal.DataSource = categorias;
+            DdlCategoriaTribunal.DataBind();
+            DdlCategoriaTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            var regiones = dsLey22.TribunalRegions.OrderBy(a => a.NB_TribunalRegion).Select(r => new ListItem { Value = r.Id_TribunalRegion.ToString(), Text = r.NB_TribunalRegion }).ToList();
+
+            DdlRegionTribunal.DataValueField = "Value";
+            DdlRegionTribunal.DataTextField = "Text";
+            DdlRegionTribunal.DataSource = regiones;
+            DdlRegionTribunal.DataBind();
+            DdlRegionTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            TxtNombreTribunal.Text = "";
+            TxtTelefonoTribunal1.Text = "";
+            TxtTelefonoTribunal2.Text = "";
+            TxtTelefonoTribunal3.Text = "";
+            TxtDireccionTribunal.Text = "";
+            DdlPaisTribunal.SelectedValue = "1";
+            TxtBoxTribunal.Text = "";
+            TxtCategoriaTribunal.Text = "";
+            TxtRegionTribunal.Text= "";
+
+            ChkCategoria.Checked = false;
+            ChkRegion.Checked = false;
+
+        }
         protected void BtnCrear_Click(object sender, EventArgs e)
         {
             string mensaje = string.Empty;
@@ -391,6 +425,48 @@ namespace Ley22_WebApp_V2
 
         }
 
+        protected void BtnTribunal_Click(object sender, EventArgs e)
+        {
+            string mensaje = string.Empty;
+
+            string nombre = TxtNombreTribunal.Text;
+            string telefono = TxtTelefonoTribunal1.Text + "-" + TxtTelefonoTribunal2.Text + "-" + TxtTelefonoTribunal3.Text;
+            string direccion = TxtDireccionTribunal.Text;
+            string pais = DdlPaisTribunal.SelectedItem.Text;
+            string pobox = TxtBoxTribunal.Text;
+            string catTxt = TxtCategoriaTribunal.Text;
+            string regTxt = TxtRegionTribunal.Text;
+
+            int catDdl = Convert.ToInt32(DdlCategoriaTribunal.SelectedValue);
+            int regDdl = Convert.ToInt32(DdlRegionTribunal.SelectedValue);
+
+            try
+            {
+                dsLey22.GuardarTribunal(nombre, telefono, direccion, pais, pobox, catTxt, regTxt, catDdl, regDdl);
+
+                mensaje = "El tribunal " + nombre + " fue registrado correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Tribunal Registrado", "sweetAlert('Tribunal Registrado','" + mensaje + "','success')", true);
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
+            LoadDdlTribunal();
+        }
         void Eliminar_Caso()
         {
             this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());

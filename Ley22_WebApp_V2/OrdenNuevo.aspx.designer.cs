@@ -24,6 +24,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.TextBox TxtNombreTribunal;
 
         /// <summary>
+        /// RequiredFieldValidator13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
+
+        /// <summary>
         /// TxtTelefonoTribunal1 control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator5;
+
+        /// <summary>
+        /// RequiredFieldValidator22 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator22;
 
         /// <summary>
         /// TxtTelefonoTribunal2 control.
@@ -60,6 +78,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
+        /// RequiredFieldValidator23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator23;
+
+        /// <summary>
         /// TxtTelefonoTribunal3 control.
         /// </summary>
         /// <remarks>
@@ -78,6 +105,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
 
         /// <summary>
+        /// RequiredFieldValidator24 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator24;
+
+        /// <summary>
         /// TxtDireccionTribunal control.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,15 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtDireccionTribunal;
+
+        /// <summary>
+        /// RequiredFieldValidator25 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator25;
 
         /// <summary>
         /// DdlPaisTribunal control.
@@ -105,6 +150,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.TextBox TxtBoxTribunal;
 
         /// <summary>
+        /// RequiredFieldValidator26 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator26;
+
+        /// <summary>
         /// ChkCategoria control.
         /// </summary>
         /// <remarks>
@@ -123,6 +177,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.DropDownList DdlCategoriaTribunal;
 
         /// <summary>
+        /// ReqDdlCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqDdlCategoria;
+
+        /// <summary>
         /// TxtCategoriaTribunal control.
         /// </summary>
         /// <remarks>
@@ -130,6 +193,15 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtCategoriaTribunal;
+
+        /// <summary>
+        /// ReqTxtCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqTxtCategoria;
 
         /// <summary>
         /// ChkRegion control.
@@ -150,6 +222,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.DropDownList DdlRegionTribunal;
 
         /// <summary>
+        /// ReqDdlRegion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqDdlRegion;
+
+        /// <summary>
         /// TxtRegionTribunal control.
         /// </summary>
         /// <remarks>
@@ -159,13 +240,22 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.TextBox TxtRegionTribunal;
 
         /// <summary>
-        /// Button1 control.
+        /// ReqTxtRegion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Button1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqTxtRegion;
+
+        /// <summary>
+        /// BtnTribunal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnTribunal;
 
         /// <summary>
         /// NombreParticipante control.
@@ -346,15 +436,6 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNroCasoCriminal3;
-
-        /// <summary>
-        /// ChkTribunal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ChkTribunal;
 
         /// <summary>
         /// DdlPais control.

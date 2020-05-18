@@ -690,6 +690,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator77;
 
         /// <summary>
+        /// TxtNacimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtNacimiento;
+
+        /// <summary>
         /// TxtCelular control.
         /// </summary>
         /// <remarks>
@@ -1084,6 +1093,33 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator21;
+
+        /// <summary>
+        /// TxtContacto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtContacto;
+
+        /// <summary>
+        /// TxtTelefonoContacto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtTelefonoContacto;
+
+        /// <summary>
+        /// RegularExpressionValidator12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator12;
 
         /// <summary>
         /// BtnCrear control.

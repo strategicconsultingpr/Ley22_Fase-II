@@ -538,6 +538,14 @@
                             </div>
 
                         </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="juez">Lugar De Nacimiento</label>
+                                <asp:TextBox ID="TxtNacimiento" runat="server" class="form-control" placeholder="Ej. Hospital Veterano"></asp:TextBox>
+                            </div>
+                        </div>
+
                         </div>
                         <!-- col -->
                         
@@ -908,6 +916,24 @@
                         </div>
 
                         </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="contacto">Nombre de contacto de emergencia</label>
+                                <asp:TextBox ID="TxtContacto" runat="server" class="form-control" placeholder="Ej. Alejandro Ortiz"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="tel-contacto">Teléfono de contacto</label>
+                                <asp:TextBox ID="TxtTelefonoContacto" runat="server" class="form-control" placeholder="Ej. 7875559999"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtTelefonoContacto" ForeColor="Red"></asp:RegularExpressionValidator>
+                            </div>
+                        </div>
+
+                    </div>
+
                     </div>
                 </div>
            

@@ -330,9 +330,95 @@
                             <div class="form-group">
                                 <label for="n-seguro-social">Expediente</label>
                                 <asp:TextBox ID="TxtExpediente" runat="server" class="form-control" placeholder="Ej. 999999999" MaxLength="30" ReadOnly="true"></asp:TextBox>
-                                
                             </div>
                         </div>
+
+                       
+                          <div class="col-md-12">
+                               <div class="form-group">
+                                   <div class="row bb">
+                                        <br />
+                                   </div>
+                                   <div class="row">
+                                        <br />
+                                   </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <h5><label class="form-intervenido">¿Es la primera vez que es intervenido en este tipo de caso?</label></h5>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <asp:DropDownList ID="DdlIntervenido" runat="server" class="form-control" OnChange="intervenido();">
+                                                <asp:ListItem Value="0" Selected="True">-</asp:ListItem>
+                                                <asp:ListItem Value="1">Si</asp:ListItem>
+                                                <asp:ListItem Value="2">No</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlIntervenido" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                        </div>
+
+                                        <div class="col-md-6" id="divSentencias" style="visibility:hidden">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h5><label class="form-sentencias">¿Cuantas veces ha sido sentenciado?</label></h5>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <asp:TextBox ID="TxtSetencias" runat="server" class="form-control" Text="0" MaxLength="2"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="ReqValSentencias" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtSetencias" Display="Dynamic" InitialValue="0" Enabled="false"></asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtSetencias" ForeColor="Red"></asp:RegularExpressionValidator>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <div class="row bb">
+                                        <br />
+                                   </div>
+                                   <div class="row">
+                                        <br />
+                                   </div>
+                                   <div class="row">
+                                        <div class="col-md-11">
+                                            <h5><label class="form-evaluado">¿Ha sido evaluado anteriormente por nuestro programa u otra agencia, por un caso de la Ley de Vehículos y Transito de Puerto Rico? (Conducir en estado de embriaguez alcohólica)</label></h5>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <asp:DropDownList ID="DdlEvaluado" runat="server" class="form-control" OnChange="evaluado();">
+                                                <asp:ListItem Value="0" Selected="True">-</asp:ListItem>
+                                                <asp:ListItem Value="1">Si</asp:ListItem>
+                                                <asp:ListItem Value="2">No</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlEvaluado" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                                        </div>
+                                   </div>
+                                   <div id="divEvaluado" style="visibility:hidden">
+                                   <div class="row">
+                                        <br />
+                                   </div>
+                                   <div class="row">
+                                        <br />
+                                   </div>
+                                   <div class="row">
+                                       <div class="col-md-1">
+                                           <h5><label class="form-sentencias">Oficina:</label></h5>
+                                       </div>
+                                        <div class="col-md-3">
+                                            <asp:TextBox ID="TxtOficina" runat="server" class="form-control" placeholder="Ej. Oficina de Assmca" Text="No Aplica"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="ReqValOficina" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtOficina" Display="Dynamic" Enabled="false"></asp:RequiredFieldValidator>
+                                        </div>
+                                       <div class="col-md-1">
+                                           <h5><label class="form-sentencias">Año:</label></h5>
+                                       </div>
+                                        <div class="col-md-1">
+                                            <asp:TextBox ID="TxtAno" runat="server" class="form-control" placeholder="Ej. 2020" MaxLength="4" MinLength="4" Text="0000"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="ReqValAno" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtAno" Display="Dynamic" Enabled="false"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtAno" ForeColor="Red"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ErrorMessage="*Ingresar cuatro digitos" ValidationExpression="^.{4}.*" ControlToValidate="TxtAno" ForeColor="Red"></asp:RegularExpressionValidator>
+                                        </div>
+                                   </div>
+                                       </div>
+                                </div>
+                            </div>
+                        
                         <!-- col -->
 
                        <%-- <div class="col-md-3">
@@ -412,62 +498,6 @@
 
             </div>
             <!-- row -->
-
-
-
-
-<%--            <div class="row pb-4 mb-4 bb">
-                <div class="col-md-2 text-right">
-                    <strong>Identificación</strong>
-                </div>
-
-                <div class="col-md-10">
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="primer-nombre">Primer Nombre (*)</label>
-                                <asp:TextBox ID="TxtPrimerNombre" runat="server" CssClass="form-control" placeholder="Ej. John"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPrimerNombre" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <!-- col -->
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="segundo-nombre">Segundo Nombre</label>
-                                <asp:TextBox ID="TxtSegundoNombre" runat="server" CssClass="form-control" placeholder="Ej. John"></asp:TextBox>
-                            </div>
-                        </div>
-                        <!-- col -->
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="primer-apellido">Apellido Paterno (*)</label>
-                                <asp:TextBox ID="TxtPrimerApellido" runat="server" CssClass="form-control" placeholder="Ej. Perez"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtPrimerApellido" Display="Dynamic"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <!-- col -->
-
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="segundo-apellido">Apellido Materno (*)</label>
-                                <asp:TextBox ID="TxtSegundoApellido" runat="server" CssClass="form-control" placeholder="Ej. Perez"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="TxtSegundoApellido" Display="Dynamic"></asp:RequiredFieldValidator>
-
-                            </div>
-                        </div>
-                        <!-- col -->
-                    </div>
-                </div>
-                <!-- col-9 -->
-
-            </div>--%>
-            <!-- row -->
-
-
 
             <div class="row bb pb-4 mb-4">
                 <div class="col-md-2 text-right">
@@ -1084,6 +1114,45 @@
                   divTxtRegion.style.visibility = 'hidden'; 
 
               }
+          }
+
+        function intervenido(){
+            
+            var ddlIntervenido = document.getElementById("<%=DdlIntervenido.ClientID %>");
+            var reqValSentencias = document.getElementById("<%=ReqValSentencias.ClientID %>");
+            
+            if (ddlIntervenido.value == "1") {
+                divSentencias.style.visibility = 'visible';
+                ValidatorEnable(reqValSentencias);
+                document.getElementById("<%=TxtSetencias.ClientID %>").value = "";
+            }
+            else {
+                document.getElementById("<%=TxtSetencias.ClientID %>").value = "0";
+                ValidatorEnable(reqValSentencias, false);
+                divSentencias.style.visibility = 'hidden';
+            }
+          }
+
+          function evaluado() {
+
+              var ddlEvaluado = document.getElementById("<%=DdlEvaluado.ClientID %>");
+              var reqValOficina = document.getElementById("<%=ReqValOficina.ClientID %>");
+              var reqValAno = document.getElementById("<%=ReqValAno.ClientID %>");
+
+              if (ddlEvaluado.value == "1") {
+                  divEvaluado.style.visibility = 'visible';
+                  document.getElementById("<%=TxtOficina.ClientID %>").value = "";
+                  document.getElementById("<%=TxtAno.ClientID %>").value = "";
+                  ValidatorEnable(reqValOficina);
+                  ValidatorEnable(reqValAno);
+              }
+              else {
+                  document.getElementById("<%=TxtOficina.ClientID %>").value = "No Aplica";
+                  document.getElementById("<%=TxtAno.ClientID %>").value = "0000";
+                  ValidatorEnable(reqValOficina, false);
+                  ValidatorEnable(reqValAno, false);
+                  divEvaluado.style.visibility = 'hidden';
+            }
           }
 
           function eliminar() {

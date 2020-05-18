@@ -82,6 +82,24 @@ namespace Ley22_WebApp_V2
 
                         ChkCaso.Checked = true;
                     }
+
+                    DdlIntervenido.SelectedValue = caso.Intervenido.ToString();
+                    TxtSetencias.Text = caso.NumSentencias.ToString();
+
+                    DdlEvaluado.SelectedValue = caso.Evaluado.ToString();
+                    TxtOficina.Text = caso.EvaOficina;
+                    TxtAno.Text = caso.EvaFecha;
+
+                    if (caso.Intervenido == 1)
+                    {
+                        divSentencias.Attributes.Add("style", "visibility:visible");
+                    }
+
+                    if (caso.Evaluado == 1)
+                    {
+                        divEvaluado.Attributes.Add("style", "visibility:visible");
+                    }
+
                     TxtExpediente.Text = CasoExpediente;
                     TxtFechaOrden.Text = Convert.ToDateTime(caso.FechaOrden).ToString("MM/dd/yyyy");
                     TxtSentencia.Text = Convert.ToDateTime(caso.FechaSentencia).ToString("MM/dd/yyyy");
@@ -121,6 +139,9 @@ namespace Ley22_WebApp_V2
                     TxtPareja.Text = caso.NB_Pareja;
                     TxtPadre.Text = caso.NB_Padre;
                     TxtMadre.Text = caso.NB_Madre;
+                    TxtNacimiento.Text = caso.LugarNacimiento;
+                    TxtContacto.Text = caso.NB_Contacto;
+                    TxtTelefonoContacto.Text = caso.TelContacto;
 
                     BtnActualizar.Visible = true;
 
@@ -163,6 +184,17 @@ namespace Ley22_WebApp_V2
                         TxtPareja.ReadOnly = true;
                         TxtPadre.ReadOnly = true;
                         TxtMadre.ReadOnly = true;
+
+                        DdlIntervenido.Enabled = false;
+                        TxtSetencias.ReadOnly = true;
+
+                        DdlEvaluado.Enabled = false;
+                        TxtOficina.ReadOnly = true;
+                        TxtAno.ReadOnly = true;
+
+                        TxtNacimiento.ReadOnly = true;
+                        TxtContacto.ReadOnly = true;
+                        TxtTelefonoContacto.ReadOnly = true;
 
                         BtnActualizar.Visible = false;
 
@@ -324,7 +356,8 @@ namespace Ley22_WebApp_V2
                         TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
 
                 mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
@@ -369,7 +402,8 @@ namespace Ley22_WebApp_V2
                         TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
 
                 mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
 

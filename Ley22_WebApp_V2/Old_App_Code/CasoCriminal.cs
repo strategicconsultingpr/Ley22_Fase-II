@@ -60,6 +60,14 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<decimal> Pagos { get; set; }
         public string NumeroCasoCriminalDos { get; set; }
         public string NumeroCasoCriminalTres { get; set; }
+        public string NB_Contacto { get; set; }
+        public string TelContacto { get; set; }
+        public string LugarNacimiento { get; set; }
+        public Nullable<byte> Intervenido { get; set; }
+        public Nullable<int> NumSentencias { get; set; }
+        public Nullable<byte> Evaluado { get; set; }
+        public string EvaOficina { get; set; }
+        public string EvaFecha { get; set; }
     
         public virtual Tribunal Tribunal { get; set; }
     }

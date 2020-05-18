@@ -355,7 +355,7 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlIntervenido" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                                         </div>
 
-                                        <div class="col-md-6" id="divSentencias" style="visibility:hidden">
+                                        <div class="col-md-6" id="divSentencias" style="visibility:hidden" runat="server">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h5><label class="form-sentencias">¿Cuantas veces ha sido sentenciado?</label></h5>
@@ -390,7 +390,7 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*Requerido" ForeColor="Red" ControlToValidate="DdlEvaluado" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
                                         </div>
                                    </div>
-                                   <div id="divEvaluado" style="visibility:hidden">
+                                   <div id="divEvaluado" style="visibility:hidden" runat="server">
                                    <div class="row">
                                         <br />
                                    </div>
@@ -1148,14 +1148,14 @@
             var reqValSentencias = document.getElementById("<%=ReqValSentencias.ClientID %>");
             
             if (ddlIntervenido.value == "1") {
-                divSentencias.style.visibility = 'visible';
+                document.getElementById("<%=divSentencias.ClientID %>").style.visibility = 'visible';
                 ValidatorEnable(reqValSentencias);
                 document.getElementById("<%=TxtSetencias.ClientID %>").value = "";
             }
             else {
                 document.getElementById("<%=TxtSetencias.ClientID %>").value = "0";
                 ValidatorEnable(reqValSentencias, false);
-                divSentencias.style.visibility = 'hidden';
+                document.getElementById("<%=divSentencias.ClientID %>").style.visibility = 'hidden';
             }
           }
 
@@ -1166,7 +1166,7 @@
               var reqValAno = document.getElementById("<%=ReqValAno.ClientID %>");
 
               if (ddlEvaluado.value == "1") {
-                  divEvaluado.style.visibility = 'visible';
+                  document.getElementById("<%=divEvaluado.ClientID %>").style.visibility = 'visible';
                   document.getElementById("<%=TxtOficina.ClientID %>").value = "";
                   document.getElementById("<%=TxtAno.ClientID %>").value = "";
                   ValidatorEnable(reqValOficina);
@@ -1177,7 +1177,7 @@
                   document.getElementById("<%=TxtAno.ClientID %>").value = "0000";
                   ValidatorEnable(reqValOficina, false);
                   ValidatorEnable(reqValAno, false);
-                  divEvaluado.style.visibility = 'hidden';
+                  document.getElementById("<%=divEvaluado.ClientID %>").style.visibility = 'hidden';
             }
           }
 

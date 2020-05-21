@@ -69,6 +69,9 @@ namespace Ley22_WebApp_V2
                 {
                     divReportes.Visible = true;
                 }
+
+                string url = Server.MapPath("~/images/editar-usuario-registrado.png");
+                imgEditar.ImageUrl = ResolveClientUrl("~/images/editar-usuario-registrado.png");
             }
         }
 

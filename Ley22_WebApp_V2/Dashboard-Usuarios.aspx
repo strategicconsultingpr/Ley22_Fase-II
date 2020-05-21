@@ -43,7 +43,7 @@
                                         <p class="mt-4">
                                             <a href="../Entrada.aspx">
                                                 <span class="fa-stack fa-3x">
-                                                    <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                                    <asp:Image ImageUrl="imageurl" id="imgEditar" runat="server" />
                                                 </span>
                                             </a>
                                         </p>

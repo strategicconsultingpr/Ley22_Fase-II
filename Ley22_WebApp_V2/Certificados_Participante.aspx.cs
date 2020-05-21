@@ -3,6 +3,7 @@ using Ley22_WebApp_V2.Old_App_Code;
 using SelectPdf;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -176,9 +177,9 @@ namespace Ley22_WebApp_V2
             {
                // string PathNameDocumento = "//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
-                if (Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/"))
+                if (Directory.Exists(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/"))
                 {
-                    string[] filesPaths = Directory.GetFiles("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
+                    string[] filesPaths = Directory.GetFiles(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_CasoCriminal + "/Certificaciones/");
                     List<ListItem> files = new List<ListItem>();
 
                     foreach (string item in filesPaths)

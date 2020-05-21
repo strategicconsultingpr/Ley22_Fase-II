@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ley22_WebApp_V2 {
-    
-    
-    public partial class Dashboard_Usuarios {
-        
+namespace Ley22_WebApp_V2
+{
+
+
+    public partial class Dashboard_Usuarios
+    {
+
         /// <summary>
         /// LitNombre control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LitNombre;
-        
+
         /// <summary>
         /// LitPrimerNombre control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LitPrimerNombre;
-        
+
         /// <summary>
         /// LitPrimerApellido control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LitPrimerApellido;
-        
+
         /// <summary>
         /// LitEmail control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LitEmail;
-        
+
         /// <summary>
         /// LitRoles control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LitRoles;
-        
+
         /// <summary>
         /// divExpediente control.
         /// </summary>
@@ -65,7 +67,16 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divExpediente;
-        
+
+        /// <summary>
+        /// imgEditar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgEditar;
+
         /// <summary>
         /// divCitas control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCitas;
-        
+
         /// <summary>
         /// divCharlas control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCharlas;
-        
+
         /// <summary>
         /// divRecaudos control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace Ley22_WebApp_V2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRecaudos;
-        
+
         /// <summary>
         /// divReportes control.
         /// </summary>

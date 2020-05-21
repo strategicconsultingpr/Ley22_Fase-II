@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -78,7 +79,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
     protected void lnkImprimir_Click(object sender, EventArgs e)
     {
         LinkButton btn = (LinkButton)(sender);//Assmca-file/share2/APP-LEY22/DocumentosDeParticipantes/"
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosOficiales/" + btn.CommandArgument.ToString();
+        string PathNameDocumento = ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosOficiales/" + btn.CommandArgument.ToString();
 
         try
         {
@@ -115,7 +116,7 @@ public partial class imprimir_documentos : System.Web.UI.Page
             {
                 if (GvDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_Documento.ToString())
                 {
-                    File.Delete("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosOficiales/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
+                    File.Delete(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosOficiales/" + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
                     mensaje += "Documento " + GvDocumentos.DataKeys[item.RowIndex].Values[1].ToString() + " fue eliminado.";
                 }
             }
@@ -139,10 +140,10 @@ public partial class imprimir_documentos : System.Web.UI.Page
                 string Archivo = Path.GetFileName(FileUpload1.FileName);
                 string tipo = Path.GetExtension(FileUpload1.FileName);
                 string mensaje = string.Empty;
-                if ((!File.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosOficiales/" + Archivo)) && tipo == ".pdf")
+                if ((!File.Exists(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosOficiales/" + Archivo)) && tipo == ".pdf")
                 {
                     string Documento = Archivo.Substring(0, Archivo.LastIndexOf(".pdf"));
-                    FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosOficiales/" + Archivo);
+                    FileUpload1.SaveAs(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosOficiales/" + Archivo);
 
                     using (Ley22Entities mylib = new Ley22Entities())
                     {

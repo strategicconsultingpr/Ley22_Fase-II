@@ -55,7 +55,8 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
             NombreParticipante.Text = Session["NombreParticipante"].ToString();
             NombrePrograma.Text = Session["NombrePrograma"].ToString();
             LitExpediente.Text = Session["Expediente"].ToString();
-            
+
+            inboxImg.Attributes["src"] = "~/images/recepcion-documentos.png";
             if(verificarOrdenJudicialAbierta())
             {
                 LitEstatus.Text = "Abierto bajo este programa";
@@ -68,11 +69,11 @@ public partial class seleccion_proximo_paso : System.Web.UI.Page
 
                 if (verificarFaltaDeDocumento())
                 {
-                    inboxImg.Attributes["src"] = "../images/inbox-rojo.png";
+                    inboxImg.Attributes["src"] = "~/images/inbox-rojo.png";
                 }
                 else
                 {
-                    inboxImg.Attributes["src"] = "../images/recepcion-documentos.png";
+                    inboxImg.Attributes["src"] = "~/images/recepcion-documentos.png";
                 }
             }
             else

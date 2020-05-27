@@ -27,10 +27,11 @@
 
     <div class="container-fluid">
   <header class="row align-items-end main">
-    <div class="col-sm-auto">
+   
         
-            <div class="brand">
-        <img src="../images/assmca-logo.svg" alt="ASSMCA">
+         <div class="brand">
+              <div class="col">
+        <img src="<%=ResolveClientUrl("~/images/assmca-logo.svg")%>" alt="ASSMCA">
       </div>
     </div>
     <div class="col" style="text-align:center">WELCOME TO ASSMCA PUERTO RICO</div>

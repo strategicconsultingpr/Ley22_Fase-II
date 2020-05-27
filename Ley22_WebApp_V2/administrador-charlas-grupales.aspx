@@ -353,7 +353,7 @@
 
                                 <label for="fecha-charla">Fecha</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("~/images/calendar_icon.png")%>" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaModCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla2"  ></asp:TextBox>
 
                                     <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" />
@@ -367,7 +367,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Inicial</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("/images/clock_icon.png")%>" alt="ASSMCA"></div>
 
                                     <asp:TextBox ID="TxtIncialModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtIncialModCharla" ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
@@ -382,7 +382,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Final</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("/images/clock_icon.png")%>" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFinalModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtFinalModCharla" ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalModCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
@@ -583,7 +583,7 @@
                                 </div>
                             </div>
                             <br />
-                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
+                            <a href="<%=ResolveClientUrl("~/Dashboard-Usuarios.aspx")%>" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
                         </div>
                     </div>
                 </div>
@@ -603,8 +603,8 @@
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="BtnHoy" runat="server" Text="Hoy" class="btn btn-secondary btn-sm" OnClick="BtnHoy_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false"><img src="<%=ResolveClientUrl("~/images/izquierda.png")%>" alt="ASSMCA"></asp:LinkButton>
+                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false"><img src="<%=ResolveClientUrl("~/images/derecha.png")%>" alt="ASSMCA"></asp:LinkButton>
                                 <asp:Literal ID="LiMesAno" runat="server"></asp:Literal>
 
                             </div>
@@ -1063,6 +1063,7 @@
                             function OnGetAllMembersSuccess(data, status) {
 
                                 var myData = data.d;
+                                $("#bodyLista").empty();
                                 $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                                 $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                                 $("#bodyLista").append(myData.Participantes);

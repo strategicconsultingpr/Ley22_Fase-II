@@ -71,7 +71,7 @@ namespace Ley22_WebApp_V2
                 }
 
                 string url = Server.MapPath("~/images/editar-usuario-registrado.png");
-                imgEditar.ImageUrl = ResolveClientUrl("~/images/editar-usuario-registrado.png");
+                //imgEditar.ImageUrl = ResolveClientUrl("~/images/editar-usuario-registrado.png");
             }
         }
 

@@ -415,12 +415,12 @@ namespace Ley22_WebApp_V2
 
                             if (Convert.ToInt32(mydata.NroCharla) != 1 && asistenciaPrimeraCharla.Asistio != 1)
                             {
-                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"../images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
+                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
                             }
                             else
                             {
-                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"><img src=\"../images/person-check.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"CAMBIAR PARTICIPANTE A SI ASISTIÓ\"></a>"
-                                + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "," + orden + "')\"><img src=\"../images/x-circle.svg\" alt=\"\" width=\"25\" height=\"25\" title=\"ELMINIAR PARTICIPANTE DE CHARLA\"></a></td>";
+                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\">hola <img src=\"../images/person-check.svg\" alt=\"\" width=\"28\" height=\"28\" id=\"Img1\" runat=\"server\" title=\"CAMBIAR PARTICIPANTE A SI ASISTIÓ\"></a>"
+                                + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "," + orden + "')\"><img src=\"../images/x-circle.svg\" alt=\"\" width=\"25\" height=\"25\" runat=\"server\" title=\"ELMINIAR PARTICIPANTE DE CHARLA\"></a></td>";
                             }
                         }
                         else

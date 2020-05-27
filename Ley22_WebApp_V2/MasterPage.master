@@ -66,7 +66,7 @@
     <div class="col-sm-auto">
         
             <div class="brand">
-        <img src="../images/assmca-logo.svg" alt="ASSMCA">
+        <img src="<%=ResolveClientUrl("~/images/assmca-logo.svg")%>" alt="ASSMCA">
       </div>
     </div>
 <%--SuperAdmin--%>
@@ -76,26 +76,26 @@
                       <nav>
                       <ul class="nav" id="nav">
                         <li class="nav-item" id="liExpediente" runat="server" visible="false">
-                          <a class="nav-link active" href="../entrada.aspx">Búsqueda de Expediente</a>
+                          <a class="nav-link active" href="<%=ResolveClientUrl("~/entrada.aspx")%>">Búsqueda de Expediente</a>
                         </li>  
                           <li class="nav-item" id="liCitas" runat="server" visible="false">
-                          <a class="nav-link" href="../trabajor-excepciones.aspx">Calendario de Citas</a>
+                          <a class="nav-link" href="<%=ResolveClientUrl("~/trabajor-excepciones.aspx")%>">Calendario de Citas</a>
                         </li>
                         <li class="nav-item" id="liCharlas" runat="server" visible="false">
-                          <a class="nav-link" href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a>
+                          <a class="nav-link" href="<%=ResolveClientUrl("~/administrador-charlas-grupales.aspx")%>">Calendario de Charlas</a>
                         </li>                       
                        <%-- <li class="nav-item">
                           <a class="nav-link" href="#">Administración</a>
                         </li>--%>
                    
                           <li class="nav-item" id="liRecaudo" runat="server" visible="false">
-                          <a class="nav-link" href="../recaudos-busqueda-usuario.aspx">Recaudos</a>
+                          <a class="nav-link" href="<%=ResolveClientUrl("~/recaudos-busqueda-usuario.aspx")%>">Recaudos</a>
                         </li>
                           <li class="nav-item" id="liReportes" runat="server" visible="false">
-                          <a class="nav-link" href="../Reportes.aspx">Reportes</a>
+                          <a class="nav-link" href="<%=ResolveClientUrl("~/Reportes.aspx")%>">Reportes</a>
                         </li> 
                           <li class="nav-item" id="liDocumentos" runat="server" visible="false">
-                          <a class="nav-link" href="../imprimir-documentos.aspx">Documentos</a>
+                          <a class="nav-link" href="<%=ResolveClientUrl("~/imprimir-documentos.aspx")%>">Documentos</a>
                         </li> 
                       </ul>
                     </nav>  
@@ -112,17 +112,17 @@
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">
                                             <ContentTemplate>
-                                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
-                                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
-                                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/Register.aspx")%>">Registo Usuarios</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/AssignRole.aspx")%>">Asignar Roles</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/AssignProgram.aspx")%>">Asignar Programas</a>
                                             </ContentTemplate>
                                         </asp:RoleGroup>
 
                                         <asp:RoleGroup Roles="Supervisor">
                                             <ContentTemplate>
-                                                <a class="dropdown-item" href="../Account/Register.aspx">Registo Usuarios</a>
-                                                <a class="dropdown-item" href="../Account/AssignRole.aspx">Asignar Roles</a>
-                                                <a class="dropdown-item" href="../Account/AssignProgram.aspx">Asignar Programas</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/Register.aspx")%>">Registo Usuarios</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/AssignRole.aspx")%>">Asignar Roles</a>
+                                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Account/AssignProgram.aspx")%>">Asignar Programas</a>
                                             </ContentTemplate>
                                         </asp:RoleGroup>
 

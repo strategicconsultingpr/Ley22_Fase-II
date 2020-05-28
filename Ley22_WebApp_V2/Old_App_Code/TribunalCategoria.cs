@@ -12,25 +12,18 @@ namespace Ley22_WebApp_V2.Old_App_Code
     using System;
     using System.Collections.Generic;
     
-    public partial class Tribunal
+    public partial class TribunalCategoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tribunal()
+        public TribunalCategoria()
         {
-            this.CasoCriminals = new HashSet<CasoCriminal>();
+            this.Tribunals = new HashSet<Tribunal>();
         }
     
-        public int Id_Tribunal { get; set; }
-        public string NB_Tribunal { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
-        public int FK_Categoria { get; set; }
-        public int FK_Region { get; set; }
-        public string PO_BOX { get; set; }
+        public int Id_TribunalCategoria { get; set; }
+        public string NB_TribunalCategoria { get; set; }
     
-        public virtual TribunalCategoria TribunalCategoria { get; set; }
-        public virtual TribunalRegion TribunalRegion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CasoCriminal> CasoCriminals { get; set; }
+        public virtual ICollection<Tribunal> Tribunals { get; set; }
     }
 }

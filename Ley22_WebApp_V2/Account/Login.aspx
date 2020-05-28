@@ -37,10 +37,19 @@
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordInput" CssClass="text-danger" ErrorMessage="The password field is required." />
                   </div>
                   <div class="form-group text-left">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                <asp:CheckBox runat="server" ID="RememberMe" />
-                                <asp:Label runat="server" AssociatedControlID="RememberMe">Remember me?</asp:Label>
+                      <div class="row">
+                            <div class="col text-left">
+                                <div class="checkbox">
+                                    <label for="ShowPassword">
+                                    <input type="checkbox" id="ShowPassword" />
+                                    Mostrar Contraseña</label>
+                                </div>
+                            </div>
+                            <div class="col text-right">
+                                <div class="checkbox">
+                                    <asp:CheckBox runat="server" ID="RememberMe" />
+                                    <asp:Label runat="server" AssociatedControlID="RememberMe">¿Recordarme?</asp:Label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,6 +79,24 @@
   </div>
 </div>
 
+    <script type="text/javascript">
+        $(function () {
+            $("#ShowPassword").bind("click", function () {
+                var txtPassword = $("[id*=PasswordInput]");
+                if ($(this).is(":checked")) {
+                    txtPassword.after('<input onchange = "PasswordChanged(this);" id = "txt_' + txtPassword.attr("id") + '" class="form-control" placeholder="Ingrese Contraseña" type = "text" value = "' + txtPassword.val() + '" />');
+                    txtPassword.hide();
+                } else {
+                    txtPassword.val(txtPassword.next().val());
+                    txtPassword.next().remove();
+                    txtPassword.show();
+                }
+            });
+        });
+        function PasswordChanged(txt) {
+            $(txt).prev().val($(txt).val());
+        }
+    </script>
 
 </asp:Content>
 

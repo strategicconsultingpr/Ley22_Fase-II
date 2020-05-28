@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -192,24 +193,80 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         if (Page.Request.Params["__EVENTTARGET"] == "EliminarParticipante")
         {
             string[] targets = Request["__EVENTARGUMENT"].Split(',');
-            //EliminarParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             EliminarParticipante(Convert.ToInt32(targets[0]), Convert.ToInt32(targets[1]));
             return;
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "AsistioParticipante")
         {
-            AsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
-            string mensaje = "El participante cumplió con la charla";
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('Cumplió','" + mensaje + "','success')", true);
-            
+            string mensaje = string.Empty;
+            string titulo = string.Empty;
+            string tipo = string.Empty;
+
+            try
+            {
+
+                dsLey22.AsistioCharla(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+
+                mensaje = "El participante cumplió con la charla";
+                titulo = "Cumplió";
+                tipo = "success";
+
+                GenerarCalendario();
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+                titulo = "Error";
+                tipo = "error";
+            }
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Cumplió", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
             return;
         }
+
         else if (Page.Request.Params["__EVENTTARGET"] == "NoAsistioParticipante")
         {
-            NoAsistioParticipante(Convert.ToInt32(Request["__EVENTARGUMENT"]));
-            string mensaje = "El participante NO cumplió con la charla";
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('NO cumplió','" + mensaje + "','error')", true);
-            
+            string mensaje = string.Empty;
+            string titulo = string.Empty;
+            string tipo = string.Empty;
+
+            try
+            {
+
+                dsLey22.NoAsistioCharla(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+
+                mensaje = "El participante NO cumplió con la charla";
+                titulo = "NO Cumplió";
+                tipo = "warning";
+
+                GenerarCalendario();
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+                titulo = "Error";
+                tipo = "error";
+            }
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "No Cumplió", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
             return;
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "ExpedienteParticipante")
@@ -218,9 +275,40 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
         }
         else if (Page.Request.Params["__EVENTTARGET"] == "TodosAsistieron")
         {
-            TodosAsistieron(Convert.ToInt32(Request["__EVENTARGUMENT"]));
-            string mensaje = "Todos los participantes asistieron a esta charla";
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error", "sweetAlert('Cumplió','" + mensaje + "','success')", true);
+            string mensaje = string.Empty;
+            string titulo = string.Empty;
+            string tipo = string.Empty;
+
+            try
+            {
+                
+                dsLey22.AsistieronTodosCharla(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+
+                mensaje = "Todos los participantes asistieron a esta charla";
+                titulo = "Asistencia";
+                tipo = "success";
+
+                GenerarCalendario();
+                
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+                titulo = "Falta de Asistencia";
+                tipo = "warning";
+            }
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Asistencia", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
+            return;
+
         }
     }
 
@@ -294,9 +382,11 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
             if (fecha.ToShortDateString() == DateTime.Now.ToShortDateString())
                 LitNumDia[i].Text = "<span class=\"dia actual\">" + fecha.Day.ToString() + "</span>";
 
+            if (DdlCentro.SelectedValue != "0" && DdlCentro.SelectedValue != "")
+            {
                 AsignarExcepcionesPorDia(i, fecha, LitContCelda, ListarExcepcionesCharlaGrupal);
                 AsignatCharlaPordia(i, fecha, LitContCelda, ListarCharlasCalendario);
-                
+            }
 
             if (i.ToString() == "14")
                 LiMesAno.Text = UppercaseFirst(fecha.ToString("MMMM")) + " " + fecha.Year.ToString();
@@ -563,7 +653,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 var fechaInical = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Min();
                 var fechaFinal = dsLey22.CharlaGrupals.Where(u => charlas.Contains(u.Id_CharlaGrupal)).Select(a => a.FechaInicial).Max();
 
-                string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
+                string PathNameDocumento = ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/Certificado_" + item.Id_CasoCriminal + ".pdf";
 
 
 
@@ -588,9 +678,9 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 }
 
 
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
+                if (!Directory.Exists(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/"))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
+                    Directory.CreateDirectory(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + item.Id_CasoCriminal + "/Certificaciones/");
                 }
 
                 string baseUrl = "C:/Users/alexie.ortiz/source/repos/Ley22_Fase-II/Ley22_WebApp_V2/images/";
@@ -666,7 +756,7 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
         int Programa = Convert.ToInt32(DdlCentro.SelectedValue.ToString());
 
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_Caso + "/Certificaciones/Certificado_" + Id_Caso + ".pdf";
+        string PathNameDocumento = ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + Id_Caso + "/Certificaciones/Certificado_" + Id_Caso + ".pdf";
 
         if (File.Exists(PathNameDocumento))
         {
@@ -869,30 +959,36 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
 
     void EliminarParticipante(int Id_Participante, int casoCriminal)
     {
-        //int Id_Participante = Convert.ToInt32(Request["__EVENTARGUMENT"]);
+       
         int Id_Charla = Convert.ToInt32(Id_CharlaGrupal.Value);
 
-        using (Ley22Entities mylib = new Ley22Entities())
+        string mensaje = string.Empty;
+        string titulo = string.Empty;
+        string tipo = string.Empty;
+
+        try
         {
-            //int casoCriminal = Convert.ToInt32(mylib.ParticipantesPorCharlas.Where(p => p.Id_CharlaGrupal.Equals(Id_Charla)).Where(a => a.Id_Participante.Equals(Id_Participante)).Select(r => r.Id_OrdenJudicial).Single());
-            var email = mylib.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
+            string numeroCaso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(casoCriminal)).Select(p => p.NumeroCasoCriminal).Single();
 
-            string numeroCaso = mylib.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(casoCriminal)).Select(p => p.NumeroCasoCriminal).Single();
+            dsLey22.EliminarParticipanteCharlaGrupalCasoCriminal(Id_Charla, Id_Participante, casoCriminal);
 
-            //mylib.EliminarParticipanteCharlaGrupal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante);
-            mylib.EliminarParticipanteCharlaGrupalCasoCriminal(Convert.ToInt32(Id_CharlaGrupal.Value), Id_Participante,casoCriminal);
+            mensaje = "El participante fué eliminado de la charla";
+            titulo = "Participante Eliminado";
+            tipo = "success";
+
+            var email = dsLey22.CasoCriminals.Where(p => p.Id_CasoCriminal.Equals(casoCriminal)).Select(r => r.Email).SingleOrDefault();
 
             if (email.Count() > 0)
             {
 
-                string charla = mylib.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
+                string charla = dsLey22.CharlaGrupals.Where(a => a.Id_CharlaGrupal.Equals(Id_Charla)).Select(p => p.FechaInicial).Single().ToString();
 
                 var du = dsPerfil.SA_PERSONA.Where(a => a.PK_Persona.Equals(Id_Participante)).Single();
-              
+
 
                 string evento = "Se elimino charla con fecha " + charla;
                 GridView gv = new GridView();
-                gv.DataSource = mylib.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
+                gv.DataSource = dsLey22.ConsultarCharlasParaTarjeta(Id_Participante, Convert.ToInt32(DdlCentro.SelectedValue));
 
                 gv.PagerStyle.HorizontalAlign = HorizontalAlign.Center;
                 gv.EmptyDataText = "No hay charlas asignadas para este caso criminal";
@@ -911,43 +1007,24 @@ public partial class administrador_charlas_grupales : System.Web.UI.Page
                 mail.SendAsyncCita(email, "Tarjeta de Charlas", body);
             }
         }
-        string mensaje = "El participante fué eliminado de la charla";
-        ClientScript.RegisterStartupScript(this.GetType(), "Participante Eliminado", "sweetAlert('Participante Eliminado','" + mensaje + "','success')", true);
-        GenerarCalendario();
+        catch (Exception ex)
+        {
+            if (ex.InnerException == null)
+            {
+                mensaje = ex.Message;
+            }
+            else
+            {
+                mensaje = ex.InnerException.Message;
+            }
 
-    }
-
-    void AsistioParticipante(int Id_ParticipantePorCharlaGrupal)
-    {
-        dsLey22.AsistioCharla(Id_ParticipantePorCharlaGrupal);
-        string mensaje = "El participante cumplió con la charla";
-        
-        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','success')", true);
-        
-        GenerarCalendario();
-       
-    }
-
-    void NoAsistioParticipante(int Id_ParticipantePorCharlaGrupal)
-    {
-        dsLey22.NoAsistioCharla(Id_ParticipantePorCharlaGrupal);
-        string mensaje = "El participante NO cumplió con la charla";
-
-        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','error')", true);
-        
-        GenerarCalendario();
-
-        
-    }
-
-    void TodosAsistieron(int Id_CharlaGrupal)
-    {
-        dsLey22.AsistieronTodosCharla(Id_CharlaGrupal);
-        string mensaje = "Todos los participantes asistieron a esta charla";
-
-        ClientScript.RegisterStartupScript(this.GetType(), "Asistencia", "sweetAlert('Asistencia','" + mensaje + "','success')", true);
+            titulo = "Error";
+            tipo = "error";
+        }
 
         GenerarCalendario();
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "No Cumplió", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
 
     }
 

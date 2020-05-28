@@ -363,7 +363,7 @@
                                 </button>
                             </div>
                             <br />
-                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
+                            <a href="<%=ResolveClientUrl("~/Dashboard-Usuarios.aspx")%>" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
                         </div>
                     </div>
                 </div>
@@ -408,8 +408,8 @@
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="BtnHoy" runat="server" Text="Hoy" class="btn btn-secondary btn-sm" OnClick="BtnHoy_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" OnClick="BtnLeft_Click" CausesValidation="false" ><img src="<%=ResolveClientUrl("~/images/izquierda.png")%>" alt="ASSMCA"></asp:LinkButton>
+                                <asp:LinkButton ID="BtnRight" runat="server"  class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" ><img src="<%=ResolveClientUrl("~/images/izquierda.png")%>" alt="ASSMCA"></asp:LinkButton>
                                 <asp:Literal ID="LiMesAno" runat="server"></asp:Literal>
 
                             </div>

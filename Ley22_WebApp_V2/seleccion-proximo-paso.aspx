@@ -200,7 +200,7 @@
                         </li>
                     </ul>
 
-                    <a href="entrada.aspx" class="btn btn-secondary btn-block mb-4">Salir del Tablero de Expediente</a>
+                    <a href="<%=ResolveClientUrl("~/entrada.aspx")%>" class="btn btn-secondary btn-block mb-4">Salir del Tablero de Expediente</a>
                 </div>
 
                 <!-- Bloque Interior -->
@@ -210,13 +210,13 @@
                                                     <div class="card text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="ParticipanteNuevo.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/ParticipanteNuevo.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/editar-usuario-registrado.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>                                   
-                                                            <h4 class="card-title"><a href="ParticipanteNuevo.aspx">Modificar Participante</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/ParticipanteNuevo.aspx")%>">Modificar Participante</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -226,13 +226,13 @@
                                                     <div class="card text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="OrdenNuevo.aspx">
+                                                                <a ID="ordenImg" runat="server" href="OrdenNuevo.aspx">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/caso-icon.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/caso-icon.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>                                   
-                                                            <h4 class="card-title"><a href="OrdenNuevo.aspx">Registro de Caso Criminal</a></h4>
+                                                            <h4 class="card-title"><a ID="ordenText" runat="server" href="OrdenNuevo.aspx">Registro de Caso Criminal</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,13 +241,13 @@
                                                     <div class="card text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="cargar-documentos.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/cargar-documentos.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
                                                                         <img src="../images/recepcion-documentos.png" alt="ASSMCA" id="inboxImg" runat="server">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="cargar-documentos.aspx">Recibo de Documentos</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/cargar-documentos.aspx")%>">Recibo de Documentos</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,13 +261,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="asignar-citas-individual.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/asignar-citas-individual.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/calendario-citas-trabajador-social.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="asignar-citas-individual.aspx">Calendario Citas Trabajador Social</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/asignar-citas-individual.aspx")%>">Calendario Citas Trabajador Social</a></h4>
                                                         </div>
                                                     </div>
 
@@ -278,13 +278,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="charlas-grupales.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/charlas-grupales.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/calendario-citas-charlas.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="charlas-grupales.aspx">Calendario Charlas Socio-Educativas</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/charlas-grupales.aspx")%>">Calendario Charlas Socio-Educativas</a></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -297,13 +297,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="balance-pago-solo-saldo.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/balance-pago-solo-saldo.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/recaudos.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/recaudos.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="balance-pago-solo-saldo.aspx">Historial Financiero</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/balance-pago-solo-saldo.aspx")%>">Historial Financiero</a></h4>
                                                         </div>
                                                     </div>
 
@@ -315,13 +315,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="Certificados_Participante.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/Certificados_Participante.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/certificate_icon_blue.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/certificate_icon_blue.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="Certificados_Participante.aspx">Certificados</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/Certificados_Participante.aspx")%>">Certificados</a></h4>
                                                         </div>
                                                     </div>
 
@@ -333,13 +333,13 @@
                                                     <div class="card  text-center mb-3 card-menu">
                                                         <div class="card-block">
                                                             <p class="mt-4">
-                                                                <a href="cierre-caso.aspx">
+                                                                <a href="<%=ResolveClientUrl("~/cierre-caso.aspx")%>">
                                                                     <span class="fa-stack fa-3x">
-                                                                        <img src="../images/cerrar-caso.png" alt="ASSMCA">
+                                                                        <img src="<%=ResolveClientUrl("~/images/cerrar-caso.png")%>" alt="ASSMCA">
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="cierre-caso.aspx">Cerrar Caso</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/cierre-caso.aspx")%>">Cerrar Caso</a></h4>
                                                         </div>
                                                     </div>
 
@@ -356,7 +356,25 @@
     </div>
     <!-- Card -->
 
+        <script type="text/javascript">
+            function ordenNuevo() {
 
+                swal({
+                    title: "Registrar Nuevo Caso Criminal",
+                    text: "Esta participante contiene un caso criminal activo bajo este programa ¿Esta seguro de querer registrar un nuevo caso criminal para este participante?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((value) => {
+                    if (value) {
+                        window.location.href = "OrdenNuevo.aspx";
+                    }
+                    else {
+                    }
+                })
+
+            }
+            </script>
 
 
 </asp:Content>

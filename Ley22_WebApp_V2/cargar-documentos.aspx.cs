@@ -9,6 +9,7 @@ using Ley22_WebApp_V2.Old_App_Code;
 using Ley22_WebApp_V2.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 public partial class cargar_documentos : System.Web.UI.Page
 {
@@ -157,7 +158,7 @@ public partial class cargar_documentos : System.Web.UI.Page
             {
                 if (GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[0].ToString() == Id_DocumentoPorParticipante.ToString())
                 {
-                    File.Delete("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
+                    File.Delete(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + GvRecepcionDocumentos.DataKeys[item.RowIndex].Values[1].ToString());
                 }
             }
 
@@ -179,7 +180,7 @@ public partial class cargar_documentos : System.Web.UI.Page
         string Id = Session["Id_Participante"].ToString();
         Programa = Convert.ToInt32(Session["Programa"].ToString());
         LinkButton btn = (LinkButton)(sender);       
-        string PathNameDocumento = "//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + btn.CommandArgument.ToString();
+        string PathNameDocumento = ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + btn.CommandArgument.ToString();
 
 
         Response.Clear();
@@ -302,7 +303,10 @@ public partial class cargar_documentos : System.Web.UI.Page
     }
 
     protected void BtnSubirDocumento_Click(object sender, EventArgs e)
-    {    
+    {
+        string mensaje = string.Empty;
+        string titulo = string.Empty;
+        string tipo = string.Empty;
 
         if (FileUpload1.HasFile)
         { 
@@ -311,21 +315,43 @@ public partial class cargar_documentos : System.Web.UI.Page
                 string filename = Path.GetFileName(FileUpload1.FileName);
                 string Id = Session["Id_Participante"].ToString();
                 Programa = Convert.ToInt32(Session["Programa"].ToString());
-                if (!Directory.Exists("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue))
+                if (!Directory.Exists(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue))
                 {
-                    Directory.CreateDirectory("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/");
+                    Directory.CreateDirectory(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/");
                 }
-                FileUpload1.SaveAs("//Assmca-file/share2/APP-LEY22-Prueba/DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + filename);
+                FileUpload1.SaveAs(ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/" + filename);
                 //  StatusLabel.Text = "Upload status: File uploaded!";
                 GuardarDocumento(Convert.ToInt32(DdlDocumento.SelectedValue), Convert.ToInt32(Session["Id_Participante"]), Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue), filename, Convert.ToInt32(Session["Id_UsuarioApp"]));
-                BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-                CargarDocumentosFaltantes();
-                ActualizarDocumentosDdl();
+                
+
+                mensaje = "El documento se guardó correctamente";
+                titulo = "Docuento Guardado";
+                tipo = "success";
             }
             catch (Exception ex)
             {
-                // StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+                titulo = "Error";
+                tipo = "error";
             }
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
+
+            BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+            CargarDocumentosFaltantes();
+            ActualizarDocumentosDdl();
+
+            
+           // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento", "alert('hola');", true);
+            
         }
 
     }

@@ -55,6 +55,7 @@ namespace Ley22_WebApp_V2
 
                 TxtIUP.Text = sa_persona.PK_Persona.ToString();
                 LoadDropDownList();
+                LoadDdlTribunal();
 
                 NombreParticipante.Text = Session["NombreParticipante"].ToString();
                 NombrePrograma.Text = Session["NombrePrograma"].ToString();
@@ -64,7 +65,6 @@ namespace Ley22_WebApp_V2
                     this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
 
                     short idPrograma = Convert.ToInt16(Session["Programa"]);
-                    
 
                     var caso = dsLey22.CasoCriminals.Where(a => a.Id_CasoCriminal.Equals(Id_Caso)).SingleOrDefault();
 
@@ -82,6 +82,24 @@ namespace Ley22_WebApp_V2
 
                         ChkCaso.Checked = true;
                     }
+
+                    DdlIntervenido.SelectedValue = caso.Intervenido.ToString();
+                    TxtSetencias.Text = caso.NumSentencias.ToString();
+
+                    DdlEvaluado.SelectedValue = caso.Evaluado.ToString();
+                    TxtOficina.Text = caso.EvaOficina;
+                    TxtAno.Text = caso.EvaFecha;
+
+                    if (caso.Intervenido == 1)
+                    {
+                        divSentencias.Attributes.Add("style", "visibility:visible");
+                    }
+
+                    if (caso.Evaluado == 1)
+                    {
+                        divEvaluado.Attributes.Add("style", "visibility:visible");
+                    }
+
                     TxtExpediente.Text = CasoExpediente;
                     TxtFechaOrden.Text = Convert.ToDateTime(caso.FechaOrden).ToString("MM/dd/yyyy");
                     TxtSentencia.Text = Convert.ToDateTime(caso.FechaSentencia).ToString("MM/dd/yyyy");
@@ -121,6 +139,9 @@ namespace Ley22_WebApp_V2
                     TxtPareja.Text = caso.NB_Pareja;
                     TxtPadre.Text = caso.NB_Padre;
                     TxtMadre.Text = caso.NB_Madre;
+                    TxtNacimiento.Text = caso.LugarNacimiento;
+                    TxtContacto.Text = caso.NB_Contacto;
+                    TxtTelefonoContacto.Text = caso.TelContacto;
 
                     BtnActualizar.Visible = true;
 
@@ -164,10 +185,45 @@ namespace Ley22_WebApp_V2
                         TxtPadre.ReadOnly = true;
                         TxtMadre.ReadOnly = true;
 
+                        DdlIntervenido.Enabled = false;
+                        TxtSetencias.ReadOnly = true;
+
+                        DdlEvaluado.Enabled = false;
+                        TxtOficina.ReadOnly = true;
+                        TxtAno.ReadOnly = true;
+
+                        TxtNacimiento.ReadOnly = true;
+                        TxtContacto.ReadOnly = true;
+                        TxtTelefonoContacto.ReadOnly = true;
+
                         BtnActualizar.Visible = false;
+
+                        if (caso.Activa == 0 && (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")))
+                        {
+                            BtnReabrir.Visible = true;
+                        }
                     }
 
                     BtnCrear.Visible = false;
+
+                    var cargosVacio = (from casos in dsLey22.CasoCriminals
+                                     join control in dsLey22.ControldePagoes on casos.Id_CasoCriminal equals control.FK_CasoCriminal
+                                     where casos.Id_CasoCriminal == this.Id_Caso
+                                     select new { resultado = casos.Id_CasoCriminal }
+                                    ).Count();
+
+                    var documentosVacio = (from casos in dsLey22.CasoCriminals
+                                           join documentos in dsLey22.DocumentosPorParticipantes on casos.Id_CasoCriminal equals documentos.Id_OrdenJudicial
+                                           where casos.Id_CasoCriminal == this.Id_Caso
+                                           select new { resultado = casos.Id_CasoCriminal }
+                                    ).Count();
+
+                    if (caso.Activa == 1 && (userManager.IsInRole(ExistingUser.Id, "SuperAdmin") || userManager.IsInRole(ExistingUser.Id, "Supervisor")) && cargosVacio == 0 && documentosVacio == 0)
+                    {
+                        BtnEliminar.Visible = true;
+                    }
+
+
 
                 }
                 else
@@ -185,17 +241,17 @@ namespace Ley22_WebApp_V2
 
                 
             }
+
+            if (Page.Request.Params["__EVENTTARGET"] == "EliminarCasoCriminal")
+            {
+                Eliminar_Caso();
+                return;
+            }
         }
 
         void LoadDropDownList()
         {           
-            var tribunales = dsLey22.Tribunals.OrderBy(a => a.NB_Tribunal).Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
-
-            DdlTribunal.DataValueField = "Value";
-            DdlTribunal.DataTextField = "Text";
-            DdlTribunal.DataSource = tribunales;
-            DdlTribunal.DataBind();
-            DdlTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+            
 
             var estados_civiles = dsPerfil.SA_LKP_TEDS_ESTADO_MARITAL.Where(a => a.Active == true).Select(r => new ListItem { Value = r.PK_EstadoMarital.ToString(), Text = r.DE_EstadoMarital }).ToList();
 
@@ -245,8 +301,50 @@ namespace Ley22_WebApp_V2
          //   DdlDesempleado.Items.Insert(0, new ListItem("-Seleccione-", "0"));
         }
 
+        void LoadDdlTribunal()
+        {
+            var tribunales = dsLey22.Tribunals.OrderBy(a => a.NB_Tribunal).Select(r => new ListItem { Value = r.Id_Tribunal.ToString(), Text = r.NB_Tribunal }).ToList();
+
+            DdlTribunal.DataValueField = "Value";
+            DdlTribunal.DataTextField = "Text";
+            DdlTribunal.DataSource = tribunales;
+            DdlTribunal.DataBind();
+            DdlTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            var categorias = dsLey22.TribunalCategorias.OrderBy(a => a.NB_TribunalCategoria).Select(r => new ListItem { Value = r.Id_TribunalCategoria.ToString(), Text = r.NB_TribunalCategoria }).ToList();
+
+            DdlCategoriaTribunal.DataValueField = "Value";
+            DdlCategoriaTribunal.DataTextField = "Text";
+            DdlCategoriaTribunal.DataSource = categorias;
+            DdlCategoriaTribunal.DataBind();
+            DdlCategoriaTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            var regiones = dsLey22.TribunalRegions.OrderBy(a => a.NB_TribunalRegion).Select(r => new ListItem { Value = r.Id_TribunalRegion.ToString(), Text = r.NB_TribunalRegion }).ToList();
+
+            DdlRegionTribunal.DataValueField = "Value";
+            DdlRegionTribunal.DataTextField = "Text";
+            DdlRegionTribunal.DataSource = regiones;
+            DdlRegionTribunal.DataBind();
+            DdlRegionTribunal.Items.Insert(0, new ListItem("-Seleccione-", "0"));
+
+            TxtNombreTribunal.Text = "";
+            TxtTelefonoTribunal1.Text = "";
+            TxtTelefonoTribunal2.Text = "";
+            TxtTelefonoTribunal3.Text = "";
+            TxtDireccionTribunal.Text = "";
+            DdlPaisTribunal.SelectedValue = "1";
+            TxtBoxTribunal.Text = "";
+            TxtCategoriaTribunal.Text = "";
+            TxtRegionTribunal.Text= "";
+
+            ChkCategoria.Checked = false;
+            ChkRegion.Checked = false;
+
+        }
         protected void BtnCrear_Click(object sender, EventArgs e)
         {
+            string mensaje = string.Empty;
+
             try
             {
                 using (Ley22Entities mylib = new Ley22Entities())
@@ -258,9 +356,10 @@ namespace Ley22_WebApp_V2
                         TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
 
-                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
+                mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
                
                 ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlertRef('Caso Criminal Registrado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
@@ -270,8 +369,14 @@ namespace Ley22_WebApp_V2
             }
             catch (Exception ex)
             {
-
-                string mensaje = ex.InnerException.Message;
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
 
 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
@@ -283,6 +388,7 @@ namespace Ley22_WebApp_V2
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
             this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+            string mensaje = string.Empty;
 
             try
             {
@@ -296,9 +402,10 @@ namespace Ley22_WebApp_V2
                         TxtPostalLinea1.Text, TxtPostalLinea2.Text, Convert.ToInt32(DdlPuebloPostal.SelectedValue), TxtCodigoPostalPostal.Text,
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
-                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper());
+                        TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
 
-                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
+                mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
 
 
                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
@@ -309,12 +416,127 @@ namespace Ley22_WebApp_V2
             catch (Exception ex)
             {
 
-                string mensaje = ex.InnerException.Message;
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
 
-                
+
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
             }
             
+        }
+
+        protected void BtnReabrir_Click(object sender, EventArgs e)
+        {
+            this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+
+            try
+            {
+                using (Ley22Entities mylib = new Ley22Entities())
+                    mylib.ReabrirCasoCriminal(this.Id_Caso);
+
+                string mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " fue reabierto correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Reabierto", "sweetAlertRef('Caso Criminal Reabierto','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
+
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                string mensaje = ex.InnerException.Message;
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
+        }
+
+        protected void BtnTribunal_Click(object sender, EventArgs e)
+        {
+            string mensaje = string.Empty;
+
+            string nombre = TxtNombreTribunal.Text;
+            string telefono = TxtTelefonoTribunal1.Text + "-" + TxtTelefonoTribunal2.Text + "-" + TxtTelefonoTribunal3.Text;
+            string direccion = TxtDireccionTribunal.Text;
+            string pais = DdlPaisTribunal.SelectedItem.Text;
+            string pobox = TxtBoxTribunal.Text;
+            string catTxt = TxtCategoriaTribunal.Text;
+            string regTxt = TxtRegionTribunal.Text;
+
+            int catDdl = Convert.ToInt32(DdlCategoriaTribunal.SelectedValue);
+            int regDdl = Convert.ToInt32(DdlRegionTribunal.SelectedValue);
+
+            try
+            {
+                dsLey22.GuardarTribunal(nombre, telefono, direccion, pais, pobox, catTxt, regTxt, catDdl, regDdl);
+
+                mensaje = "El tribunal " + nombre + " fue registrado correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Tribunal Registrado", "sweetAlert('Tribunal Registrado','" + mensaje + "','success')", true);
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
+            LoadDdlTribunal();
+        }
+        void Eliminar_Caso()
+        {
+            this.Id_Caso = Convert.ToInt32(Request.QueryString["id_caso"].ToString());
+            string mensaje = string.Empty;
+
+            try
+            {
+                //using (Ley22Entities mylib = new Ley22Entities())
+                //    mylib.ReabrirCasoCriminal(this.Id_Caso);
+
+                dsLey22.EliminarCasoCriminal(this.Id_Caso);
+
+                mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " fue eliminado correctamente.";
+
+
+                // ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Registrado", "sweetAlert('Caso Criminal Registrado','" + mensaje + "','success')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Caso Criminal Reabierto", "sweetAlertRef('Caso Criminal Eliminado','" + mensaje + "','success','seleccion-proximo-paso.aspx');", true);
+
+                //Response.Redirect("seleccion-proximo-paso.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                if (ex.InnerException == null)
+                {
+                    mensaje = ex.Message;
+                }
+                else
+                {
+                    mensaje = ex.InnerException.Message;
+                }
+
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Error ", "sweetAlert('Error','" + mensaje + "','error')", true);
+            }
+
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

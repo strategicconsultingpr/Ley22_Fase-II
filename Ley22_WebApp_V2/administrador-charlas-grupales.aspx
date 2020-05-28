@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4" style="text-align:center">
+                       <%-- <div class="col-md-4" style="text-align:center">
                             <p><strong>Participantes</strong></p>
                         </div>
                         <div class="col-md-4" style="text-align:center">
@@ -101,7 +101,24 @@
                             <strong>Balance</strong>
                             </div>
                             </div>
+                        </div>--%>
+                        <div class="container">
+                            <table class="table table-bordered">
+                               <thead class="thead-default">
+                                   <tr class="d-flex">
+                                    <th class="col-4" style="text-align:center"><h6><strong>Participantes</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Estatus</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Charlas</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Deuda</strong></h6></th>
+                                    <th class="col-2" style="text-align:center"><h6><strong>Acción</strong></h6></th>
+                                   </tr>
+                               </thead>
+                               <tbody id="bodyLista">
+                                   
+                               </tbody>
+                           </table>
                         </div>
+
                                         
                     </div>
                     <div class="row" id="Participantes">
@@ -336,7 +353,7 @@
 
                                 <label for="fecha-charla">Fecha</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/calendar_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("~/images/calendar_icon.png")%>" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFechaModCharla" runat="server" class="form-control" placeholder="Ej. mm/dd/yyyy" ValidationGroup="VGCrearCharla2"  ></asp:TextBox>
 
                                     <ajaxToolkit:CalendarExtender Format="MM/dd/yyyy" ID="TxtFechaNacimiento_CalendarExtender2" runat="server" BehaviorID="TxtFechaNacimiento_CalendarExtender2" TargetControlID="TxtFechaModCharla" />
@@ -350,7 +367,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Inicial</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("/images/clock_icon.png")%>" alt="ASSMCA"></div>
 
                                     <asp:TextBox ID="TxtIncialModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtIncialModCharla" ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
@@ -365,7 +382,7 @@
                             <div class="form-group">
                                 <label for="hora-charla">Hora Final</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><img src="../images/clock_icon.png" alt="ASSMCA"></div>
+                                    <div class="input-group-addon"><img src="<%=ResolveClientUrl("/images/clock_icon.png")%>" alt="ASSMCA"></div>
                                     <asp:TextBox ID="TxtFinalModCharla" runat="server" class="form-control" ValidationGroup="VGCrearCharla2"></asp:TextBox>
                                     <asp:RequiredFieldValidator ControlToValidate="TxtFinalModCharla" ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" Display="Dynamic" ForeColor="Red" ValidationGroup="VGCrearCharla2"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ControlToValidate="TxtFinalModCharla" runat="server" ErrorMessage="*Formato hh:mm am/pm" ForeColor="Red" Display="Dynamic" ValidationExpression="\b((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" ValidationGroup="VGCrearCharla2"></asp:RegularExpressionValidator>
@@ -566,7 +583,7 @@
                                 </div>
                             </div>
                             <br />
-                            <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
+                            <a href="<%=ResolveClientUrl("~/Dashboard-Usuarios.aspx")%>" class="btn btn-secondary btn-block mb-4">Volver a mi Tablero</a>
                         </div>
                     </div>
                 </div>
@@ -586,8 +603,8 @@
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="BtnHoy" runat="server" Text="Hoy" class="btn btn-secondary btn-sm" OnClick="BtnHoy_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false"><img src="<%=ResolveClientUrl("~/images/izquierda.png")%>" alt="ASSMCA"></asp:LinkButton>
+                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false"><img src="<%=ResolveClientUrl("~/images/derecha.png")%>" alt="ASSMCA"></asp:LinkButton>
                                 <asp:Literal ID="LiMesAno" runat="server"></asp:Literal>
 
                             </div>
@@ -1046,9 +1063,10 @@
                             function OnGetAllMembersSuccess(data, status) {
 
                                 var myData = data.d;
+                                $("#bodyLista").empty();
                                 $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                                 $("#FechaHoraCharla").html(myData.FechaHoraCharla);
-                                $("#Participantes").html(myData.Participantes);
+                                $("#bodyLista").append(myData.Participantes);
                                 $("#BtnAsistencia").html(myData.AdcionarParticipante);
                                 
 
@@ -1095,6 +1113,19 @@
 
              
              $('#modal-Info-Charla').modal({ show: true });
+        }
+
+        function asistenciaAlerta(titulo, texto, icono) {
+            
+            swal({
+                
+                title: titulo,
+                text: texto,
+                icon: icono
+            }
+            );
+
+          //  $('#modal-Info-Charla').modal({ show: true });
         }
 
         function imprimirCertificado(IdParticipante, IdCasoCriminal) {

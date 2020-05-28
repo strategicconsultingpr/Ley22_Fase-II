@@ -41,13 +41,13 @@
                                 <div class="card text-center mb-3 card-menu">
                                     <div class="card-block">
                                         <p class="mt-4">
-                                            <a href="../Entrada.aspx">
+                                            <a href="<%=ResolveClientUrl("~/Entrada.aspx")%>">
                                                 <span class="fa-stack fa-3x">
-                                                    <img src="../images/editar-usuario-registrado.png" alt="ASSMCA">
+                                                    <img src="<%=ResolveClientUrl("~/images/editar-usuario-registrado.png")%>" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>
-                                        <h4 class="card-title"><a href="../Entrada.aspx">Búsqueda de Expediente</a></h4>
+                                        <h4 class="card-title"><a href="<%=ResolveClientUrl("~/Entrada.aspx")%>">Búsqueda de Expediente</a></h4>
                                     </div>
                                 </div>
                             </div> 
@@ -56,13 +56,13 @@
                                 <div class="card text-center mb-3 card-menu">
                                     <div class="card-block">
                                         <p class="mt-4">
-                                            <a href="../trabajor-excepciones.aspx">
+                                            <a href="<%=ResolveClientUrl("~/trabajor-excepciones.aspx")%>">
                                                 <span class="fa-stack fa-3x">
-                                                    <img src="../images/calendario-citas-trabajador-social.png" alt="ASSMCA">
+                                                    <img src="<%=ResolveClientUrl("~/images/calendario-citas-trabajador-social.png")%>" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
-                                        <h4 class="card-title"><a href="../trabajor-excepciones.aspx">Calendario de Citas</a></h4>
+                                        <h4 class="card-title"><a href="<%=ResolveClientUrl("~/trabajor-excepciones.aspx")%>">Calendario de Citas</a></h4>
                                     </div>
                                 </div>
                             </div>  
@@ -71,13 +71,13 @@
                                 <div class="card text-center mb-3 card-menu">
                                     <div class="card-block">
                                         <p class="mt-4">
-                                            <a href="../administrador-charlas-grupales.aspx">
+                                            <a href="<%=ResolveClientUrl("~/administrador-charlas-grupales.aspx")%>">
                                                 <span class="fa-stack fa-3x">
-                                                    <img src="../images/calendario-citas-charlas.png" alt="ASSMCA">
+                                                    <img src="<%=ResolveClientUrl("~/images/calendario-citas-charlas.png")%>" alt="ASSMCA">
                                                 </span>
                                             </a>
                                         </p>                                   
-                                        <h4 class="card-title"><a href="../administrador-charlas-grupales.aspx">Calendario de Charlas</a></h4>
+                                        <h4 class="card-title"><a href="<%=ResolveClientUrl("~/administrador-charlas-grupales.aspx")%>">Calendario de Charlas</a></h4>
                                     </div>
                                 </div>
                             </div> 
@@ -88,13 +88,13 @@
                             <div class="card  text-center mb-3 card-menu">
                                 <div class="card-block">
                                     <p class="mt-4">
-                                        <a href="../recaudos-busqueda-usuario.aspx">
+                                        <a href="<%=ResolveClientUrl("~/recaudos-busqueda-usuario.aspx")%>">
                                             <span class="fa-stack fa-3x">
-                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                                <img src="<%=ResolveClientUrl("~/images/recaudos.png")%>" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
-                                    <h4 class="card-title"><a href="../recaudos-busqueda-usuario.aspx">Recaudos</a></h4>
+                                    <h4 class="card-title"><a href="<%=ResolveClientUrl("~/recaudos-busqueda-usuario.aspx")%>">Recaudos</a></h4>
                                 </div>
                             </div>
                         </div>
@@ -103,13 +103,13 @@
                             <div class="card text-center mb-3 card-menu">
                                 <div class="card-block">
                                     <p class="mt-4">
-                                        <a href="../Reportes.aspx">
+                                        <a href="<%=ResolveClientUrl("~/Reportes.aspx")%>">
                                             <span class="fa-stack fa-3x">
-                                                <img src="../images/recaudos.png" alt="ASSMCA">
+                                                <img src="<%=ResolveClientUrl("~/images/recaudos.png")%>" alt="ASSMCA">
                                             </span>
                                         </a>
                                     </p>
-                                    <h4 class="card-title"><a href="../Reportes.aspx">Reportes</a></h4>
+                                    <h4 class="card-title"><a href="<%=ResolveClientUrl("~/Reportes.aspx")%>">Reportes</a></h4>
                                 </div>
                             </div>
                         </div>

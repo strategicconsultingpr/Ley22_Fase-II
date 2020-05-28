@@ -413,9 +413,16 @@ namespace Ley22_WebApp_V2
                                 Estatus = "<td class=\"col-2\" style=\"text-align:center\">A Realizarce</td>";
                             }
 
-                            if (Convert.ToInt32(mydata.NroCharla) != 1 && asistenciaPrimeraCharla.Asistio != 1)
+                            if (Convert.ToInt32(mydata.NroCharla) != 1)
                             {
-                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
+                                if (asistenciaPrimeraCharla == null)
+                                {
+                                    Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
+                                }
+                                else if (asistenciaPrimeraCharla.Asistio != 1)
+                                {
+                                    Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
+                                }
                             }
                             else
                             {

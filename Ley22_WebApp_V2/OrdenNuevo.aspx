@@ -167,7 +167,7 @@
                     
                     <div class="row">
                      <div class="col" style="text-align:right">
-                            <a data-dismiss="modal" href="#" data-toggle="modal" data-target="#modal-agregar-tribunal" data-whatever="@getbootstrap" runat="server"><img src="../images/plus-circle.svg" alt="" width="25" height="25" title="AGREGAR NUEVO TRIBUNAL"></a>
+                            <a data-dismiss="modal" href="#" data-toggle="modal" data-target="#modal-agregar-tribunal" data-whatever="@getbootstrap" runat="server"><img src="<%=ResolveClientUrl("~/images/plus-circle.svg")%>" alt="" width="25" height="25" title="AGREGAR NUEVO TRIBUNAL"></a>
                         </div>
                     </div>
                     
@@ -1147,7 +1147,7 @@
             var ddlIntervenido = document.getElementById("<%=DdlIntervenido.ClientID %>");
             var reqValSentencias = document.getElementById("<%=ReqValSentencias.ClientID %>");
             
-            if (ddlIntervenido.value == "1") {
+            if (ddlIntervenido.value == "2") {
                 document.getElementById("<%=divSentencias.ClientID %>").style.visibility = 'visible';
                 ValidatorEnable(reqValSentencias);
                 document.getElementById("<%=TxtSetencias.ClientID %>").value = "";

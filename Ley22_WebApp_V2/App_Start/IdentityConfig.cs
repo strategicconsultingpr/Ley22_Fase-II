@@ -58,22 +58,22 @@ namespace Ley22_WebApp_V2
             //}
 
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html);
-            LinkedResource lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_1.jpg");
+            LinkedResource lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/ASSMCA_LOGO.png"));
             lr.ContentId = "logo_1";
-            lr.ContentType.MediaType = "image/jpg";
+            lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_2.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/ASSMCA_LOGO.png"));
             lr.ContentId = "logo_2";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/twitter-circle-colored.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/twitter-circle-colored.png"));
             lr.ContentId = "twitter";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/facebook-circle-colored.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/facebook-circle-colored.png"));
             lr.ContentId = "facebook";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
@@ -100,22 +100,22 @@ namespace Ley22_WebApp_V2
         void sendMailCita(string email, string subject, string body)
         {
             AlternateView imgview = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
-            LinkedResource lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_1.jpg");
+            LinkedResource lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/ASSMCA_LOGO.png"));
             lr.ContentId = "logo_1";
-            lr.ContentType.MediaType = "image/jpg";
+            lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/logo_2.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/ASSMCA_LOGO.png"));
             lr.ContentId = "logo_2";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/twitter-circle-colored.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/twitter-circle-colored.png"));
             lr.ContentId = "twitter";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);
 
-            lr = new LinkedResource("//vassmcaweb/wwwroot/LEY22/images/facebook-circle-colored.png");
+            lr = new LinkedResource(System.Web.Hosting.HostingEnvironment.MapPath("~/images/facebook-circle-colored.png"));
             lr.ContentId = "facebook";
             lr.ContentType.MediaType = "image/png";
             imgview.LinkedResources.Add(lr);

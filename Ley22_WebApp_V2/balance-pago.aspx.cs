@@ -469,19 +469,19 @@ public partial class balance_pago : System.Web.UI.Page
 
                 if (a != '-')
                 {
-                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + Descripcion + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"images/print.png\" alt=\"ASSMCA\"></a>";
 
                     string PathNameDocumento = ConfigurationManager.AppSettings["URL_Documentos"].ToString() + "DocumentosDeParticipantes/" + Programa + "/" + Id + "/" + DdlNumeroOrdenJudicial.SelectedValue + "/Pagos/" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "/" + NroRecibo + "_" + DataBinder.Eval(e.Row.DataItem, "Descripcion").ToString() + "_Void.pdf";
 
                     if (!File.Exists(PathNameDocumento))
                     {
-                        LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + "," + NumerodeChequeVoid + "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/trash.png\" alt=\"ASSMCA\"></a>";
+                        LitVoid.Text = "<a href=\"#\" OnClick='changeDivVoid(" + Id_Pago + "," + FormadePago + "," + NumerodeChequeVoid + "," + FechaPagoVoid + "," + Cantidad + "," + Descripcion + "," + NroRecibo + ")' data-toggle=\"modal\" data-target=\"#Void-modal\" title=\"Void Recibo\" data-whatever=\"@getbootstrap\"><img src=\"images/trash.png\" alt=\"ASSMCA\"></a>";
                     }
 
                 }
                 else
                 {
-                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + DescVoid + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"../images/print.png\" alt=\"ASSMCA\"></a>";
+                    LitColocarModal.Text = "<a href=\"#\" OnClick='changeDivContent(" + Id_Pago + "," + NroRecibo + "," + Descripcion + "," + FormadePago + "," + Fecha + "," + Cantidad + "," + NombreCompleto + "," + DescVoid + ")' data-toggle=\"modal\" data-target=\"#imprimir-recibo-modal\" title=\"Ver Recibo\" data-whatever=\"@getbootstrap\"><img src=\"images/print.png\" alt=\"ASSMCA\"></a>";
                 }
                 //"," + NumerodeChequeVoid + "," + Fecha + "," + Cantidad + "," + Descripcion + "," + NroRecibo +
                 //    LitColocarEstatus.Text = "<div class=\"text-success\">Pagada</div>";

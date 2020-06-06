@@ -506,8 +506,8 @@
                             <div class="col">
 
                                 <asp:Button ID="BtnHoy" runat="server" Text="Hoy" class="btn btn-secondary btn-sm" OnClick="BtnHoy_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false" />
-                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false" />
+                                <asp:LinkButton ID="BtnLeft" runat="server" class="btn btn-secondary btn-sm" Text="<img src='../images/izquierda.png' alt='ASSMCA'>" OnClick="BtnLeft_Click" CausesValidation="false"> <img src="<%=ResolveClientUrl("~/images/izquierda.png")%>" alt="ASSMCA"></asp:LinkButton>
+                                <asp:LinkButton ID="BtnRight" runat="server" Text="<img src='../images/derecha.png' alt='ASSMCA'>" class="btn btn-secondary btn-sm" OnClick="BtnRight_Click" CausesValidation="false"> <img src="<%=ResolveClientUrl("~/images/derecha.png")%>" alt="ASSMCA"></asp:LinkButton>
                                 <asp:Literal ID="LiMesAno" runat="server"></asp:Literal>
 
                             </div>
@@ -999,7 +999,7 @@
                            $.ajax({
                                type: "POST",
                                cache: false,
-                               url: "/WSCalendarioGrupal.asmx/BindModalAsistencia",
+                               url: "WSCalendarioGrupal.asmx/BindModalAsistencia",
                                data: ajax_data,
                                contentType: "application/json; charset=utf-8",
                                dataType: "json",
@@ -1018,9 +1018,9 @@
                    
 
                    function OnGetAllMembersSuccess(data, status) {
-                       $("#bodyLista").find("tr").remove();
-
+                       
                        var myData = data.d;
+                       $("#bodyLista").find("tr").remove();
                        $("#TipoCharlaNivel").html(myData.TipoCharlaNivel);
                        $("#FechaHoraCharla").html(myData.FechaHoraCharla);
                        $("#bodyLista").append(myData.Participantes);

@@ -15,6 +15,7 @@
             <div class="logo-login">
               <img src="../images/assmca-big-logo.png" alt="ASSMCA">
             </div>
+            VERSIÓN DE PRUEBA
           <div class="row">
             <div class="col"></div>
             <div class="col-10">

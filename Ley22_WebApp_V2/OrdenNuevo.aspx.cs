@@ -90,7 +90,7 @@ namespace Ley22_WebApp_V2
                     TxtOficina.Text = caso.EvaOficina;
                     TxtAno.Text = caso.EvaFecha;
 
-                    if (caso.Intervenido == 1)
+                    if (caso.Intervenido == 2)
                     {
                         divSentencias.Attributes.Add("style", "visibility:visible");
                     }

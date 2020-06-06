@@ -95,14 +95,14 @@
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" title="Imprimir" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="../images/print.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkImprimir" OnClick="lnkImprimir_Click" runat="server" title="Imprimir" data-toggle="tooltip" CausesValidation="false" CommandArgument='<%#  Bind("PathNameDocumento")%>'> <img src="<%=ResolveClientUrl("~/images/print.png")%>" alt="ASSMCA"></asp:LinkButton>
 
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
 
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClick="lnkEliminar_Click" OnClientClick="return confirm('Seguro de querer borrar el documento?');" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="../images/trash.png" alt="ASSMCA"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkEliminar"  runat="server" data-toggle="tooltip" title="Eliminiar" OnClick="lnkEliminar_Click" OnClientClick="return confirm('Seguro de querer borrar el documento?');" CausesValidation="false" CommandArgument='<%# Bind("Id_DocumentoPorParticipante") %>'> <img src="<%=ResolveClientUrl("~/images/trash.png")%>" alt="ASSMCA"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

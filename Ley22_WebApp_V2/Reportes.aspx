@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                       <a href="../Dashboard-Usuarios.aspx" class="btn btn-secondary btn-lg">Volver a mi Tablero</a>
+                       <a href="<%=ResolveClientUrl("~/Dashboard-Usuarios.aspx")%>" class="btn btn-secondary btn-lg">Volver a mi Tablero</a>
                     </div>
                 </div> 
         </div>

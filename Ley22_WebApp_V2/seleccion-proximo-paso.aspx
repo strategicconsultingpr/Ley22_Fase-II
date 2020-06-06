@@ -267,7 +267,7 @@
                                                                     </span>
                                                                 </a>
                                                             </p>
-                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/asignar-citas-individual.aspx")%>">Calendario Citas Trabajador Social</a></h4>
+                                                            <h4 class="card-title"><a href="<%=ResolveClientUrl("~/asignar-citas-individual.aspx")%>">Calendario Citas de Evaluaciones </a></h4>
                                                         </div>
                                                     </div>
 

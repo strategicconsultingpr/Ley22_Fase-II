@@ -546,6 +546,15 @@ namespace Ley22_WebApp_V2
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator9;
 
         /// <summary>
+        /// paraSentenciado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea paraSentenciado;
+
+        /// <summary>
         /// DdlEvaluado control.
         /// </summary>
         /// <remarks>
@@ -625,6 +634,15 @@ namespace Ley22_WebApp_V2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator11;
+
+        /// <summary>
+        /// paraEvaluado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea paraEvaluado;
 
         /// <summary>
         /// GVListadeEpisodios control.

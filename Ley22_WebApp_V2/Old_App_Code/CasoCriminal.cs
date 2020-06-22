@@ -68,6 +68,8 @@ namespace Ley22_WebApp_V2.Old_App_Code
         public Nullable<byte> Evaluado { get; set; }
         public string EvaOficina { get; set; }
         public string EvaFecha { get; set; }
+        public string ComentarioIntervenido { get; set; }
+        public string ComentarioEvaluado { get; set; }
     
         public virtual Tribunal Tribunal { get; set; }
     }

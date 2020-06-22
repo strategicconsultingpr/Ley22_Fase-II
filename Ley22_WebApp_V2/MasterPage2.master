@@ -27,14 +27,20 @@
 
     <div class="container-fluid">
   <header class="row align-items-end main">
-   
-        
-         <div class="brand">
-              <div class="col">
-        <img src="<%=ResolveClientUrl("~/images/assmca-logo.svg")%>" alt="ASSMCA">
-      </div>
-    </div>
-    <div class="col" style="text-align:center">WELCOME TO ASSMCA PUERTO RICO</div>
+      
+        <div class="col-12">
+            <div class="row">
+                   <div class="brand">
+              
+                    <img src="<%=ResolveClientUrl("~/images/assmca-logo.svg")%>" alt="ASSMCA">
+                  </div>
+            </div>
+            <div class="row" >
+                <div class="col-12" style="text-align:center">
+                    <h2>CMS LEY 22</h2>
+                </div>
+            </div>
+    `   </div>
   </header>
       </div>
 

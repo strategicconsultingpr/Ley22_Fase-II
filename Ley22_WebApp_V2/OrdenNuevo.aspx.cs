@@ -85,10 +85,12 @@ namespace Ley22_WebApp_V2
 
                     DdlIntervenido.SelectedValue = caso.Intervenido.ToString();
                     TxtSetencias.Text = caso.NumSentencias.ToString();
+                    paraSentenciado.InnerText = caso.ComentarioIntervenido.ToString();
 
                     DdlEvaluado.SelectedValue = caso.Evaluado.ToString();
                     TxtOficina.Text = caso.EvaOficina;
                     TxtAno.Text = caso.EvaFecha;
+                    paraEvaluado.InnerText = caso.ComentarioEvaluado.ToString();
 
                     if (caso.Intervenido == 2)
                     {
@@ -187,10 +189,12 @@ namespace Ley22_WebApp_V2
 
                         DdlIntervenido.Enabled = false;
                         TxtSetencias.ReadOnly = true;
+                        paraSentenciado.Disabled = true;
 
                         DdlEvaluado.Enabled = false;
                         TxtOficina.ReadOnly = true;
                         TxtAno.ReadOnly = true;
+                        paraEvaluado.Disabled = true;
 
                         TxtNacimiento.ReadOnly = true;
                         TxtContacto.ReadOnly = true;
@@ -357,7 +361,7 @@ namespace Ley22_WebApp_V2
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
                         TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
-                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text, paraSentenciado.InnerText, paraEvaluado.InnerText);
 
                 mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se añadió correctamente.";
 
@@ -403,7 +407,7 @@ namespace Ley22_WebApp_V2
                         Convert.ToInt32(DdlPlanMedico.SelectedValue), DdlTratamiento.SelectedValue, DdlImpedimento.SelectedValue, Convert.ToInt32(DdlGrado.SelectedValue),
                         TxtTrabajo.Text, TxtOcupacion.Text, ChkNoTrabajo.Checked == true ? Convert.ToByte(1) : Convert.ToByte(2), Convert.ToInt32(DdlDesempleado.SelectedValue), Convert.ToInt32(TxtFamiliar.Text),
                         TxtPareja.Text.ToUpper(), TxtPadre.Text.ToUpper(), TxtMadre.Text.ToUpper(), TxtContacto.Text, TxtTelefonoContacto.Text, TxtNacimiento.Text, Convert.ToByte(DdlIntervenido.SelectedValue),
-                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text);
+                        Convert.ToInt32(TxtSetencias.Text), Convert.ToByte(DdlEvaluado.SelectedValue), TxtOficina.Text, TxtAno.Text, paraSentenciado.InnerText, paraEvaluado.InnerText);
 
                 mensaje = "El caso criminal #" + TxtNroCasoCriminal.Text + " se actualizó correctamente.";
 

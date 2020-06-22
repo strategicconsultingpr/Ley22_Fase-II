@@ -78,6 +78,8 @@
           <Property Name="Evaluado" Type="tinyint" />
           <Property Name="EvaOficina" Type="varchar(max)" />
           <Property Name="EvaFecha" Type="varchar" MaxLength="10" />
+          <Property Name="ComentarioIntervenido" Type="varchar(max)" />
+          <Property Name="ComentarioEvaluado" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="CCG_Excepciones">
           <Key>
@@ -535,6 +537,8 @@
           <Parameter Name="Evaluado" Type="tinyint" Mode="In" />
           <Parameter Name="EvaOficina" Type="varchar(max)" Mode="In" />
           <Parameter Name="EvaFecha" Type="varchar" Mode="In" />
+          <Parameter Name="ComentarioIntervenido" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ComentarioEvaluado" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="GuardarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Centro" Type="int" Mode="In" />
@@ -752,6 +756,8 @@
           <Parameter Name="Evaluado" Type="tinyint" Mode="In" />
           <Parameter Name="EvaOficina" Type="varchar(max)" Mode="In" />
           <Parameter Name="EvaFecha" Type="varchar" Mode="In" />
+          <Parameter Name="ComentarioIntervenido" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ComentarioEvaluado" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="ModificarCharlaGrupal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_CharlaGrupal" Type="int" Mode="In" />
@@ -1343,6 +1349,8 @@
             <Parameter Name="Evaluado" Mode="In" Type="Byte" />
             <Parameter Name="EvaOficina" Mode="In" Type="String" />
             <Parameter Name="EvaFecha" Mode="In" Type="String" />
+            <Parameter Name="ComentarioIntervenido" Mode="In" Type="String" />
+            <Parameter Name="ComentarioEvaluado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ModificarCasoCriminal">
             <Parameter Name="Id_CasoCriminal" Mode="In" Type="Int32" />
@@ -1388,6 +1396,8 @@
             <Parameter Name="Evaluado" Mode="In" Type="Byte" />
             <Parameter Name="EvaOficina" Mode="In" Type="String" />
             <Parameter Name="EvaFecha" Mode="In" Type="String" />
+            <Parameter Name="ComentarioIntervenido" Mode="In" Type="String" />
+            <Parameter Name="ComentarioEvaluado" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarSEPSPersonaXNroSeguroSocial_Result">
@@ -2240,6 +2250,8 @@
           <Property Name="Evaluado" Type="Byte" />
           <Property Name="EvaOficina" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EvaFecha" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ComentarioIntervenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ComentarioEvaluado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tribunal" Relationship="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" FromRole="CasoCriminal" ToRole="Tribunal" />
         </EntityType>
         <Association Name="FK_Tribunal_Tribunal_Id_Tribunal">
@@ -3139,6 +3151,8 @@
           <EntitySetMapping Name="CasoCriminals">
             <EntityTypeMapping TypeName="Ley22Model.CasoCriminal">
               <MappingFragment StoreEntitySet="CasoCriminal">
+                <ScalarProperty Name="ComentarioEvaluado" ColumnName="ComentarioEvaluado" />
+                <ScalarProperty Name="ComentarioIntervenido" ColumnName="ComentarioIntervenido" />
                 <ScalarProperty Name="EvaFecha" ColumnName="EvaFecha" />
                 <ScalarProperty Name="EvaOficina" ColumnName="EvaOficina" />
                 <ScalarProperty Name="Evaluado" ColumnName="Evaluado" />

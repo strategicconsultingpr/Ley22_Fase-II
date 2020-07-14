@@ -107,7 +107,7 @@
                     <li class="nav-item dropdown"">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><asp:Literal runat="server" ID="Usuario"/></a>
                             <div class="dropdown-menu">                                
-                                <a class="dropdown-item" href="../Dashboard-Usuarios.aspx">Mi Tablero</a>
+                                <a class="dropdown-item" href="<%=ResolveClientUrl("~/Dashboard-Usuarios.aspx")%>">Mi Tablero</a>
                                 <asp:LoginView runat="server" ViewStateMode="Disabled">
                                     <RoleGroups>
                                         <asp:RoleGroup Roles="SuperAdmin">

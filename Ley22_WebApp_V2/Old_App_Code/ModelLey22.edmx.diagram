@@ -34,7 +34,7 @@
         <EntityTypeShape EntityType="Ley22Model.TribunalRegion" Width="1.5" PointX="13.125" PointY="15.125" />
         <AssociationConnector Association="Ley22Model.FK_Tribunal_TribunalCategoria_Id_TribunalCategoria" />
         <AssociationConnector Association="Ley22Model.FK_Tribunal_TribunalRegion_Id_TribunalRegion" />
-        <EntityTypeShape EntityType="Ley22Model.CasoCriminal" Width="1.5" PointX="17.625" PointY="17.625" />
+        <EntityTypeShape EntityType="Ley22Model.CasoCriminal" Width="1.5" PointX="17.625" PointY="18" />
         <AssociationConnector Association="Ley22Model.FK_Tribunal_Tribunal_Id_Tribunal" />
       </Diagram>
     </edmx:Diagrams>

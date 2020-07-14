@@ -18,7 +18,7 @@
 
                     <div class="row bb pl-4 pr-4 pb-4 mb-4">
 
-                       <div class="col-md-6">
+                       <div class="col-md-6"> 
                            <div class="form-group">
                                <label for="tribunal-nombre">Nombre</label>
                                <asp:TextBox runat="server" ID="TxtNombreTribunal" CssClass="form-control" ValidationGroup="VGtribunal"></asp:TextBox>
@@ -167,7 +167,7 @@
                     
                     <div class="row">
                      <div class="col" style="text-align:right">
-                            <a data-dismiss="modal" href="#" data-toggle="modal" data-target="#modal-agregar-tribunal" data-whatever="@getbootstrap" runat="server"><img src="../images/plus-circle.svg" alt="" width="25" height="25" title="AGREGAR NUEVO TRIBUNAL"></a>
+                            <a data-dismiss="modal" href="#" data-toggle="modal" data-target="#modal-agregar-tribunal" data-whatever="@getbootstrap" runat="server"><img src="<%=ResolveClientUrl("~/images/plus-circle.svg")%>" alt="" width="25" height="25" title="AGREGAR NUEVO TRIBUNAL"></a>
                         </div>
                     </div>
                     
@@ -369,6 +369,12 @@
 
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-2"><h5><label class="form-sent-comentario">Comentarios:</label></h5></div>
+                                                <div class="col-md-10">
+                                                    <textarea cols="1" type="text" id="paraSentenciado" runat="server" class="md-textarea form-control" rows="6"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                    <div class="row bb">
@@ -414,6 +420,12 @@
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="*Sólo números" ValidationExpression="^[0-9]+$" ControlToValidate="TxtAno" ForeColor="Red"></asp:RegularExpressionValidator>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ErrorMessage="*Ingresar cuatro digitos" ValidationExpression="^.{4}.*" ControlToValidate="TxtAno" ForeColor="Red"></asp:RegularExpressionValidator>
                                         </div>
+                                       <div class="col-md-1">
+                                           <h5><label class="form-eva-comentario">Comentarios:</label></h5>
+                                       </div>
+                                       <div class="col-md-5">
+                                                <textarea cols="1" type="text" id="paraEvaluado" runat="server" class="md-textarea form-control" rows="6"></textarea>
+                                       </div>
                                    </div>
                                        </div>
                                 </div>
@@ -1147,14 +1159,16 @@
             var ddlIntervenido = document.getElementById("<%=DdlIntervenido.ClientID %>");
             var reqValSentencias = document.getElementById("<%=ReqValSentencias.ClientID %>");
             
-            if (ddlIntervenido.value == "1") {
+            if (ddlIntervenido.value == "2") {
                 document.getElementById("<%=divSentencias.ClientID %>").style.visibility = 'visible';
                 ValidatorEnable(reqValSentencias);
                 document.getElementById("<%=TxtSetencias.ClientID %>").value = "";
+                document.getElementById("<%=paraSentenciado.ClientID %>").value = "";
             }
             else {
                 document.getElementById("<%=TxtSetencias.ClientID %>").value = "0";
                 ValidatorEnable(reqValSentencias, false);
+                document.getElementById("<%=paraSentenciado.ClientID %>").value = "-";
                 document.getElementById("<%=divSentencias.ClientID %>").style.visibility = 'hidden';
             }
           }
@@ -1169,12 +1183,14 @@
                   document.getElementById("<%=divEvaluado.ClientID %>").style.visibility = 'visible';
                   document.getElementById("<%=TxtOficina.ClientID %>").value = "";
                   document.getElementById("<%=TxtAno.ClientID %>").value = "";
+                  document.getElementById("<%=paraEvaluado.ClientID %>").value = "";
                   ValidatorEnable(reqValOficina);
                   ValidatorEnable(reqValAno);
               }
               else {
                   document.getElementById("<%=TxtOficina.ClientID %>").value = "No Aplica";
                   document.getElementById("<%=TxtAno.ClientID %>").value = "0000";
+                  document.getElementById("<%=paraEvaluado.ClientID %>").value = "-";
                   ValidatorEnable(reqValOficina, false);
                   ValidatorEnable(reqValAno, false);
                   document.getElementById("<%=divEvaluado.ClientID %>").style.visibility = 'hidden';
@@ -1200,7 +1216,7 @@
               })
               
           }
-    </script>
+      </script>
    
 </asp:Content>
 

@@ -88,9 +88,11 @@ namespace Ley22_WebApp_V2
                 // se cargan los participante 
                 List<ListarCharlasCasoCriminal_Result> CharlasDelCaso = mylib.ListarCharlasCasoCriminal(Id_CasoCriminal).ToList();
 
-                var primeraCharla = CharlasDelCaso.Where(u => u.NumeroCharla == 1).Count();
+                var primeraCharla = CharlasDelCaso.Where(u => u.NumeroCharla == 1).Where(a => a.TipodeCharla != "Impacto a Victima").Count();
 
-                var charlaRepetida = CharlasDelCaso.Where(u => u.NumeroCharla == resulDetalle[0].NumeroCharla).Where(p => p.Id_CharlaGrupal != Id_CharlaGrupal).Count();
+                var panelImpacto = CharlasDelCaso.Where(u => u.TipodeCharla == "Impacto a Victima").Count();
+
+                var charlaRepetida = CharlasDelCaso.Where(u => u.NumeroCharla == resulDetalle[0].NumeroCharla).Where(a => a.TipodeCharla == resulDetalle[0].TipodeCharla).Where(p => p.Id_CharlaGrupal != Id_CharlaGrupal).Count();
 
 
                 string Parti = string.Empty;
@@ -114,31 +116,31 @@ namespace Ley22_WebApp_V2
                                 {
                                     //HrefRemover = " <a href=\"#\" onclick=\"javacript:asistioParticipante()\" placeholder=\"'Presione para obtener más información'\"> - PARTICIPANTE NO SE PUEDE ELIMINAR</a>";
                                     //HrefRemover = " <a href=\"#\"><img src=\"../images/person-dash.svg\" alt=\"\" width=\"32\" height=\"32\" title=\"PARTICIPANTE ASISTIÓ A CHARLA\"></a>";
-                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#D5EB98\" ><img src=\"../images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASISTIÓ A CHARLA\"></td>";
+                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#D5EB98\" ><img src=\"images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASISTIÓ A CHARLA\"></td>";
                                 }
                                 else if (c.Asistio == 0 && resulDetalle[0].FechaInicial > DateTime.Today)
                                 {
-                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#E9CA6D\"><img src=\"../images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"CHARLA A REALIZARCE\"></td>";
-                                    participanteEliminar = c.NB_Primero + " " + c.AP_Primero + " &nbsp; <a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#E96D6D\" onclick=\"javacript:eliminarParticipante()\" ><img src=\"../images/x-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"ELIMINAR PARTICIPANTE DE CHARLA\"></a>";
+                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#E9CA6D\"><img src=\"images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"CHARLA A REALIZARCE\"></td>";
+                                    participanteEliminar = c.NB_Primero + " " + c.AP_Primero + " &nbsp; <a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#E96D6D\" onclick=\"javacript:eliminarParticipante()\" ><img src=\"images/x-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"ELIMINAR PARTICIPANTE DE CHARLA\"></a>";
                                 }
                                 else
                                 {
                                     //HrefRemover = "<label class=\"form-check-label\"> - PARTICIPANTE ACTUAL </label>";
-                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#E96D6D\"><img src=\"../images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE NO HA ASISTIÓ A CHARLA\"></td>";
-                                    participanteEliminar = c.NB_Primero + " " + c.AP_Primero + " &nbsp; <a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#E96D6D\" onclick=\"javacript:eliminarParticipante()\" ><img src=\"../images/x-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"ELIMINAR PARTICIPANTE DE CHARLA\"></a>";
+                                    HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\" bgcolor=\"#E96D6D\"><img src=\"images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE NO HA ASISTIÓ A CHARLA\"></td>";
+                                    participanteEliminar = c.NB_Primero + " " + c.AP_Primero + " &nbsp; <a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#E96D6D\" onclick=\"javacript:eliminarParticipante()\" ><img src=\"images/x-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"ELIMINAR PARTICIPANTE DE CHARLA\"></a>";
 
                                 }
                             }
                             else
                             {
                                 //HrefRemover = "<label class=\"form-check-label\"> - CASO CRIMINAL SE ENCUENTRA CERRADO </label>";
-                                HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\"><img src=\"../images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASISTIÓ A CHARLA\"></td>";
+                                HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\"><img src=\"images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASISTIÓ A CHARLA\"></td>";
                             }
                         }
                         else
                         {
                             //HrefRemover = "<label class=\"form-check-label\"> - PARTICIPANTE YA ESTA EN ESTA CHARLA BAJO OTRO CASO CRIMINAL </label>";
-                            HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\"><img src=\"../images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASIGNADO A CHARLA BAJO OTRO CASO CRIMINAL\"></td>";
+                            HrefRemover = "<td class=\"col-9\" style=\"text-align:center\"><h6><strong>" + c.NB_Primero + " " + c.AP_Primero + "</strong></h6></td><td class=\"col-2\" style=\"text-align:center\"><img src=\"images/person.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE ASIGNADO A CHARLA BAJO OTRO CASO CRIMINAL\"></td>";
                         }
                     }
                     else
@@ -153,18 +155,18 @@ namespace Ley22_WebApp_V2
 
                 if (swEstaenLaCharla == false)
                 {
-                    if(primeraCharla < 1 && resulDetalle[0].NumeroCharla != 1)
+                    if(primeraCharla < 1 && resulDetalle[0].NumeroCharla != 1 && resulDetalle[0].TipodeCharla != "Impacto a Victima")
                     {
-                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:gold\" onclick=\"javacript:sweetAlert('Falta de Charla','Participante no se encuentra asignado a una primera charla.','warning')\" ><img src=\"../images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a>";
+                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:gold\" onclick=\"javacript:sweetAlert('Falta de Charla','Participante no se encuentra asignado a una primera charla.','warning')\" ><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a>";
                         
                     }
                     else if (charlaRepetida > 0)
                     {
-                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:gold\" onclick=\"javacript:sweetAlert('Charla Repetida','Participante se encuentra asignado a otra charla con este numero.','warning')\" ><img src=\"../images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE YA ASIGNADO A OTRA CHARLA #" + resulDetalle[0].NumeroCharla.ToString() + "\"></a>";
+                            HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:gold\" onclick=\"javacript:sweetAlert('Charla Repetida','Participante se encuentra asignado a otra charla con este numero.','warning')\" ><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"PARTICIPANTE YA ASIGNADO A OTRA CHARLA #" + resulDetalle[0].NumeroCharla.ToString() + "\"></a>";
                     }
                     else
                     {
-                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#D5EB98\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" ><img src=\"../images/plus-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"AGREGAR PARTICIPANTE A CHARLA\"></a>";
+                        HreAdicionar = NombreParticipante + " &nbsp;<a href=\"#\" class=\"btn btn-secondary\" style=\"background-color:#D5EB98\" onclick=\"javacript:__doPostBack('AnadirParticipante', '')\" ><img src=\"images/plus-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"AGREGAR PARTICIPANTE A CHARLA\"></a>";
                     }
                 }
                 else
@@ -391,7 +393,7 @@ namespace Ley22_WebApp_V2
 
                             if (balance.Equals(Convert.ToDecimal(0.00)) && (userManager.IsInRole(userId, "SuperAdmin") || userManager.IsInRole(userId, "Supervisor")))
                             {
-                                HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")' </a> <img src=\"../images/print.png\" alt=\"ASSMCA\">";
+                                HrefPrint = "<a href=\"#\"   OnClick='imprimirCertificado(" + c.Id_Participante.ToString() + "," + orden.ToString() + ")' </a> <img src=\"images/print.png\" alt=\"ASSMCA\">";
                             }
                         }
                         else
@@ -423,18 +425,23 @@ namespace Ley22_WebApp_V2
                                 {
                                     Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript: asistenciaAlerta('Falta de Asistencia','El participante NO ha asistido a su primera charla bajo este caso criminal. No puede modificar la asistencia de este participante. Favor de verificar asistencia de su primera charla','warning')\"><img src=\"images/exclamation-circle.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"FALTA DE PRIMERA CHARLA\"></a></td>";
                                 }
+                                else
+                                {
+                                    Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"> <img src=\"images/person-check.svg\" alt=\"\" width=\"28\" height=\"28\" id=\"Img1\" runat=\"server\" title=\"CAMBIAR PARTICIPANTE A SI ASISTIÓ\"></a>"
+                                    + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "," + orden + "')\"><img src=\"images/x-circle.svg\" alt=\"\" width=\"25\" height=\"25\" runat=\"server\" title=\"ELMINIAR PARTICIPANTE DE CHARLA\"></a></td>";
+                                }
                             }
                             else
                             {
-                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\">hola <img src=\"../images/person-check.svg\" alt=\"\" width=\"28\" height=\"28\" id=\"Img1\" runat=\"server\" title=\"CAMBIAR PARTICIPANTE A SI ASISTIÓ\"></a>"
-                                + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "," + orden + "')\"><img src=\"../images/x-circle.svg\" alt=\"\" width=\"25\" height=\"25\" runat=\"server\" title=\"ELMINIAR PARTICIPANTE DE CHARLA\"></a></td>";
+                                Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('AsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"> <img src=\"images/person-check.svg\" alt=\"\" width=\"28\" height=\"28\" id=\"Img1\" runat=\"server\" title=\"CAMBIAR PARTICIPANTE A SI ASISTIÓ\"></a>"
+                                + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:__doPostBack('EliminarParticipante','" + c.Id_Participante + "," + orden + "')\"><img src=\"images/x-circle.svg\" alt=\"\" width=\"25\" height=\"25\" runat=\"server\" title=\"ELMINIAR PARTICIPANTE DE CHARLA\"></a></td>";
                             }
                         }
                         else
                         {
                             Estatus = "<td class=\"col-2\" style=\"text-align:center\">Asistió</td>";
 
-                            Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"><img src=\"../images/person-dash.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"CAMBIAR PARTICIPANTE A NO ASISTIÓ\"></a></td>";
+                            Accion = "<td class=\"col-2\" style=\"text-align:center\"><a href=\"#\" onclick=\"javascript:__doPostBack('NoAsistioParticipante','" + c.Id_ParticipantePorCharlaGrupal + "')\"><img src=\"images/person-dash.svg\" alt=\"\" width=\"28\" height=\"28\" title=\"CAMBIAR PARTICIPANTE A NO ASISTIÓ\"></a></td>";
                         }
 
                         if (charlasRegulares > 9 && (victima == 1 || victima == -1))

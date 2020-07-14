@@ -148,6 +148,10 @@ public partial class cargar_documentos : System.Web.UI.Page
 
         string Id = Session["Id_Participante"].ToString();
 
+        string mensaje = string.Empty;
+        string titulo = string.Empty;
+        string tipo = string.Empty;
+
         try
         {
             using (Ley22Entities mylib = new Ley22Entities())
@@ -162,18 +166,34 @@ public partial class cargar_documentos : System.Web.UI.Page
                 }
             }
 
+            mensaje = "El documento se eliminó correctamente";
+            titulo = "Documento Eliminado";
+            tipo = "success";
 
 
-            ActualizarDocumentosDdl();
-            BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
-            CargarDocumentosFaltantes();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
-            throw;
+            if (ex.InnerException == null)
+            {
+                mensaje = ex.Message;
+            }
+            else
+            {
+                mensaje = ex.InnerException.Message;
+            }
+
+            titulo = "Error";
+            tipo = "error";
         }
-        
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Documento", "sweetAlert('" + titulo + "','" + mensaje + "','" + tipo + "')", true);
+
+        ActualizarDocumentosDdl();
+        BidGrid(Convert.ToInt32(DdlNumeroOrdenJudicial.SelectedValue));
+        CargarDocumentosFaltantes();
+
     }
     protected void lnkImprimir_Click(object sender, EventArgs e)
     {
@@ -325,7 +345,7 @@ public partial class cargar_documentos : System.Web.UI.Page
                 
 
                 mensaje = "El documento se guardó correctamente";
-                titulo = "Docuento Guardado";
+                titulo = "Documento Guardado";
                 tipo = "success";
             }
             catch (Exception ex)

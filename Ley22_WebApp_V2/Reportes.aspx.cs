@@ -136,8 +136,8 @@ namespace Ley22_WebApp_V2
             string Folder_ReportingServices = ((string)(configurationAppSettings.GetValue("Folder_ReportingServices", typeof(string))));
             this.Session["URL_Reports"] = URL_ReportingServices + "?/" + Folder_ReportingServices + "/";
 
-            this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_" + programa + "_Prueba";
-            this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_" + programa + "_Prueba";
+            this.DetalleIngresos.NavigateUrl = this.Session["URL_Reports"].ToString() + "DetalleIngresos_Prueba&FK_Programa=" + DdlPrograma.SelectedValue + "&NB_Programa=" + programa;
+            this.ServiciosDiarios.NavigateUrl = this.Session["URL_Reports"].ToString() + "ServiciosDiariosCobrados_Prueba&FK_Programa=" + DdlPrograma.SelectedValue + "&NB_Programa=" + programa;
             this.AgeingReport.NavigateUrl = this.Session["URL_Reports"].ToString() + "AgeingReport_Prueba&Programa=" + DdlPrograma.SelectedValue;
             this.ParticipantesPrograma.NavigateUrl = this.Session["URL_Reports"].ToString() + "ReporteParticipantePrograma_Prueba&FK_Programa=" + DdlPrograma.SelectedValue;
             

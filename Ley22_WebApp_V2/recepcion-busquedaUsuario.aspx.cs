@@ -61,7 +61,7 @@ public partial class recepcion_busquedaUsuario : System.Web.UI.Page
             LitParametrodeBusqueda.Text = strParametroBusqueda.ToString() ;
 
           //  LitBusquedaCon.Text = Session["txtDocumentos"].ToString();
-       int TotalReg=  BindGridView(1);
+            int TotalReg=  BindGridView(1);
             this.FillJumpToList(TotalReg);
             //
 

@@ -80,7 +80,7 @@ namespace Ley22_WebApp_V2
                         CasoDos.Attributes.Add("style", "visibility:visible");
                         CasoTres.Attributes.Add("style", "visibility:visible");
 
-                        ChkCaso.Checked = true;
+                        ChkCaso.Checked = true; 
                     }
 
                     DdlIntervenido.SelectedValue = caso.Intervenido.ToString();

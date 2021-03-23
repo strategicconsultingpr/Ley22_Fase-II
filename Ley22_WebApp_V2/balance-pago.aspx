@@ -180,6 +180,7 @@ Mental y Contra la Adicción             Administración Auxiliar de Prevención
                                         <asp:ListItem Value="3">Charlas Socio Educativas</asp:ListItem>
                                         <asp:ListItem Value="4">Toxicologia</asp:ListItem>
                                         <asp:ListItem Value="5">Certificaciones</asp:ListItem>
+                                        <asp:ListItem Value="5">Impacto a Victima</asp:ListItem>
                                         
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Requerido" ControlToValidate="DdlDTipoPago" InitialValue="0" ForeColor="Red" Display="Dynamic" ValidationGroup="gPago"></asp:RequiredFieldValidator>
